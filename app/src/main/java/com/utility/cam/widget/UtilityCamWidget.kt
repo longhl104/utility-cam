@@ -6,6 +6,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.*
+import androidx.glance.action.actionStartActivity
+import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.provideContent
@@ -14,6 +16,7 @@ import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
+import com.utility.cam.MainActivity
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityPhoto
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +45,7 @@ fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
             .fillMaxSize()
             .background(Color(0xFF1C1B1F))
             .padding(16.dp)
+            .clickable(actionStartActivity<MainActivity>())
     ) {
         // Header
         Row(
