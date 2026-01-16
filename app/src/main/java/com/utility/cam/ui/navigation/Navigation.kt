@@ -14,10 +14,10 @@ import com.utility.cam.ui.settings.SettingsScreen
 sealed class Screen(val route: String) {
     object Gallery : Screen("gallery")
     object Camera : Screen("camera")
-    object CaptureReview : Screen("capture_review/{imagePath}") {
+    object CaptureReview : Screen("capture_review?imagePath={imagePath}") {
         fun createRoute(imagePath: String): String {
             val encodedPath = Uri.encode(imagePath)
-            return "capture_review/$encodedPath"
+            return "capture_review?imagePath=$encodedPath"
         }
     }
     object PhotoDetail : Screen("photo_detail/{photoId}") {
