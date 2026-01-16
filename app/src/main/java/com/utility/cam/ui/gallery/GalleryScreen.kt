@@ -116,11 +116,13 @@ fun PhotoGridItem(
             .clip(RoundedCornerShape(8.dp))
             .clickable(onClick = onClick)
     ) {
-        val imagePath = photo.thumbnailPath ?: photo.filePath
+        val imagePath = photo.filePath
         val painter = rememberAsyncImagePainter(
             ImageRequest.Builder(LocalContext.current)
                 .data(File(imagePath))
                 .crossfade(true)
+                .allowHardware(false)
+                .size(800, 800) // Higher quality for grid items
                 .build()
         )
         
