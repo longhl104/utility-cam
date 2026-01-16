@@ -77,8 +77,8 @@ dependencies {
     implementation("androidx.work:work-runtime-ktx:2.9.0")
     
     // Glance for widgets
-    implementation("androidx.glance:glance-appwidget:1.0.0")
-    implementation("androidx.glance:glance-material3:1.0.0")
+    implementation("androidx.glance:glance-appwidget:1.1.1")
+    implementation("androidx.glance:glance-material3:1.1.1")
     
     // DataStore for preferences
     implementation("androidx.datastore:datastore-preferences:1.0.0")

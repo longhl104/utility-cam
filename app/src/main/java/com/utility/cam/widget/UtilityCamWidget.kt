@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.*
-import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.provideContent
@@ -118,7 +117,6 @@ fun WidgetPhotoItem(photo: UtilityPhoto) {
         modifier = GlanceModifier
             .fillMaxWidth()
             .background(Color(0xFF2C2B2F))
-            .cornerRadius(8.dp)
             .padding(12.dp)
     ) {
         Column {

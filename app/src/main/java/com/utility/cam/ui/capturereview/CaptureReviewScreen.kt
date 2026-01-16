@@ -33,7 +33,6 @@ fun CaptureReviewScreen(
     
     var selectedTTL by remember { mutableStateOf<TTLDuration?>(null) }
     var description by remember { mutableStateOf("") }
-    var showDescriptionDialog by remember { mutableStateOf(false) }
     var isSaving by remember { mutableStateOf(false) }
     
     val ttl = selectedTTL ?: defaultTTL
