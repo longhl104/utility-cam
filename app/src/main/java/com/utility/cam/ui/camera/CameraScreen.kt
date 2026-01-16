@@ -1,7 +1,6 @@
 package com.utility.cam.ui.camera
 
 import android.content.Context
-import android.net.Uri
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -142,9 +141,16 @@ fun CameraPreviewScreen(
                         if (!isCapturing) {
                             isCapturing = true
                             coroutineScope.launch {
-                                imageCapture?.let { capture ->
-                                    val photoFile = takePicture(context, capture)
-                                    photoFile?.let(onPhotoCapture)
+                                try {
+                                    imageCapture?.let { capture ->
+                                        val photoFile = takePicture(context, capture)
+                                        if (photoFile != null) {
+                                            onPhotoCapture(photoFile)
+                                        }
+                                    }
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                } finally {
                                     isCapturing = false
                                 }
                             }

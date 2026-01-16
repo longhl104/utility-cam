@@ -1,5 +1,6 @@
 package com.utility.cam.ui.navigation
 
+import android.net.Uri
 import androidx.compose.runtime.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,7 +15,10 @@ sealed class Screen(val route: String) {
     object Gallery : Screen("gallery")
     object Camera : Screen("camera")
     object CaptureReview : Screen("capture_review/{imagePath}") {
-        fun createRoute(imagePath: String) = "capture_review/$imagePath"
+        fun createRoute(imagePath: String): String {
+            val encodedPath = Uri.encode(imagePath)
+            return "capture_review/$encodedPath"
+        }
     }
     object PhotoDetail : Screen("photo_detail/{photoId}") {
         fun createRoute(photoId: String) = "photo_detail/$photoId"
@@ -25,8 +29,7 @@ sealed class Screen(val route: String) {
 @Composable
 fun UtilityCamNavigation() {
     val navController = rememberNavController()
-    var capturedImagePath by remember { mutableStateOf<String?>(null) }
-    
+
     NavHost(
         navController = navController,
         startDestination = Screen.Gallery.route
@@ -48,7 +51,6 @@ fun UtilityCamNavigation() {
         composable(Screen.Camera.route) {
             CameraScreen(
                 onPhotoCapture = { imageFile ->
-                    capturedImagePath = imageFile.absolutePath
                     navController.navigate(
                         Screen.CaptureReview.createRoute(imageFile.absolutePath)
                     )
@@ -60,8 +62,9 @@ fun UtilityCamNavigation() {
         }
         
         composable(Screen.CaptureReview.route) { backStackEntry ->
-            val imagePath = backStackEntry.arguments?.getString("imagePath")
-            
+            val encodedImagePath = backStackEntry.arguments?.getString("imagePath")
+            val imagePath = encodedImagePath?.let { Uri.decode(it) }
+
             imagePath?.let {
                 CaptureReviewScreen(
                     capturedImagePath = it,
