@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Utility Cam</string>
+    <string name="widget_description">Shows your active utility photos with expiration times</string>
+</resources>
