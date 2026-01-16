@@ -6,12 +6,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.*
+import androidx.glance.action.ActionParameters
 import androidx.glance.action.actionStartActivity
+import androidx.glance.action.actionParametersOf
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.provideContent
 import androidx.glance.layout.*
+import androidx.glance.appwidget.lazy.LazyColumn
+import androidx.glance.appwidget.lazy.items
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
@@ -26,15 +30,19 @@ import kotlinx.coroutines.withContext
  * Home screen widget showing active utility photos
  */
 class UtilityCamWidget : GlanceAppWidget() {
-    
+
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val photos = withContext(Dispatchers.IO) {
             PhotoStorageManager(context).getAllPhotos()
         }
-        
+
         provideContent {
             UtilityCamWidgetContent(photos)
         }
+    }
+
+    companion object {
+        val PHOTO_ID_KEY = ActionParameters.Key<String>("photo_id")
     }
 }
 
@@ -44,12 +52,13 @@ fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
         modifier = GlanceModifier
             .fillMaxSize()
             .background(Color(0xFF1C1B1F))
-            .padding(16.dp)
-            .clickable(actionStartActivity<MainActivity>())
     ) {
-        // Header
+        // Header - fixed at top
         Row(
-            modifier = GlanceModifier.fillMaxWidth(),
+            modifier = GlanceModifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .clickable(actionStartActivity<MainActivity>()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -62,9 +71,7 @@ fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
                 )
             )
         }
-        
-        Spacer(modifier = GlanceModifier.height(12.dp))
-        
+
         if (photos.isEmpty()) {
             // Empty state
             Column(
@@ -91,24 +98,35 @@ fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
                 )
             }
         } else {
-            // Photo list
-            Column(
-                modifier = GlanceModifier.fillMaxWidth()
+            // Scrollable photo list
+            LazyColumn(
+                modifier = GlanceModifier
+                    .fillMaxWidth()
+                    .defaultWeight()
             ) {
-                photos.take(5).forEach { photo ->
-                    WidgetPhotoItem(photo)
+                item {
                     Spacer(modifier = GlanceModifier.height(8.dp))
                 }
-                
-                if (photos.size > 5) {
-                    Text(
-                        text = "+${photos.size - 5} more",
-                        style = TextStyle(
-                            color = ColorProvider(Color(0xFF808080)),
-                            fontSize = 12.sp
-                        ),
-                        modifier = GlanceModifier.padding(top = 4.dp)
-                    )
+
+                items(photos) { photo ->
+                    Box(
+                        modifier = GlanceModifier
+                            .padding(horizontal = 16.dp, vertical = 4.dp)
+                            .clickable(
+                                actionStartActivity(
+                                    activity = MainActivity::class.java,
+                                    parameters = actionParametersOf(
+                                        UtilityCamWidget.PHOTO_ID_KEY to photo.id
+                                    )
+                                )
+                            )
+                    ) {
+                        WidgetPhotoItem(photo)
+                    }
+                }
+
+                item {
+                    Spacer(modifier = GlanceModifier.height(8.dp))
                 }
             }
         }
@@ -134,9 +152,9 @@ fun WidgetPhotoItem(photo: UtilityPhoto) {
                 ),
                 maxLines = 1
             )
-            
+
             Spacer(modifier = GlanceModifier.height(4.dp))
-            
+
             // Expiration time
             Row(
                 verticalAlignment = Alignment.CenterVertically

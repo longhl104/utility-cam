@@ -27,8 +27,15 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun UtilityCamNavigation() {
+fun UtilityCamNavigation(initialPhotoId: String? = null) {
     val navController = rememberNavController()
+
+    // Navigate to photo detail if photoId is provided from widget
+    LaunchedEffect(initialPhotoId) {
+        if (initialPhotoId != null) {
+            navController.navigate(Screen.PhotoDetail.createRoute(initialPhotoId))
+        }
+    }
 
     NavHost(
         navController = navController,

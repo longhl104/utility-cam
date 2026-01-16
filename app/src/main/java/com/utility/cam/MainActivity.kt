@@ -22,13 +22,16 @@ class MainActivity : ComponentActivity() {
         // Schedule periodic cleanup worker
         schedulePhotoCleanup()
         
+        // Get photo ID from intent extras (from widget click)
+        val photoId = intent?.extras?.getString("photo_id")
+
         setContent {
             UtilityCamTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    UtilityCamNavigation()
+                    UtilityCamNavigation(initialPhotoId = photoId)
                 }
             }
         }
@@ -44,5 +47,9 @@ class MainActivity : ComponentActivity() {
             ExistingPeriodicWorkPolicy.KEEP,
             cleanupRequest
         )
+    }
+
+    companion object {
+        const val EXTRA_PHOTO_ID = "extra_photo_id"
     }
 }
