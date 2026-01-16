@@ -20,15 +20,27 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../utility-cam-release.keystore")
+            storePassword = project.findProperty("KEYSTORE_PASSWORD") as String? ?: ""
+            keyAlias = "utility-cam"
+            keyPassword = project.findProperty("KEY_PASSWORD") as String? ?: ""
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

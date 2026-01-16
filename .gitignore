@@ -61,3 +61,4 @@ captures/
 Thumbs.db
 
 *.hprof
+gradle.properties
