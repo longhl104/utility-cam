@@ -24,7 +24,6 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityPhoto
-import kotlinx.coroutines.launch
 import java.io.File
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +35,7 @@ fun GalleryScreen(
 ) {
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
-    val coroutineScope = rememberCoroutineScope()
+    rememberCoroutineScope()
     
     var photos by remember { mutableStateOf<List<UtilityPhoto>>(emptyList()) }
     

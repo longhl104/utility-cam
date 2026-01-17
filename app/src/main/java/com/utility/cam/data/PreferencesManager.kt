@@ -15,11 +15,11 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
  * Manages app preferences using DataStore
  */
 class PreferencesManager(private val context: Context) {
-    
+
     companion object {
         val DEFAULT_TTL_KEY = stringPreferencesKey("default_ttl")
     }
-    
+
     /**
      * Get the default TTL duration
      */
@@ -27,11 +27,11 @@ class PreferencesManager(private val context: Context) {
         val ttlName = preferences[DEFAULT_TTL_KEY] ?: TTLDuration.TWENTY_FOUR_HOURS.name
         try {
             TTLDuration.valueOf(ttlName)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             TTLDuration.TWENTY_FOUR_HOURS
         }
     }
-    
+
     /**
      * Set the default TTL duration
      */

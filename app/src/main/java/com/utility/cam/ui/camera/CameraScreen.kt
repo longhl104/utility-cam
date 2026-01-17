@@ -20,7 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
@@ -82,7 +82,7 @@ fun CameraPreviewScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
     
-    var lensFacing by remember { mutableStateOf(CameraSelector.LENS_FACING_BACK) }
+    var lensFacing by remember { mutableIntStateOf(CameraSelector.LENS_FACING_BACK) }
     var imageCapture: ImageCapture? by remember { mutableStateOf(null) }
     var previewView: PreviewView? by remember { mutableStateOf(null) }
     var isCapturing by remember { mutableStateOf(false) }
@@ -98,11 +98,8 @@ fun CameraPreviewScreen(
     }
     
     Box(modifier = Modifier.fillMaxSize()) {
-        AndroidView(
-            factory = { ctx ->
-                PreviewView(ctx).also { previewView = it }
-            },
-            modifier = Modifier.fillMaxSize()
+        CameraPreview(
+            onPreviewViewCreated = { previewView = it }
         )
         
         // Camera controls
@@ -209,7 +206,7 @@ private fun setupCamera(
         cameraProvider.unbindAll()
         
         val preview = Preview.Builder().build().also {
-            it.setSurfaceProvider(previewView?.surfaceProvider)
+            it.surfaceProvider = previewView?.surfaceProvider
         }
         
         val imageCapture = ImageCapture.Builder()
@@ -261,3 +258,18 @@ private suspend fun takePicture(
         }
     )
 }
+
+@Composable
+fun CameraPreview(
+    onPreviewViewCreated: (PreviewView) -> Unit
+) {
+    AndroidView(
+        factory = { context ->
+            PreviewView(context).also { previewView ->
+                onPreviewViewCreated(previewView)
+            }
+        },
+        modifier = Modifier.fillMaxSize()
+    )
+}
+

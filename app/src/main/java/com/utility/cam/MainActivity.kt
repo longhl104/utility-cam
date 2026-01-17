@@ -50,6 +50,5 @@ class MainActivity : ComponentActivity() {
     }
 
     companion object {
-        const val EXTRA_PHOTO_ID = "extra_photo_id"
     }
 }
