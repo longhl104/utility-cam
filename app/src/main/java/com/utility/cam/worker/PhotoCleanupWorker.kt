@@ -32,10 +32,19 @@ class PhotoCleanupWorker(
 
         return try {
             val storageManager = PhotoStorageManager(applicationContext)
+
+            // Log all photos before cleanup
+            val allPhotos = storageManager.getAllPhotos()
+            Log.d(TAG, "Total active photos before cleanup: ${allPhotos.size}")
+
             val deletedCount = storageManager.deleteExpiredPhotos()
             
             val deletedMessage = "Deleted $deletedCount expired photo(s)"
             Log.d(TAG, deletedMessage)
+
+            // Log all photos after cleanup
+            val remainingPhotos = storageManager.getAllPhotos()
+            Log.d(TAG, "Total active photos after cleanup: ${remainingPhotos.size}")
 
             // Send notification about deleted photos if enabled
             if (deletedCount > 0) {

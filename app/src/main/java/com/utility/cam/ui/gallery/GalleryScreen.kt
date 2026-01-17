@@ -19,11 +19,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.utility.cam.data.PhotoEventBus
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityPhoto
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import java.io.File
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,14 +41,51 @@ fun GalleryScreen(
 ) {
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
-    rememberCoroutineScope()
-    
+    val lifecycleOwner = LocalLifecycleOwner.current
+
     var photos by remember { mutableStateOf<List<UtilityPhoto>>(emptyList()) }
-    
-    LaunchedEffect(Unit) {
+    var refreshTrigger by remember { mutableIntStateOf(0) }
+
+    // Function to load photos
+    suspend fun loadPhotos() {
         photos = storageManager.getAllPhotos()
     }
     
+    // Initial load and reload on trigger
+    LaunchedEffect(refreshTrigger) {
+        loadPhotos()
+    }
+
+    // Listen to PhotoEventBus for immediate refresh when photos are added/deleted
+    LaunchedEffect(Unit) {
+        PhotoEventBus.photoEvents.collect { _ ->
+            // Refresh gallery when photos are added or deleted
+            loadPhotos()
+        }
+    }
+
+    // Periodic refresh every 60 seconds as a fallback (in case events are missed)
+    // This interval is much longer now since we have event-driven updates
+    LaunchedEffect(Unit) {
+        while (isActive) {
+            delay(60_000) // 60 seconds
+            loadPhotos()
+        }
+    }
+
+    // Refresh when the screen resumes (comes back to foreground)
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                refreshTrigger++
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(

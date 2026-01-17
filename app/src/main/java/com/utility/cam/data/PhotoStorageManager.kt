@@ -8,6 +8,7 @@ import android.graphics.Matrix
 import androidx.exifinterface.media.ExifInterface
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +22,10 @@ import java.util.UUID
  */
 class PhotoStorageManager(private val context: Context) {
     
+    companion object {
+        private const val TAG = "PhotoStorageManager"
+    }
+
     private val photosDir = File(context.filesDir, "utility_photos")
     private val metadataFile = File(context.filesDir, "photos_metadata.json")
     private val gson = Gson()
@@ -65,6 +70,9 @@ class PhotoStorageManager(private val context: Context) {
         // Save metadata
         savePhotoMetadata(photo)
         
+        // Emit event
+        PhotoEventBus.emit(PhotoEvent.PhotoAdded)
+
         photo
     }
     
@@ -147,6 +155,9 @@ class PhotoStorageManager(private val context: Context) {
         photos.remove(photo)
         saveAllPhotoMetadata(photos)
         
+        // Emit event
+        PhotoEventBus.emit(PhotoEvent.PhotosDeleted)
+
         true
     }
     
@@ -154,18 +165,50 @@ class PhotoStorageManager(private val context: Context) {
      * Delete all expired photos
      */
     suspend fun deleteExpiredPhotos(): Int = withContext(Dispatchers.IO) {
+        Log.d(TAG, "deleteExpiredPhotos: Starting cleanup process")
+        val currentTime = System.currentTimeMillis()
+        Log.d(TAG, "deleteExpiredPhotos: Current time = $currentTime")
+
         val photos = loadPhotoMetadata()
+        Log.d(TAG, "deleteExpiredPhotos: Loaded ${photos.size} total photos from metadata")
+
+        // Log each photo's expiration status
+        photos.forEachIndexed { index, photo ->
+            val isExpired = photo.isExpired()
+            val timeRemaining = photo.getTimeRemaining()
+            Log.d(TAG, "deleteExpiredPhotos: Photo $index - ID: ${photo.id}, " +
+                    "Expiration: ${photo.expirationTimestamp}, " +
+                    "IsExpired: $isExpired, " +
+                    "TimeRemaining: ${timeRemaining}ms (${timeRemaining / 1000}s)")
+        }
+
         val (expired, active) = photos.partition { it.isExpired() }
-        
+        Log.d(TAG, "deleteExpiredPhotos: Found ${expired.size} expired photos and ${active.size} active photos")
+
         // Delete expired files
-        expired.forEach { photo ->
-            File(photo.filePath).delete()
-            photo.thumbnailPath?.let { File(it).delete() }
+        expired.forEachIndexed { index, photo ->
+            Log.d(TAG, "deleteExpiredPhotos: Deleting expired photo ${index + 1}/${expired.size} - ID: ${photo.id}")
+            val mainFileDeleted = File(photo.filePath).delete()
+            Log.d(TAG, "deleteExpiredPhotos: Main file deleted: $mainFileDeleted - ${photo.filePath}")
+
+            photo.thumbnailPath?.let { thumbPath ->
+                val thumbDeleted = File(thumbPath).delete()
+                Log.d(TAG, "deleteExpiredPhotos: Thumbnail deleted: $thumbDeleted - $thumbPath")
+            }
         }
         
         // Save active photos metadata
+        Log.d(TAG, "deleteExpiredPhotos: Saving ${active.size} active photos to metadata")
         saveAllPhotoMetadata(active)
         
+        Log.d(TAG, "deleteExpiredPhotos: Cleanup complete. Deleted ${expired.size} photos")
+
+        // Emit event if photos were deleted
+        if (expired.isNotEmpty()) {
+            Log.d(TAG, "deleteExpiredPhotos: Emitting PhotosDeleted event")
+            PhotoEventBus.emit(PhotoEvent.PhotosDeleted)
+        }
+
         expired.size
     }
     
