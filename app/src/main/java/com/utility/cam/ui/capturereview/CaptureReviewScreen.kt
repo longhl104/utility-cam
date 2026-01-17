@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.utility.cam.BuildConfig
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
@@ -83,14 +84,16 @@ fun CaptureReviewScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    TTLDuration.entries.forEach { duration ->
-                        FilterChip(
-                            selected = ttl == duration,
-                            onClick = { selectedTTL = duration },
-                            label = { Text(duration.displayName) },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
+                    TTLDuration.entries
+                        .filter { !it.isDebugOnly || BuildConfig.DEBUG }
+                        .forEach { duration ->
+                            FilterChip(
+                                selected = ttl == duration,
+                                onClick = { selectedTTL = duration },
+                                label = { Text(duration.displayName) },
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
                 }
                 
                 Spacer(modifier = Modifier.height(16.dp))

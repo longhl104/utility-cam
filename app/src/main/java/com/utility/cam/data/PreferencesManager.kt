@@ -20,6 +20,7 @@ class PreferencesManager(private val context: Context) {
     companion object {
         val DEFAULT_TTL_KEY = stringPreferencesKey("default_ttl")
         val NOTIFICATIONS_ENABLED_KEY = booleanPreferencesKey("notifications_enabled")
+        val FIRST_LAUNCH_KEY = booleanPreferencesKey("first_launch")
     }
 
     /**
@@ -56,6 +57,22 @@ class PreferencesManager(private val context: Context) {
     suspend fun setNotificationsEnabled(enabled: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[NOTIFICATIONS_ENABLED_KEY] = enabled
+        }
+    }
+
+    /**
+     * Check if this is the first launch
+     */
+    fun isFirstLaunch(): Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[FIRST_LAUNCH_KEY] ?: true // Default to true (first launch)
+    }
+
+    /**
+     * Mark that the app has been launched
+     */
+    suspend fun setFirstLaunchComplete() {
+        context.dataStore.edit { preferences ->
+            preferences[FIRST_LAUNCH_KEY] = false
         }
     }
 }

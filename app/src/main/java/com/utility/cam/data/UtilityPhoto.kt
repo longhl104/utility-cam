@@ -45,10 +45,17 @@ data class UtilityPhoto(
 /**
  * Time-to-live duration options
  */
-enum class TTLDuration(val hours: Int, val displayName: String) {
+enum class TTLDuration(val hours: Int, val displayName: String, val isDebugOnly: Boolean = false) {
+    TEST_3_SECONDS(0, "3 seconds (Test)", isDebugOnly = true),
     TWENTY_FOUR_HOURS(24, "24 hours"),
     THREE_DAYS(72, "3 days"),
     ONE_WEEK(168, "1 week");
 
-    fun toMilliseconds(): Long = hours * 60 * 60 * 1000L
+    fun toMilliseconds(): Long {
+        // Special handling for test duration
+        if (this == TEST_3_SECONDS) {
+            return 3 * 1000L // 3 seconds
+        }
+        return hours * 60 * 60 * 1000L
+    }
 }

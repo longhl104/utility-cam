@@ -9,6 +9,7 @@ import com.utility.cam.ui.camera.CameraScreen
 import com.utility.cam.ui.capturereview.CaptureReviewScreen
 import com.utility.cam.ui.gallery.GalleryScreen
 import com.utility.cam.ui.photodetail.PhotoDetailScreen
+import com.utility.cam.ui.permissions.NotificationPermissionHandler
 import com.utility.cam.ui.settings.SettingsScreen
 
 sealed class Screen(val route: String) {
@@ -29,6 +30,9 @@ sealed class Screen(val route: String) {
 @Composable
 fun UtilityCamNavigation(initialPhotoId: String? = null) {
     val navController = rememberNavController()
+
+    // Request notification permission on first launch
+    NotificationPermissionHandler()
 
     // Navigate to photo detail if photoId is provided from widget
     LaunchedEffect(initialPhotoId) {
