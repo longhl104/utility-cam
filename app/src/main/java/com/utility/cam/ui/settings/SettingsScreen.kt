@@ -24,7 +24,8 @@ fun SettingsScreen(
     val coroutineScope = rememberCoroutineScope()
     
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
-    
+    val notificationsEnabled by preferencesManager.getNotificationsEnabled().collectAsState(initial = true)
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -81,7 +82,48 @@ fun SettingsScreen(
                     )
                 }
             }
-            
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            HorizontalDivider()
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                "Notifications",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        "Cleanup Notifications",
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        "Get notified when expired photos are deleted",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Switch(
+                    checked = notificationsEnabled,
+                    onCheckedChange = { enabled ->
+                        coroutineScope.launch {
+                            preferencesManager.setNotificationsEnabled(enabled)
+                        }
+                    }
+                )
+            }
+
             Spacer(modifier = Modifier.height(32.dp))
             
             HorizontalDivider()
