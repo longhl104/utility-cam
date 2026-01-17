@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Utility Cam</string>
     <string name="widget_description">Shows your active utility photos with expiration times</string>
+    <string name="notification_cleanup_title">Photos Cleaned Up</string>
+    <plurals name="notification_cleanup_message">
+        <item quantity="one">%d expired photo was automatically deleted</item>
+        <item quantity="other">%d expired photos were automatically deleted</item>
+    </plurals>
 </resources>

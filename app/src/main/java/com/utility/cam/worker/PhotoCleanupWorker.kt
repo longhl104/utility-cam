@@ -3,6 +3,7 @@ package com.utility.cam.worker
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PhotoStorageManager
 
 /**
@@ -18,9 +19,9 @@ class PhotoCleanupWorker(
             val storageManager = PhotoStorageManager(applicationContext)
             val deletedCount = storageManager.deleteExpiredPhotos()
             
-            // Log or notify about deleted photos if needed
+            // Send notification about deleted photos
             if (deletedCount > 0) {
-                // Could send a notification here if desired
+                NotificationHelper.sendPhotoCleanupNotification(applicationContext, deletedCount)
             }
             
             Result.success()

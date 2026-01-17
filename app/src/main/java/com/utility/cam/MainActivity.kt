@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.utility.cam.data.NotificationHelper
 import com.utility.cam.ui.navigation.UtilityCamNavigation
 import com.utility.cam.ui.theme.UtilityCamTheme
 import com.utility.cam.worker.PhotoCleanupWorker
@@ -19,6 +20,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
+        // Create notification channel
+        NotificationHelper.createNotificationChannel(this)
+
         // Schedule periodic cleanup worker
         schedulePhotoCleanup()
         
@@ -49,6 +53,5 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-    companion object {
-    }
+    companion object
 }
