@@ -92,9 +92,6 @@ fun CameraPreviewScreen(
     var previewView: PreviewView? by remember { mutableStateOf(null) }
     var isCapturing by remember { mutableStateOf(false) }
     var zoomRatio by remember { mutableFloatStateOf(1f) }
-    var focusX by remember { mutableFloatStateOf(0f) }
-    var focusY by remember { mutableFloatStateOf(0f) }
-    var showFocusIndicator by remember { mutableStateOf(false) }
 
     LaunchedEffect(lensFacing) {
         val cameraProvider = context.getCameraProvider()
@@ -125,36 +122,14 @@ fun CameraPreviewScreen(
             onFocus = { x, y ->
                 previewView?.let { preview ->
                     camera?.let { cam ->
-                        // Update focus indicator position
-                        focusX = x
-                        focusY = y
-                        showFocusIndicator = true
-
-                        // Trigger camera focus
                         val factory = preview.meteringPointFactory
                         val point = factory.createPoint(x, y)
                         val action = FocusMeteringAction.Builder(point).build()
                         cam.cameraControl.startFocusAndMetering(action)
-
-                        // Hide focus indicator after 1 second
-                        coroutineScope.launch {
-                            kotlinx.coroutines.delay(1000)
-                            showFocusIndicator = false
-                        }
                     }
                 }
             }
         )
-
-        // Focus indicator
-        if (showFocusIndicator) {
-            Box(
-                modifier = Modifier
-                    .offset(x = (focusX - 40).dp, y = (focusY - 40).dp)
-                    .size(80.dp)
-                    .border(2.dp, Color.White, RoundedCornerShape(4.dp))
-            )
-        }
 
         // Zoom indicator
         Box(
@@ -163,6 +138,14 @@ fun CameraPreviewScreen(
                 .padding(top = 60.dp)
                 .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(16.dp))
                 .padding(horizontal = 16.dp, vertical = 8.dp)
+                .pointerInput(Unit) {
+                    detectTapGestures {
+                        camera?.let { cam ->
+                            cam.cameraControl.setZoomRatio(1f)
+                            zoomRatio = 1f
+                        }
+                    }
+                }
         ) {
             Text(
                 text = String.format(Locale.US, "%.1fx", zoomRatio),
