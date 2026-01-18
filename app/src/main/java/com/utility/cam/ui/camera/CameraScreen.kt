@@ -6,8 +6,11 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -19,6 +22,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
@@ -84,24 +88,89 @@ fun CameraPreviewScreen(
     
     var lensFacing by remember { mutableIntStateOf(CameraSelector.LENS_FACING_BACK) }
     var imageCapture: ImageCapture? by remember { mutableStateOf(null) }
+    var camera: Camera? by remember { mutableStateOf(null) }
     var previewView: PreviewView? by remember { mutableStateOf(null) }
     var isCapturing by remember { mutableStateOf(false) }
-    
+    var zoomRatio by remember { mutableFloatStateOf(1f) }
+    var focusX by remember { mutableFloatStateOf(0f) }
+    var focusY by remember { mutableFloatStateOf(0f) }
+    var showFocusIndicator by remember { mutableStateOf(false) }
+
     LaunchedEffect(lensFacing) {
         val cameraProvider = context.getCameraProvider()
-        imageCapture = setupCamera(
+        val result = setupCamera(
             cameraProvider,
             previewView,
             lifecycleOwner,
             lensFacing
         )
+        imageCapture = result.first
+        camera = result.second
+        zoomRatio = camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
     }
     
     Box(modifier = Modifier.fillMaxSize()) {
         CameraPreview(
-            onPreviewViewCreated = { previewView = it }
+            onPreviewViewCreated = { previewView = it },
+            onZoomChange = { scale ->
+                camera?.let { cam ->
+                    val zoomState = cam.cameraInfo.zoomState.value
+                    val minZoom = zoomState?.minZoomRatio ?: 1f
+                    val maxZoom = zoomState?.maxZoomRatio ?: 1f
+                    val newZoom = (zoomRatio * scale).coerceIn(minZoom, maxZoom)
+                    cam.cameraControl.setZoomRatio(newZoom)
+                    zoomRatio = newZoom
+                }
+            },
+            onFocus = { x, y ->
+                previewView?.let { preview ->
+                    camera?.let { cam ->
+                        // Update focus indicator position
+                        focusX = x
+                        focusY = y
+                        showFocusIndicator = true
+
+                        // Trigger camera focus
+                        val factory = preview.meteringPointFactory
+                        val point = factory.createPoint(x, y)
+                        val action = FocusMeteringAction.Builder(point).build()
+                        cam.cameraControl.startFocusAndMetering(action)
+
+                        // Hide focus indicator after 1 second
+                        coroutineScope.launch {
+                            kotlinx.coroutines.delay(1000)
+                            showFocusIndicator = false
+                        }
+                    }
+                }
+            }
         )
-        
+
+        // Focus indicator
+        if (showFocusIndicator) {
+            Box(
+                modifier = Modifier
+                    .offset(x = (focusX - 40).dp, y = (focusY - 40).dp)
+                    .size(80.dp)
+                    .border(2.dp, Color.White, RoundedCornerShape(4.dp))
+            )
+        }
+
+        // Zoom indicator
+        Box(
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 60.dp)
+                .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(16.dp))
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            Text(
+                text = String.format(Locale.US, "%.1fx", zoomRatio),
+                color = Color.White,
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
+
         // Camera controls
         Column(
             modifier = Modifier
@@ -201,7 +270,7 @@ private fun setupCamera(
     previewView: PreviewView?,
     lifecycleOwner: LifecycleOwner,
     lensFacing: Int
-): ImageCapture? {
+): Pair<ImageCapture?, Camera?> {
     return try {
         cameraProvider.unbindAll()
         
@@ -217,17 +286,17 @@ private fun setupCamera(
             .requireLensFacing(lensFacing)
             .build()
         
-        cameraProvider.bindToLifecycle(
+        val camera = cameraProvider.bindToLifecycle(
             lifecycleOwner,
             cameraSelector,
             preview,
             imageCapture
         )
         
-        imageCapture
+        Pair(imageCapture, camera)
     } catch (e: Exception) {
         e.printStackTrace()
-        null
+        Pair(null, null)
     }
 }
 
@@ -261,7 +330,9 @@ private suspend fun takePicture(
 
 @Composable
 fun CameraPreview(
-    onPreviewViewCreated: (PreviewView) -> Unit
+    onPreviewViewCreated: (PreviewView) -> Unit,
+    onZoomChange: (Float) -> Unit,
+    onFocus: (Float, Float) -> Unit
 ) {
     AndroidView(
         factory = { context ->
@@ -269,7 +340,18 @@ fun CameraPreview(
                 onPreviewViewCreated(previewView)
             }
         },
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures { offset ->
+                    onFocus(offset.x, offset.y)
+                }
+            }
+            .pointerInput(Unit) {
+                detectTransformGestures { _, _, zoom, _ ->
+                    onZoomChange(zoom)
+                }
+            }
     )
 }
 
