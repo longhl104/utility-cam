@@ -41,10 +41,12 @@ fun SettingsScreen(
     val cleanupDelaySeconds by preferencesManager.getCleanupDelaySeconds().collectAsState(initial = 10)
 
     var cleanupDelayInput by remember { mutableStateOf("") }
+    var hasUserEdited by remember { mutableStateOf(false) }
 
-    // Initialize input with current value
+    // Initialize input with current value from preferences
     LaunchedEffect(cleanupDelaySeconds) {
-        if (cleanupDelayInput.isEmpty()) {
+        // Only update if user hasn't edited the field yet
+        if (!hasUserEdited) {
             cleanupDelayInput = cleanupDelaySeconds.toString()
         }
     }
@@ -220,6 +222,9 @@ fun SettingsScreen(
                 OutlinedTextField(
                     value = cleanupDelayInput,
                     onValueChange = { newValue ->
+                        // Mark as edited by user
+                        hasUserEdited = true
+
                         // Only allow digits
                         if (newValue.isEmpty() || newValue.all { it.isDigit() }) {
                             cleanupDelayInput = newValue
@@ -228,6 +233,8 @@ fun SettingsScreen(
                                 if (seconds > 0 && seconds <= 3600) { // Max 1 hour
                                     coroutineScope.launch {
                                         preferencesManager.setCleanupDelaySeconds(seconds)
+                                        // Reset the flag after saving so next restart shows correct value
+                                        hasUserEdited = false
                                         Toast.makeText(
                                             context,
                                             "Cleanup delay updated to $seconds seconds. Restart app to apply.",

@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,6 +46,7 @@ fun GalleryScreen(
 
     var photos by remember { mutableStateOf<List<UtilityPhoto>>(emptyList()) }
     var refreshTrigger by remember { mutableIntStateOf(0) }
+    var isRefreshing by remember { mutableStateOf(false) }
 
     // Function to load photos
     suspend fun loadPhotos() {
@@ -53,7 +55,11 @@ fun GalleryScreen(
     
     // Initial load and reload on trigger
     LaunchedEffect(refreshTrigger) {
+        if (refreshTrigger > 0) {
+            isRefreshing = true
+        }
         loadPhotos()
+        isRefreshing = false
     }
 
     // Listen to PhotoEventBus for immediate refresh when photos are added/deleted
@@ -106,41 +112,48 @@ fun GalleryScreen(
             }
         }
     ) { padding ->
-        if (photos.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        "No utility photos yet",
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        "Tap + to capture your first utility photo",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+        PullToRefreshBox(
+            isRefreshing = isRefreshing,
+            onRefresh = {
+                refreshTrigger++
+            },
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+        ) {
+            if (photos.isEmpty()) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            "No utility photos yet",
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            "Tap + to capture your first utility photo",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
-            }
-        } else {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                contentPadding = padding,
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp)
-            ) {
-                items(photos, key = { it.id }) { photo ->
-                    PhotoGridItem(
-                        photo = photo,
-                        onClick = { onNavigateToPhotoDetail(photo.id) }
-                    )
+            } else {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(8.dp)
+                ) {
+                    items(photos, key = { it.id }) { photo ->
+                        PhotoGridItem(
+                            photo = photo,
+                            onClick = { onNavigateToPhotoDetail(photo.id) }
+                        )
+                    }
                 }
             }
         }
