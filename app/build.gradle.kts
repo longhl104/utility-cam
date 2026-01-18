@@ -11,8 +11,8 @@ android {
         applicationId = "com.utility.cam"
         minSdk = 26
         targetSdk = 36
-        versionCode = 6
-        versionName = "1.1.4"
+        versionCode = 7
+        versionName = "1.1.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -30,6 +30,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("boolean", "DEBUG", "false")
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -38,6 +41,10 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
+            // Add native debug symbols
+            ndk {
+                debugSymbolLevel = "full" // or "FULL" for more detailed information
+            }
         }
     }
 
@@ -95,6 +102,9 @@ dependencies {
 
     // Accompanist for permissions
     implementation("com.google.accompanist:accompanist-permissions:0.37.3")
+
+    // Google Play Billing
+    implementation("com.android.billingclient:billing-ktx:8.3.0")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
