@@ -23,6 +23,7 @@ class PreferencesManager(private val context: Context) {
         val NOTIFICATIONS_ENABLED_KEY = booleanPreferencesKey("notifications_enabled")
         val FIRST_LAUNCH_KEY = booleanPreferencesKey("first_launch")
         val CLEANUP_DELAY_SECONDS_KEY = intPreferencesKey("cleanup_delay_seconds")
+        val REMINDER_NOTIFICATIONS_ENABLED_KEY = booleanPreferencesKey("reminder_notifications_enabled")
     }
 
     /**
@@ -91,6 +92,22 @@ class PreferencesManager(private val context: Context) {
     suspend fun setCleanupDelaySeconds(seconds: Int) {
         context.dataStore.edit { preferences ->
             preferences[CLEANUP_DELAY_SECONDS_KEY] = seconds
+        }
+    }
+
+    /**
+     * Get whether reminder notifications are enabled
+     */
+    fun getReminderNotificationsEnabled(): Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[REMINDER_NOTIFICATIONS_ENABLED_KEY] ?: true // Default to enabled
+    }
+
+    /**
+     * Set whether reminder notifications are enabled
+     */
+    suspend fun setReminderNotificationsEnabled(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[REMINDER_NOTIFICATIONS_ENABLED_KEY] = enabled
         }
     }
 }

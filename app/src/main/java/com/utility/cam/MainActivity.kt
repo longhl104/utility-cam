@@ -17,6 +17,7 @@ import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.ui.navigation.UtilityCamNavigation
 import com.utility.cam.ui.theme.UtilityCamTheme
+import com.utility.cam.worker.ExpiringPhotoReminderWorker
 import com.utility.cam.worker.PhotoCleanupWorker
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -32,6 +33,9 @@ class MainActivity : ComponentActivity() {
         // Schedule periodic cleanup worker
         schedulePhotoCleanup()
         
+        // Schedule expiring photo reminder worker
+        scheduleExpiringPhotoReminder()
+
         // In debug mode, also schedule immediate cleanup for testing
         if (BuildConfig.DEBUG) {
             val debugMessage = "Debug mode: Scheduling immediate cleanup check"
@@ -97,6 +101,40 @@ class MainActivity : ComponentActivity() {
         val immediateCleanup = OneTimeWorkRequestBuilder<PhotoCleanupWorker>().build()
         WorkManager.getInstance(this).enqueue(immediateCleanup)
         Log.d("MainActivity", "Scheduled immediate cleanup")
+    }
+
+    private fun scheduleExpiringPhotoReminder() {
+        if (BuildConfig.DEBUG) {
+            // In debug mode, check every 5 minutes
+            val delayMinutes = 5L
+            val reminderRequest = OneTimeWorkRequestBuilder<ExpiringPhotoReminderWorker>()
+                .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
+                .build()
+
+            WorkManager.getInstance(this).enqueueUniqueWork(
+                "photo_expiring_reminder",
+                ExistingWorkPolicy.REPLACE,
+                reminderRequest
+            )
+
+            val scheduleMessage = "Scheduled expiring photo reminder worker with $delayMinutes minute delay"
+            Log.d("MainActivity", scheduleMessage)
+        } else {
+            // In release mode, check every 30 minutes
+            val delayMinutes = 30L
+            val reminderRequest = OneTimeWorkRequestBuilder<ExpiringPhotoReminderWorker>()
+                .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
+                .build()
+
+            WorkManager.getInstance(this).enqueueUniqueWork(
+                "photo_expiring_reminder",
+                ExistingWorkPolicy.REPLACE,
+                reminderRequest
+            )
+
+            val scheduleMessage = "Scheduled expiring photo reminder worker with $delayMinutes minute delay"
+            Log.d("MainActivity", scheduleMessage)
+        }
     }
 
     companion object

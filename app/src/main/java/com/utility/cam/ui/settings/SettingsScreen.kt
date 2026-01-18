@@ -37,6 +37,7 @@ fun SettingsScreen(
     
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
     val notificationsEnabled by preferencesManager.getNotificationsEnabled().collectAsState(initial = true)
+    val reminderNotificationsEnabled by preferencesManager.getReminderNotificationsEnabled().collectAsState(initial = true)
     val hasNotificationPermission = isNotificationPermissionGranted()
     val cleanupDelaySeconds by preferencesManager.getCleanupDelaySeconds().collectAsState(initial = 10)
 
@@ -146,6 +147,36 @@ fun SettingsScreen(
                     onCheckedChange = { enabled ->
                         coroutineScope.launch {
                             preferencesManager.setNotificationsEnabled(enabled)
+                        }
+                    }
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        "Expiring Soon Reminders",
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        "Get reminded when photos are about to expire (within 1 hour)",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Switch(
+                    checked = reminderNotificationsEnabled,
+                    onCheckedChange = { enabled ->
+                        coroutineScope.launch {
+                            preferencesManager.setReminderNotificationsEnabled(enabled)
                         }
                     }
                 )
