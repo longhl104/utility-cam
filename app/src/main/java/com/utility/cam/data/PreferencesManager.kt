@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +22,7 @@ class PreferencesManager(private val context: Context) {
         val DEFAULT_TTL_KEY = stringPreferencesKey("default_ttl")
         val NOTIFICATIONS_ENABLED_KEY = booleanPreferencesKey("notifications_enabled")
         val FIRST_LAUNCH_KEY = booleanPreferencesKey("first_launch")
+        val CLEANUP_DELAY_SECONDS_KEY = intPreferencesKey("cleanup_delay_seconds")
     }
 
     /**
@@ -73,6 +75,22 @@ class PreferencesManager(private val context: Context) {
     suspend fun setFirstLaunchComplete() {
         context.dataStore.edit { preferences ->
             preferences[FIRST_LAUNCH_KEY] = false
+        }
+    }
+
+    /**
+     * Get the cleanup delay in seconds (for debug mode)
+     */
+    fun getCleanupDelaySeconds(): Flow<Int> = context.dataStore.data.map { preferences ->
+        preferences[CLEANUP_DELAY_SECONDS_KEY] ?: 10 // Default to 10 seconds
+    }
+
+    /**
+     * Set the cleanup delay in seconds (for debug mode)
+     */
+    suspend fun setCleanupDelaySeconds(seconds: Int) {
+        context.dataStore.edit { preferences ->
+            preferences[CLEANUP_DELAY_SECONDS_KEY] = seconds
         }
     }
 }

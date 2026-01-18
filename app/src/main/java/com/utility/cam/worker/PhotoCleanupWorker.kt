@@ -70,8 +70,11 @@ class PhotoCleanupWorker(
 
             // In debug mode, schedule the next run to create a repeating cycle
             if (BuildConfig.DEBUG) {
+                val preferencesManager = PreferencesManager(applicationContext)
+                val delaySeconds = preferencesManager.getCleanupDelaySeconds().first()
+
                 val nextCleanup = OneTimeWorkRequestBuilder<PhotoCleanupWorker>()
-                    .setInitialDelay(10, TimeUnit.SECONDS)
+                    .setInitialDelay(delaySeconds.toLong(), TimeUnit.SECONDS)
                     .build()
 
                 WorkManager.getInstance(applicationContext).enqueueUniqueWork(
@@ -80,7 +83,7 @@ class PhotoCleanupWorker(
                     nextCleanup
                 )
 
-                val chainMessage = "Scheduled next cleanup in 10 seconds"
+                val chainMessage = "Scheduled next cleanup in $delaySeconds seconds"
                 Log.d(TAG, chainMessage)
             }
 

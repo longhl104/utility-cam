@@ -8,16 +8,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.utility.cam.data.NotificationHelper
+import com.utility.cam.data.PreferencesManager
 import com.utility.cam.ui.navigation.UtilityCamNavigation
 import com.utility.cam.ui.theme.UtilityCamTheme
 import com.utility.cam.worker.PhotoCleanupWorker
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
 
 class MainActivity : ComponentActivity() {
@@ -55,10 +57,14 @@ class MainActivity : ComponentActivity() {
     private fun schedulePhotoCleanup() {
         if (BuildConfig.DEBUG) {
             // In debug mode, use chained one-time work to bypass 15-minute minimum
-            // Schedule repeating 10-second cleanup cycles
-            val delaySeconds = 10L
+            // Get delay from preferences
+            val preferencesManager = PreferencesManager(this)
+            val delaySeconds = runBlocking {
+                preferencesManager.getCleanupDelaySeconds().first()
+            }
+
             val cleanupRequest = OneTimeWorkRequestBuilder<PhotoCleanupWorker>()
-                .setInitialDelay(delaySeconds, TimeUnit.SECONDS)
+                .setInitialDelay(delaySeconds.toLong(), TimeUnit.SECONDS)
                 .build()
 
             WorkManager.getInstance(this).enqueueUniqueWork(

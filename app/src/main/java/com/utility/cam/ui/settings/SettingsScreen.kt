@@ -38,6 +38,16 @@ fun SettingsScreen(
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
     val notificationsEnabled by preferencesManager.getNotificationsEnabled().collectAsState(initial = true)
     val hasNotificationPermission = isNotificationPermissionGranted()
+    val cleanupDelaySeconds by preferencesManager.getCleanupDelaySeconds().collectAsState(initial = 10)
+
+    var cleanupDelayInput by remember { mutableStateOf("") }
+
+    // Initialize input with current value
+    LaunchedEffect(cleanupDelaySeconds) {
+        if (cleanupDelayInput.isEmpty()) {
+            cleanupDelayInput = cleanupDelaySeconds.toString()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -202,6 +212,39 @@ fun SettingsScreen(
                     "Testing utilities for development",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Cleanup delay input
+                OutlinedTextField(
+                    value = cleanupDelayInput,
+                    onValueChange = { newValue ->
+                        // Only allow digits
+                        if (newValue.isEmpty() || newValue.all { it.isDigit() }) {
+                            cleanupDelayInput = newValue
+                            // Update preference if valid
+                            newValue.toIntOrNull()?.let { seconds ->
+                                if (seconds > 0 && seconds <= 3600) { // Max 1 hour
+                                    coroutineScope.launch {
+                                        preferencesManager.setCleanupDelaySeconds(seconds)
+                                        Toast.makeText(
+                                            context,
+                                            "Cleanup delay updated to $seconds seconds. Restart app to apply.",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    label = { Text("Cleanup Worker Delay (seconds)") },
+                    supportingText = {
+                        Text("Time between cleanup worker runs (1-3600 seconds). Requires app restart.")
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    isError = cleanupDelayInput.toIntOrNull()?.let { it <= 0 || it > 3600 } ?: false
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
