@@ -43,7 +43,7 @@ android {
             signingConfig = signingConfigs.getByName("release")
             // Add native debug symbols
             ndk {
-                debugSymbolLevel = "full" // or "FULL" for more detailed information
+                debugSymbolLevel = "FULL" // or "FULL" for more detailed information
             }
         }
     }

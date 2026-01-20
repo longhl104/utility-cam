@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="ad.size" content="width=320,height=480" />
+		<title>Utility Cam - Interstitial Ad</title>
+
+		<!-- Google Ads ClickTag -->
+		<script>
+			var clickTag =
+				"https://play.google.com/store/apps/details?id=com.utility.cam";
+		</script>
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				width: 320px;
+				height: 480px;
+				overflow: hidden;
+				font-family:
+					-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
+					sans-serif;
+				cursor: pointer;
+			}
+
+			#ad-container {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				background: #2a2a2a;
+			}
+
+			/* ========== SCENE 1: INTRO ========== */
+			#scene1 {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 20px;
+				opacity: 1;
+				transition: opacity 0.5s ease;
+			}
+
+			#scene1.hidden {
+				opacity: 0;
+				pointer-events: none;
+				position: absolute;
+			}
+
+			.headline {
+				font-size: 28px;
+				font-weight: bold;
+				color: #ffffff;
+				text-align: center;
+				margin-bottom: 30px;
+				line-height: 1.3;
+				animation: fadeInDown 0.8s ease;
+			}
+
+			/* Placeholder for cluttered photos image */
+			.clutter-img {
+				width: 240px;
+				height: 180px;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				border-radius: 12px;
+				margin-bottom: 40px;
+				position: relative;
+				animation: fadeInScale 1s ease 0.3s backwards;
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+			}
+
+			/* Visual representation of clutter using CSS */
+			.clutter-img::before,
+			.clutter-img::after {
+				content: "";
+				position: absolute;
+				background: rgba(255, 255, 255, 0.2);
+				border-radius: 4px;
+			}
+
+			.clutter-img::before {
+				width: 40px;
+				height: 50px;
+				top: 20px;
+				left: 30px;
+				transform: rotate(-15deg);
+			}
+
+			.clutter-img::after {
+				width: 50px;
+				height: 40px;
+				bottom: 30px;
+				right: 40px;
+				transform: rotate(20deg);
+			}
+
+			/* Replace this div with: <img src="your-clutter-image.png" alt="Cluttered Gallery" class="clutter-img"> */
+
+			.btn-clean {
+				background: #4caf50;
+				color: white;
+				border: none;
+				padding: 16px 48px;
+				font-size: 18px;
+				font-weight: bold;
+				border-radius: 50px;
+				cursor: pointer;
+				animation:
+					pulse 2s infinite,
+					fadeInUp 1s ease 0.6s backwards;
+				box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+				transition: transform 0.2s ease;
+			}
+
+			.btn-clean:active {
+				transform: scale(0.95);
+			}
+
+			@keyframes pulse {
+				0%,
+				100% {
+					transform: scale(1);
+				}
+				50% {
+					transform: scale(1.05);
+				}
+			}
+
+			@keyframes fadeInDown {
+				from {
+					opacity: 0;
+					transform: translateY(-20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes fadeInScale {
+				from {
+					opacity: 0;
+					transform: scale(0.8);
+				}
+				to {
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* ========== SCENE 2: INTERACTION ========== */
+			#scene2 {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 20px;
+				opacity: 0;
+				pointer-events: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			#scene2.active {
+				opacity: 1;
+				pointer-events: auto;
+			}
+
+			.photo-container {
+				width: 240px;
+				height: 240px;
+				position: relative;
+				margin-bottom: 20px;
+			}
+
+			/* Placeholder for the new photo */
+			.new-photo {
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+				border-radius: 12px;
+				opacity: 0;
+				transform: scale(0.5);
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+			}
+
+			/* Replace this div with: <img src="your-photo.png" alt="New Photo" class="new-photo"> */
+
+			.new-photo.show {
+				animation: photoAppear 0.6s ease forwards;
+			}
+
+			.new-photo.vanish {
+				animation: photoVanish 0.8s ease forwards;
+			}
+
+			@keyframes photoAppear {
+				to {
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+
+			@keyframes photoVanish {
+				to {
+					opacity: 0;
+					transform: scale(0.3);
+				}
+			}
+
+			/* Timer overlay */
+			.timer-overlay {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 72px;
+				font-weight: bold;
+				color: white;
+				text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+				opacity: 0;
+				z-index: 10;
+			}
+
+			.timer-overlay.show {
+				animation: timerPulse 1s ease;
+			}
+
+			@keyframes timerPulse {
+				0%,
+				100% {
+					opacity: 0;
+					transform: translate(-50%, -50%) scale(0.5);
+				}
+				50% {
+					opacity: 1;
+					transform: translate(-50%, -50%) scale(1);
+				}
+			}
+
+			/* Camera shutter flash */
+			.shutter-flash {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: white;
+				opacity: 0;
+				pointer-events: none;
+				z-index: 100;
+			}
+
+			.shutter-flash.flash {
+				animation: shutterFlash 0.3s ease;
+			}
+
+			@keyframes shutterFlash {
+				0% {
+					opacity: 0;
+				}
+				50% {
+					opacity: 0.9;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+
+			/* ========== SCENE 3: END CARD ========== */
+			#scene3 {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 20px;
+				opacity: 0;
+				pointer-events: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			}
+
+			#scene3.active {
+				animation: fadeIn 0.8s ease forwards;
+				pointer-events: auto;
+			}
+
+			@keyframes fadeIn {
+				to {
+					opacity: 1;
+				}
+			}
+
+			.tagline {
+				font-size: 32px;
+				font-weight: bold;
+				color: white;
+				text-align: center;
+				margin-bottom: 40px;
+				line-height: 1.2;
+				animation: fadeInDown 0.8s ease 0.2s backwards;
+			}
+
+			/* Placeholder for logo */
+			.logo {
+				width: 120px;
+				height: 120px;
+				background: white;
+				border-radius: 24px;
+				margin-bottom: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 16px;
+				font-weight: bold;
+				color: #667eea;
+				text-align: center;
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+				animation: fadeInScale 0.8s ease 0.4s backwards;
+			}
+
+			/* Replace this div with: <img src="your-logo.png" alt="Utility Cam Logo" class="logo"> */
+
+			.btn-install {
+				background: white;
+				color: #667eea;
+				border: none;
+				padding: 18px 60px;
+				font-size: 20px;
+				font-weight: bold;
+				border-radius: 50px;
+				cursor: pointer;
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+				animation: fadeInUp 0.8s ease 0.6s backwards;
+				transition: transform 0.2s ease;
+			}
+
+			.btn-install:active {
+				transform: scale(0.95);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="ad-container">
+			<!-- Shutter Flash Effect -->
+			<div class="shutter-flash" id="shutterFlash"></div>
+
+			<!-- ========== SCENE 1: INTRO ========== -->
+			<div id="scene1">
+				<h1 class="headline">Gallery Full of Junk?</h1>
+
+				<img
+					src="assets/clutter-image.png"
+					alt="Cluttered Gallery"
+					class="clutter-img"
+				/>
+
+				<button class="btn-clean" id="btnClean">Clean Up</button>
+			</div>
+
+			<!-- ========== SCENE 2: INTERACTION ========== -->
+			<div id="scene2">
+				<div class="photo-container">
+					<!-- ASSET PLACEHOLDER: Replace this div with your photo image -->
+					<img
+						src="assets/new-photo.png"
+						alt="New Photo"
+						class="new-photo"
+						id="newPhoto"
+					/>
+
+					<div class="timer-overlay" id="timerDisplay"></div>
+				</div>
+			</div>
+
+			<!-- ========== SCENE 3: END CARD ========== -->
+			<div id="scene3">
+				<h2 class="tagline">Snap. Use. Vanish.</h2>
+
+				<!-- ASSET PLACEHOLDER: Replace this div with your Utility Cam logo -->
+				<img src="assets/utility-cam-logo.png" alt="Utility Cam" class="logo" />
+
+				<button class="btn-install" id="btnInstall">Install Free</button>
+			</div>
+		</div>
+
+		<script>
+			// Make entire container clickable with clickTag
+			const adContainer = document.getElementById("ad-container");
+			adContainer.addEventListener("click", function () {
+				window.open(window.clickTag);
+			});
+
+			// Get all elements
+			const scene1 = document.getElementById("scene1");
+			const scene2 = document.getElementById("scene2");
+			const scene3 = document.getElementById("scene3");
+			const btnClean = document.getElementById("btnClean");
+			const shutterFlash = document.getElementById("shutterFlash");
+			const newPhoto = document.getElementById("newPhoto");
+			const timerDisplay = document.getElementById("timerDisplay");
+
+			// Scene 1 -> Scene 2 transition
+			btnClean.addEventListener("click", function (e) {
+				e.stopPropagation(); // Prevent clickTag from firing on button click
+
+				// Hide Scene 1
+				scene1.classList.add("hidden");
+
+				// Show Scene 2
+				scene2.classList.add("active");
+
+				// Trigger shutter flash
+				shutterFlash.classList.add("flash");
+
+				// Show new photo after flash
+				setTimeout(function () {
+					newPhoto.classList.add("show");
+
+					// Start countdown after photo appears
+					setTimeout(startCountdown, 800);
+				}, 300);
+			});
+
+			// Countdown timer
+			function startCountdown() {
+				let count = 3;
+
+				const countdownInterval = setInterval(function () {
+					if (count > 0) {
+						// Remove previous show class first
+						timerDisplay.classList.remove("show");
+
+						// Force reflow to restart animation
+						void timerDisplay.offsetWidth;
+
+						timerDisplay.textContent = count;
+						timerDisplay.classList.add("show");
+
+						count--;
+					} else {
+						clearInterval(countdownInterval);
+
+						// Vanish the photo
+						newPhoto.classList.add("vanish");
+
+						// Show Scene 3 after photo vanishes
+						setTimeout(function () {
+							scene3.classList.add("active");
+						}, 800);
+					}
+				}, 1000);
+			}
+
+			// Reset animation classes after use
+			shutterFlash.addEventListener("animationend", function () {
+				shutterFlash.classList.remove("flash");
+			});
+		</script>
+	</body>
+</html>
