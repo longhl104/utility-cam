@@ -119,6 +119,7 @@
     <string name="settings_about_feature_1">• Photos are stored in private app storage, not your main gallery</string>
     <string name="settings_about_feature_2">• Tap \'Keep Forever\' on any photo to save it permanently</string>
     <string name="settings_about_feature_3">• The home screen widget shows your active photos</string>
+    <string name="settings_media_permission_info">💡 Tip: On Android 14+, you can choose to share only selected photos instead of granting full access.</string>
     <string name="settings_warning_uninstall">⚠️ Warning: Uninstalling the app will permanently delete all photos stored in it. Make sure to save any important photos before uninstalling.</string>
     <string name="settings_app_version">App Version</string>
     <string name="settings_version_format">Version %1$s (%2$d)</string>

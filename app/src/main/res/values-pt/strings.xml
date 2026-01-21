@@ -119,6 +119,7 @@
     <string name="settings_about_feature_1">• As fotos são armazenadas no armazenamento privado do app, não na sua galeria principal</string>
     <string name="settings_about_feature_2">• Toque em \'Manter Para Sempre\' em qualquer foto para salvá-la permanentemente</string>
     <string name="settings_about_feature_3">• O widget da tela inicial mostra suas fotos ativas</string>
+    <string name="settings_media_permission_info">💡 Dica: No Android 14+, você pode escolher compartilhar apenas fotos selecionadas em vez de conceder acesso total.</string>
     <string name="settings_warning_uninstall">⚠️ Aviso: Desinstalar o app excluirá permanentemente todas as fotos armazenadas nele. Certifique-se de salvar quaisquer fotos importantes antes de desinstalar.</string>
     <string name="settings_app_version">Versão do App</string>
     <string name="settings_version_format">Versão %1$s (%2$d)</string>

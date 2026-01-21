@@ -483,6 +483,28 @@ fun SettingsScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
+            // Show Selected Photos Access info for Android 14+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                    )
+                ) {
+                    Row(
+                        modifier = Modifier.padding(16.dp)
+                    ) {
+                        Text(
+                            stringResource(R.string.settings_media_permission_info),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                }
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
 
             Card(
