@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">Utility Cam</string>
+    <string name="widget_description">Mostra suas fotos utilitárias ativas com tempos de expiração</string>
+
+    <!-- Notifications -->
+    <string name="notification_cleanup_title">Fotos Removidas</string>
+    <plurals name="notification_cleanup_message">
+        <item quantity="one">%d foto expirada foi automaticamente excluída</item>
+        <item quantity="many">%d fotos expiradas foram automaticamente excluídas</item>
+    </plurals>
+    <string name="notification_reminder_title">Foto Expirando em Breve</string>
+    <string name="notification_reminder_message">Uma foto será excluída em %s</string>
+    <string name="notification_reminder_message_with_description" formatted="false">\"%s\" será excluída em %s</string>
+    <string name="notification_channel_name">Limpeza de Fotos</string>
+    <string name="notification_channel_description">Notificações sobre limpeza automática de fotos</string>
+
+    <!-- TTL Durations -->
+    <string name="ttl_test_3_seconds">3 segundos (Teste)</string>
+    <string name="ttl_24_hours">24 horas</string>
+    <string name="ttl_3_days">3 dias</string>
+    <string name="ttl_1_week">1 semana</string>
+
+    <!-- Time formatting -->
+    <string name="time_format_days_hours" formatted="false">%dd %dh</string>
+    <string name="time_format_hours_minutes" formatted="false">%dh %dm</string>
+    <string name="time_format_minutes">%dm</string>
+
+    <!-- Gallery Screen -->
+    <string name="gallery_title">Utility Cam</string>
+    <string name="gallery_settings">Configurações</string>
+    <string name="gallery_take_photo">Tirar Foto</string>
+    <string name="gallery_no_photos">Nenhuma foto utilitária ainda</string>
+    <string name="gallery_no_photos_hint">Toque em + para capturar sua primeira foto utilitária</string>
+    <string name="gallery_expires_in">Expira em: %s</string>
+
+    <!-- Camera Screen -->
+    <string name="camera_permission_required">Permissão de câmera é necessária</string>
+    <string name="camera_grant_permission">Conceder Permissão</string>
+    <string name="camera_flip">Virar Câmera</string>
+    <string name="camera_take_photo">Tirar Foto</string>
+    <string name="camera_close">Fechar</string>
+    <string name="camera_zoom_format">%.1fx</string>
+
+    <!-- Capture Review Screen -->
+    <string name="capture_review_title">Revisar Foto</string>
+    <string name="capture_review_delete_after">Excluir após:</string>
+    <string name="capture_review_description_label">Descrição (opcional)</string>
+    <string name="capture_review_description_hint">ex., Vaga de Estacionamento: Nível 4</string>
+    <string name="capture_review_retake">Tirar Novamente</string>
+    <string name="capture_review_save">Salvar</string>
+
+    <!-- Photo Detail Screen -->
+    <string name="photo_detail_title">Detalhes da Foto</string>
+    <string name="photo_detail_save">Salvar na Galeria</string>
+    <string name="photo_detail_delete">Excluir</string>
+    <string name="photo_detail_back">Voltar</string>
+    <string name="photo_detail_expires_in">Expira em %s</string>
+    <string name="photo_detail_captured">Capturada</string>
+    <string name="photo_detail_description">Descrição</string>
+    <string name="photo_detail_add">Adicionar</string>
+    <string name="photo_detail_edit">Editar</string>
+    <string name="photo_detail_no_description">Sem descrição</string>
+    <string name="photo_detail_keep_forever">Manter Para Sempre (Salvar na Galeria)</string>
+    <string name="photo_detail_delete_title">Excluir Foto?</string>
+    <string name="photo_detail_delete_message">Esta ação não pode ser desfeita.</string>
+    <string name="photo_detail_delete_confirm">Excluir</string>
+    <string name="photo_detail_cancel">Cancelar</string>
+    <string name="photo_detail_save_title">Salvar na Galeria?</string>
+    <string name="photo_detail_save_message">Isso salvará a foto na galeria do seu dispositivo e a removerá do Utility Cam.</string>
+    <string name="photo_detail_save_confirm">Salvar</string>
+    <string name="photo_detail_saved_success">Foto salva na galeria</string>
+    <string name="photo_detail_save_failed">Falha ao salvar foto</string>
+    <string name="photo_detail_deleted_success">Foto excluída</string>
+    <string name="photo_detail_edit_description_title">Editar Descrição</string>
+    <string name="photo_detail_edit_description_hint">Digite uma descrição para esta foto</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Configurações</string>
+    <string name="settings_back">Voltar</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_hint">Escolha seu idioma preferido</string>
+    <string name="settings_language_system_default">Padrão do Sistema</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_portuguese">Português</string>
+    <string name="settings_language_restart_hint">O idioma será atualizado imediatamente</string>
+    <string name="settings_default_expiration">Tempo de Expiração Padrão</string>
+    <string name="settings_default_expiration_hint">Escolha por quanto tempo as fotos devem ser mantidas antes de serem excluídas automaticamente</string>
+    <string name="settings_notifications">Notificações</string>
+    <string name="settings_cleanup_notifications">Notificações de Limpeza</string>
+    <string name="settings_cleanup_notifications_hint">Seja notificado quando fotos expiradas forem excluídas</string>
+    <string name="settings_reminder_notifications">Lembretes de Expiração</string>
+    <string name="settings_reminder_notifications_hint">Seja lembrado quando as fotos estiverem prestes a expirar (dentro de 1 hora)</string>
+    <string name="settings_notification_permission_required">Permissão de Notificação Necessária</string>
+    <string name="settings_notification_permission_message">Para receber notificações de limpeza, você precisa conceder permissão de notificação.</string>
+    <string name="settings_open_settings">Abrir Configurações</string>
+    <string name="settings_debug_tools">Ferramentas de Depuração</string>
+    <string name="settings_debug_tools_hint">Utilitários de teste para desenvolvimento</string>
+    <string name="settings_cleanup_delay_label">Atraso do Worker de Limpeza (segundos)</string>
+    <string name="settings_cleanup_delay_hint">Tempo entre execuções do worker de limpeza (1–3600 segundos). Requer reinicialização do app.</string>
+    <string name="settings_cleanup_delay_updated">Atraso de limpeza atualizado para %d segundos. Reinicie o app para aplicar.</string>
+    <string name="settings_trigger_cleanup">Acionar Limpeza Agora</string>
+    <string name="settings_trigger_cleanup_started">Acionando worker de limpeza…</string>
+    <string name="settings_cleanup_completed">Limpeza concluída!</string>
+    <string name="settings_cleanup_failed">Limpeza falhou!</string>
+    <string name="settings_cleanup_running">Limpeza em execução…</string>
+    <string name="settings_test_notification">Testar Notificação</string>
+    <string name="settings_test_notification_sent">Enviando notificação de teste…</string>
+    <string name="settings_check_worker_status">Verificar Status do Worker</string>
+    <string name="settings_worker_not_scheduled">Nenhum worker periódico agendado!</string>
+    <string name="settings_worker_status_format">Status do Worker: %1$s\nTentativa de Execução: %2$d\nTags: %3$s</string>
+    <string name="settings_about">Sobre Utility Cam</string>
+    <string name="settings_about_description">Uma câmera secundária para fotos temporárias. Tudo capturado neste app se exclui automaticamente após o período de tempo definido.</string>
+    <string name="settings_about_feature_1">• As fotos são armazenadas no armazenamento privado do app, não na sua galeria principal</string>
+    <string name="settings_about_feature_2">• Toque em \'Manter Para Sempre\' em qualquer foto para salvá-la permanentemente</string>
+    <string name="settings_about_feature_3">• O widget da tela inicial mostra suas fotos ativas</string>
+    <string name="settings_warning_uninstall">⚠️ Aviso: Desinstalar o app excluirá permanentemente todas as fotos armazenadas nele. Certifique-se de salvar quaisquer fotos importantes antes de desinstalar.</string>
+    <string name="settings_app_version">Versão do App</string>
+    <string name="settings_version_format">Versão %1$s (%2$d)</string>
+
+    <!-- Widget -->
+    <string name="widget_title">Utility Cam</string>
+    <string name="widget_no_photos">Nenhuma foto ativa</string>
+    <string name="widget_open_app">Abra o app para capturar</string>
+    <string name="widget_expires_in">⏱ Expira em: </string>
+</resources>

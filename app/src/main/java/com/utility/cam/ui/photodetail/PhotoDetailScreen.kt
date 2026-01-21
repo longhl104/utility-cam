@@ -1,5 +1,6 @@
 package com.utility.cam.ui.photodetail
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -17,13 +18,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.utility.cam.R
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityPhoto
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.compose.ui.res.stringResource
 
+@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PhotoDetailScreen(
@@ -59,22 +63,22 @@ fun PhotoDetailScreen(
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("Photo Details") },
+                    title = { Text(stringResource(R.string.photo_detail_title)) },
                     navigationIcon = {
                         IconButton(onClick = onNavigateBack) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.photo_detail_back))
                         }
                     },
                     actions = {
                         IconButton(
                             onClick = { showSaveDialog = true }
                         ) {
-                            Icon(Icons.Default.Save, contentDescription = "Save to Gallery")
+                            Icon(Icons.Default.Save, contentDescription = stringResource(R.string.photo_detail_save))
                         }
                         IconButton(
                             onClick = { showDeleteDialog = true }
                         ) {
-                            Icon(Icons.Default.Delete, contentDescription = "Delete")
+                            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.photo_detail_delete))
                         }
                     }
                 )
@@ -117,7 +121,7 @@ fun PhotoDetailScreen(
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text(
-                                "Expires in ${currentPhoto.getFormattedTimeRemaining()}",
+                                stringResource(R.string.photo_detail_expires_in, currentPhoto.getFormattedTimeRemaining()),
                                 style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onErrorContainer
                             )
@@ -135,7 +139,7 @@ fun PhotoDetailScreen(
                     
                     // Captured time
                     Text(
-                        "Captured",
+                        stringResource(R.string.photo_detail_captured),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -154,12 +158,12 @@ fun PhotoDetailScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            "Description",
+                            stringResource(R.string.photo_detail_description),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         TextButton(onClick = { showDescriptionDialog = true }) {
-                            Text(if (description.isEmpty()) "Add" else "Edit")
+                            Text(stringResource(if (description.isEmpty()) R.string.photo_detail_add else R.string.photo_detail_edit))
                         }
                     }
                     
@@ -170,7 +174,7 @@ fun PhotoDetailScreen(
                         )
                     } else {
                         Text(
-                            "No description",
+                            stringResource(R.string.photo_detail_no_description),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -185,7 +189,7 @@ fun PhotoDetailScreen(
                     ) {
                         Icon(Icons.Default.Save, contentDescription = null)
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Keep Forever (Save to Gallery)")
+                        Text(stringResource(R.string.photo_detail_keep_forever))
                     }
                 }
             }
@@ -195,8 +199,8 @@ fun PhotoDetailScreen(
         if (showDeleteDialog) {
             AlertDialog(
                 onDismissRequest = { showDeleteDialog = false },
-                title = { Text("Delete Photo?") },
-                text = { Text("This action cannot be undone.") },
+                title = { Text(stringResource(R.string.photo_detail_delete_title)) },
+                text = { Text(stringResource(R.string.photo_detail_delete_message)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -207,12 +211,12 @@ fun PhotoDetailScreen(
                             }
                         }
                     ) {
-                        Text("Delete")
+                        Text(stringResource(R.string.photo_detail_delete_confirm))
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showDeleteDialog = false }) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.photo_detail_cancel))
                     }
                 }
             )
@@ -222,8 +226,8 @@ fun PhotoDetailScreen(
         if (showSaveDialog) {
             AlertDialog(
                 onDismissRequest = { showSaveDialog = false },
-                title = { Text("Save to Gallery?") },
-                text = { Text("This photo will be moved to your main gallery and will no longer expire.") },
+                title = { Text(stringResource(R.string.photo_detail_save_title)) },
+                text = { Text(stringResource(R.string.photo_detail_save_message)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -231,21 +235,21 @@ fun PhotoDetailScreen(
                                 val success = storageManager.saveToGallery(photoId)
                                 showSaveDialog = false
                                 if (success) {
-                                    snackbarMessage = "Saved to gallery"
+                                    snackbarMessage = context.getString(R.string.photo_detail_saved_success)
                                     kotlinx.coroutines.delay(1000)
                                     onNavigateBack()
                                 } else {
-                                    snackbarMessage = "Failed to save"
+                                    snackbarMessage = context.getString(R.string.photo_detail_save_failed)
                                 }
                             }
                         }
                     ) {
-                        Text("Save")
+                        Text(context.getString(R.string.photo_detail_save_confirm))
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showSaveDialog = false }) {
-                        Text("Cancel")
+                        Text(context.getString(R.string.photo_detail_cancel))
                     }
                 }
             )
@@ -257,12 +261,13 @@ fun PhotoDetailScreen(
             
             AlertDialog(
                 onDismissRequest = { showDescriptionDialog = false },
-                title = { Text("Add Description") },
+                title = { Text(context.getString(R.string.photo_detail_edit_description_title)) },
                 text = {
                     OutlinedTextField(
                         value = tempDescription,
                         onValueChange = { tempDescription = it },
-                        label = { Text("Description") },
+                        label = { Text(context.getString(R.string.photo_detail_description)) },
+                        placeholder = { Text(context.getString(R.string.photo_detail_edit_description_hint)) },
                         modifier = Modifier.fillMaxWidth(),
                         maxLines = 3
                     )
@@ -278,12 +283,12 @@ fun PhotoDetailScreen(
                             }
                         }
                     ) {
-                        Text("Save")
+                        Text(context.getString(R.string.photo_detail_save_confirm))
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showDescriptionDialog = false }) {
-                        Text("Cancel")
+                        Text(context.getString(R.string.photo_detail_cancel))
                     }
                 }
             )

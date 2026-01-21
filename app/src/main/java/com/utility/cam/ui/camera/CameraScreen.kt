@@ -32,12 +32,14 @@ import androidx.lifecycle.LifecycleOwner
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
+import com.utility.cam.R
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -66,10 +68,10 @@ fun CameraScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("Camera permission is required")
+                    Text(stringResource(R.string.camera_permission_required))
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(onClick = { cameraPermissionState.launchPermissionRequest() }) {
-                        Text("Grant Permission")
+                        Text(stringResource(R.string.camera_grant_permission))
                     }
                 }
             }
@@ -183,7 +185,7 @@ fun CameraPreviewScreen(
                 ) {
                     Icon(
                         Icons.Default.FlipCameraAndroid,
-                        contentDescription = "Flip Camera",
+                        contentDescription = stringResource(R.string.camera_flip),
                         tint = Color.White
                     )
                 }
@@ -217,7 +219,7 @@ fun CameraPreviewScreen(
                 ) {
                     Icon(
                         Icons.Default.CameraAlt,
-                        contentDescription = "Take Photo",
+                        contentDescription = stringResource(R.string.camera_take_photo),
                         tint = Color.Black,
                         modifier = Modifier.size(36.dp)
                     )
@@ -231,7 +233,7 @@ fun CameraPreviewScreen(
                         containerColor = Color.White.copy(alpha = 0.2f)
                     )
                 ) {
-                    Text("✕", color = Color.White)
+                    Text(stringResource(R.string.camera_close), color = Color.White)
                 }
             }
         }

@@ -1,9 +1,11 @@
 package com.utility.cam.ui.settings
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -14,11 +16,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import android.widget.Toast
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkInfo
 import com.utility.cam.BuildConfig
+import com.utility.cam.R
+import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
@@ -26,6 +31,7 @@ import com.utility.cam.ui.permissions.isNotificationPermissionGranted
 import com.utility.cam.worker.PhotoCleanupWorker
 import kotlinx.coroutines.launch
 
+@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
@@ -33,6 +39,7 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val preferencesManager = remember { PreferencesManager(context) }
+    val localeManager = remember { LocaleManager(context) }
     val coroutineScope = rememberCoroutineScope()
     
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
@@ -40,6 +47,10 @@ fun SettingsScreen(
     val reminderNotificationsEnabled by preferencesManager.getReminderNotificationsEnabled().collectAsState(initial = true)
     val hasNotificationPermission = isNotificationPermissionGranted()
     val cleanupDelaySeconds by preferencesManager.getCleanupDelaySeconds().collectAsState(initial = 10)
+    val selectedLanguage by localeManager.getSelectedLanguage().collectAsState(initial = LocaleManager.SYSTEM_DEFAULT)
+
+    var showLanguageDialog by remember { mutableStateOf(false) }
+    val supportedLanguages = remember { localeManager.getSupportedLanguages() }
 
     var cleanupDelayInput by remember { mutableStateOf("") }
     var hasUserEdited by remember { mutableStateOf(false) }
@@ -55,10 +66,10 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Settings") },
+                title = { Text(stringResource(R.string.settings_title)) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.settings_back))
                     }
                 }
             )
@@ -71,15 +82,67 @@ fun SettingsScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp)
         ) {
+            // Language Selection
             Text(
-                "Default Expiration Time",
+                stringResource(R.string.settings_language),
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                stringResource(R.string.settings_language_hint),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            OutlinedCard(
+                onClick = { showLanguageDialog = true },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                ) {
+                    val currentLanguage = supportedLanguages.find { it.code == selectedLanguage }
+                        ?: supportedLanguages.first()
+
+                    Column {
+                        Text(
+                            currentLanguage.displayName,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                        Text(
+                            stringResource(R.string.settings_language_restart_hint),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+
+                    Text("▼", style = MaterialTheme.typography.bodyMedium)
+                }
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            HorizontalDivider()
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                stringResource(R.string.settings_default_expiration),
                 style = MaterialTheme.typography.titleMedium
             )
             
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                "Choose how long photos should be kept before automatically deleting",
+                stringResource(R.string.settings_default_expiration_hint),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -104,7 +167,7 @@ fun SettingsScreen(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            duration.displayName,
+                            duration.getDisplayName(context),
                             modifier = Modifier.padding(top = 12.dp),
                             style = MaterialTheme.typography.bodyLarge
                         )
@@ -118,7 +181,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                "Notifications",
+                stringResource(R.string.settings_notifications),
                 style = MaterialTheme.typography.titleMedium
             )
 
@@ -132,12 +195,12 @@ fun SettingsScreen(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        "Cleanup Notifications",
+                        stringResource(R.string.settings_cleanup_notifications),
                         style = MaterialTheme.typography.bodyLarge
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        "Get notified when expired photos are deleted",
+                        stringResource(R.string.settings_cleanup_notifications_hint),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -162,12 +225,12 @@ fun SettingsScreen(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        "Expiring Soon Reminders",
+                        stringResource(R.string.settings_reminder_notifications),
                         style = MaterialTheme.typography.bodyLarge
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        "Get reminded when photos are about to expire (within 1 hour)",
+                        stringResource(R.string.settings_reminder_notifications_hint),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -196,13 +259,13 @@ fun SettingsScreen(
                         modifier = Modifier.padding(16.dp)
                     ) {
                         Text(
-                            "Notification Permission Required",
+                            stringResource(R.string.settings_notification_permission_required),
                             style = MaterialTheme.typography.titleSmall,
                             color = MaterialTheme.colorScheme.onErrorContainer
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            "To receive cleanup notifications, you need to grant notification permission.",
+                            stringResource(R.string.settings_notification_permission_message),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onErrorContainer
                         )
@@ -220,7 +283,7 @@ fun SettingsScreen(
                                 containerColor = MaterialTheme.colorScheme.error
                             )
                         ) {
-                            Text("Open Settings")
+                            Text(stringResource(R.string.settings_open_settings))
                         }
                     }
                 }
@@ -235,14 +298,14 @@ fun SettingsScreen(
             // Debug section (only visible in debug builds)
             if (BuildConfig.DEBUG) {
                 Text(
-                    "Debug Tools",
+                    stringResource(R.string.settings_debug_tools),
                     style = MaterialTheme.typography.titleMedium
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    "Testing utilities for development",
+                    stringResource(R.string.settings_debug_tools_hint),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -268,7 +331,7 @@ fun SettingsScreen(
                                         hasUserEdited = false
                                         Toast.makeText(
                                             context,
-                                            "Cleanup delay updated to $seconds seconds. Restart app to apply.",
+                                            context.getString(R.string.settings_cleanup_delay_updated, seconds),
                                             Toast.LENGTH_LONG
                                         ).show()
                                     }
@@ -276,9 +339,9 @@ fun SettingsScreen(
                             }
                         }
                     },
-                    label = { Text("Cleanup Worker Delay (seconds)") },
+                    label = { Text(stringResource(R.string.settings_cleanup_delay_label)) },
                     supportingText = {
-                        Text("Time between cleanup worker runs (1-3600 seconds). Requires app restart.")
+                        Text(stringResource(R.string.settings_cleanup_delay_hint))
                     },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
@@ -290,7 +353,7 @@ fun SettingsScreen(
                 Button(
                     onClick = {
                         // Trigger immediate cleanup
-                        Toast.makeText(context, "Triggering cleanup worker...", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, context.getString(R.string.settings_trigger_cleanup_started), Toast.LENGTH_SHORT).show()
                         val cleanupRequest = OneTimeWorkRequestBuilder<PhotoCleanupWorker>().build()
                         WorkManager.getInstance(context).enqueue(cleanupRequest)
 
@@ -300,13 +363,13 @@ fun SettingsScreen(
                             .observeForever { workInfo ->
                                 when (workInfo?.state) {
                                     WorkInfo.State.SUCCEEDED -> {
-                                        Toast.makeText(context, "Cleanup completed!", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, context.getString(R.string.settings_cleanup_completed), Toast.LENGTH_SHORT).show()
                                     }
                                     WorkInfo.State.FAILED -> {
-                                        Toast.makeText(context, "Cleanup failed!", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, context.getString(R.string.settings_cleanup_failed), Toast.LENGTH_SHORT).show()
                                     }
                                     WorkInfo.State.RUNNING -> {
-                                        Toast.makeText(context, "Cleanup running...", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, context.getString(R.string.settings_cleanup_running), Toast.LENGTH_SHORT).show()
                                     }
                                     else -> {}
                                 }
@@ -314,7 +377,7 @@ fun SettingsScreen(
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Trigger Cleanup Now")
+                    Text(stringResource(R.string.settings_trigger_cleanup))
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -322,12 +385,12 @@ fun SettingsScreen(
                 OutlinedButton(
                     onClick = {
                         // Test notification directly
-                        Toast.makeText(context, "Sending test notification...", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, context.getString(R.string.settings_test_notification_sent), Toast.LENGTH_SHORT).show()
                         NotificationHelper.sendPhotoCleanupNotification(context, 1)
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Test Notification")
+                    Text(stringResource(R.string.settings_test_notification))
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -339,18 +402,21 @@ fun SettingsScreen(
                         val workInfos = workManager.getWorkInfosForUniqueWork("photo_cleanup").get()
 
                         if (workInfos.isEmpty()) {
-                            Toast.makeText(context, "No periodic worker scheduled!", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, context.getString(R.string.settings_worker_not_scheduled), Toast.LENGTH_LONG).show()
                         } else {
                             val workInfo = workInfos[0]
-                            val status = "Worker Status: ${workInfo.state}\n" +
-                                        "Run Attempt: ${workInfo.runAttemptCount}\n" +
-                                        "Tags: ${workInfo.tags.joinToString()}"
+                            val status = context.getString(
+                                R.string.settings_worker_status_format,
+                                workInfo.state.toString(),
+                                workInfo.runAttemptCount,
+                                workInfo.tags.joinToString()
+                            )
                             Toast.makeText(context, status, Toast.LENGTH_LONG).show()
                         }
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Check Worker Status")
+                    Text(stringResource(R.string.settings_check_worker_status))
                 }
 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -361,14 +427,14 @@ fun SettingsScreen(
             }
 
             Text(
-                "About Utility Cam",
+                stringResource(R.string.settings_about),
                 style = MaterialTheme.typography.titleMedium
             )
             
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                "A secondary camera for temporary photos. Everything captured in this app automatically deletes itself after the set time period.",
+                stringResource(R.string.settings_about_description),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -376,7 +442,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(16.dp))
             
             Text(
-                "• Photos are stored in private app storage, not your main gallery",
+                stringResource(R.string.settings_about_feature_1),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -384,7 +450,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                "• Tap 'Keep Forever' on any photo to save it permanently",
+                stringResource(R.string.settings_about_feature_2),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -392,7 +458,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                "• The home screen widget shows your active photos",
+                stringResource(R.string.settings_about_feature_3),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -409,11 +475,7 @@ fun SettingsScreen(
                     modifier = Modifier.padding(16.dp)
                 ) {
                     Text(
-                        "⚠️ ",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Text(
-                        "Warning: Uninstalling the app will permanently delete all photos stored in it. Make sure to save any important photos before uninstalling.",
+                        stringResource(R.string.settings_warning_uninstall),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onErrorContainer
                     )
@@ -427,7 +489,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                "App Version",
+                stringResource(R.string.settings_app_version),
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -435,9 +497,59 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                "Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+                stringResource(R.string.settings_version_format, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE),
                 style = MaterialTheme.typography.bodyMedium
             )
         }
+    }
+
+    // Language selection dialog
+    if (showLanguageDialog) {
+        AlertDialog(
+            onDismissRequest = { showLanguageDialog = false },
+            title = { Text(stringResource(R.string.settings_language)) },
+            text = {
+                Column {
+                    supportedLanguages.forEach { language ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    coroutineScope.launch {
+                                        localeManager.setSelectedLanguage(language.code)
+                                        showLanguageDialog = false
+                                        // Trigger activity recreation to apply new language
+                                        (context as? android.app.Activity)?.recreate()
+                                    }
+                                }
+                                .padding(vertical = 12.dp),
+                            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = selectedLanguage == language.code,
+                                onClick = {
+                                    coroutineScope.launch {
+                                        localeManager.setSelectedLanguage(language.code)
+                                        showLanguageDialog = false
+                                        // Trigger activity recreation to apply new language
+                                        (context as? android.app.Activity)?.recreate()
+                                    }
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                language.displayName,
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showLanguageDialog = false }) {
+                    Text(stringResource(R.string.photo_detail_cancel))
+                }
+            }
+        )
     }
 }

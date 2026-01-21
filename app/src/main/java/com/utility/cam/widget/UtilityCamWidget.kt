@@ -1,5 +1,6 @@
 package com.utility.cam.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -21,6 +22,7 @@ import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import com.utility.cam.MainActivity
+import com.utility.cam.R
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityPhoto
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +39,7 @@ class UtilityCamWidget : GlanceAppWidget() {
         }
 
         provideContent {
-            UtilityCamWidgetContent(photos)
+            UtilityCamWidgetContent(context, photos)
         }
     }
 
@@ -46,8 +48,9 @@ class UtilityCamWidget : GlanceAppWidget() {
     }
 }
 
+@SuppressLint("RestrictedApi")
 @Composable
-fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
+fun UtilityCamWidgetContent(context: Context, photos: List<UtilityPhoto>) {
     Column(
         modifier = GlanceModifier
             .fillMaxSize()
@@ -63,7 +66,7 @@ fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Utility Cam",
+                text = context.getString(R.string.widget_title),
                 style = TextStyle(
                     color = ColorProvider(Color.White),
                     fontSize = 18.sp,
@@ -82,7 +85,7 @@ fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "No active photos",
+                    text = context.getString(R.string.widget_no_photos),
                     style = TextStyle(
                         color = ColorProvider(Color(0xFFB0B0B0)),
                         fontSize = 14.sp
@@ -90,7 +93,7 @@ fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
                 )
                 Spacer(modifier = GlanceModifier.height(8.dp))
                 Text(
-                    text = "Open app to capture",
+                    text = context.getString(R.string.widget_open_app),
                     style = TextStyle(
                         color = ColorProvider(Color(0xFF808080)),
                         fontSize = 12.sp
@@ -121,7 +124,7 @@ fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
                                 )
                             )
                     ) {
-                        WidgetPhotoItem(photo)
+                        WidgetPhotoItem(context, photo)
                     }
                 }
 
@@ -133,8 +136,9 @@ fun UtilityCamWidgetContent(photos: List<UtilityPhoto>) {
     }
 }
 
+@SuppressLint("RestrictedApi")
 @Composable
-fun WidgetPhotoItem(photo: UtilityPhoto) {
+fun WidgetPhotoItem(context: Context, photo: UtilityPhoto) {
     Box(
         modifier = GlanceModifier
             .fillMaxWidth()
@@ -160,7 +164,7 @@ fun WidgetPhotoItem(photo: UtilityPhoto) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "⏱ Expires in: ",
+                    text = context.getString(R.string.widget_expires_in),
                     style = TextStyle(
                         color = ColorProvider(Color(0xFFB0B0B0)),
                         fontSize = 12.sp

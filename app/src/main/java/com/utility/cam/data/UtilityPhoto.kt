@@ -1,5 +1,8 @@
 package com.utility.cam.data
 
+import android.content.Context
+import com.utility.cam.R
+
 /**
  * Represents a photo captured in Utility Cam
  */
@@ -45,11 +48,11 @@ data class UtilityPhoto(
 /**
  * Time-to-live duration options
  */
-enum class TTLDuration(val hours: Int, val displayName: String, val isDebugOnly: Boolean = false) {
-    TEST_3_SECONDS(0, "3 seconds (Test)", isDebugOnly = true),
-    TWENTY_FOUR_HOURS(24, "24 hours"),
-    THREE_DAYS(72, "3 days"),
-    ONE_WEEK(168, "1 week");
+enum class TTLDuration(val hours: Int, val displayNameResId: Int, val isDebugOnly: Boolean = false) {
+    TEST_3_SECONDS(0, R.string.ttl_test_3_seconds, isDebugOnly = true),
+    TWENTY_FOUR_HOURS(24, R.string.ttl_24_hours),
+    THREE_DAYS(72, R.string.ttl_3_days),
+    ONE_WEEK(168, R.string.ttl_1_week);
 
     fun toMilliseconds(): Long {
         // Special handling for test duration
@@ -57,5 +60,9 @@ enum class TTLDuration(val hours: Int, val displayName: String, val isDebugOnly:
             return 3 * 1000L // 3 seconds
         }
         return hours * 60 * 60 * 1000L
+    }
+
+    fun getDisplayName(context: Context): String {
+        return context.getString(displayNameResId)
     }
 }

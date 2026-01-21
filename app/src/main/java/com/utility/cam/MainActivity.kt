@@ -1,5 +1,6 @@
 package com.utility.cam
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -15,6 +16,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
+import com.utility.cam.data.LocaleManager
 import com.utility.cam.ui.navigation.UtilityCamNavigation
 import com.utility.cam.ui.theme.UtilityCamTheme
 import com.utility.cam.worker.ExpiringPhotoReminderWorker
@@ -24,9 +26,26 @@ import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
 
 class MainActivity : ComponentActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        // Apply selected language before activity is created
+        val localeManager = LocaleManager(newBase)
+        val selectedLanguage = runBlocking {
+            localeManager.getSelectedLanguage().first()
+        }
+
+        val context = if (selectedLanguage != LocaleManager.SYSTEM_DEFAULT) {
+            localeManager.applyLocale(selectedLanguage)
+        } else {
+            newBase
+        }
+
+        super.attachBaseContext(context)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         // Create notification channel
         NotificationHelper.createNotificationChannel(this)
 

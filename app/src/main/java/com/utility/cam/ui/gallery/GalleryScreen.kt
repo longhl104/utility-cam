@@ -26,12 +26,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.utility.cam.R
 import com.utility.cam.data.PhotoEventBus
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityPhoto
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import java.io.File
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -95,10 +97,10 @@ fun GalleryScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Utility Cam") },
+                title = { Text(stringResource(R.string.gallery_title)) },
                 actions = {
                     IconButton(onClick = onNavigateToSettings) {
-                        Icon(Icons.Default.Settings, contentDescription = "Settings")
+                        Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.gallery_settings))
                     }
                 }
             )
@@ -108,7 +110,7 @@ fun GalleryScreen(
                 onClick = onNavigateToCamera,
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Take Photo")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.gallery_take_photo))
             }
         }
     ) { padding ->
@@ -128,12 +130,12 @@ fun GalleryScreen(
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
-                            "No utility photos yet",
+                            stringResource(R.string.gallery_no_photos),
                             style = MaterialTheme.typography.titleLarge
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            "Tap + to capture your first utility photo",
+                            stringResource(R.string.gallery_no_photos_hint),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

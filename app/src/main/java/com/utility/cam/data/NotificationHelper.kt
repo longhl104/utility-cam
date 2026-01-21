@@ -16,8 +16,6 @@ import com.utility.cam.R
 object NotificationHelper {
 
     private const val CHANNEL_ID = "photo_cleanup_channel"
-    private const val CHANNEL_NAME = "Photo Cleanup"
-    private const val CHANNEL_DESCRIPTION = "Notifications about automatic photo cleanup"
     private const val NOTIFICATION_ID = 1001
     private const val REMINDER_NOTIFICATION_ID_BASE = 2000
     private const val TAG = "NotificationHelper"
@@ -27,8 +25,12 @@ object NotificationHelper {
      */
     fun createNotificationChannel(context: Context) {
         val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance).apply {
-            description = CHANNEL_DESCRIPTION
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            context.getString(R.string.notification_channel_name),
+            importance
+        ).apply {
+            description = context.getString(R.string.notification_channel_description)
             enableVibration(true)
         }
 
@@ -108,11 +110,11 @@ object NotificationHelper {
         )
 
         val timeRemaining = photo.getFormattedTimeRemaining()
-        val title = "Photo Expiring Soon"
+        val title = context.getString(R.string.notification_reminder_title)
         val message = if (photo.description.isNullOrEmpty()) {
-            "A photo will be deleted in $timeRemaining"
+            context.getString(R.string.notification_reminder_message, timeRemaining)
         } else {
-            "\"${photo.description}\" will be deleted in $timeRemaining"
+            context.getString(R.string.notification_reminder_message_with_description, photo.description, timeRemaining)
         }
 
         val contentMessage = "Reminder notification - Title: $title, Message: $message"

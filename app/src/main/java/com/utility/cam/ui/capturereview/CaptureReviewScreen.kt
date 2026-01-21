@@ -11,11 +11,13 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.BuildConfig
+import com.utility.cam.R
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
 import kotlinx.coroutines.launch
 import java.io.File
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,7 +42,7 @@ fun CaptureReviewScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Review Photo") }
+                title = { Text(stringResource(R.string.capture_review_title)) }
             )
         }
     ) { padding ->
@@ -59,7 +61,7 @@ fun CaptureReviewScreen(
             
             Image(
                 painter = painter,
-                contentDescription = "Captured photo",
+                contentDescription = stringResource(R.string.capture_review_title),
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
@@ -74,7 +76,7 @@ fun CaptureReviewScreen(
             ) {
                 // TTL Selection
                 Text(
-                    "Delete after:",
+                    stringResource(R.string.capture_review_delete_after),
                     style = MaterialTheme.typography.titleMedium
                 )
                 
@@ -90,7 +92,7 @@ fun CaptureReviewScreen(
                             FilterChip(
                                 selected = ttl == duration,
                                 onClick = { selectedTTL = duration },
-                                label = { Text(duration.displayName) },
+                                label = { Text(duration.getDisplayName(context)) },
                                 modifier = Modifier.weight(1f)
                             )
                         }
@@ -102,8 +104,8 @@ fun CaptureReviewScreen(
                 OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
-                    label = { Text("Description (optional)") },
-                    placeholder = { Text("e.g., Parking Spot: Level 4") },
+                    label = { Text(stringResource(R.string.capture_review_description_label)) },
+                    placeholder = { Text(stringResource(R.string.capture_review_description_hint)) },
                     modifier = Modifier.fillMaxWidth(),
                     maxLines = 2
                 )
@@ -120,7 +122,7 @@ fun CaptureReviewScreen(
                         modifier = Modifier.weight(1f),
                         enabled = !isSaving
                     ) {
-                        Text("Retake")
+                        Text(stringResource(R.string.capture_review_retake))
                     }
                     
                     Button(
@@ -145,7 +147,7 @@ fun CaptureReviewScreen(
                                 color = MaterialTheme.colorScheme.onPrimary
                             )
                         } else {
-                            Text("Save")
+                            Text(stringResource(R.string.capture_review_save))
                         }
                     }
                 }

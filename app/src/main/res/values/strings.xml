@@ -1,9 +1,125 @@
 <resources>
     <string name="app_name">Utility Cam</string>
     <string name="widget_description">Shows your active utility photos with expiration times</string>
+
+    <!-- Notifications -->
     <string name="notification_cleanup_title">Photos Cleaned Up</string>
     <plurals name="notification_cleanup_message">
         <item quantity="one">%d expired photo was automatically deleted</item>
         <item quantity="other">%d expired photos were automatically deleted</item>
     </plurals>
+    <string name="notification_reminder_title">Photo Expiring Soon</string>
+    <string name="notification_reminder_message">A photo will be deleted in %s</string>
+    <string name="notification_reminder_message_with_description" formatted="false">\"%s\" will be deleted in %s</string>
+    <string name="notification_channel_name">Photo Cleanup</string>
+    <string name="notification_channel_description">Notifications about automatic photo cleanup</string>
+
+    <!-- TTL Durations -->
+    <string name="ttl_test_3_seconds">3 seconds (Test)</string>
+    <string name="ttl_24_hours">24 hours</string>
+    <string name="ttl_3_days">3 days</string>
+    <string name="ttl_1_week">1 week</string>
+
+    <!-- Time formatting -->
+    <string name="time_format_days_hours" formatted="false">%dd %dh</string>
+    <string name="time_format_hours_minutes" formatted="false">%dh %dm</string>
+    <string name="time_format_minutes">%dm</string>
+
+    <!-- Gallery Screen -->
+    <string name="gallery_title">Utility Cam</string>
+    <string name="gallery_settings">Settings</string>
+    <string name="gallery_take_photo">Take Photo</string>
+    <string name="gallery_no_photos">No utility photos yet</string>
+    <string name="gallery_no_photos_hint">Tap + to capture your first utility photo</string>
+    <string name="gallery_expires_in">Expires in: %s</string>
+
+    <!-- Camera Screen -->
+    <string name="camera_permission_required">Camera permission is required</string>
+    <string name="camera_grant_permission">Grant Permission</string>
+    <string name="camera_flip">Flip Camera</string>
+    <string name="camera_take_photo">Take Photo</string>
+    <string name="camera_close">Close</string>
+    <string name="camera_zoom_format">%.1fx</string>
+
+    <!-- Capture Review Screen -->
+    <string name="capture_review_title">Review Photo</string>
+    <string name="capture_review_delete_after">Delete after:</string>
+    <string name="capture_review_description_label">Description (optional)</string>
+    <string name="capture_review_description_hint">e.g., Parking Spot: Level 4</string>
+    <string name="capture_review_retake">Retake</string>
+    <string name="capture_review_save">Save</string>
+
+    <!-- Photo Detail Screen -->
+    <string name="photo_detail_title">Photo Details</string>
+    <string name="photo_detail_save">Save to Gallery</string>
+    <string name="photo_detail_delete">Delete</string>
+    <string name="photo_detail_back">Back</string>
+    <string name="photo_detail_expires_in">Expires in %s</string>
+    <string name="photo_detail_captured">Captured</string>
+    <string name="photo_detail_description">Description</string>
+    <string name="photo_detail_add">Add</string>
+    <string name="photo_detail_edit">Edit</string>
+    <string name="photo_detail_no_description">No description</string>
+    <string name="photo_detail_keep_forever">Keep Forever (Save to Gallery)</string>
+    <string name="photo_detail_delete_title">Delete Photo?</string>
+    <string name="photo_detail_delete_message">This action cannot be undone.</string>
+    <string name="photo_detail_delete_confirm">Delete</string>
+    <string name="photo_detail_cancel">Cancel</string>
+    <string name="photo_detail_save_title">Save to Gallery?</string>
+    <string name="photo_detail_save_message">This will save the photo to your device\'s gallery and remove it from Utility Cam.</string>
+    <string name="photo_detail_save_confirm">Save</string>
+    <string name="photo_detail_saved_success">Photo saved to gallery</string>
+    <string name="photo_detail_save_failed">Failed to save photo</string>
+    <string name="photo_detail_deleted_success">Photo deleted</string>
+    <string name="photo_detail_edit_description_title">Edit Description</string>
+    <string name="photo_detail_edit_description_hint">Enter a description for this photo</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_back">Back</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_hint">Choose your preferred language</string>
+    <string name="settings_language_system_default">System Default</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_portuguese">Português</string>
+    <string name="settings_language_restart_hint">Language will update immediately</string>
+    <string name="settings_default_expiration">Default Expiration Time</string>
+    <string name="settings_default_expiration_hint">Choose how long photos should be kept before automatically deleting</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_cleanup_notifications">Cleanup Notifications</string>
+    <string name="settings_cleanup_notifications_hint">Get notified when expired photos are deleted</string>
+    <string name="settings_reminder_notifications">Expiring Soon Reminders</string>
+    <string name="settings_reminder_notifications_hint">Get reminded when photos are about to expire (within 1 hour)</string>
+    <string name="settings_notification_permission_required">Notification Permission Required</string>
+    <string name="settings_notification_permission_message">To receive cleanup notifications, you need to grant notification permission.</string>
+    <string name="settings_open_settings">Open Settings</string>
+    <string name="settings_debug_tools">Debug Tools</string>
+    <string name="settings_debug_tools_hint">Testing utilities for development</string>
+    <string name="settings_cleanup_delay_label">Cleanup Worker Delay (seconds)</string>
+    <string name="settings_cleanup_delay_hint">Time between cleanup worker runs (1-3600 seconds). Requires app restart.</string>
+    <string name="settings_cleanup_delay_updated">Cleanup delay updated to %d seconds. Restart app to apply.</string>
+    <string name="settings_trigger_cleanup">Trigger Cleanup Now</string>
+    <string name="settings_trigger_cleanup_started">Triggering cleanup worker...</string>
+    <string name="settings_cleanup_completed">Cleanup completed!</string>
+    <string name="settings_cleanup_failed">Cleanup failed!</string>
+    <string name="settings_cleanup_running">Cleanup running...</string>
+    <string name="settings_test_notification">Test Notification</string>
+    <string name="settings_test_notification_sent">Sending test notification...</string>
+    <string name="settings_check_worker_status">Check Worker Status</string>
+    <string name="settings_worker_not_scheduled">No periodic worker scheduled!</string>
+    <string name="settings_worker_status_format">Worker Status: %1$s\nRun Attempt: %2$d\nTags: %3$s</string>
+    <string name="settings_about">About Utility Cam</string>
+    <string name="settings_about_description">A secondary camera for temporary photos. Everything captured in this app automatically deletes itself after the set time period.</string>
+    <string name="settings_about_feature_1">• Photos are stored in private app storage, not your main gallery</string>
+    <string name="settings_about_feature_2">• Tap \'Keep Forever\' on any photo to save it permanently</string>
+    <string name="settings_about_feature_3">• The home screen widget shows your active photos</string>
+    <string name="settings_warning_uninstall">⚠️ Warning: Uninstalling the app will permanently delete all photos stored in it. Make sure to save any important photos before uninstalling.</string>
+    <string name="settings_app_version">App Version</string>
+    <string name="settings_version_format">Version %1$s (%2$d)</string>
+
+    <!-- Widget -->
+    <string name="widget_title">Utility Cam</string>
+    <string name="widget_no_photos">No active photos</string>
+    <string name="widget_open_app">Open app to capture</string>
+    <string name="widget_expires_in">⏱ Expires in: </string>
 </resources>
