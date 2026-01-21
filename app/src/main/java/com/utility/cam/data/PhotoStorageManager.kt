@@ -70,6 +70,10 @@ class PhotoStorageManager(private val context: Context) {
         // Save metadata
         savePhotoMetadata(photo)
         
+        // Track photo count for feedback
+        val feedbackManager = FeedbackManager(context)
+        feedbackManager.incrementPhotoCount()
+
         // Emit event
         PhotoEventBus.emit(PhotoEvent.PhotoAdded)
 

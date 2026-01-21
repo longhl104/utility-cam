@@ -17,6 +17,7 @@ import androidx.work.WorkManager
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.LocaleManager
+import com.utility.cam.data.FeedbackManager
 import com.utility.cam.ui.navigation.UtilityCamNavigation
 import com.utility.cam.ui.theme.UtilityCamTheme
 import com.utility.cam.worker.ExpiringPhotoReminderWorker
@@ -45,6 +46,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Track app launch for feedback prompting
+        val feedbackManager = FeedbackManager(this)
+        runBlocking {
+            feedbackManager.incrementAppLaunchCount()
+        }
 
         // Create notification channel
         NotificationHelper.createNotificationChannel(this)

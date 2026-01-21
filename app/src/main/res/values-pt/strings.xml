@@ -109,6 +109,9 @@
     <string name="settings_check_worker_status">Verificar Status do Worker</string>
     <string name="settings_worker_not_scheduled">Nenhum worker periódico agendado!</string>
     <string name="settings_worker_status_format">Status do Worker: %1$s\nTentativa de Execução: %2$d\nTags: %3$s</string>
+    <string name="settings_reset_feedback">Redefinir Estado de Feedback</string>
+    <string name="settings_reset_feedback_hint">Limpar todos os dados de rastreamento de feedback para testar o prompt novamente</string>
+    <string name="settings_feedback_reset_success">Estado de feedback redefinido! Reabra a Galeria para ver o prompt.</string>
     <string name="settings_about">Sobre Utility Cam</string>
     <string name="settings_about_description">Uma câmera secundária para fotos temporárias. Tudo capturado neste app se exclui automaticamente após o período de tempo definido.</string>
     <string name="settings_about_feature_1">• As fotos são armazenadas no armazenamento privado do app, não na sua galeria principal</string>
@@ -117,6 +120,13 @@
     <string name="settings_warning_uninstall">⚠️ Aviso: Desinstalar o app excluirá permanentemente todas as fotos armazenadas nele. Certifique-se de salvar quaisquer fotos importantes antes de desinstalar.</string>
     <string name="settings_app_version">Versão do App</string>
     <string name="settings_version_format">Versão %1$s (%2$d)</string>
+
+    <!-- Feedback Dialog -->
+    <string name="feedback_title">Gostando do Utility Cam?</string>
+    <string name="feedback_message">Adoraríamos ouvir sua opinião! Seu feedback nos ajuda a melhorar e alcançar mais usuários.</string>
+    <string name="feedback_rate_now">Avaliar na Play Store</string>
+    <string name="feedback_later">Talvez Mais Tarde</string>
+    <string name="feedback_no_thanks">Não, Obrigado</string>
 
     <!-- Widget -->
     <string name="widget_title">Utility Cam</string>

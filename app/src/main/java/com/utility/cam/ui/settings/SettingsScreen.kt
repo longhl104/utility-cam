@@ -23,6 +23,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkInfo
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
+import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
@@ -40,6 +41,7 @@ fun SettingsScreen(
     val context = LocalContext.current
     val preferencesManager = remember { PreferencesManager(context) }
     val localeManager = remember { LocaleManager(context) }
+    val feedbackManager = remember { FeedbackManager(context) }
     val coroutineScope = rememberCoroutineScope()
     
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
@@ -417,6 +419,24 @@ fun SettingsScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(stringResource(R.string.settings_check_worker_status))
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                OutlinedButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            feedbackManager.resetFeedbackState()
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.settings_feedback_reset_success),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(stringResource(R.string.settings_reset_feedback))
                 }
 
                 Spacer(modifier = Modifier.height(32.dp))

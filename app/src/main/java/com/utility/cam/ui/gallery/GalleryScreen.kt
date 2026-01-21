@@ -27,11 +27,14 @@ import androidx.lifecycle.LifecycleEventObserver
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.R
+import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.PhotoEventBus
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityPhoto
+import com.utility.cam.ui.feedback.FeedbackDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import java.io.File
 import androidx.compose.ui.res.stringResource
 
@@ -44,11 +47,14 @@ fun GalleryScreen(
 ) {
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
+    val feedbackManager = remember { FeedbackManager(context) }
     val lifecycleOwner = LocalLifecycleOwner.current
+    val coroutineScope = rememberCoroutineScope()
 
     var photos by remember { mutableStateOf<List<UtilityPhoto>>(emptyList()) }
     var refreshTrigger by remember { mutableIntStateOf(0) }
     var isRefreshing by remember { mutableStateOf(false) }
+    var showFeedbackDialog by remember { mutableStateOf(false) }
 
     // Function to load photos
     suspend fun loadPhotos() {
@@ -78,6 +84,20 @@ fun GalleryScreen(
         while (isActive) {
             delay(60_000) // 60 seconds
             loadPhotos()
+        }
+    }
+
+    // Check and show feedback dialog when appropriate
+    LaunchedEffect(Unit) {
+        // Wait a bit for the screen to settle
+        delay(3000)
+
+        // Check if we should show feedback
+        feedbackManager.shouldShowFeedbackPrompt().collect { shouldShow ->
+            if (shouldShow && !showFeedbackDialog) {
+                showFeedbackDialog = true
+                feedbackManager.markPromptShown()
+            }
         }
     }
 
@@ -159,6 +179,30 @@ fun GalleryScreen(
                 }
             }
         }
+    }
+
+    // Show feedback dialog when conditions are met
+    if (showFeedbackDialog) {
+        FeedbackDialog(
+            onRateNow = {
+                coroutineScope.launch {
+                    feedbackManager.markUserRated()
+                }
+                showFeedbackDialog = false
+            },
+            onMaybeLater = {
+                coroutineScope.launch {
+                    feedbackManager.markPromptDismissed()
+                }
+                showFeedbackDialog = false
+            },
+            onNoThanks = {
+                coroutineScope.launch {
+                    feedbackManager.markUserRated() // Treat as if they rated to not show again
+                }
+                showFeedbackDialog = false
+            }
+        )
     }
 }
 

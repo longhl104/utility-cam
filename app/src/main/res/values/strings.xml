@@ -97,18 +97,21 @@
     <string name="settings_debug_tools">Debug Tools</string>
     <string name="settings_debug_tools_hint">Testing utilities for development</string>
     <string name="settings_cleanup_delay_label">Cleanup Worker Delay (seconds)</string>
-    <string name="settings_cleanup_delay_hint">Time between cleanup worker runs (1-3600 seconds). Requires app restart.</string>
+    <string name="settings_cleanup_delay_hint">Time between cleanup worker runs (1–3600 seconds). Requires app restart.</string>
     <string name="settings_cleanup_delay_updated">Cleanup delay updated to %d seconds. Restart app to apply.</string>
     <string name="settings_trigger_cleanup">Trigger Cleanup Now</string>
-    <string name="settings_trigger_cleanup_started">Triggering cleanup worker...</string>
+    <string name="settings_trigger_cleanup_started">Triggering cleanup worker…</string>
     <string name="settings_cleanup_completed">Cleanup completed!</string>
     <string name="settings_cleanup_failed">Cleanup failed!</string>
-    <string name="settings_cleanup_running">Cleanup running...</string>
+    <string name="settings_cleanup_running">Cleanup running…</string>
     <string name="settings_test_notification">Test Notification</string>
-    <string name="settings_test_notification_sent">Sending test notification...</string>
+    <string name="settings_test_notification_sent">Sending test notification…</string>
     <string name="settings_check_worker_status">Check Worker Status</string>
     <string name="settings_worker_not_scheduled">No periodic worker scheduled!</string>
     <string name="settings_worker_status_format">Worker Status: %1$s\nRun Attempt: %2$d\nTags: %3$s</string>
+    <string name="settings_reset_feedback">Reset Feedback State</string>
+    <string name="settings_reset_feedback_hint">Clear all feedback tracking data to test the prompt again</string>
+    <string name="settings_feedback_reset_success">Feedback state reset! Reopen Gallery to see prompt.</string>
     <string name="settings_about">About Utility Cam</string>
     <string name="settings_about_description">A secondary camera for temporary photos. Everything captured in this app automatically deletes itself after the set time period.</string>
     <string name="settings_about_feature_1">• Photos are stored in private app storage, not your main gallery</string>
@@ -117,6 +120,13 @@
     <string name="settings_warning_uninstall">⚠️ Warning: Uninstalling the app will permanently delete all photos stored in it. Make sure to save any important photos before uninstalling.</string>
     <string name="settings_app_version">App Version</string>
     <string name="settings_version_format">Version %1$s (%2$d)</string>
+
+    <!-- Feedback Dialog -->
+    <string name="feedback_title">Enjoying Utility Cam?</string>
+    <string name="feedback_message">We\'d love to hear your thoughts! Your feedback helps us improve and reach more users.</string>
+    <string name="feedback_rate_now">Rate on Play Store</string>
+    <string name="feedback_later">Maybe Later</string>
+    <string name="feedback_no_thanks">No Thanks</string>
 
     <!-- Widget -->
     <string name="widget_title">Utility Cam</string>
