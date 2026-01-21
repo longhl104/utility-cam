@@ -1,9 +1,11 @@
 # App Store Descriptions
 
 ## Short Description (80 characters)
+
 Temporary photo storage with auto-delete. Keep your gallery clean and organized.
 
 ## Alternative Short Descriptions
+
 - Camera for temporary photos that auto-delete after 24hrs, 3 days, or 1 week
 - Snap temporary photos that vanish automatically. Save only what matters.
 - Quick photos with auto-delete timer. Keep your gallery clutter-free.
@@ -31,48 +33,56 @@ Your gallery is full of photos you only needed temporarily - parking lot locatio
 **KEY FEATURES**
 
 ⏱️ **Automatic Expiration**
+
 - Photos auto-delete after 24 hours, 3 days, or 1 week
 - Background cleanup runs automatically every 15 minutes
 - Never worry about deleting temporary photos manually
 - Set different expiration times for different photos
 
 📸 **Simple Camera Interface**
+
 - Front and back camera support
 - Quick capture with minimal steps
 - Review before saving with retake option
 - Add descriptions to photos for context
 
 📱 **Home Screen Widget**
+
 - View up to 5 active photos at a glance
 - See countdown timers for each photo
 - Quick overview of temporary photo inventory
 - No need to open the app to check photos
 
 🖼️ **Gallery View**
+
 - Grid layout showing all active photos
 - Visual countdown indicators
 - Expiration warnings for photos about to vanish
 - Tap to view full-size with details
 
 💾 **Smart Storage**
+
 - Photos stored in app's private space
 - Keeps your main gallery completely clean
 - No cluttered DCIM folder with temporary shots
 - Efficient thumbnail generation
 
 🔒 **"Keep Forever" Option**
+
 - Found an important photo? Save it permanently!
 - One-tap save to device gallery
 - Moved to DCIM folder for permanent storage
 - Removed from temporary storage after saving
 
 📝 **Photo Descriptions**
+
 - Add notes to remember context
 - Perfect for parking locations, product info, etc.
 - Edit descriptions anytime
 - Quick reference without opening photos
 
 🔐 **Privacy First**
+
 - All photos stored locally on your device
 - No cloud uploads or external servers
 - No account required
@@ -114,6 +124,7 @@ Unlike complex camera apps with hundreds of filters and features you'll never us
 **UPCOMING FEATURES**
 
 We're constantly improving based on user feedback:
+
 - Custom expiration durations
 - Notification reminders before photos expire
 - Tags and categories for organization
@@ -138,4 +149,5 @@ Download Utility Cam today and never manually delete temporary photos again!
 **Character Count:** ~3,998 characters (including spaces)
 
 ## Additional Keywords for ASO (App Store Optimization)
+
 temporary photos, auto delete photos, self destructing photos, expiring photos, photo timer, temporary storage, clean gallery, photo organizer, parking spot camera, quick reference photos, utility photos, ephemeral photos, time limited photos, auto cleanup, gallery cleaner, temporary camera, disposable photos, photo expiration, timed photos, smart cleanup
