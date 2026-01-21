@@ -261,7 +261,7 @@ fun SettingsScreen(
                             cleanupDelayInput = newValue
                             // Update preference if valid
                             newValue.toIntOrNull()?.let { seconds ->
-                                if (seconds > 0 && seconds <= 3600) { // Max 1 hour
+                                if (seconds in 1..3600) { // Max 1 hour
                                     coroutineScope.launch {
                                         preferencesManager.setCleanupDelaySeconds(seconds)
                                         // Reset the flag after saving so next restart shows correct value
@@ -282,7 +282,7 @@ fun SettingsScreen(
                     },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
-                    isError = cleanupDelayInput.toIntOrNull()?.let { it <= 0 || it > 3600 } ?: false
+                    isError = cleanupDelayInput.toIntOrNull()?.let { it !in 1..3600 } ?: false
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -396,6 +396,29 @@ fun SettingsScreen(
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.errorContainer
+                )
+            ) {
+                Row(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text(
+                        "⚠️ ",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    Text(
+                        "Warning: Uninstalling the app will permanently delete all photos stored in it. Make sure to save any important photos before uninstalling.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onErrorContainer
+                    )
+                }
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
