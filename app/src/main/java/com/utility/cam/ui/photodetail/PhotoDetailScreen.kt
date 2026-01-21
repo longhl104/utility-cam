@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.R
+import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityPhoto
 import kotlinx.coroutines.launch
@@ -75,6 +76,9 @@ fun PhotoDetailScreen(
                     actions = {
                         IconButton(
                             onClick = {
+                                // Track analytics
+                                AnalyticsHelper.logPhotoShared(currentPhoto.id)
+
                                 // Share photo using Android's share sheet
                                 val photoFile = File(currentPhoto.filePath)
                                 val photoUri = FileProvider.getUriForFile(

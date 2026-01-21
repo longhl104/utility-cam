@@ -23,6 +23,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkInfo
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
+import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
@@ -550,6 +551,12 @@ fun SettingsScreen(
                                 selected = selectedLanguage == language.code,
                                 onClick = {
                                     coroutineScope.launch {
+                                        // Track analytics
+                                        AnalyticsHelper.logLanguageChanged(
+                                            oldLanguage = selectedLanguage,
+                                            newLanguage = language.code
+                                        )
+
                                         localeManager.setSelectedLanguage(language.code)
                                         showLanguageDialog = false
                                         // Trigger activity recreation to apply new language

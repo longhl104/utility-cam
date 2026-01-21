@@ -27,6 +27,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.R
+import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.PhotoEventBus
 import com.utility.cam.data.PhotoStorageManager
@@ -186,18 +187,21 @@ fun GalleryScreen(
         FeedbackDialog(
             onRateNow = {
                 coroutineScope.launch {
+                    AnalyticsHelper.logFeedbackAction("rate_now")
                     feedbackManager.markUserRated()
                 }
                 showFeedbackDialog = false
             },
             onMaybeLater = {
                 coroutineScope.launch {
+                    AnalyticsHelper.logFeedbackAction("maybe_later")
                     feedbackManager.markPromptDismissed()
                 }
                 showFeedbackDialog = false
             },
             onNoThanks = {
                 coroutineScope.launch {
+                    AnalyticsHelper.logFeedbackAction("no_thanks")
                     feedbackManager.markUserRated() // Treat as if they rated to not show again
                 }
                 showFeedbackDialog = false

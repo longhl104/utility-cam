@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.utility.cam.analytics.AnalyticsHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -73,6 +74,12 @@ class PhotoStorageManager(private val context: Context) {
         // Track photo count for feedback
         val feedbackManager = FeedbackManager(context)
         feedbackManager.incrementPhotoCount()
+
+        // Track analytics
+        AnalyticsHelper.logPhotoCaptured(
+            ttlDuration = ttlDuration.name,
+            hasDescription = !description.isNullOrBlank()
+        )
 
         // Emit event
         PhotoEventBus.emit(PhotoEvent.PhotoAdded)
@@ -159,6 +166,9 @@ class PhotoStorageManager(private val context: Context) {
         photos.remove(photo)
         saveAllPhotoMetadata(photos)
         
+        // Track analytics
+        AnalyticsHelper.logPhotoDeleted(photoId, manualDelete = true)
+
         // Emit event
         PhotoEventBus.emit(PhotoEvent.PhotosDeleted)
 
@@ -242,6 +252,9 @@ class PhotoStorageManager(private val context: Context) {
                     }
                 }
                 
+                // Track analytics
+                AnalyticsHelper.logPhotoSavedToGallery(photoId)
+
                 // Delete from sandbox after successful save
                 deletePhoto(photoId)
                 true
