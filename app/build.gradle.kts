@@ -11,8 +11,8 @@ android {
         applicationId = "com.utility.cam"
         minSdk = 26
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.1.5"
+        versionCode = 8
+        versionName = "1.1.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -31,7 +31,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("boolean", "DEBUG", "false")
+            buildConfigField("boolean", "DEBUG", "true")
         }
         release {
             isMinifyEnabled = true
