@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">Utility Cam</string>
+    <string name="widget_description">Menampilkan foto utilitas aktif Anda dengan waktu kedaluwarsa</string>
+
+    <!-- Notifications -->
+    <string name="notification_cleanup_title">Foto Dibersihkan</string>
+    <plurals name="notification_cleanup_message">
+        <item quantity="other">%d foto kedaluwarsa telah dihapus secara otomatis</item>
+    </plurals>
+    <string name="notification_reminder_title">Foto Akan Segera Kedaluwarsa</string>
+    <string name="notification_reminder_message">Sebuah foto akan dihapus dalam %s</string>
+    <string name="notification_reminder_message_with_description" formatted="false">\"%s\" akan dihapus dalam %s</string>
+    <string name="notification_channel_name">Pembersihan Foto</string>
+    <string name="notification_channel_description">Notifikasi tentang pembersihan foto otomatis</string>
+
+    <!-- TTL Durations -->
+    <string name="ttl_test_3_seconds">3 detik (Tes)</string>
+    <string name="ttl_24_hours">24 jam</string>
+    <string name="ttl_3_days">3 hari</string>
+    <string name="ttl_1_week">1 minggu</string>
+
+    <!-- Time formatting -->
+    <string name="time_format_days_hours" formatted="false">%dh %dj</string>
+    <string name="time_format_hours_minutes" formatted="false">%dj %dm</string>
+    <string name="time_format_minutes">%dm</string>
+
+    <!-- Gallery Screen -->
+    <string name="gallery_title">Utility Cam</string>
+    <string name="gallery_settings">Pengaturan</string>
+    <string name="gallery_take_photo">Ambil Foto</string>
+    <string name="gallery_no_photos">Belum ada foto utilitas</string>
+    <string name="gallery_no_photos_hint">Ketuk + untuk mengambil foto utilitas pertama Anda</string>
+    <string name="gallery_expires_in">Kedaluwarsa dalam: %s</string>
+
+    <!-- Camera Screen -->
+    <string name="camera_permission_required">Izin kamera diperlukan</string>
+    <string name="camera_grant_permission">Berikan Izin</string>
+    <string name="camera_flip">Balik Kamera</string>
+    <string name="camera_take_photo">Ambil Foto</string>
+    <string name="camera_close">Tutup</string>
+    <string name="camera_zoom_format">%.1fx</string>
+
+    <!-- Capture Review Screen -->
+    <string name="capture_review_title">Tinjau Foto</string>
+    <string name="capture_review_delete_after">Hapus setelah:</string>
+    <string name="capture_review_description_label">Deskripsi (opsional)</string>
+    <string name="capture_review_description_hint">contoh, Tempat Parkir: Lantai 4</string>
+    <string name="capture_review_retake">Ambil Ulang</string>
+    <string name="capture_review_save">Simpan</string>
+
+    <!-- Photo Detail Screen -->
+    <string name="photo_detail_title">Detail Foto</string>
+    <string name="photo_detail_save">Simpan ke Galeri</string>
+    <string name="photo_detail_delete">Hapus</string>
+    <string name="photo_detail_back">Kembali</string>
+    <string name="photo_detail_expires_in">Kedaluwarsa dalam %s</string>
+    <string name="photo_detail_captured">Diambil</string>
+    <string name="photo_detail_description">Deskripsi</string>
+    <string name="photo_detail_add">Tambah</string>
+    <string name="photo_detail_edit">Edit</string>
+    <string name="photo_detail_no_description">Tidak ada deskripsi</string>
+    <string name="photo_detail_keep_forever">Simpan Selamanya (Simpan ke Galeri)</string>
+    <string name="photo_detail_delete_title">Hapus Foto?</string>
+    <string name="photo_detail_delete_message">Tindakan ini tidak dapat dibatalkan.</string>
+    <string name="photo_detail_delete_confirm">Hapus</string>
+    <string name="photo_detail_cancel">Batal</string>
+    <string name="photo_detail_save_title">Simpan ke Galeri?</string>
+    <string name="photo_detail_save_message">Ini akan menyimpan foto ke galeri perangkat Anda dan menghapusnya dari Utility Cam.</string>
+    <string name="photo_detail_save_confirm">Simpan</string>
+    <string name="photo_detail_saved_success">Foto disimpan ke galeri</string>
+    <string name="photo_detail_save_failed">Gagal menyimpan foto</string>
+    <string name="photo_detail_deleted_success">Foto dihapus</string>
+    <string name="photo_detail_edit_description_title">Edit Deskripsi</string>
+    <string name="photo_detail_edit_description_hint">Masukkan deskripsi untuk foto ini</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Pengaturan</string>
+    <string name="settings_back">Kembali</string>
+    <string name="settings_language">Bahasa</string>
+    <string name="settings_language_hint">Pilih bahasa pilihan Anda</string>
+    <string name="settings_language_system_default">Default Sistem</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_portuguese">Português</string>
+    <string name="settings_language_indonesian">Bahasa Indonesia</string>
+    <string name="settings_language_restart_hint">Bahasa akan diperbarui segera</string>
+    <string name="settings_default_expiration">Waktu Kedaluwarsa Default</string>
+    <string name="settings_default_expiration_hint">Pilih berapa lama foto harus disimpan sebelum dihapus secara otomatis</string>
+    <string name="settings_notifications">Notifikasi</string>
+    <string name="settings_cleanup_notifications">Notifikasi Pembersihan</string>
+    <string name="settings_cleanup_notifications_hint">Dapatkan notifikasi ketika foto kedaluwarsa dihapus</string>
+    <string name="settings_reminder_notifications">Pengingat Kedaluwarsa</string>
+    <string name="settings_reminder_notifications_hint">Dapatkan pengingat ketika foto akan segera kedaluwarsa (dalam 1 jam)</string>
+    <string name="settings_notification_permission_required">Izin Notifikasi Diperlukan</string>
+    <string name="settings_notification_permission_message">Untuk menerima notifikasi pembersihan, Anda perlu memberikan izin notifikasi.</string>
+    <string name="settings_open_settings">Buka Pengaturan</string>
+    <string name="settings_debug_tools">Alat Debug</string>
+    <string name="settings_debug_tools_hint">Utilitas pengujian untuk pengembangan</string>
+    <string name="settings_cleanup_delay_label">Penundaan Worker Pembersihan (detik)</string>
+    <string name="settings_cleanup_delay_hint">Waktu antara jalannya worker pembersihan (1–3600 detik). Memerlukan restart aplikasi.</string>
+    <string name="settings_cleanup_delay_updated">Penundaan pembersihan diperbarui ke %d detik. Restart aplikasi untuk menerapkan.</string>
+    <string name="settings_trigger_cleanup">Jalankan Pembersihan Sekarang</string>
+    <string name="settings_trigger_cleanup_started">Menjalankan worker pembersihan…</string>
+    <string name="settings_cleanup_completed">Pembersihan selesai!</string>
+    <string name="settings_cleanup_failed">Pembersihan gagal!</string>
+    <string name="settings_cleanup_running">Pembersihan berjalan…</string>
+    <string name="settings_test_notification">Tes Notifikasi</string>
+    <string name="settings_test_notification_sent">Mengirim notifikasi tes…</string>
+    <string name="settings_check_worker_status">Periksa Status Worker</string>
+    <string name="settings_worker_not_scheduled">Tidak ada worker periodik yang dijadwalkan!</string>
+    <string name="settings_worker_status_format">Status Worker: %1$s\nPercobaan Jalankan: %2$d\nTag: %3$s</string>
+    <string name="settings_about">Tentang Utility Cam</string>
+    <string name="settings_about_description">Kamera sekunder untuk foto sementara. Semua yang diambil di aplikasi ini akan otomatis menghapus dirinya sendiri setelah periode waktu yang ditentukan.</string>
+    <string name="settings_about_feature_1">• Foto disimpan dalam penyimpanan aplikasi pribadi, bukan galeri utama Anda</string>
+    <string name="settings_about_feature_2">• Ketuk \'Simpan Selamanya\' pada foto mana pun untuk menyimpannya secara permanen</string>
+    <string name="settings_about_feature_3">• Widget layar utama menampilkan foto aktif Anda</string>
+    <string name="settings_warning_uninstall">⚠️ Peringatan: Mencopot aplikasi akan menghapus secara permanen semua foto yang disimpan di dalamnya. Pastikan untuk menyimpan foto penting sebelum mencopot.</string>
+    <string name="settings_app_version">Versi Aplikasi</string>
+    <string name="settings_version_format">Versi %1$s (%2$d)</string>
+
+    <!-- Widget -->
+    <string name="widget_title">Utility Cam</string>
+    <string name="widget_no_photos">Tidak ada foto aktif</string>
+    <string name="widget_open_app">Buka aplikasi untuk mengambil</string>
+    <string name="widget_expires_in">⏱ Kedaluwarsa dalam: </string>
+</resources>

@@ -65,7 +65,8 @@ class LocaleManager(private val context: Context) {
         return listOf(
             Language(SYSTEM_DEFAULT, "System Default"),
             Language("en", "English"),
-            Language("pt", "Português")
+            Language("pt", "Português"),
+            Language("in", "Bahasa Indonesia")
         )
     }
 }
