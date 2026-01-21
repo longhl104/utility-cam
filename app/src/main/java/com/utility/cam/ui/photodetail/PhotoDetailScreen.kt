@@ -1,14 +1,17 @@
 package com.utility.cam.ui.photodetail
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.core.content.FileProvider
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -70,6 +73,35 @@ fun PhotoDetailScreen(
                         }
                     },
                     actions = {
+                        IconButton(
+                            onClick = {
+                                // Share photo using Android's share sheet
+                                val photoFile = File(currentPhoto.filePath)
+                                val photoUri = FileProvider.getUriForFile(
+                                    context,
+                                    "${context.packageName}.fileprovider",
+                                    photoFile
+                                )
+
+                                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "image/jpeg"
+                                    putExtra(Intent.EXTRA_STREAM, photoUri)
+                                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                    currentPhoto.description?.let {
+                                        putExtra(Intent.EXTRA_TEXT, it)
+                                    }
+                                }
+
+                                context.startActivity(
+                                    Intent.createChooser(
+                                        shareIntent,
+                                        context.getString(R.string.photo_detail_share_title)
+                                    )
+                                )
+                            }
+                        ) {
+                            Icon(Icons.Default.Share, contentDescription = stringResource(R.string.photo_detail_share))
+                        }
                         IconButton(
                             onClick = { showSaveDialog = true }
                         ) {

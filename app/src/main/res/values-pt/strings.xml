@@ -52,8 +52,10 @@
     <!-- Photo Detail Screen -->
     <string name="photo_detail_title">Detalhes da Foto</string>
     <string name="photo_detail_save">Salvar na Galeria</string>
+    <string name="photo_detail_share">Compartilhar</string>
     <string name="photo_detail_delete">Excluir</string>
     <string name="photo_detail_back">Voltar</string>
+    <string name="photo_detail_share_title">Compartilhar foto via</string>
     <string name="photo_detail_expires_in">Expira em %s</string>
     <string name="photo_detail_captured">Capturada</string>
     <string name="photo_detail_description">Descrição</string>

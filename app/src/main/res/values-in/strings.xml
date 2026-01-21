@@ -51,8 +51,10 @@
     <!-- Photo Detail Screen -->
     <string name="photo_detail_title">Detail Foto</string>
     <string name="photo_detail_save">Simpan ke Galeri</string>
+    <string name="photo_detail_share">Bagikan</string>
     <string name="photo_detail_delete">Hapus</string>
     <string name="photo_detail_back">Kembali</string>
+    <string name="photo_detail_share_title">Bagikan foto via</string>
     <string name="photo_detail_expires_in">Kedaluwarsa dalam %s</string>
     <string name="photo_detail_captured">Diambil</string>
     <string name="photo_detail_description">Deskripsi</string>

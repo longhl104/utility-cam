@@ -52,8 +52,10 @@
     <!-- Photo Detail Screen -->
     <string name="photo_detail_title">Photo Details</string>
     <string name="photo_detail_save">Save to Gallery</string>
+    <string name="photo_detail_share">Share</string>
     <string name="photo_detail_delete">Delete</string>
     <string name="photo_detail_back">Back</string>
+    <string name="photo_detail_share_title">Share photo via</string>
     <string name="photo_detail_expires_in">Expires in %s</string>
     <string name="photo_detail_captured">Captured</string>
     <string name="photo_detail_description">Description</string>
