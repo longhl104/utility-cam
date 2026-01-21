@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.FlipCameraAndroid
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -226,14 +227,17 @@ fun CameraPreviewScreen(
                 }
                 
                 // Back button
-                Button(
+                IconButton(
                     onClick = onNavigateBack,
-                    modifier = Modifier.size(56.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White.copy(alpha = 0.2f)
-                    )
+                    modifier = Modifier
+                        .size(56.dp)
+                        .background(Color.White.copy(alpha = 0.2f), CircleShape)
                 ) {
-                    Text(stringResource(R.string.camera_close), color = Color.White)
+                    Icon(
+                        Icons.Default.Close,
+                        contentDescription = stringResource(R.string.camera_close),
+                        tint = Color.White
+                    )
                 }
             }
         }
