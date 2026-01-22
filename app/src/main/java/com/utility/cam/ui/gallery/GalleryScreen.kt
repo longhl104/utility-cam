@@ -34,6 +34,7 @@ import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityPhoto
 import com.utility.cam.ui.feedback.FeedbackDialog
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.io.File
@@ -106,12 +107,11 @@ fun GalleryScreen(
 
     // Check if we should show analytics consent dialog (first launch)
     LaunchedEffect(Unit) {
-        preferencesManager.hasShownAnalyticsConsent().collect { hasShown ->
-            if (!hasShown && !showAnalyticsConsentDialog) {
-                // Small delay to let the UI settle
-                delay(500)
-                showAnalyticsConsentDialog = true
-            }
+        val hasShown = preferencesManager.hasShownAnalyticsConsent().first()
+        if (!hasShown) {
+            // Small delay to let the UI settle
+            delay(500)
+            showAnalyticsConsentDialog = true
         }
     }
 
@@ -231,12 +231,19 @@ fun GalleryScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
+                        // Dismiss dialog first to prevent re-triggering
+                        showAnalyticsConsentDialog = false
+
                         coroutineScope.launch {
+                            // Save preferences
                             preferencesManager.setAnalyticsEnabled(true)
                             preferencesManager.setAnalyticsConsentShown()
+
+                            // Initialize analytics now that user has consented
+                            AnalyticsHelper.initialize(context)
                             AnalyticsHelper.setAnalyticsEnabled(true)
+                            AnalyticsHelper.logAppLaunched()
                         }
-                        showAnalyticsConsentDialog = false
                     }
                 ) {
                     Text(stringResource(R.string.settings_analytics_consent_accept))
@@ -245,12 +252,17 @@ fun GalleryScreen(
             dismissButton = {
                 TextButton(
                     onClick = {
+                        // Dismiss dialog first to prevent re-triggering
+                        showAnalyticsConsentDialog = false
+
                         coroutineScope.launch {
+                            // Save preferences
                             preferencesManager.setAnalyticsEnabled(false)
                             preferencesManager.setAnalyticsConsentShown()
+
+                            // Ensure analytics is disabled
                             AnalyticsHelper.setAnalyticsEnabled(false)
                         }
-                        showAnalyticsConsentDialog = false
                     }
                 ) {
                     Text(stringResource(R.string.settings_analytics_consent_decline))
