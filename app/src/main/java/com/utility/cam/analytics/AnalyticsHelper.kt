@@ -4,13 +4,21 @@ import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.analytics
+import com.utility.cam.BuildConfig
 
 object AnalyticsHelper {
     private lateinit var analytics: FirebaseAnalytics
+    private var isEnabled = false
+
     fun initialize(context: Context) {
-        analytics = Firebase.analytics
+        isEnabled = BuildConfig.USE_FIREBASE_ANALYTICS
+        if (isEnabled) {
+            analytics = Firebase.analytics
+        }
     }
+
     fun logPhotoCaptured(ttlDuration: String, hasDescription: Boolean) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("ttl_duration", ttlDuration)
             putBoolean("has_description", hasDescription)
@@ -18,12 +26,14 @@ object AnalyticsHelper {
         analytics.logEvent("photo_captured", bundle)
     }
     fun logPhotoSavedToGallery(photoId: String) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("photo_id", photoId)
         }
         analytics.logEvent("photo_saved_to_gallery", bundle)
     }
     fun logPhotoDeleted(photoId: String, manualDelete: Boolean = true) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("photo_id", photoId)
             putBoolean("manual_delete", manualDelete)
@@ -31,18 +41,21 @@ object AnalyticsHelper {
         analytics.logEvent("photo_deleted", bundle)
     }
     fun logPhotoShared(photoId: String) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("photo_id", photoId)
         }
         analytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle)
     }
     fun logPhotosAutoCleaned(count: Int) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putInt("photo_count", count)
         }
         analytics.logEvent("photos_auto_cleaned", bundle)
     }
     fun logSettingChanged(settingName: String, value: String) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("setting_name", settingName)
             putString("value", value)
@@ -50,6 +63,7 @@ object AnalyticsHelper {
         analytics.logEvent("setting_changed", bundle)
     }
     fun logLanguageChanged(oldLanguage: String, newLanguage: String) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("old_language", oldLanguage)
             putString("new_language", newLanguage)
@@ -57,12 +71,14 @@ object AnalyticsHelper {
         analytics.logEvent("language_changed", bundle)
     }
     fun logFeedbackAction(action: String) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("action", action)
         }
         analytics.logEvent("feedback_action", bundle)
     }
     fun logScreenView(screenName: String, screenClass: String) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
             putString(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass)
@@ -70,6 +86,7 @@ object AnalyticsHelper {
         analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
     }
     fun logNotificationSettingChanged(notificationType: String, enabled: Boolean) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("notification_type", notificationType)
             putBoolean("enabled", enabled)
@@ -77,18 +94,22 @@ object AnalyticsHelper {
         analytics.logEvent("notification_setting_changed", bundle)
     }
     fun logWidgetInteraction(action: String) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("action", action)
         }
         analytics.logEvent("widget_interaction", bundle)
     }
     fun logAppLaunched() {
+        if (!isEnabled) return
         analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null)
     }
     fun setUserProperty(propertyName: String, value: String) {
+        if (!isEnabled) return
         analytics.setUserProperty(propertyName, value)
     }
     fun logCameraFeatureUsed(feature: String) {
+        if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("feature", feature)
         }

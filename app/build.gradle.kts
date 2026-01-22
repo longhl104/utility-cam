@@ -12,8 +12,8 @@ android {
         applicationId = "com.utility.cam"
         minSdk = 26
         targetSdk = 36
-        versionCode = 24
-        versionName = "1.2.14"
+        versionCode = 25
+        versionName = "1.2.15"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -33,6 +33,7 @@ android {
     buildTypes {
         debug {
             buildConfigField("boolean", "DEBUG", "true")
+            buildConfigField("boolean", "USE_FIREBASE_ANALYTICS", "false")
         }
         release {
             isMinifyEnabled = true
@@ -42,6 +43,7 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
+            buildConfigField("boolean", "USE_FIREBASE_ANALYTICS", "true")
             // Add native debug symbols
             ndk {
                 debugSymbolLevel = "FULL" // or "FULL" for more detailed information

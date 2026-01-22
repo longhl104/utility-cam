@@ -57,9 +57,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialize Firebase Analytics
-        AnalyticsHelper.initialize(this)
-        AnalyticsHelper.logAppLaunched()
+        // Initialize Firebase Analytics only if enabled for this build type
+        if (BuildConfig.USE_FIREBASE_ANALYTICS) {
+            AnalyticsHelper.initialize(this)
+            AnalyticsHelper.logAppLaunched()
+        }
 
         // Track app launch for feedback prompting
         val feedbackManager = FeedbackManager(this)
