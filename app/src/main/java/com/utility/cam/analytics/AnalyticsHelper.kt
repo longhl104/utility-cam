@@ -142,4 +142,28 @@ object AnalyticsHelper {
         }
         analytics.logEvent("camera_feature_used", bundle)
     }
+
+    fun logBatchDelete(count: Int) {
+        if (!isEnabled) return
+        val bundle = Bundle().apply {
+            putInt("photo_count", count)
+        }
+        analytics.logEvent("batch_delete", bundle)
+    }
+
+    fun logBatchSave(count: Int) {
+        if (!isEnabled) return
+        val bundle = Bundle().apply {
+            putInt("photo_count", count)
+        }
+        analytics.logEvent("batch_save", bundle)
+    }
+
+    fun logBatchShare(count: Int) {
+        if (!isEnabled) return
+        val bundle = Bundle().apply {
+            putInt("photo_count", count)
+        }
+        analytics.logEvent("batch_share", bundle)
+    }
 }

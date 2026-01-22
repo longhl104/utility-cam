@@ -31,6 +31,18 @@
     <string name="gallery_no_photos">Nenhuma foto utilitária ainda</string>
     <string name="gallery_no_photos_hint">Toque em + para capturar sua primeira foto utilitária</string>
     <string name="gallery_expires_in">Expira em: %s</string>
+    <string name="gallery_selection_count">%d selecionado(s)</string>
+    <string name="gallery_exit_selection">Sair do modo de seleção</string>
+    <string name="gallery_share_selected">Compartilhar selecionados</string>
+    <string name="gallery_save_selected">Salvar selecionados</string>
+    <string name="gallery_delete_selected">Excluir selecionados</string>
+    <string name="gallery_delete_confirm_title">Excluir %d foto(s)?</string>
+    <string name="gallery_delete_confirm_message">Esta ação não pode ser desfeita.</string>
+    <string name="gallery_delete_button">Excluir</string>
+    <string name="gallery_cancel_button">Cancelar</string>
+    <string name="gallery_save_confirm_title">Salvar %d foto(s) permanentemente?</string>
+    <string name="gallery_save_confirm_message">As fotos serão salvas na sua galeria e removidas deste app.</string>
+    <string name="gallery_save_button">Salvar</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Permissão de câmera é necessária</string>

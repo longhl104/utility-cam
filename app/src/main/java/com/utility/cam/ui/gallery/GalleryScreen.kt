@@ -2,7 +2,7 @@ package com.utility.cam.ui.gallery
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -10,7 +10,11 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material3.*
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
@@ -18,8 +22,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -39,6 +45,8 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.io.File
 import androidx.compose.ui.res.stringResource
+import android.content.Intent
+import androidx.core.content.FileProvider
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,6 +67,12 @@ fun GalleryScreen(
     var isRefreshing by remember { mutableStateOf(false) }
     var showFeedbackDialog by remember { mutableStateOf(false) }
     var showAnalyticsConsentDialog by remember { mutableStateOf(false) }
+
+    // Multi-select state
+    var isSelectionMode by remember { mutableStateOf(false) }
+    var selectedPhotoIds by remember { mutableStateOf<Set<String>>(emptySet()) }
+    var showDeleteConfirmDialog by remember { mutableStateOf(false) }
+    var showSaveConfirmDialog by remember { mutableStateOf(false) }
 
     // Function to load photos
     suspend fun loadPhotos() {
@@ -130,21 +144,74 @@ fun GalleryScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.gallery_title)) },
-                actions = {
-                    IconButton(onClick = onNavigateToSettings) {
-                        Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.gallery_settings))
+            if (isSelectionMode) {
+                // Selection mode top bar
+                TopAppBar(
+                    title = { Text(stringResource(R.string.gallery_selection_count, selectedPhotoIds.size)) },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            isSelectionMode = false
+                            selectedPhotoIds = emptySet()
+                        }) {
+                            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.gallery_exit_selection))
+                        }
+                    },
+                    actions = {
+                        // Share button
+                        IconButton(
+                            onClick = {
+                                shareSelectedPhotos(context, photos.filter { it.id in selectedPhotoIds })
+                                // Keep selection active after sharing
+                            },
+                            enabled = selectedPhotoIds.isNotEmpty()
+                        ) {
+                            Icon(Icons.Default.Share, contentDescription = stringResource(R.string.gallery_share_selected))
+                        }
+
+                        // Save permanently button
+                        IconButton(
+                            onClick = {
+                                showSaveConfirmDialog = true
+                            },
+                            enabled = selectedPhotoIds.isNotEmpty()
+                        ) {
+                            Icon(Icons.Outlined.CheckCircle, contentDescription = stringResource(R.string.gallery_save_selected))
+                        }
+
+                        // Delete button
+                        IconButton(
+                            onClick = {
+                                showDeleteConfirmDialog = true
+                            },
+                            enabled = selectedPhotoIds.isNotEmpty()
+                        ) {
+                            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.gallery_delete_selected))
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer
+                    )
+                )
+            } else {
+                // Normal top bar
+                TopAppBar(
+                    title = { Text(stringResource(R.string.gallery_title)) },
+                    actions = {
+                        IconButton(onClick = onNavigateToSettings) {
+                            Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.gallery_settings))
+                        }
                     }
-                }
-            )
+                )
+            }
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = onNavigateToCamera,
-                containerColor = MaterialTheme.colorScheme.primary
-            ) {
-                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.gallery_take_photo))
+            if (!isSelectionMode) {
+                FloatingActionButton(
+                    onClick = onNavigateToCamera,
+                    containerColor = MaterialTheme.colorScheme.primary
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = stringResource(R.string.gallery_take_photo))
+                }
             }
         }
     ) { padding ->
@@ -187,7 +254,29 @@ fun GalleryScreen(
                     items(photos, key = { it.id }) { photo ->
                         PhotoGridItem(
                             photo = photo,
-                            onClick = { onNavigateToPhotoDetail(photo.id) }
+                            isSelected = selectedPhotoIds.contains(photo.id),
+                            isSelectionMode = isSelectionMode,
+                            onClick = {
+                                if (isSelectionMode) {
+                                    // Toggle selection
+                                    selectedPhotoIds = if (photo.id in selectedPhotoIds) {
+                                        selectedPhotoIds - photo.id
+                                    } else {
+                                        selectedPhotoIds + photo.id
+                                    }
+                                    // Exit selection mode if no photos selected
+                                    if (selectedPhotoIds.isEmpty()) {
+                                        isSelectionMode = false
+                                    }
+                                } else {
+                                    onNavigateToPhotoDetail(photo.id)
+                                }
+                            },
+                            onLongClick = {
+                                // Enter selection mode and select this photo
+                                isSelectionMode = true
+                                selectedPhotoIds = selectedPhotoIds + photo.id
+                            }
                         )
                     }
                 }
@@ -270,18 +359,133 @@ fun GalleryScreen(
             }
         )
     }
+
+    // Delete confirmation dialog
+    if (showDeleteConfirmDialog) {
+        AlertDialog(
+            onDismissRequest = { showDeleteConfirmDialog = false },
+            title = { Text(stringResource(R.string.gallery_delete_confirm_title, selectedPhotoIds.size)) },
+            text = { Text(stringResource(R.string.gallery_delete_confirm_message)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            selectedPhotoIds.forEach { photoId ->
+                                storageManager.deletePhoto(photoId)
+                            }
+                            AnalyticsHelper.logBatchDelete(selectedPhotoIds.size)
+                            isSelectionMode = false
+                            selectedPhotoIds = emptySet()
+                            showDeleteConfirmDialog = false
+                            loadPhotos()
+                        }
+                    }
+                ) {
+                    Text(stringResource(R.string.gallery_delete_button))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteConfirmDialog = false }) {
+                    Text(stringResource(R.string.gallery_cancel_button))
+                }
+            }
+        )
+    }
+
+    // Save confirmation dialog
+    if (showSaveConfirmDialog) {
+        AlertDialog(
+            onDismissRequest = { showSaveConfirmDialog = false },
+            title = { Text(stringResource(R.string.gallery_save_confirm_title, selectedPhotoIds.size)) },
+            text = { Text(stringResource(R.string.gallery_save_confirm_message)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            var savedCount = 0
+                            selectedPhotoIds.forEach { photoId ->
+                                if (storageManager.saveToGallery(photoId)) {
+                                    savedCount++
+                                }
+                            }
+                            AnalyticsHelper.logBatchSave(savedCount)
+                            isSelectionMode = false
+                            selectedPhotoIds = emptySet()
+                            showSaveConfirmDialog = false
+                            loadPhotos()
+                        }
+                    }
+                ) {
+                    Text(stringResource(R.string.gallery_save_button))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showSaveConfirmDialog = false }) {
+                    Text(stringResource(R.string.gallery_cancel_button))
+                }
+            }
+        )
+    }
+}
+
+// Helper function to share multiple photos
+private fun shareSelectedPhotos(context: android.content.Context, photos: List<UtilityPhoto>) {
+    if (photos.isEmpty()) return
+
+    try {
+        val uris = photos.mapNotNull { photo ->
+            val file = File(photo.filePath)
+            if (file.exists()) {
+                FileProvider.getUriForFile(
+                    context,
+                    "${context.packageName}.fileprovider",
+                    file
+                )
+            } else null
+        }
+
+        if (uris.isEmpty()) return
+
+        val shareIntent = Intent().apply {
+            if (uris.size == 1) {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_STREAM, uris[0])
+            } else {
+                action = Intent.ACTION_SEND_MULTIPLE
+                putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
+            }
+            type = "image/*"
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+
+        context.startActivity(Intent.createChooser(shareIntent, "Share photos"))
+        AnalyticsHelper.logBatchShare(photos.size)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
 }
 
 @Composable
 fun PhotoGridItem(
     photo: UtilityPhoto,
-    onClick: () -> Unit
+    isSelected: Boolean = false,
+    isSelectionMode: Boolean = false,
+    onClick: () -> Unit,
+    onLongClick: () -> Unit
 ) {
+    val haptic = LocalHapticFeedback.current
+
     Box(
         modifier = Modifier
             .aspectRatio(1f)
             .clip(RoundedCornerShape(8.dp))
-            .clickable(onClick = onClick)
+            .combinedClickable(
+                onClick = onClick,
+                onLongClick = {
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                    onLongClick()
+                }
+            )
     ) {
         val imagePath = photo.filePath
         val painter = rememberAsyncImagePainter(
@@ -300,6 +504,35 @@ fun PhotoGridItem(
             contentScale = ContentScale.Crop
         )
         
+        // Selection overlay
+        if (isSelectionMode) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        if (isSelected)
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                        else
+                            Color.Transparent
+                    )
+            )
+
+            // Checkmark
+            if (isSelected) {
+                Icon(
+                    imageVector = Icons.Outlined.CheckCircle,
+                    contentDescription = "Selected",
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(8.dp)
+                        .size(32.dp)
+                        .background(Color.White, shape = RoundedCornerShape(16.dp))
+                        .padding(4.dp)
+                )
+            }
+        }
+
         // Timer overlay
         Box(
             modifier = Modifier
