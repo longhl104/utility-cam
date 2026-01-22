@@ -5,8 +5,30 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
-# Keep data classes for Gson
+# Keep all data classes and managers (required for Gson, DataStore, and language switching)
+# This includes LocaleManager, Language, PreferencesManager, etc.
 -keep class com.utility.cam.data.** { *; }
+
+# Keep DataStore classes and methods
+-keepclassmembers class * extends androidx.datastore.preferences.core.Preferences { *; }
+-keep class androidx.datastore.preferences.** { *; }
+-keep class androidx.datastore.core.** { *; }
+
+# Keep Kotlin metadata for data classes (required for reflection)
+-keep class kotlin.Metadata { *; }
+
+# Keep Kotlin coroutines
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+-keepclassmembers class kotlinx.coroutines.** {
+    volatile <fields>;
+}
+
+# Keep methods used for locale/configuration changes
+-keepclassmembers class * extends android.app.Activity {
+    public void attachBaseContext(android.content.Context);
+    public void recreate();
+}
 
 # Glance
 -keep class androidx.glance.** { *; }
