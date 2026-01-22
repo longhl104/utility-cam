@@ -135,7 +135,6 @@
     <string name="settings_about_description">Kamera sekunder untuk foto sementara. Semua yang diambil di aplikasi ini akan otomatis menghapus dirinya sendiri setelah periode waktu yang ditentukan.</string>
     <string name="settings_about_feature_1">• Foto disimpan dalam penyimpanan aplikasi pribadi, bukan galeri utama Anda</string>
     <string name="settings_about_feature_2">• Ketuk \'Simpan Selamanya\' pada foto mana pun untuk menyimpannya secara permanen</string>
-    <string name="settings_about_feature_3">• Widget layar utama menampilkan foto aktif Anda</string>
     <string name="settings_about_privacy">Privasi: Kami mengumpulkan data penggunaan anonim untuk meningkatkan aplikasi. Tidak ada foto atau informasi pribadi yang dibagikan. Anda dapat menonaktifkan ini di Pengaturan > Privasi.</string>
     <string name="settings_media_permission_info">💡 Tip: Di Android 14+, Anda dapat memilih untuk membagikan hanya foto yang dipilih daripada memberikan akses penuh.</string>
     <string name="settings_warning_uninstall">⚠️ Peringatan: Mencopot aplikasi akan menghapus secara permanen semua foto yang disimpan di dalamnya. Pastikan untuk menyimpan foto penting sebelum mencopot.</string>
