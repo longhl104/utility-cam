@@ -34,17 +34,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Widget Receiver -->
-        <receiver
-            android:name=".widget.UtilityCamWidgetReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/utility_cam_widget_info" />
-        </receiver>
 
         <!-- WorkManager initialization -->
         <provider

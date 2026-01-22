@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Utility Cam</string>
-    <string name="widget_description">Mostra suas fotos utilitárias ativas com tempos de expiração</string>
 
     <!-- Notifications -->
     <string name="notification_cleanup_title">Fotos Removidas</string>
@@ -125,7 +124,6 @@
     <string name="settings_about_description">Uma câmera secundária para fotos temporárias. Tudo capturado neste app se exclui automaticamente após o período de tempo definido.</string>
     <string name="settings_about_feature_1">• As fotos são armazenadas no armazenamento privado do app, não na sua galeria principal</string>
     <string name="settings_about_feature_2">• Toque em \'Manter Para Sempre\' em qualquer foto para salvá-la permanentemente</string>
-    <string name="settings_about_feature_3">• O widget da tela inicial mostra suas fotos ativas</string>
     <string name="settings_about_privacy">Privacidade: Coletamos dados de uso anônimos para melhorar o app. Nenhuma foto ou informação pessoal é compartilhada. Você pode desativar isso em Configurações > Privacidade.</string>
     <string name="settings_media_permission_info">💡 Dica: No Android 14+, você pode escolher compartilhar apenas fotos selecionadas em vez de conceder acesso total.</string>
     <string name="settings_warning_uninstall">⚠️ Aviso: Desinstalar o app excluirá permanentemente todas as fotos armazenadas nele. Certifique-se de salvar quaisquer fotos importantes antes de desinstalar.</string>
@@ -138,10 +136,4 @@
     <string name="feedback_rate_now">Avaliar na Play Store</string>
     <string name="feedback_later">Talvez Mais Tarde</string>
     <string name="feedback_no_thanks">Não, Obrigado</string>
-
-    <!-- Widget -->
-    <string name="widget_title">Utility Cam</string>
-    <string name="widget_no_photos">Nenhuma foto ativa</string>
-    <string name="widget_open_app">Abra o app para capturar</string>
-    <string name="widget_expires_in">⏱ Expira em: </string>
 </resources>

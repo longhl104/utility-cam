@@ -94,7 +94,7 @@ class MainActivity : ComponentActivity() {
             scheduleImmediateCleanup()
         }
 
-        // Get photo ID from intent extras (from widget click)
+        // Get photo ID from intent extras
         val photoId = intent?.extras?.getString("photo_id")
 
         setContent {

@@ -243,6 +243,7 @@ fun PhotoDetailScreen(
                             coroutineScope.launch {
                                 storageManager.deletePhoto(photoId)
                                 showDeleteDialog = false
+
                                 onNavigateBack()
                             }
                         }

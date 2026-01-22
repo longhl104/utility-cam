@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Utility Cam</string>
-    <string name="widget_description">Menampilkan foto utilitas aktif Anda dengan waktu kedaluwarsa</string>
 
     <!-- Notifications -->
     <string name="notification_cleanup_title">Foto Dibersihkan</string>
@@ -137,10 +136,4 @@
     <string name="feedback_rate_now">Beri Rating di Play Store</string>
     <string name="feedback_later">Nanti Saja</string>
     <string name="feedback_no_thanks">Tidak, Terima Kasih</string>
-
-    <!-- Widget -->
-    <string name="widget_title">Utility Cam</string>
-    <string name="widget_no_photos">Tidak ada foto aktif</string>
-    <string name="widget_open_app">Buka aplikasi untuk mengambil</string>
-    <string name="widget_expires_in">⏱ Kedaluwarsa dalam: </string>
 </resources>

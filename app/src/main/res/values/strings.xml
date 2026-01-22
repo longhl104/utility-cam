@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Utility Cam</string>
-    <string name="widget_description">Shows your active utility photos with expiration times</string>
 
     <!-- Notifications -->
     <string name="notification_cleanup_title">Photos Cleaned Up</string>
@@ -125,7 +124,6 @@
     <string name="settings_about_description">A secondary camera for temporary photos. Everything captured in this app automatically deletes itself after the set time period.</string>
     <string name="settings_about_feature_1">• Photos are stored in private app storage, not your main gallery</string>
     <string name="settings_about_feature_2">• Tap \'Keep Forever\' on any photo to save it permanently</string>
-    <string name="settings_about_feature_3">• The home screen widget shows your active photos</string>
     <string name="settings_about_privacy">Privacy: We collect anonymous usage data to improve the app. No photos or personal information are ever shared. You can disable this in Settings > Privacy.</string>
     <string name="settings_media_permission_info">💡 Tip: On Android 14+, you can choose to share only selected photos instead of granting full access.</string>
     <string name="settings_warning_uninstall">⚠️ Warning: Uninstalling the app will permanently delete all photos stored in it. Make sure to save any important photos before uninstalling.</string>
@@ -138,10 +136,4 @@
     <string name="feedback_rate_now">Rate on Play Store</string>
     <string name="feedback_later">Maybe Later</string>
     <string name="feedback_no_thanks">No Thanks</string>
-
-    <!-- Widget -->
-    <string name="widget_title">Utility Cam</string>
-    <string name="widget_no_photos">No active photos</string>
-    <string name="widget_open_app">Open app to capture</string>
-    <string name="widget_expires_in">⏱ Expires in: </string>
 </resources>
