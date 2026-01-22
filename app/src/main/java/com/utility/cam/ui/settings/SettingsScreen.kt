@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -21,6 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkInfo
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
+import com.google.android.play.core.splitinstall.SplitInstallRequest
+import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
+import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
@@ -32,6 +37,7 @@ import com.utility.cam.data.TTLDuration
 import com.utility.cam.ui.permissions.isNotificationPermissionGranted
 import com.utility.cam.worker.PhotoCleanupWorker
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,6 +50,10 @@ fun SettingsScreen(
     val localeManager = remember { LocaleManager(context) }
     val feedbackManager = remember { FeedbackManager(context) }
     val coroutineScope = rememberCoroutineScope()
+    
+    // SplitInstallManager for downloading language resources
+    val splitInstallManager = remember { SplitInstallManagerFactory.create(context) }
+    var isDownloadingLanguage by remember { mutableStateOf(false) }
     
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
     val notificationsEnabled by preferencesManager.getNotificationsEnabled().collectAsState(initial = true)
@@ -537,11 +547,77 @@ fun SettingsScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable {
-                                    coroutineScope.launch {
-                                        localeManager.setSelectedLanguage(language.code)
-                                        showLanguageDialog = false
-                                        // Trigger activity recreation to apply new language
-                                        (context as? android.app.Activity)?.recreate()
+                                    if (!isDownloadingLanguage) {
+                                        coroutineScope.launch {
+                                            // Track analytics
+                                            AnalyticsHelper.logLanguageChanged(
+                                                oldLanguage = selectedLanguage,
+                                                newLanguage = language.code
+                                            )
+
+                                            // Save language preference
+                                            localeManager.setSelectedLanguage(language.code)
+
+                                            // Download language resources if not system default
+                                            if (language.code != LocaleManager.SYSTEM_DEFAULT) {
+                                                isDownloadingLanguage = true
+                                                val locale = Locale.forLanguageTag(language.code)
+
+                                                val request = SplitInstallRequest.newBuilder()
+                                                    .addLanguage(locale)
+                                                    .build()
+
+                                                val listener =
+                                                    SplitInstallStateUpdatedListener { state ->
+                                                        when (state.status()) {
+                                                            SplitInstallSessionStatus.INSTALLED -> {
+                                                                isDownloadingLanguage = false
+                                                                showLanguageDialog = false
+                                                                // Recreate activity to apply language
+                                                                (context as? android.app.Activity)?.recreate()
+                                                            }
+
+                                                            SplitInstallSessionStatus.FAILED -> {
+                                                                isDownloadingLanguage = false
+                                                                Log.e(
+                                                                    "SettingsScreen",
+                                                                    "Language download failed"
+                                                                )
+                                                                Toast.makeText(
+                                                                    context,
+                                                                    "Failed to download language",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            }
+
+                                                            SplitInstallSessionStatus.DOWNLOADING,
+                                                            SplitInstallSessionStatus.INSTALLING -> {
+                                                                // Still downloading/installing
+                                                            }
+
+                                                            else -> {
+                                                                // Other states
+                                                            }
+                                                        }
+                                                    }
+
+                                                splitInstallManager.registerListener(listener)
+                                                splitInstallManager.startInstall(request)
+                                                    .addOnFailureListener {
+                                                        isDownloadingLanguage = false
+                                                        splitInstallManager.unregisterListener(
+                                                            listener
+                                                        )
+                                                        // Fallback: just recreate activity
+                                                        showLanguageDialog = false
+                                                        (context as? android.app.Activity)?.recreate()
+                                                    }
+                                            } else {
+                                                // System default - no download needed
+                                                showLanguageDialog = false
+                                                (context as? android.app.Activity)?.recreate()
+                                            }
+                                        }
                                     }
                                 }
                                 .padding(vertical = 12.dp),
@@ -549,20 +625,8 @@ fun SettingsScreen(
                         ) {
                             RadioButton(
                                 selected = selectedLanguage == language.code,
-                                onClick = {
-                                    coroutineScope.launch {
-                                        // Track analytics
-                                        AnalyticsHelper.logLanguageChanged(
-                                            oldLanguage = selectedLanguage,
-                                            newLanguage = language.code
-                                        )
-
-                                        localeManager.setSelectedLanguage(language.code)
-                                        showLanguageDialog = false
-                                        // Trigger activity recreation to apply new language
-                                        (context as? android.app.Activity)?.recreate()
-                                    }
-                                }
+                                enabled = !isDownloadingLanguage,
+                                onClick = null // Handled by Row's clickable
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(

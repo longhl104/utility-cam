@@ -30,6 +30,10 @@
     public void recreate();
 }
 
+# Play Core / Play Feature Delivery (for on-demand language resources)
+-keep class com.google.android.play.core.** { *; }
+-keep interface com.google.android.play.core.** { *; }
+
 # Glance
 -keep class androidx.glance.** { *; }
 

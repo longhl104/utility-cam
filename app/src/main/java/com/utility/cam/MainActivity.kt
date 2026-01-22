@@ -1,6 +1,7 @@
 package com.utility.cam
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -14,6 +15,7 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.LocaleManager
@@ -25,6 +27,7 @@ import com.utility.cam.worker.ExpiringPhotoReminderWorker
 import com.utility.cam.worker.PhotoCleanupWorker
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class MainActivity : ComponentActivity() {
@@ -36,13 +39,19 @@ class MainActivity : ComponentActivity() {
             localeManager.getSelectedLanguage().first()
         }
 
-        val context = if (selectedLanguage != LocaleManager.SYSTEM_DEFAULT) {
-            localeManager.applyLocale(selectedLanguage)
-        } else {
-            newBase
+        // Configure locale
+        val configuration = Configuration(newBase.resources.configuration)
+        if (selectedLanguage != LocaleManager.SYSTEM_DEFAULT) {
+            val locale = Locale.forLanguageTag(selectedLanguage)
+            Locale.setDefault(locale)
+            configuration.setLocale(locale)
         }
-
+        
+        val context = newBase.createConfigurationContext(configuration)
         super.attachBaseContext(context)
+        
+        // Install split resources for App Bundle language support
+        SplitCompat.installActivity(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
