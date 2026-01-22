@@ -49,6 +49,7 @@ fun GalleryScreen(
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
     val feedbackManager = remember { FeedbackManager(context) }
+    val preferencesManager = remember { com.utility.cam.data.PreferencesManager(context) }
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
 
@@ -56,6 +57,7 @@ fun GalleryScreen(
     var refreshTrigger by remember { mutableIntStateOf(0) }
     var isRefreshing by remember { mutableStateOf(false) }
     var showFeedbackDialog by remember { mutableStateOf(false) }
+    var showAnalyticsConsentDialog by remember { mutableStateOf(false) }
 
     // Function to load photos
     suspend fun loadPhotos() {
@@ -98,6 +100,17 @@ fun GalleryScreen(
             if (shouldShow && !showFeedbackDialog) {
                 showFeedbackDialog = true
                 feedbackManager.markPromptShown()
+            }
+        }
+    }
+
+    // Check if we should show analytics consent dialog (first launch)
+    LaunchedEffect(Unit) {
+        preferencesManager.hasShownAnalyticsConsent().collect { hasShown ->
+            if (!hasShown && !showAnalyticsConsentDialog) {
+                // Small delay to let the UI settle
+                delay(500)
+                showAnalyticsConsentDialog = true
             }
         }
     }
@@ -205,6 +218,43 @@ fun GalleryScreen(
                     feedbackManager.markUserRated() // Treat as if they rated to not show again
                 }
                 showFeedbackDialog = false
+            }
+        )
+    }
+
+    // Show analytics consent dialog on first launch
+    if (showAnalyticsConsentDialog) {
+        AlertDialog(
+            onDismissRequest = { /* Cannot dismiss without choosing */ },
+            title = { Text(stringResource(R.string.settings_analytics_consent_dialog_title)) },
+            text = { Text(stringResource(R.string.settings_analytics_consent_dialog_message)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            preferencesManager.setAnalyticsEnabled(true)
+                            preferencesManager.setAnalyticsConsentShown()
+                            AnalyticsHelper.setAnalyticsEnabled(true)
+                        }
+                        showAnalyticsConsentDialog = false
+                    }
+                ) {
+                    Text(stringResource(R.string.settings_analytics_consent_accept))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            preferencesManager.setAnalyticsEnabled(false)
+                            preferencesManager.setAnalyticsConsentShown()
+                            AnalyticsHelper.setAnalyticsEnabled(false)
+                        }
+                        showAnalyticsConsentDialog = false
+                    }
+                ) {
+                    Text(stringResource(R.string.settings_analytics_consent_decline))
+                }
             }
         )
     }

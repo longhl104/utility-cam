@@ -58,6 +58,7 @@ fun SettingsScreen(
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
     val notificationsEnabled by preferencesManager.getNotificationsEnabled().collectAsState(initial = true)
     val reminderNotificationsEnabled by preferencesManager.getReminderNotificationsEnabled().collectAsState(initial = true)
+    val analyticsEnabled by preferencesManager.getAnalyticsEnabled().collectAsState(initial = true)
     val hasNotificationPermission = isNotificationPermissionGranted()
     val cleanupDelaySeconds by preferencesManager.getCleanupDelaySeconds().collectAsState(initial = 10)
     val selectedLanguage by localeManager.getSelectedLanguage().collectAsState(initial = LocaleManager.SYSTEM_DEFAULT)
@@ -303,9 +304,53 @@ fun SettingsScreen(
             }
 
             Spacer(modifier = Modifier.height(32.dp))
-            
+
             HorizontalDivider()
-            
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Privacy Section
+            Text(
+                stringResource(R.string.settings_privacy),
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        stringResource(R.string.settings_analytics_consent),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        stringResource(R.string.settings_analytics_consent_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Switch(
+                    checked = analyticsEnabled,
+                    onCheckedChange = { enabled ->
+                        coroutineScope.launch {
+                            preferencesManager.setAnalyticsEnabled(enabled)
+                            // Update Firebase Analytics collection
+                            AnalyticsHelper.setAnalyticsEnabled(enabled)
+                        }
+                    }
+                )
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            HorizontalDivider()
+
             Spacer(modifier = Modifier.height(16.dp))
 
             // Debug section (only visible in debug builds)
@@ -494,6 +539,24 @@ fun SettingsScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                )
+            ) {
+                Row(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text(
+                        stringResource(R.string.settings_about_privacy),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
 

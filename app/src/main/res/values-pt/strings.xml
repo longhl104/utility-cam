@@ -96,6 +96,13 @@
     <string name="settings_notification_permission_required">Permissão de Notificação Necessária</string>
     <string name="settings_notification_permission_message">Para receber notificações de limpeza, você precisa conceder permissão de notificação.</string>
     <string name="settings_open_settings">Abrir Configurações</string>
+    <string name="settings_privacy">Privacidade</string>
+    <string name="settings_analytics_consent">Ajude a Melhorar o App</string>
+    <string name="settings_analytics_consent_hint">Compartilhe dados de uso anônimos para nos ajudar a melhorar o app. Nenhuma informação pessoal é coletada.</string>
+    <string name="settings_analytics_consent_dialog_title">Ajude-nos a Melhorar o Utility Cam</string>
+    <string name="settings_analytics_consent_dialog_message">Gostaríamos de coletar dados de uso anônimos para melhorar o app. Isso inclui:\n\n• Uso de recursos do app\n• Eventos de captura de fotos (duração, não conteúdo)\n• Dados de desempenho do app\n\nNÃO coletamos:\n• Suas fotos ou seu conteúdo\n• Descrições que você inserir\n• Informações pessoais\n\nVocê pode alterar esta configuração a qualquer momento em Configurações > Privacidade.</string>
+    <string name="settings_analytics_consent_accept">Permitir</string>
+    <string name="settings_analytics_consent_decline">Não, Obrigado</string>
     <string name="settings_debug_tools">Ferramentas de Depuração</string>
     <string name="settings_debug_tools_hint">Utilitários de teste para desenvolvimento</string>
     <string name="settings_cleanup_delay_label">Atraso do Worker de Limpeza (segundos)</string>
@@ -119,6 +126,7 @@
     <string name="settings_about_feature_1">• As fotos são armazenadas no armazenamento privado do app, não na sua galeria principal</string>
     <string name="settings_about_feature_2">• Toque em \'Manter Para Sempre\' em qualquer foto para salvá-la permanentemente</string>
     <string name="settings_about_feature_3">• O widget da tela inicial mostra suas fotos ativas</string>
+    <string name="settings_about_privacy">Privacidade: Coletamos dados de uso anônimos para melhorar o app. Nenhuma foto ou informação pessoal é compartilhada. Você pode desativar isso em Configurações > Privacidade.</string>
     <string name="settings_media_permission_info">💡 Dica: No Android 14+, você pode escolher compartilhar apenas fotos selecionadas em vez de conceder acesso total.</string>
     <string name="settings_warning_uninstall">⚠️ Aviso: Desinstalar o app excluirá permanentemente todas as fotos armazenadas nele. Certifique-se de salvar quaisquer fotos importantes antes de desinstalar.</string>
     <string name="settings_app_version">Versão do App</string>

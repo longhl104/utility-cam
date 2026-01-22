@@ -96,6 +96,13 @@
     <string name="settings_notification_permission_required">Notification Permission Required</string>
     <string name="settings_notification_permission_message">To receive cleanup notifications, you need to grant notification permission.</string>
     <string name="settings_open_settings">Open Settings</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="settings_analytics_consent">Help Improve the App</string>
+    <string name="settings_analytics_consent_hint">Share anonymous usage data to help us improve the app. No personal information is collected.</string>
+    <string name="settings_analytics_consent_dialog_title">Help Us Improve Utility Cam</string>
+    <string name="settings_analytics_consent_dialog_message">We\'d like to collect anonymous usage data to improve the app. This includes:\n\n• App feature usage\n• Photo capture events (duration, not content)\n• App performance data\n\nWe DO NOT collect:\n• Your photos or their content\n• Descriptions you enter\n• Personal information\n\nYou can change this setting anytime in Settings > Privacy.</string>
+    <string name="settings_analytics_consent_accept">Allow</string>
+    <string name="settings_analytics_consent_decline">No Thanks</string>
     <string name="settings_debug_tools">Debug Tools</string>
     <string name="settings_debug_tools_hint">Testing utilities for development</string>
     <string name="settings_cleanup_delay_label">Cleanup Worker Delay (seconds)</string>
@@ -119,6 +126,7 @@
     <string name="settings_about_feature_1">• Photos are stored in private app storage, not your main gallery</string>
     <string name="settings_about_feature_2">• Tap \'Keep Forever\' on any photo to save it permanently</string>
     <string name="settings_about_feature_3">• The home screen widget shows your active photos</string>
+    <string name="settings_about_privacy">Privacy: We collect anonymous usage data to improve the app. No photos or personal information are ever shared. You can disable this in Settings > Privacy.</string>
     <string name="settings_media_permission_info">💡 Tip: On Android 14+, you can choose to share only selected photos instead of granting full access.</string>
     <string name="settings_warning_uninstall">⚠️ Warning: Uninstalling the app will permanently delete all photos stored in it. Make sure to save any important photos before uninstalling.</string>
     <string name="settings_app_version">App Version</string>

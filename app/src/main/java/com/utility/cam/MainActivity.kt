@@ -58,9 +58,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Initialize Firebase Analytics only if enabled for this build type
+        // and only after user has seen the consent dialog
         if (BuildConfig.USE_FIREBASE_ANALYTICS) {
-            AnalyticsHelper.initialize(this)
-            AnalyticsHelper.logAppLaunched()
+            val preferencesManager = PreferencesManager(this)
+            val hasSeenConsent = runBlocking {
+                preferencesManager.hasShownAnalyticsConsent().first()
+            }
+
+            // Only initialize if user has already made a choice
+            if (hasSeenConsent) {
+                AnalyticsHelper.initialize(this)
+                AnalyticsHelper.logAppLaunched()
+            }
         }
 
         // Track app launch for feedback prompting

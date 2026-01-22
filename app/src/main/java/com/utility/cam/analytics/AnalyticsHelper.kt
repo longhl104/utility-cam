@@ -5,15 +5,42 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.analytics
 import com.utility.cam.BuildConfig
+import com.utility.cam.data.PreferencesManager
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
 object AnalyticsHelper {
     private lateinit var analytics: FirebaseAnalytics
     private var isEnabled = false
+    private lateinit var preferencesManager: PreferencesManager
 
     fun initialize(context: Context) {
-        isEnabled = BuildConfig.USE_FIREBASE_ANALYTICS
-        if (isEnabled) {
+        preferencesManager = PreferencesManager(context)
+
+        // Only initialize if build type allows it
+        if (BuildConfig.USE_FIREBASE_ANALYTICS) {
             analytics = Firebase.analytics
+
+            // Check user consent
+            val userConsent = runBlocking {
+                preferencesManager.getAnalyticsEnabled().first()
+            }
+
+            // Set analytics collection enabled based on user consent
+            analytics.setAnalyticsCollectionEnabled(userConsent)
+            isEnabled = userConsent
+        } else {
+            isEnabled = false
+        }
+    }
+
+    /**
+     * Update analytics consent when user changes settings
+     */
+    fun setAnalyticsEnabled(enabled: Boolean) {
+        if (BuildConfig.USE_FIREBASE_ANALYTICS && ::analytics.isInitialized) {
+            analytics.setAnalyticsCollectionEnabled(enabled)
+            isEnabled = enabled
         }
     }
 

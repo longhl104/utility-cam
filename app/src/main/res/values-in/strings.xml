@@ -95,6 +95,13 @@
     <string name="settings_notification_permission_required">Izin Notifikasi Diperlukan</string>
     <string name="settings_notification_permission_message">Untuk menerima notifikasi pembersihan, Anda perlu memberikan izin notifikasi.</string>
     <string name="settings_open_settings">Buka Pengaturan</string>
+    <string name="settings_privacy">Privasi</string>
+    <string name="settings_analytics_consent">Bantu Tingkatkan Aplikasi</string>
+    <string name="settings_analytics_consent_hint">Bagikan data penggunaan anonim untuk membantu kami meningkatkan aplikasi. Tidak ada informasi pribadi yang dikumpulkan.</string>
+    <string name="settings_analytics_consent_dialog_title">Bantu Kami Tingkatkan Utility Cam</string>
+    <string name="settings_analytics_consent_dialog_message">Kami ingin mengumpulkan data penggunaan anonim untuk meningkatkan aplikasi. Ini termasuk:\n\n• Penggunaan fitur aplikasi\n• Kejadian pengambilan foto (durasi, bukan konten)\n• Data performa aplikasi\n\nKami TIDAK mengumpulkan:\n• Foto Anda atau kontennya\n• Deskripsi yang Anda masukkan\n• Informasi pribadi\n\nAnda dapat mengubah pengaturan ini kapan saja di Pengaturan > Privasi.</string>
+    <string name="settings_analytics_consent_accept">Izinkan</string>
+    <string name="settings_analytics_consent_decline">Tidak, Terima Kasih</string>
     <string name="settings_debug_tools">Alat Debug</string>
     <string name="settings_debug_tools_hint">Utilitas pengujian untuk pengembangan</string>
     <string name="settings_cleanup_delay_label">Penundaan Worker Pembersihan (detik)</string>
@@ -118,6 +125,7 @@
     <string name="settings_about_feature_1">• Foto disimpan dalam penyimpanan aplikasi pribadi, bukan galeri utama Anda</string>
     <string name="settings_about_feature_2">• Ketuk \'Simpan Selamanya\' pada foto mana pun untuk menyimpannya secara permanen</string>
     <string name="settings_about_feature_3">• Widget layar utama menampilkan foto aktif Anda</string>
+    <string name="settings_about_privacy">Privasi: Kami mengumpulkan data penggunaan anonim untuk meningkatkan aplikasi. Tidak ada foto atau informasi pribadi yang dibagikan. Anda dapat menonaktifkan ini di Pengaturan > Privasi.</string>
     <string name="settings_media_permission_info">💡 Tip: Di Android 14+, Anda dapat memilih untuk membagikan hanya foto yang dipilih daripada memberikan akses penuh.</string>
     <string name="settings_warning_uninstall">⚠️ Peringatan: Mencopot aplikasi akan menghapus secara permanen semua foto yang disimpan di dalamnya. Pastikan untuk menyimpan foto penting sebelum mencopot.</string>
     <string name="settings_app_version">Versi Aplikasi</string>
