@@ -219,6 +219,8 @@
     <string name="pro_features_title">Pro Features</string>
     <string name="pro_feature_video_title">Video Recording</string>
     <string name="pro_feature_video_description">Capture and save video recordings with auto-delete timers</string>
+    <string name="pro_feature_custom_expiration_title">Customize Expiration Time</string>
+    <string name="pro_feature_custom_expiration_description">Set custom expiration times in hours, days, or weeks for your photos and videos</string>
     <string name="pro_feature_priority_support_title">Priority Support</string>
     <string name="pro_feature_priority_support_description">Get faster responses to your questions and issues</string>
     <string name="pro_feature_support_dev_title">Support Development</string>

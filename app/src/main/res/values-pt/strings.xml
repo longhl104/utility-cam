@@ -219,6 +219,8 @@
     <string name="pro_features_title">Recursos Pro</string>
     <string name="pro_feature_video_title">Gravação de Vídeo</string>
     <string name="pro_feature_video_description">Capture e salve gravações de vídeo com timers de exclusão automática</string>
+    <string name="pro_feature_custom_expiration_title">Personalizar Tempo de Expiração</string>
+    <string name="pro_feature_custom_expiration_description">Defina tempos de expiração personalizados em horas, dias ou semanas para suas fotos e vídeos</string>
     <string name="pro_feature_priority_support_title">Suporte Prioritário</string>
     <string name="pro_feature_priority_support_description">Obtenha respostas mais rápidas para suas perguntas e problemas</string>
     <string name="pro_feature_support_dev_title">Apoie o Desenvolvimento</string>

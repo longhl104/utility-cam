@@ -171,6 +171,14 @@ fun ProScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             ProFeatureItem(
+                icon = Icons.Default.Schedule,
+                title = stringResource(R.string.pro_feature_custom_expiration_title),
+                description = stringResource(R.string.pro_feature_custom_expiration_description)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ProFeatureItem(
                 icon = Icons.Default.HeadsetMic,
                 title = stringResource(R.string.pro_feature_priority_support_title),
                 description = stringResource(R.string.pro_feature_priority_support_description)
