@@ -70,6 +70,7 @@
     <string name="capture_review_description_hint">e.g., Parking Spot: Level 4</string>
     <string name="capture_review_retake">Retake</string>
     <string name="capture_review_save">Save</string>
+    <string name="capture_review_gallery">View Gallery</string>
     <string name="capture_review_custom">Custom</string>
     <string name="capture_review_custom_hours_suffix">h</string>
     <string name="capture_review_custom_pro_title">Custom Duration - PRO Feature</string>

@@ -69,6 +69,7 @@
     <string name="capture_review_description_hint">mis., Tempat Parkir: Lantai 4</string>
     <string name="capture_review_retake">Ambil Lagi</string>
     <string name="capture_review_save">Simpan</string>
+    <string name="capture_review_gallery">Lihat Galeri</string>
     <string name="capture_review_custom">Kustom</string>
     <string name="capture_review_custom_hours_suffix">j</string>
     <string name="capture_review_custom_pro_title">Durasi Kustom - Fitur PRO</string>

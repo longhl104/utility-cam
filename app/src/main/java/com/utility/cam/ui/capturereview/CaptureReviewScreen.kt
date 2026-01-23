@@ -2,23 +2,49 @@ package com.utility.cam.ui.capturereview
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Collections
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.Button
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Lock
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
-import com.utility.cam.data.BillingManager
 import com.utility.cam.data.PhotoStorageManager
-import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
 import com.utility.cam.ui.common.CustomTTLDialog
 import com.utility.cam.ui.common.ProLockedDialog
@@ -26,7 +52,6 @@ import com.utility.cam.ui.common.VideoPlayer
 import com.utility.cam.ui.common.rememberProUserStateWithManagers
 import kotlinx.coroutines.launch
 import java.io.File
-import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,7 +59,8 @@ fun CaptureReviewScreen(
     capturedImagePath: String,
     onMediaSaved: () -> Unit,
     onRetake: () -> Unit,
-    onNavigateToPro: () -> Unit = {}
+    onNavigateToPro: () -> Unit = {},
+    onNavigateToGallery: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
@@ -62,7 +88,15 @@ fun CaptureReviewScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(titleRes)) }
+                title = { Text(stringResource(titleRes)) },
+                actions = {
+                    IconButton(onClick = onNavigateToGallery) {
+                        Icon(
+                            Icons.Default.Collections,
+                            contentDescription = stringResource(R.string.capture_review_gallery)
+                        )
+                    }
+                }
             )
         }
     ) { padding ->

@@ -100,6 +100,9 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
                     },
                     onNavigateToPro = {
                         navController.navigate(Screen.Pro.route)
+                    },
+                    onNavigateToGallery = {
+                        navController.popBackStack(Screen.Gallery.route, inclusive = false)
                     }
                 )
             }

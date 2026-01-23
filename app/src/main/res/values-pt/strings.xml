@@ -70,6 +70,7 @@
     <string name="capture_review_description_hint">ex., Vaga de Estacionamento: Nível 4</string>
     <string name="capture_review_retake">Tirar Novamente</string>
     <string name="capture_review_save">Salvar</string>
+    <string name="capture_review_gallery">Ver Galeria</string>
     <string name="capture_review_custom">Personalizar</string>
     <string name="capture_review_custom_hours_suffix">h</string>
     <string name="capture_review_custom_pro_title">Duração Personalizada - Recurso PRO</string>
