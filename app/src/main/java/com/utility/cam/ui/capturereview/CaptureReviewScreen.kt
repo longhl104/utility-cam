@@ -12,12 +12,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
+import com.utility.cam.data.BillingManager
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
+import com.utility.cam.ui.common.CustomTTLDialog
+import com.utility.cam.ui.common.ProLockedDialog
 import com.utility.cam.ui.common.VideoPlayer
+import com.utility.cam.ui.common.rememberProUserStateWithManagers
 import kotlinx.coroutines.launch
 import java.io.File
 import androidx.compose.ui.res.stringResource
@@ -27,20 +33,27 @@ import androidx.compose.ui.res.stringResource
 fun CaptureReviewScreen(
     capturedImagePath: String,
     onMediaSaved: () -> Unit,
-    onRetake: () -> Unit
+    onRetake: () -> Unit,
+    onNavigateToPro: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
-    val preferencesManager = remember { PreferencesManager(context) }
+    val proUserState = rememberProUserStateWithManagers()
+    val preferencesManager = proUserState.preferencesManager
+    val actualIsProUser = proUserState.actualIsProUser
     val coroutineScope = rememberCoroutineScope()
 
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
 
     var selectedTTL by remember { mutableStateOf<TTLDuration?>(null) }
+    var customTTLHours by remember { mutableStateOf<Int?>(null) }
     var description by remember { mutableStateOf("") }
     var isSaving by remember { mutableStateOf(false) }
+    var showCustomTTLDialog by remember { mutableStateOf(false) }
+    var showProLockedDialog by remember { mutableStateOf(false) }
 
     val ttl = selectedTTL ?: defaultTTL
+    val effectiveTTLMillis = customTTLHours?.let { it * 60 * 60 * 1000L } ?: ttl.toMilliseconds()
 
     // Detect if the file is a video
     val isVideo = capturedImagePath.endsWith(".mp4", ignoreCase = true)
@@ -111,13 +124,51 @@ fun CaptureReviewScreen(
                         .filter { !it.isDebugOnly || BuildConfig.DEBUG }
                         .forEach { duration ->
                             FilterChip(
-                                selected = ttl == duration,
-                                onClick = { selectedTTL = duration },
+                                selected = customTTLHours == null && ttl == duration,
+                                onClick = {
+                                    selectedTTL = duration
+                                    customTTLHours = null // Clear custom when selecting preset
+                                },
                                 label = { Text(duration.getDisplayName(context)) },
                                 modifier = Modifier.weight(1f)
                             )
                         }
                 }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Custom TTL option (Pro only) - separate line
+                FilterChip(
+                    selected = customTTLHours != null,
+                    onClick = {
+                        if (actualIsProUser) {
+                            showCustomTTLDialog = true
+                        } else {
+                            showProLockedDialog = true
+                        }
+                    },
+                    label = {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            if (!actualIsProUser) {
+                                Icon(
+                                    Icons.Default.Lock,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                            Text(
+                                if (customTTLHours != null) {
+                                    "$customTTLHours" + stringResource(R.string.capture_review_custom_hours_suffix)
+                                } else {
+                                    stringResource(R.string.capture_review_custom)
+                                }
+                            )
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -150,9 +201,10 @@ fun CaptureReviewScreen(
                         onClick = {
                             isSaving = true
                             coroutineScope.launch {
+                                // Use custom TTL milliseconds if set, otherwise use enum TTL
                                 storageManager.savePhoto(
                                     imageFile = File(capturedImagePath),
-                                    ttlDuration = ttl,
+                                    ttlMilliseconds = effectiveTTLMillis,
                                     description = description.takeIf { it.isNotBlank() }
                                 )
                                 isSaving = false
@@ -174,5 +226,29 @@ fun CaptureReviewScreen(
                 }
             }
         }
+    }
+
+    // Pro locked dialog
+    if (showProLockedDialog) {
+        ProLockedDialog(
+            onDismiss = { showProLockedDialog = false },
+            onUpgrade = onNavigateToPro,
+            titleResId = R.string.capture_review_custom_pro_title,
+            messageResId = R.string.capture_review_custom_pro_message,
+            upgradeButtonResId = R.string.camera_video_pro_only_upgrade,
+            cancelButtonResId = R.string.capture_review_custom_pro_ok
+        )
+    }
+
+    // Custom TTL dialog (Pro only)
+    if (showCustomTTLDialog) {
+        CustomTTLDialog(
+            onDismiss = { showCustomTTLDialog = false },
+            onConfirm = { hours ->
+                customTTLHours = hours
+                selectedTTL = null // Clear enum selection when using custom
+                showCustomTTLDialog = false
+            }
+        )
     }
 }

@@ -66,9 +66,24 @@
     <string name="capture_review_title_video">Tinjau Video</string>
     <string name="capture_review_delete_after">Hapus setelah:</string>
     <string name="capture_review_description_label">Deskripsi (opsional)</string>
-    <string name="capture_review_description_hint">contoh, Tempat Parkir: Lantai 4</string>
-    <string name="capture_review_retake">Ambil Ulang</string>
+    <string name="capture_review_description_hint">mis., Tempat Parkir: Lantai 4</string>
+    <string name="capture_review_retake">Ambil Lagi</string>
     <string name="capture_review_save">Simpan</string>
+    <string name="capture_review_custom">Kustom</string>
+    <string name="capture_review_custom_hours_suffix">j</string>
+    <string name="capture_review_custom_pro_title">Durasi Kustom - Fitur PRO</string>
+    <string name="capture_review_custom_pro_message">Atur waktu kedaluwarsa kustom dengan Utility Cam PRO. Tingkatkan untuk membuka fitur ini!</string>
+    <string name="capture_review_custom_pro_ok">OK</string>
+    <string name="capture_review_custom_dialog_title">Waktu Kedaluwarsa Kustom</string>
+    <string name="capture_review_custom_dialog_message">Atur berapa lama sampai foto ini dihapus:</string>
+    <string name="capture_review_unit_hours">Jam</string>
+    <string name="capture_review_unit_days">Hari</string>
+    <string name="capture_review_unit_weeks">Minggu</string>
+    <string name="capture_review_custom_hours_label">Jam</string>
+    <string name="capture_review_custom_days_label">Hari</string>
+    <string name="capture_review_custom_weeks_label">Minggu</string>
+    <string name="capture_review_custom_dialog_ok">Atur</string>
+    <string name="capture_review_custom_dialog_cancel">Batal</string>
 
     <!-- Photo Detail Screen -->
     <string name="photo_detail_title">Detail Foto</string>
@@ -218,4 +233,5 @@
     <string name="pro_purchase_unavailable">Pembelian saat ini tidak tersedia</string>
     <string name="settings_go_pro">Tingkatkan ke Pro</string>
     <string name="settings_go_pro_hint">Buka fitur premium dengan pembelian sekali bayar</string>
+    <string name="settings_pro_thank_you">Terima kasih atas dukungan Anda!</string>
 </resources>

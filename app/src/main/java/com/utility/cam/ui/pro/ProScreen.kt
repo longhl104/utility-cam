@@ -23,6 +23,7 @@ import com.utility.cam.BuildConfig
 import com.utility.cam.R
 import com.utility.cam.data.BillingManager
 import com.utility.cam.data.PreferencesManager
+import com.utility.cam.ui.common.rememberProUserStateWithManagers
 
 @SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,12 +34,12 @@ fun ProScreen(
 ) {
     val context = LocalContext.current
     val activity = context as? Activity
-    val billingManager = remember { BillingManager(context) }
-    val preferencesManager = remember { PreferencesManager(context) }
+    val proUserState = rememberProUserStateWithManagers()
+    val billingManager = proUserState.billingManager
+    val actualIsProUser = proUserState.actualIsProUser
+    val isProUser = proUserState.isProUser
 
-    val isProUser by billingManager.isProUser.collectAsState()
-    val debugProOverride by preferencesManager.getDebugProOverride().collectAsState(initial = false)
-    val actualIsProUser = isProUser || (BuildConfig.DEBUG && debugProOverride)
+    val debugProOverride by proUserState.preferencesManager.getDebugProOverride().collectAsState(initial = false)
     val productDetails by billingManager.productDetails.collectAsState()
     val purchaseState by billingManager.purchaseState.collectAsState()
     val connectionState by billingManager.billingConnectionState.collectAsState()

@@ -70,6 +70,21 @@
     <string name="capture_review_description_hint">ex., Vaga de Estacionamento: Nível 4</string>
     <string name="capture_review_retake">Tirar Novamente</string>
     <string name="capture_review_save">Salvar</string>
+    <string name="capture_review_custom">Personalizar</string>
+    <string name="capture_review_custom_hours_suffix">h</string>
+    <string name="capture_review_custom_pro_title">Duração Personalizada - Recurso PRO</string>
+    <string name="capture_review_custom_pro_message">Defina tempos de expiração personalizados com o Utility Cam PRO. Atualize para desbloquear este recurso!</string>
+    <string name="capture_review_custom_pro_ok">OK</string>
+    <string name="capture_review_custom_dialog_title">Tempo de Expiração Personalizado</string>
+    <string name="capture_review_custom_dialog_message">Defina quanto tempo até que esta foto seja excluída:</string>
+    <string name="capture_review_unit_hours">Horas</string>
+    <string name="capture_review_unit_days">Dias</string>
+    <string name="capture_review_unit_weeks">Semanas</string>
+    <string name="capture_review_custom_hours_label">Horas</string>
+    <string name="capture_review_custom_days_label">Dias</string>
+    <string name="capture_review_custom_weeks_label">Semanas</string>
+    <string name="capture_review_custom_dialog_ok">Definir</string>
+    <string name="capture_review_custom_dialog_cancel">Cancelar</string>
 
     <!-- Photo Detail Screen -->
     <string name="photo_detail_title">Detalhes da Foto</string>
@@ -219,4 +234,5 @@
     <string name="pro_purchase_unavailable">Compra indisponível no momento</string>
     <string name="settings_go_pro">Atualize para Pro</string>
     <string name="settings_go_pro_hint">Desbloqueie recursos premium com uma compra única</string>
+    <string name="settings_pro_thank_you">Obrigado pelo seu apoio!</string>
 </resources>

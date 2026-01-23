@@ -18,6 +18,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.util.UUID
+import androidx.core.graphics.scale
 
 /**
  * Manages the storage and lifecycle of utility photos and videos
@@ -46,10 +47,19 @@ class PhotoStorageManager(private val context: Context) {
         imageFile: File,
         ttlDuration: TTLDuration,
         description: String? = null
+    ): UtilityMedia = savePhoto(imageFile, ttlDuration.toMilliseconds(), description)
+
+    /**
+     * Save a photo or video to the sandbox storage with custom TTL in milliseconds
+     */
+    suspend fun savePhoto(
+        imageFile: File,
+        ttlMilliseconds: Long,
+        description: String? = null
     ): UtilityMedia = withContext(Dispatchers.IO) {
         val photoId = UUID.randomUUID().toString()
         val timestamp = System.currentTimeMillis()
-        val expirationTime = timestamp + ttlDuration.toMilliseconds()
+        val expirationTime = timestamp + ttlMilliseconds
 
         // Detect if it's a video or image
         val isVideo = imageFile.name.endsWith(".mp4", ignoreCase = true)
@@ -86,7 +96,7 @@ class PhotoStorageManager(private val context: Context) {
 
         // Track analytics
         AnalyticsHelper.logPhotoCaptured(
-            ttlDuration = ttlDuration.name,
+            ttlDuration = "CUSTOM_${ttlMilliseconds / (60 * 60 * 1000)}H",
             hasDescription = !description.isNullOrBlank()
         )
 
@@ -164,7 +174,7 @@ class PhotoStorageManager(private val context: Context) {
                 val scaledWidth = (bitmap.width / scale).toInt()
                 val scaledHeight = (bitmap.height / scale).toInt()
 
-                val scaledBitmap = Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, true)
+                val scaledBitmap = bitmap.scale(scaledWidth, scaledHeight)
 
                 FileOutputStream(thumbnailFile).use { out ->
                     scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 80, out)

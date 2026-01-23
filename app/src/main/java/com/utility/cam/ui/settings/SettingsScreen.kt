@@ -36,6 +36,7 @@ import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
+import com.utility.cam.ui.common.rememberProUserStateWithManagers
 import com.utility.cam.ui.permissions.isNotificationPermissionGranted
 import com.utility.cam.worker.PhotoCleanupWorker
 import kotlinx.coroutines.launch
@@ -50,15 +51,16 @@ fun SettingsScreen(
     onNavigateToPro: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    val preferencesManager = remember { PreferencesManager(context) }
+    val proUserState = rememberProUserStateWithManagers()
+    val preferencesManager = proUserState.preferencesManager
+    val actualIsProUser = proUserState.actualIsProUser
+
+    val debugProOverride by preferencesManager.getDebugProOverride().collectAsState(initial = false)
+
     val localeManager = remember { LocaleManager(context) }
     val feedbackManager = remember { FeedbackManager(context) }
-    val billingManager = remember { BillingManager(context) }
     val coroutineScope = rememberCoroutineScope()
 
-    val isProUser by billingManager.isProUser.collectAsState()
-    val debugProOverride by preferencesManager.getDebugProOverride().collectAsState(initial = false)
-    val actualIsProUser = isProUser || (BuildConfig.DEBUG && debugProOverride)
 
     // SplitInstallManager for downloading language resources
     val splitInstallManager = remember { SplitInstallManagerFactory.create(context) }
@@ -210,7 +212,7 @@ fun SettingsScreen(
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                if (actualIsProUser) "Thank you for your support!" else stringResource(R.string.settings_go_pro_hint),
+                                if (actualIsProUser) stringResource(R.string.settings_pro_thank_you) else stringResource(R.string.settings_go_pro_hint),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = if (actualIsProUser)
                                     MaterialTheme.colorScheme.onPrimaryContainer

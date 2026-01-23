@@ -70,6 +70,21 @@
     <string name="capture_review_description_hint">e.g., Parking Spot: Level 4</string>
     <string name="capture_review_retake">Retake</string>
     <string name="capture_review_save">Save</string>
+    <string name="capture_review_custom">Custom</string>
+    <string name="capture_review_custom_hours_suffix">h</string>
+    <string name="capture_review_custom_pro_title">Custom Duration - PRO Feature</string>
+    <string name="capture_review_custom_pro_message">Set custom expiration times with Utility Cam PRO. Upgrade to unlock this feature!</string>
+    <string name="capture_review_custom_pro_ok">OK</string>
+    <string name="capture_review_custom_dialog_title">Custom Expiration Time</string>
+    <string name="capture_review_custom_dialog_message">Set how long until this photo is deleted:</string>
+    <string name="capture_review_unit_hours">Hours</string>
+    <string name="capture_review_unit_days">Days</string>
+    <string name="capture_review_unit_weeks">Weeks</string>
+    <string name="capture_review_custom_hours_label">Hours</string>
+    <string name="capture_review_custom_days_label">Days</string>
+    <string name="capture_review_custom_weeks_label">Weeks</string>
+    <string name="capture_review_custom_dialog_ok">Set</string>
+    <string name="capture_review_custom_dialog_cancel">Cancel</string>
 
     <!-- Photo Detail Screen -->
     <string name="photo_detail_title">Photo Details</string>
@@ -219,4 +234,5 @@
     <string name="pro_purchase_unavailable">Purchase is currently unavailable</string>
     <string name="settings_go_pro">Upgrade to Pro</string>
     <string name="settings_go_pro_hint">Unlock premium features with a one-time purchase</string>
+    <string name="settings_pro_thank_you">Thank you for your support!</string>
 </resources>

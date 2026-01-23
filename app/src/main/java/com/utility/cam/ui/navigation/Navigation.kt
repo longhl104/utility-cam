@@ -97,6 +97,9 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
                     onRetake = {
                         navController.popBackStack()
                         navController.navigate(Screen.Camera.createRoute(mode))
+                    },
+                    onNavigateToPro = {
+                        navController.navigate(Screen.Pro.route)
                     }
                 )
             }
