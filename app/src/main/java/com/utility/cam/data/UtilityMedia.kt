@@ -4,9 +4,9 @@ import android.content.Context
 import com.utility.cam.R
 
 /**
- * Represents a photo captured in Utility Cam
+ * Represents a photo or video captured in Utility Cam
  */
-data class UtilityPhoto(
+data class UtilityMedia(
     val id: String,
     val fileName: String,
     val filePath: String,

@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.PlayCircleOutline
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.CheckCircle
@@ -39,7 +40,7 @@ import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.PhotoEventBus
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.PreferencesManager
-import com.utility.cam.data.UtilityPhoto
+import com.utility.cam.data.UtilityMedia
 import com.utility.cam.ui.feedback.FeedbackDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -69,7 +70,7 @@ fun GalleryScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
 
-    var photos by remember { mutableStateOf<List<UtilityPhoto>>(emptyList()) }
+    var photos by remember { mutableStateOf<List<UtilityMedia>>(emptyList()) }
     var refreshTrigger by remember { mutableIntStateOf(0) }
     var isRefreshing by remember { mutableStateOf(false) }
     var showFeedbackDialog by remember { mutableStateOf(false) }
@@ -455,8 +456,8 @@ fun GalleryScreen(
     }
 }
 
-// Helper function to share multiple photos
-private fun shareSelectedPhotos(context: android.content.Context, photos: List<UtilityPhoto>) {
+// Helper function to share multiple photos and videos
+private fun shareSelectedPhotos(context: android.content.Context, photos: List<UtilityMedia>) {
     if (photos.isEmpty()) return
 
     try {
@@ -473,6 +474,15 @@ private fun shareSelectedPhotos(context: android.content.Context, photos: List<U
 
         if (uris.isEmpty()) return
 
+        // Determine if we have mixed media types
+        val hasVideos = photos.any { it.filePath.endsWith(".mp4", ignoreCase = true) }
+        val hasImages = photos.any { !it.filePath.endsWith(".mp4", ignoreCase = true) }
+        val mimeType = when {
+            hasVideos && hasImages -> "*/*" // Mixed media
+            hasVideos -> "video/*"
+            else -> "image/*"
+        }
+
         val shareIntent = Intent().apply {
             if (uris.size == 1) {
                 action = Intent.ACTION_SEND
@@ -481,11 +491,11 @@ private fun shareSelectedPhotos(context: android.content.Context, photos: List<U
                 action = Intent.ACTION_SEND_MULTIPLE
                 putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
             }
-            type = "image/*"
+            type = mimeType
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
 
-        context.startActivity(Intent.createChooser(shareIntent, "Share photos"))
+        context.startActivity(Intent.createChooser(shareIntent, "Share media"))
         AnalyticsHelper.logBatchShare(photos.size)
     } catch (e: Exception) {
         e.printStackTrace()
@@ -494,7 +504,7 @@ private fun shareSelectedPhotos(context: android.content.Context, photos: List<U
 
 @Composable
 fun PhotoGridItem(
-    photo: UtilityPhoto,
+    photo: UtilityMedia,
     isSelected: Boolean = false,
     isSelectionMode: Boolean = false,
     onClick: () -> Unit,
@@ -514,10 +524,11 @@ fun PhotoGridItem(
                 }
             )
     ) {
-        val imagePath = photo.filePath
+        // Use thumbnail for both photos and videos
+        val thumbnailPath = photo.thumbnailPath ?: photo.filePath
         val painter = rememberAsyncImagePainter(
             ImageRequest.Builder(LocalContext.current)
-                .data(File(imagePath))
+                .data(File(thumbnailPath))
                 .crossfade(true)
                 .allowHardware(false)
                 .size(800, 800) // Higher quality for grid items
@@ -530,6 +541,24 @@ fun PhotoGridItem(
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
+
+        // Video indicator overlay
+        val isVideo = photo.filePath.endsWith(".mp4", ignoreCase = true)
+        if (isVideo) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.3f)),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.PlayCircleOutline,
+                    contentDescription = "Video",
+                    tint = Color.White,
+                    modifier = Modifier.size(48.dp)
+                )
+            }
+        }
 
         // Selection overlay
         if (isSelectionMode) {

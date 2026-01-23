@@ -88,7 +88,7 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
             imagePath?.let {
                 CaptureReviewScreen(
                     capturedImagePath = it,
-                    onPhotoSaved = {
+                    onMediaSaved = {
                         navController.popBackStack(Screen.Gallery.route, inclusive = false)
                     },
                     onRetake = {

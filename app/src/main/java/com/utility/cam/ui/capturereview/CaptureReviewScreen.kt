@@ -5,17 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.ui.PlayerView
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.BuildConfig
@@ -23,6 +17,7 @@ import com.utility.cam.R
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
+import com.utility.cam.ui.common.VideoPlayer
 import kotlinx.coroutines.launch
 import java.io.File
 import androidx.compose.ui.res.stringResource
@@ -31,7 +26,7 @@ import androidx.compose.ui.res.stringResource
 @Composable
 fun CaptureReviewScreen(
     capturedImagePath: String,
-    onPhotoSaved: () -> Unit,
+    onMediaSaved: () -> Unit,
     onRetake: () -> Unit
 ) {
     val context = LocalContext.current
@@ -50,26 +45,6 @@ fun CaptureReviewScreen(
     // Detect if the file is a video
     val isVideo = capturedImagePath.endsWith(".mp4", ignoreCase = true)
     val titleRes = if (isVideo) R.string.capture_review_title_video else R.string.capture_review_title
-
-    var exoPlayer by remember { mutableStateOf<ExoPlayer?>(null) }
-
-    // Create and configure ExoPlayer
-    DisposableEffect(isVideo) {
-        if (isVideo) {
-            val player = ExoPlayer.Builder(context).build().apply {
-                val mediaItem = MediaItem.fromUri(capturedImagePath)
-                setMediaItem(mediaItem)
-                repeatMode = Player.REPEAT_MODE_ALL
-                prepare()
-                playWhenReady = true
-            }
-            exoPlayer = player
-        }
-        onDispose {
-            exoPlayer?.release()
-            exoPlayer = null
-        }
-    }
 
     Scaffold(
         topBar = {
@@ -91,20 +66,9 @@ fun CaptureReviewScreen(
                     .background(Color.Black)
             ) {
                 if (isVideo) {
-                    // Video player with ExoPlayer's built-in controls
-                    AndroidView(
-                        factory = { context ->
-                            PlayerView(context).apply {
-                                player = exoPlayer
-                                useController = true
-                                keepScreenOn = true
-                                setShowNextButton(false)
-                                setShowPreviousButton(false)
-                            }
-                        },
-                        update = { playerView ->
-                            playerView.player = exoPlayer
-                        },
+                    // Video player with controls
+                    VideoPlayer(
+                        videoUri = capturedImagePath,
                         modifier = Modifier.fillMaxSize()
                     )
                 } else {
@@ -192,7 +156,7 @@ fun CaptureReviewScreen(
                                     description = description.takeIf { it.isNotBlank() }
                                 )
                                 isSaving = false
-                                onPhotoSaved()
+                                onMediaSaved()
                             }
                         },
                         modifier = Modifier.weight(1f),

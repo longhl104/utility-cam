@@ -24,7 +24,8 @@ import coil.request.ImageRequest
 import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.PhotoStorageManager
-import com.utility.cam.data.UtilityPhoto
+import com.utility.cam.data.UtilityMedia
+import com.utility.cam.ui.common.VideoPlayer
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
@@ -41,29 +42,32 @@ fun PhotoDetailScreen(
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
     val coroutineScope = rememberCoroutineScope()
-    
-    var photo by remember { mutableStateOf<UtilityPhoto?>(null) }
+
+    var photo by remember { mutableStateOf<UtilityMedia?>(null) }
     var showDeleteDialog by remember { mutableStateOf(false) }
     var showSaveDialog by remember { mutableStateOf(false) }
     var description by remember { mutableStateOf("") }
     var showDescriptionDialog by remember { mutableStateOf(false) }
     var snackbarMessage by remember { mutableStateOf<String?>(null) }
-    
+
     val snackbarHostState = remember { SnackbarHostState() }
-    
+
     LaunchedEffect(photoId) {
         photo = storageManager.getPhoto(photoId)
         description = photo?.description ?: ""
     }
-    
+
     LaunchedEffect(snackbarMessage) {
         snackbarMessage?.let {
             snackbarHostState.showSnackbar(it)
             snackbarMessage = null
         }
     }
-    
+
     photo?.let { currentPhoto ->
+        // Detect if it's a video
+        val isVideo = currentPhoto.filePath.endsWith(".mp4", ignoreCase = true)
+
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -79,17 +83,18 @@ fun PhotoDetailScreen(
                                 // Track analytics
                                 AnalyticsHelper.logPhotoShared(currentPhoto.id)
 
-                                // Share photo using Android's share sheet
-                                val photoFile = File(currentPhoto.filePath)
-                                val photoUri = FileProvider.getUriForFile(
+                                // Share photo/video using Android's share sheet
+                                val mediaFile = File(currentPhoto.filePath)
+                                val mediaUri = FileProvider.getUriForFile(
                                     context,
                                     "${context.packageName}.fileprovider",
-                                    photoFile
+                                    mediaFile
                                 )
 
+                                val mimeType = if (isVideo) "video/mp4" else "image/jpeg"
                                 val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                                    type = "image/jpeg"
-                                    putExtra(Intent.EXTRA_STREAM, photoUri)
+                                    type = mimeType
+                                    putExtra(Intent.EXTRA_STREAM, mediaUri)
                                     addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                                     currentPhoto.description?.let {
                                         putExtra(Intent.EXTRA_TEXT, it)
@@ -127,23 +132,37 @@ fun PhotoDetailScreen(
                     .padding(padding)
                     .verticalScroll(rememberScrollState())
             ) {
-                // Image
-                val painter = rememberAsyncImagePainter(
-                    ImageRequest.Builder(context)
-                        .data(File(currentPhoto.filePath))
-                        .crossfade(true)
-                        .build()
-                )
-                
-                Image(
-                    painter = painter,
-                    contentDescription = currentPhoto.description ?: "Utility photo",
+                // Media preview (Image or Video)
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(4f / 3f),
-                    contentScale = ContentScale.Fit
-                )
-                
+                        .aspectRatio(4f / 3f)
+                ) {
+                    if (isVideo) {
+                        // Video player
+                        VideoPlayer(
+                            videoUri = currentPhoto.filePath,
+                            modifier = Modifier.fillMaxSize(),
+                            autoPlay = false // Don't auto-play in detail view
+                        )
+                    } else {
+                        // Image preview
+                        val painter = rememberAsyncImagePainter(
+                            ImageRequest.Builder(context)
+                                .data(File(currentPhoto.filePath))
+                                .crossfade(true)
+                                .build()
+                        )
+
+                        Image(
+                            painter = painter,
+                            contentDescription = currentPhoto.description ?: "Utility photo",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Fit
+                        )
+                    }
+                }
+
                 // Details
                 Column(
                     modifier = Modifier.padding(16.dp)
@@ -170,9 +189,9 @@ fun PhotoDetailScreen(
                             )
                         }
                     }
-                    
+
                     Spacer(modifier = Modifier.height(16.dp))
-                    
+
                     // Captured time
                     Text(
                         stringResource(R.string.photo_detail_captured),
@@ -184,9 +203,9 @@ fun PhotoDetailScreen(
                             .format(Date(currentPhoto.captureTimestamp)),
                         style = MaterialTheme.typography.bodyMedium
                     )
-                    
+
                     Spacer(modifier = Modifier.height(16.dp))
-                    
+
                     // Description
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -202,7 +221,7 @@ fun PhotoDetailScreen(
                             Text(stringResource(if (description.isEmpty()) R.string.photo_detail_add else R.string.photo_detail_edit))
                         }
                     }
-                    
+
                     if (description.isNotEmpty()) {
                         Text(
                             description,
@@ -215,9 +234,9 @@ fun PhotoDetailScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-                    
+
                     Spacer(modifier = Modifier.height(24.dp))
-                    
+
                     // Actions
                     Button(
                         onClick = { showSaveDialog = true },
@@ -230,7 +249,7 @@ fun PhotoDetailScreen(
                 }
             }
         }
-        
+
         // Delete confirmation dialog
         if (showDeleteDialog) {
             AlertDialog(
@@ -258,7 +277,7 @@ fun PhotoDetailScreen(
                 }
             )
         }
-        
+
         // Save confirmation dialog
         if (showSaveDialog) {
             AlertDialog(
@@ -291,11 +310,11 @@ fun PhotoDetailScreen(
                 }
             )
         }
-        
+
         // Description dialog
         if (showDescriptionDialog) {
             var tempDescription by remember { mutableStateOf(description) }
-            
+
             AlertDialog(
                 onDismissRequest = { showDescriptionDialog = false },
                 title = { Text(context.getString(R.string.photo_detail_edit_description_title)) },

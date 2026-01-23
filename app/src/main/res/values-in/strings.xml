@@ -26,21 +26,21 @@
     <!-- Gallery Screen -->
     <string name="gallery_title">Utility Cam</string>
     <string name="gallery_settings">Pengaturan</string>
-    <string name="gallery_take_photo">Ambil Foto</string>
-    <string name="gallery_no_photos">Belum ada foto utilitas</string>
-    <string name="gallery_no_photos_hint">Ketuk + untuk mengambil foto utilitas pertama Anda</string>
+    <string name="gallery_take_photo">Ambil</string>
+    <string name="gallery_no_photos">Belum ada media utilitas</string>
+    <string name="gallery_no_photos_hint">Ketuk + untuk mengambil foto atau video pertama Anda</string>
     <string name="gallery_expires_in">Kedaluwarsa dalam: %s</string>
     <string name="gallery_selection_count">%d dipilih</string>
     <string name="gallery_exit_selection">Keluar dari mode pilihan</string>
     <string name="gallery_share_selected">Bagikan yang dipilih</string>
     <string name="gallery_save_selected">Simpan yang dipilih</string>
     <string name="gallery_delete_selected">Hapus yang dipilih</string>
-    <string name="gallery_delete_confirm_title">Hapus %d foto?</string>
+    <string name="gallery_delete_confirm_title">Hapus %d item?</string>
     <string name="gallery_delete_confirm_message">Tindakan ini tidak dapat dibatalkan.</string>
     <string name="gallery_delete_button">Hapus</string>
     <string name="gallery_cancel_button">Batal</string>
-    <string name="gallery_save_confirm_title">Simpan %d foto secara permanen?</string>
-    <string name="gallery_save_confirm_message">Foto akan disimpan ke galeri Anda dan dihapus dari aplikasi ini.</string>
+    <string name="gallery_save_confirm_title">Simpan %d item secara permanen?</string>
+    <string name="gallery_save_confirm_message">Item akan disimpan ke galeri Anda dan dihapus dari aplikasi ini.</string>
     <string name="gallery_save_button">Simpan</string>
 
     <!-- Camera Screen -->

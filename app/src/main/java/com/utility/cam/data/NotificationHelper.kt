@@ -91,7 +91,7 @@ object NotificationHelper {
     /**
      * Sends a reminder notification for a photo that is expiring soon
      */
-    fun sendExpiringPhotoReminder(context: Context, photo: UtilityPhoto) {
+    fun sendExpiringPhotoReminder(context: Context, photo: UtilityMedia) {
         val prepMessage = "Preparing to send reminder for photo ${photo.id}"
         Log.d(TAG, prepMessage)
 
