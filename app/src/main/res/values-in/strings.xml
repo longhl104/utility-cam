@@ -68,6 +68,7 @@
 
     <!-- Photo Detail Screen -->
     <string name="photo_detail_title">Detail Foto</string>
+    <string name="photo_detail_title_video">Detail Video</string>
     <string name="photo_detail_save">Simpan ke Galeri</string>
     <string name="photo_detail_share">Bagikan</string>
     <string name="photo_detail_delete">Hapus</string>
@@ -92,6 +93,33 @@
     <string name="photo_detail_deleted_success">Foto dihapus</string>
     <string name="photo_detail_edit_description_title">Edit Deskripsi</string>
     <string name="photo_detail_edit_description_hint">Masukkan deskripsi untuk foto ini</string>
+
+    <!-- Media Detail Screen -->
+    <string name="media_detail_title">Detail Media</string>
+    <string name="media_detail_save">Simpan ke Galeri</string>
+    <string name="media_detail_share">Bagikan</string>
+    <string name="media_detail_delete">Hapus</string>
+    <string name="media_detail_back">Kembali</string>
+    <string name="media_detail_share_title">Bagikan media via</string>
+    <string name="media_detail_expires_in">Kedaluwarsa dalam %s</string>
+    <string name="media_detail_captured">Diambil</string>
+    <string name="media_detail_description">Deskripsi</string>
+    <string name="media_detail_add">Tambah</string>
+    <string name="media_detail_edit">Edit</string>
+    <string name="media_detail_no_description">Tidak ada deskripsi</string>
+    <string name="media_detail_keep_forever">Simpan Selamanya (Simpan ke Galeri)</string>
+    <string name="media_detail_delete_title">Hapus Media?</string>
+    <string name="media_detail_delete_message">Tindakan ini tidak dapat dibatalkan.</string>
+    <string name="media_detail_delete_confirm">Hapus</string>
+    <string name="media_detail_cancel">Batal</string>
+    <string name="media_detail_save_title">Simpan ke Galeri?</string>
+    <string name="media_detail_save_message">Ini akan menyimpan media ke galeri perangkat Anda dan menghapusnya dari Utility Cam.</string>
+    <string name="media_detail_save_confirm">Simpan</string>
+    <string name="media_detail_saved_success">Media disimpan ke galeri</string>
+    <string name="media_detail_save_failed">Gagal menyimpan media</string>
+    <string name="media_detail_deleted_success">Media dihapus</string>
+    <string name="media_detail_edit_description_title">Edit Deskripsi</string>
+    <string name="media_detail_edit_description_hint">Masukkan deskripsi untuk media ini</string>
 
     <!-- Settings Screen -->
     <string name="settings_title">Pengaturan</string>

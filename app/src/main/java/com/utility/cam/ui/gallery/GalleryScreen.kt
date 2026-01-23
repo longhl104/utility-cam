@@ -56,7 +56,7 @@ import androidx.core.content.FileProvider
 fun GalleryScreen(
     onNavigateToCamera: () -> Unit,
     onNavigateToSettings: () -> Unit,
-    onNavigateToPhotoDetail: (String) -> Unit
+    onNavigateToMediaDetail: (String) -> Unit
 ) {
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
@@ -297,7 +297,7 @@ fun GalleryScreen(
                                         isSelectionMode = false
                                     }
                                 } else {
-                                    onNavigateToPhotoDetail(photo.id)
+                                    onNavigateToMediaDetail(photo.id)
                                 }
                             },
                             onLongClick = {

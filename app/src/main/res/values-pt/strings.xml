@@ -69,6 +69,7 @@
 
     <!-- Photo Detail Screen -->
     <string name="photo_detail_title">Detalhes da Foto</string>
+    <string name="photo_detail_title_video">Detalhes do Vídeo</string>
     <string name="photo_detail_save">Salvar na Galeria</string>
     <string name="photo_detail_share">Compartilhar</string>
     <string name="photo_detail_delete">Excluir</string>
@@ -93,6 +94,33 @@
     <string name="photo_detail_deleted_success">Foto excluída</string>
     <string name="photo_detail_edit_description_title">Editar Descrição</string>
     <string name="photo_detail_edit_description_hint">Digite uma descrição para esta foto</string>
+
+    <!-- Media Detail Screen -->
+    <string name="media_detail_title">Detalhes da Mídia</string>
+    <string name="media_detail_save">Salvar na Galeria</string>
+    <string name="media_detail_share">Compartilhar</string>
+    <string name="media_detail_delete">Excluir</string>
+    <string name="media_detail_back">Voltar</string>
+    <string name="media_detail_share_title">Compartilhar mídia via</string>
+    <string name="media_detail_expires_in">Expira em %s</string>
+    <string name="media_detail_captured">Capturada</string>
+    <string name="media_detail_description">Descrição</string>
+    <string name="media_detail_add">Adicionar</string>
+    <string name="media_detail_edit">Editar</string>
+    <string name="media_detail_no_description">Sem descrição</string>
+    <string name="media_detail_keep_forever">Manter Para Sempre (Salvar na Galeria)</string>
+    <string name="media_detail_delete_title">Excluir Mídia?</string>
+    <string name="media_detail_delete_message">Esta ação não pode ser desfeita.</string>
+    <string name="media_detail_delete_confirm">Excluir</string>
+    <string name="media_detail_cancel">Cancelar</string>
+    <string name="media_detail_save_title">Salvar na Galeria?</string>
+    <string name="media_detail_save_message">Isso salvará a mídia na galeria do seu dispositivo e a removerá do Utility Cam.</string>
+    <string name="media_detail_save_confirm">Salvar</string>
+    <string name="media_detail_saved_success">Mídia salva na galeria</string>
+    <string name="media_detail_save_failed">Falha ao salvar mídia</string>
+    <string name="media_detail_deleted_success">Mídia excluída</string>
+    <string name="media_detail_edit_description_title">Editar Descrição</string>
+    <string name="media_detail_edit_description_hint">Digite uma descrição para esta mídia</string>
 
     <!-- Settings Screen -->
     <string name="settings_title">Configurações</string>

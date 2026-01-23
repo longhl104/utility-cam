@@ -8,7 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.utility.cam.ui.camera.CameraScreen
 import com.utility.cam.ui.capturereview.CaptureReviewScreen
 import com.utility.cam.ui.gallery.GalleryScreen
-import com.utility.cam.ui.photodetail.PhotoDetailScreen
+import com.utility.cam.ui.mediadetail.MediaDetailScreen
 import com.utility.cam.ui.permissions.NotificationPermissionHandler
 import com.utility.cam.ui.settings.SettingsScreen
 import com.utility.cam.ui.pro.ProScreen
@@ -26,8 +26,8 @@ sealed class Screen(val route: String) {
             return "capture_review?imagePath=$encodedPath&mode=$mode"
         }
     }
-    object PhotoDetail : Screen("photo_detail/{photoId}") {
-        fun createRoute(photoId: String) = "photo_detail/$photoId"
+    object MediaDetail : Screen("media_detail/{mediaId}") {
+        fun createRoute(mediaId: String) = "media_detail/$mediaId"
     }
     object Settings : Screen("settings")
     object Pro : Screen("pro")
@@ -40,10 +40,10 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
     // Request notification permission on first launch
     NotificationPermissionHandler()
 
-    // Navigate to photo detail if photoId is provided from widget
+    // Navigate to media detail if mediaId is provided from widget
     LaunchedEffect(initialPhotoId) {
         if (initialPhotoId != null) {
-            navController.navigate(Screen.PhotoDetail.createRoute(initialPhotoId))
+            navController.navigate(Screen.MediaDetail.createRoute(initialPhotoId))
         }
     }
 
@@ -59,8 +59,8 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
                 onNavigateToSettings = {
                     navController.navigate(Screen.Settings.route)
                 },
-                onNavigateToPhotoDetail = { photoId ->
-                    navController.navigate(Screen.PhotoDetail.createRoute(photoId))
+                onNavigateToMediaDetail = { mediaId ->
+                    navController.navigate(Screen.MediaDetail.createRoute(mediaId))
                 }
             )
         }
@@ -99,12 +99,12 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
             }
         }
 
-        composable(Screen.PhotoDetail.route) { backStackEntry ->
-            val photoId = backStackEntry.arguments?.getString("photoId")
+        composable(Screen.MediaDetail.route) { backStackEntry ->
+            val mediaId = backStackEntry.arguments?.getString("mediaId")
 
-            photoId?.let {
-                PhotoDetailScreen(
-                    photoId = it,
+            mediaId?.let {
+                MediaDetailScreen(
+                    mediaId = it,
                     onNavigateBack = {
                         navController.popBackStack()
                     }

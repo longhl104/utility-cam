@@ -69,6 +69,7 @@
 
     <!-- Photo Detail Screen -->
     <string name="photo_detail_title">Photo Details</string>
+    <string name="photo_detail_title_video">Video Details</string>
     <string name="photo_detail_save">Save to Gallery</string>
     <string name="photo_detail_share">Share</string>
     <string name="photo_detail_delete">Delete</string>
@@ -93,6 +94,33 @@
     <string name="photo_detail_deleted_success">Photo deleted</string>
     <string name="photo_detail_edit_description_title">Edit Description</string>
     <string name="photo_detail_edit_description_hint">Enter a description for this photo</string>
+
+    <!-- Media Detail Screen -->
+    <string name="media_detail_title">Media Details</string>
+    <string name="media_detail_save">Save to Gallery</string>
+    <string name="media_detail_share">Share</string>
+    <string name="media_detail_delete">Delete</string>
+    <string name="media_detail_back">Back</string>
+    <string name="media_detail_share_title">Share media via</string>
+    <string name="media_detail_expires_in">Expires in %s</string>
+    <string name="media_detail_captured">Captured</string>
+    <string name="media_detail_description">Description</string>
+    <string name="media_detail_add">Add</string>
+    <string name="media_detail_edit">Edit</string>
+    <string name="media_detail_no_description">No description</string>
+    <string name="media_detail_keep_forever">Keep Forever (Save to Gallery)</string>
+    <string name="media_detail_delete_title">Delete Media?</string>
+    <string name="media_detail_delete_message">This action cannot be undone.</string>
+    <string name="media_detail_delete_confirm">Delete</string>
+    <string name="media_detail_cancel">Cancel</string>
+    <string name="media_detail_save_title">Save to Gallery?</string>
+    <string name="media_detail_save_message">This will save the media to your device\'s gallery and remove it from Utility Cam.</string>
+    <string name="media_detail_save_confirm">Save</string>
+    <string name="media_detail_saved_success">Media saved to gallery</string>
+    <string name="media_detail_save_failed">Failed to save media</string>
+    <string name="media_detail_deleted_success">Media deleted</string>
+    <string name="media_detail_edit_description_title">Edit Description</string>
+    <string name="media_detail_edit_description_hint">Enter a description for this media</string>
 
     <!-- Settings Screen -->
     <string name="settings_title">Settings</string>
