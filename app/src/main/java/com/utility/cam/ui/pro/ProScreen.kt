@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -97,7 +98,7 @@ fun ProScreen(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                        containerColor = Color(0xFF4CAF50).copy(alpha = 0.15f) // Light green background
                     )
                 ) {
                     Column(
@@ -110,21 +111,22 @@ fun ProScreen(
                             Icons.Default.CheckCircle,
                             contentDescription = null,
                             modifier = Modifier.size(64.dp),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = Color(0xFF4CAF50) // Green icon
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
                             stringResource(R.string.pro_already_purchased),
                             style = MaterialTheme.typography.headlineSmall,
                             fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
+                            color = Color(0xFF2E7D32)
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             stringResource(R.string.pro_thank_you),
                             style = MaterialTheme.typography.bodyMedium,
                             textAlign = TextAlign.Center,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            color = Color(0xFF2E7D32) // Darker green for text
                         )
                     }
                 }
