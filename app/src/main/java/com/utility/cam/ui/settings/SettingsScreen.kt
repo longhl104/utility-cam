@@ -40,6 +40,7 @@ import com.utility.cam.ui.permissions.isNotificationPermissionGranted
 import com.utility.cam.worker.PhotoCleanupWorker
 import kotlinx.coroutines.launch
 import java.util.Locale
+import androidx.core.net.toUri
 
 @SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -690,6 +691,45 @@ fun SettingsScreen(
                         color = MaterialTheme.colorScheme.onErrorContainer
                     )
                 }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Send Feedback Button
+            Button(
+                onClick = {
+                    val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                        data = "mailto:".toUri()
+                        putExtra(Intent.EXTRA_EMAIL, arrayOf("longcode10041998@gmail.com")) // Replace with your email
+                        putExtra(
+                            Intent.EXTRA_SUBJECT,
+                            context.getString(R.string.settings_feedback_email_subject, BuildConfig.VERSION_NAME)
+                        )
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            context.getString(
+                                R.string.settings_feedback_email_body,
+                                BuildConfig.VERSION_NAME,
+                                BuildConfig.VERSION_CODE,
+                                Build.VERSION.SDK_INT,
+                                Build.MANUFACTURER,
+                                Build.MODEL
+                            )
+                        )
+                    }
+                    try {
+                        context.startActivity(Intent.createChooser(emailIntent, context.getString(R.string.settings_feedback_chooser_title)))
+                    } catch (_: Exception) {
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.settings_feedback_no_email_app),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(stringResource(R.string.settings_send_feedback))
             }
 
             Spacer(modifier = Modifier.height(16.dp))
