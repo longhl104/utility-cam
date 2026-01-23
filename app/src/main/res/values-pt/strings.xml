@@ -148,4 +148,31 @@
     <string name="feedback_rate_now">Avaliar na Play Store</string>
     <string name="feedback_later">Talvez Mais Tarde</string>
     <string name="feedback_no_thanks">Não, Obrigado</string>
+
+    <!-- Pro Screen -->
+    <string name="pro_title">Pro Vitalício</string>
+    <string name="pro_back">Voltar</string>
+    <string name="pro_upgrade_title">Atualize para Pro Vitalício</string>
+    <string name="pro_upgrade_subtitle">Desbloqueie recursos premium com uma compra única</string>
+    <string name="pro_already_purchased">Você é um Usuário Pro!</string>
+    <string name="pro_thank_you">Obrigado por apoiar o Utility Cam</string>
+    <string name="pro_features_title">Recursos Pro</string>
+    <string name="pro_feature_1_title">Experiência Sem Anúncios</string>
+    <string name="pro_feature_1_description">Aproveite o app sem propagandas</string>
+    <string name="pro_feature_2_title">Suporte Prioritário</string>
+    <string name="pro_feature_2_description">Obtenha respostas mais rápidas para suas perguntas e problemas</string>
+    <string name="pro_feature_3_title">Apoie o Desenvolvimento</string>
+    <string name="pro_feature_3_description">Ajude-nos a continuar melhorando e adicionando novos recursos</string>
+    <string name="pro_feature_4_title">Recursos Pro Futuros</string>
+    <string name="pro_feature_4_description">Tenha acesso a todos os recursos premium futuros sem custo extra</string>
+    <string name="pro_one_time_payment">Pagamento Único</string>
+    <string name="pro_price_loading">Carregando…</string>
+    <string name="pro_loading_price">Carregando informações de preço…</string>
+    <string name="pro_purchase_button">Comprar Pro Vitalício</string>
+    <string name="pro_one_time_note">✓ Pagamento único, seu para sempre\n✓ Sem assinaturas ou taxas recorrentes</string>
+    <string name="pro_purchase_success">Obrigado por atualizar para Pro!</string>
+    <string name="pro_purchase_error">Falha na compra: %s</string>
+    <string name="pro_purchase_unavailable">Compra indisponível no momento</string>
+    <string name="settings_go_pro">Atualize para Pro</string>
+    <string name="settings_go_pro_hint">Desbloqueie recursos premium com uma compra única</string>
 </resources>

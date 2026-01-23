@@ -26,6 +26,7 @@ class PreferencesManager(private val context: Context) {
         val REMINDER_NOTIFICATIONS_ENABLED_KEY = booleanPreferencesKey("reminder_notifications_enabled")
         val ANALYTICS_ENABLED_KEY = booleanPreferencesKey("analytics_enabled")
         val ANALYTICS_CONSENT_SHOWN_KEY = booleanPreferencesKey("analytics_consent_shown")
+        val DEBUG_PRO_OVERRIDE_KEY = booleanPreferencesKey("debug_pro_override")
     }
 
     /**
@@ -144,6 +145,22 @@ class PreferencesManager(private val context: Context) {
     suspend fun setAnalyticsConsentShown() {
         context.dataStore.edit { preferences ->
             preferences[ANALYTICS_CONSENT_SHOWN_KEY] = true
+        }
+    }
+
+    /**
+     * Get whether debug Pro override is enabled (for testing Pro features without purchase)
+     */
+    fun getDebugProOverride(): Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[DEBUG_PRO_OVERRIDE_KEY] ?: false
+    }
+
+    /**
+     * Set whether debug Pro override is enabled (for testing Pro features without purchase)
+     */
+    suspend fun setDebugProOverride(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[DEBUG_PRO_OVERRIDE_KEY] = enabled
         }
     }
 }

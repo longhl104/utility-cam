@@ -12,8 +12,8 @@ android {
         applicationId = "com.utility.cam"
         minSdk = 26
         targetSdk = 36
-        versionCode = 29
-        versionName = "1.3.0"
+        versionCode = 30
+        versionName = "1.3.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -34,6 +34,25 @@ android {
         debug {
             buildConfigField("boolean", "DEBUG", "true")
             buildConfigField("boolean", "USE_FIREBASE_ANALYTICS", "false")
+        }
+        create("internalTesting") {
+            initWith(getByName("release"))
+            isDebuggable = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("release")
+            buildConfigField("boolean", "DEBUG", "true")
+            buildConfigField("boolean", "USE_FIREBASE_ANALYTICS", "false")
+            // Add native debug symbols for crash reporting
+            ndk {
+                debugSymbolLevel = "FULL"
+            }
+            // Optional: Add version name suffix to distinguish from release
+            versionNameSuffix = "-internal"
         }
         release {
             isMinifyEnabled = true

@@ -147,4 +147,31 @@
     <string name="feedback_rate_now">Beri Rating di Play Store</string>
     <string name="feedback_later">Nanti Saja</string>
     <string name="feedback_no_thanks">Tidak, Terima Kasih</string>
+
+    <!-- Pro Screen -->
+    <string name="pro_title">Pro Seumur Hidup</string>
+    <string name="pro_back">Kembali</string>
+    <string name="pro_upgrade_title">Tingkatkan ke Pro Seumur Hidup</string>
+    <string name="pro_upgrade_subtitle">Buka fitur premium dengan pembelian sekali bayar</string>
+    <string name="pro_already_purchased">Anda adalah Pengguna Pro!</string>
+    <string name="pro_thank_you">Terima kasih telah mendukung Utility Cam</string>
+    <string name="pro_features_title">Fitur Pro</string>
+    <string name="pro_feature_1_title">Tanpa Iklan</string>
+    <string name="pro_feature_1_description">Nikmati aplikasi tanpa iklan</string>
+    <string name="pro_feature_2_title">Dukungan Prioritas</string>
+    <string name="pro_feature_2_description">Dapatkan respons lebih cepat untuk pertanyaan dan masalah Anda</string>
+    <string name="pro_feature_3_title">Dukung Pengembangan</string>
+    <string name="pro_feature_3_description">Bantu kami terus meningkatkan dan menambahkan fitur baru</string>
+    <string name="pro_feature_4_title">Fitur Pro Masa Depan</string>
+    <string name="pro_feature_4_description">Dapatkan akses ke semua fitur premium masa depan tanpa biaya tambahan</string>
+    <string name="pro_one_time_payment">Pembayaran Sekali</string>
+    <string name="pro_price_loading">Memuat…</string>
+    <string name="pro_loading_price">Memuat informasi harga…</string>
+    <string name="pro_purchase_button">Beli Pro Seumur Hidup</string>
+    <string name="pro_one_time_note">✓ Pembayaran sekali, milik Anda selamanya\n✓ Tanpa langganan atau biaya berulang</string>
+    <string name="pro_purchase_success">Terima kasih telah meningkatkan ke Pro!</string>
+    <string name="pro_purchase_error">Pembelian gagal: %s</string>
+    <string name="pro_purchase_unavailable">Pembelian saat ini tidak tersedia</string>
+    <string name="settings_go_pro">Tingkatkan ke Pro</string>
+    <string name="settings_go_pro_hint">Buka fitur premium dengan pembelian sekali bayar</string>
 </resources>

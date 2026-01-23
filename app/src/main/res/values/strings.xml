@@ -148,4 +148,31 @@
     <string name="feedback_rate_now">Rate on Play Store</string>
     <string name="feedback_later">Maybe Later</string>
     <string name="feedback_no_thanks">No Thanks</string>
+
+    <!-- Pro Screen -->
+    <string name="pro_title">Lifetime Pro</string>
+    <string name="pro_back">Back</string>
+    <string name="pro_upgrade_title">Upgrade to Lifetime Pro</string>
+    <string name="pro_upgrade_subtitle">Unlock premium features with a one-time purchase</string>
+    <string name="pro_already_purchased">You\'re a Pro User!</string>
+    <string name="pro_thank_you">Thank you for supporting Utility Cam</string>
+    <string name="pro_features_title">Pro Features</string>
+    <string name="pro_feature_1_title">Ad-Free Experience</string>
+    <string name="pro_feature_1_description">Enjoy the app without any advertisements</string>
+    <string name="pro_feature_2_title">Priority Support</string>
+    <string name="pro_feature_2_description">Get faster responses to your questions and issues</string>
+    <string name="pro_feature_3_title">Support Development</string>
+    <string name="pro_feature_3_description">Help us continue improving and adding new features</string>
+    <string name="pro_feature_4_title">Future Pro Features</string>
+    <string name="pro_feature_4_description">Get access to all future premium features at no extra cost</string>
+    <string name="pro_one_time_payment">One-Time Payment</string>
+    <string name="pro_price_loading">Loading…</string>
+    <string name="pro_loading_price">Loading price information…</string>
+    <string name="pro_purchase_button">Purchase Lifetime Pro</string>
+    <string name="pro_one_time_note">✓ One-time payment, yours forever\n✓ No subscriptions or recurring fees</string>
+    <string name="pro_purchase_success">Thank you for upgrading to Pro!</string>
+    <string name="pro_purchase_error">Purchase failed: %s</string>
+    <string name="pro_purchase_unavailable">Purchase is currently unavailable</string>
+    <string name="settings_go_pro">Upgrade to Pro</string>
+    <string name="settings_go_pro_hint">Unlock premium features with a one-time purchase</string>
 </resources>

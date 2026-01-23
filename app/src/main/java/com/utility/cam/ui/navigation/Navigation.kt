@@ -11,6 +11,7 @@ import com.utility.cam.ui.gallery.GalleryScreen
 import com.utility.cam.ui.photodetail.PhotoDetailScreen
 import com.utility.cam.ui.permissions.NotificationPermissionHandler
 import com.utility.cam.ui.settings.SettingsScreen
+import com.utility.cam.ui.pro.ProScreen
 
 sealed class Screen(val route: String) {
     object Gallery : Screen("gallery")
@@ -25,6 +26,7 @@ sealed class Screen(val route: String) {
         fun createRoute(photoId: String) = "photo_detail/$photoId"
     }
     object Settings : Screen("settings")
+    object Pro : Screen("pro")
 }
 
 @Composable
@@ -104,6 +106,17 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
         
         composable(Screen.Settings.route) {
             SettingsScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onNavigateToPro = {
+                    navController.navigate(Screen.Pro.route)
+                }
+            )
+        }
+
+        composable(Screen.Pro.route) {
+            ProScreen(
                 onNavigateBack = {
                     navController.popBackStack()
                 }
