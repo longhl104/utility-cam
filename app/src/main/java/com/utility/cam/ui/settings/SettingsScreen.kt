@@ -30,6 +30,7 @@ import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
+import com.utility.cam.data.BillingManager
 import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
@@ -51,19 +52,23 @@ fun SettingsScreen(
     val preferencesManager = remember { PreferencesManager(context) }
     val localeManager = remember { LocaleManager(context) }
     val feedbackManager = remember { FeedbackManager(context) }
+    val billingManager = remember { BillingManager(context) }
     val coroutineScope = rememberCoroutineScope()
-    
+
+    val isProUser by billingManager.isProUser.collectAsState()
+    val debugProOverride by preferencesManager.getDebugProOverride().collectAsState(initial = false)
+    val actualIsProUser = isProUser || (BuildConfig.DEBUG && debugProOverride)
+
     // SplitInstallManager for downloading language resources
     val splitInstallManager = remember { SplitInstallManagerFactory.create(context) }
     var isDownloadingLanguage by remember { mutableStateOf(false) }
-    
+
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
     val notificationsEnabled by preferencesManager.getNotificationsEnabled().collectAsState(initial = true)
     val reminderNotificationsEnabled by preferencesManager.getReminderNotificationsEnabled().collectAsState(initial = true)
     val analyticsEnabled by preferencesManager.getAnalyticsEnabled().collectAsState(initial = true)
     val hasNotificationPermission = isNotificationPermissionGranted()
     val cleanupDelaySeconds by preferencesManager.getCleanupDelaySeconds().collectAsState(initial = 10)
-    val debugProOverride by preferencesManager.getDebugProOverride().collectAsState(initial = false)
     val selectedLanguage by localeManager.getSelectedLanguage().collectAsState(initial = LocaleManager.SYSTEM_DEFAULT)
 
     var showLanguageDialog by remember { mutableStateOf(false) }
@@ -83,7 +88,27 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.settings_title)) },
+                title = {
+                    Row(
+                        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(stringResource(R.string.settings_title))
+                        if (actualIsProUser) {
+                            Surface(
+                                color = MaterialTheme.colorScheme.primaryContainer,
+                                shape = MaterialTheme.shapes.small
+                            ) {
+                                Text(
+                                    "PRO",
+                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+                            }
+                        }
+                    }
+                },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.settings_back))
@@ -151,11 +176,14 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Upgrade to Pro Section
+            // Pro Status Section
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = if (actualIsProUser)
+                        MaterialTheme.colorScheme.primaryContainer
+                    else
+                        MaterialTheme.colorScheme.secondaryContainer
                 )
             ) {
                 Column(
@@ -171,22 +199,31 @@ fun SettingsScreen(
                     ) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                stringResource(R.string.settings_go_pro),
+                                if (actualIsProUser) "✨ Pro User" else stringResource(R.string.settings_go_pro),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                color = if (actualIsProUser)
+                                    MaterialTheme.colorScheme.onPrimaryContainer
+                                else
+                                    MaterialTheme.colorScheme.onSecondaryContainer
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                stringResource(R.string.settings_go_pro_hint),
+                                if (actualIsProUser) "Thank you for your support!" else stringResource(R.string.settings_go_pro_hint),
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                color = if (actualIsProUser)
+                                    MaterialTheme.colorScheme.onPrimaryContainer
+                                else
+                                    MaterialTheme.colorScheme.onSecondaryContainer
                             )
                         }
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowForward,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                            tint = if (actualIsProUser)
+                                MaterialTheme.colorScheme.onPrimaryContainer
+                            else
+                                MaterialTheme.colorScheme.onSecondaryContainer
                         )
                     }
                 }
@@ -202,17 +239,17 @@ fun SettingsScreen(
                 stringResource(R.string.settings_default_expiration),
                 style = MaterialTheme.typography.titleMedium
             )
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Text(
                 stringResource(R.string.settings_default_expiration_hint),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            
+
             Spacer(modifier = Modifier.height(16.dp))
-            
+
             TTLDuration.entries
                 .filter { !it.isDebugOnly || BuildConfig.DEBUG }
                 .forEach { duration ->
@@ -592,25 +629,25 @@ fun SettingsScreen(
                 stringResource(R.string.settings_about),
                 style = MaterialTheme.typography.titleMedium
             )
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Text(
                 stringResource(R.string.settings_about_description),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            
+
             Spacer(modifier = Modifier.height(16.dp))
-            
+
             Text(
                 stringResource(R.string.settings_about_feature_1),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Text(
                 stringResource(R.string.settings_about_feature_2),
                 style = MaterialTheme.typography.bodySmall,

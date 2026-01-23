@@ -34,9 +34,11 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
+import com.utility.cam.data.BillingManager
 import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.PhotoEventBus
 import com.utility.cam.data.PhotoStorageManager
+import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.UtilityPhoto
 import com.utility.cam.ui.feedback.FeedbackDialog
 import kotlinx.coroutines.delay
@@ -58,7 +60,12 @@ fun GalleryScreen(
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
     val feedbackManager = remember { FeedbackManager(context) }
-    val preferencesManager = remember { com.utility.cam.data.PreferencesManager(context) }
+    val billingManager = remember { BillingManager(context) }
+    val preferencesManager = remember { PreferencesManager(context) }
+
+    val isProUser by billingManager.isProUser.collectAsState()
+    val debugProOverride by preferencesManager.getDebugProOverride().collectAsState(initial = false)
+    val actualIsProUser = isProUser || (com.utility.cam.BuildConfig.DEBUG && debugProOverride)
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
 
@@ -78,7 +85,7 @@ fun GalleryScreen(
     suspend fun loadPhotos() {
         photos = storageManager.getAllPhotos()
     }
-    
+
     // Initial load and reload on trigger
     LaunchedEffect(refreshTrigger) {
         if (refreshTrigger > 0) {
@@ -195,7 +202,27 @@ fun GalleryScreen(
             } else {
                 // Normal top bar
                 TopAppBar(
-                    title = { Text(stringResource(R.string.gallery_title)) },
+                    title = {
+                        Row(
+                            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Text(stringResource(R.string.gallery_title))
+                            if (actualIsProUser) {
+                                Surface(
+                                    color = MaterialTheme.colorScheme.primaryContainer,
+                                    shape = RoundedCornerShape(4.dp)
+                                ) {
+                                    Text(
+                                        "PRO",
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                                    )
+                                }
+                            }
+                        }
+                    },
                     actions = {
                         IconButton(onClick = onNavigateToSettings) {
                             Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.gallery_settings))
@@ -496,14 +523,14 @@ fun PhotoGridItem(
                 .size(800, 800) // Higher quality for grid items
                 .build()
         )
-        
+
         Image(
             painter = painter,
             contentDescription = photo.description ?: "Utility photo",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
-        
+
         // Selection overlay
         if (isSelectionMode) {
             Box(
@@ -546,7 +573,7 @@ fun PhotoGridItem(
                 color = Color.White
             )
         }
-        
+
         // Description overlay if present
         photo.description?.let { desc ->
             Box(
