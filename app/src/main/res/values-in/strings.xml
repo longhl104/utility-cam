@@ -56,6 +56,10 @@
     <string name="camera_close">Tutup</string>
     <string name="camera_zoom_format">%.1fx</string>
     <string name="camera_recording_time">%02d:%02d</string>
+    <string name="camera_video_pro_only_title">Rekaman Video - Fitur PRO</string>
+    <string name="camera_video_pro_only_message">Rekaman video tersedia di Utility Cam PRO. Tingkatkan untuk membuka rekaman video tanpa batas!</string>
+    <string name="camera_video_pro_only_upgrade">Tingkatkan ke PRO</string>
+    <string name="camera_video_pro_only_cancel">Batal</string>
 
     <!-- Capture Review Screen -->
     <string name="capture_review_title">Tinjau Foto</string>
@@ -191,14 +195,14 @@
     <string name="pro_already_purchased">Anda adalah Pengguna Pro!</string>
     <string name="pro_thank_you">Terima kasih telah mendukung Utility Cam</string>
     <string name="pro_features_title">Fitur Pro</string>
-    <string name="pro_feature_1_title">Tanpa Iklan</string>
-    <string name="pro_feature_1_description">Nikmati aplikasi tanpa iklan</string>
-    <string name="pro_feature_2_title">Dukungan Prioritas</string>
-    <string name="pro_feature_2_description">Dapatkan respons lebih cepat untuk pertanyaan dan masalah Anda</string>
-    <string name="pro_feature_3_title">Dukung Pengembangan</string>
-    <string name="pro_feature_3_description">Bantu kami terus meningkatkan dan menambahkan fitur baru</string>
-    <string name="pro_feature_4_title">Fitur Pro Masa Depan</string>
-    <string name="pro_feature_4_description">Dapatkan akses ke semua fitur premium masa depan tanpa biaya tambahan</string>
+    <string name="pro_feature_video_title">Rekaman Video</string>
+    <string name="pro_feature_video_description">Tangkap dan simpan rekaman video dengan timer hapus otomatis</string>
+    <string name="pro_feature_priority_support_title">Dukungan Prioritas</string>
+    <string name="pro_feature_priority_support_description">Dapatkan respons lebih cepat untuk pertanyaan dan masalah Anda</string>
+    <string name="pro_feature_support_dev_title">Dukung Pengembangan</string>
+    <string name="pro_feature_support_dev_description">Bantu kami terus meningkatkan dan menambahkan fitur baru</string>
+    <string name="pro_feature_future_title">Fitur Pro Masa Depan</string>
+    <string name="pro_feature_future_description">Dapatkan akses ke semua fitur premium masa depan tanpa biaya tambahan</string>
     <string name="pro_one_time_payment">Pembayaran Sekali</string>
     <string name="pro_price_loading">Memuat…</string>
     <string name="pro_loading_price">Memuat informasi harga…</string>

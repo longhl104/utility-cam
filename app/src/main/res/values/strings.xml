@@ -57,6 +57,10 @@
     <string name="camera_close">Close</string>
     <string name="camera_zoom_format">%.1fx</string>
     <string name="camera_recording_time">%02d:%02d</string>
+    <string name="camera_video_pro_only_title">Video Recording - PRO Feature</string>
+    <string name="camera_video_pro_only_message">Video recording is available in Utility Cam PRO. Upgrade to unlock unlimited video recordings!</string>
+    <string name="camera_video_pro_only_upgrade">Upgrade to PRO</string>
+    <string name="camera_video_pro_only_cancel">Cancel</string>
 
     <!-- Capture Review Screen -->
     <string name="capture_review_title">Review Photo</string>
@@ -192,14 +196,14 @@
     <string name="pro_already_purchased">You\'re a Pro User!</string>
     <string name="pro_thank_you">Thank you for supporting Utility Cam</string>
     <string name="pro_features_title">Pro Features</string>
-    <string name="pro_feature_1_title">Ad-Free Experience</string>
-    <string name="pro_feature_1_description">Enjoy the app without any advertisements</string>
-    <string name="pro_feature_2_title">Priority Support</string>
-    <string name="pro_feature_2_description">Get faster responses to your questions and issues</string>
-    <string name="pro_feature_3_title">Support Development</string>
-    <string name="pro_feature_3_description">Help us continue improving and adding new features</string>
-    <string name="pro_feature_4_title">Future Pro Features</string>
-    <string name="pro_feature_4_description">Get access to all future premium features at no extra cost</string>
+    <string name="pro_feature_video_title">Video Recording</string>
+    <string name="pro_feature_video_description">Capture and save video recordings with auto-delete timers</string>
+    <string name="pro_feature_priority_support_title">Priority Support</string>
+    <string name="pro_feature_priority_support_description">Get faster responses to your questions and issues</string>
+    <string name="pro_feature_support_dev_title">Support Development</string>
+    <string name="pro_feature_support_dev_description">Help us continue improving and adding new features</string>
+    <string name="pro_feature_future_title">Future Pro Features</string>
+    <string name="pro_feature_future_description">Get access to all future premium features at no extra cost</string>
     <string name="pro_one_time_payment">One-Time Payment</string>
     <string name="pro_price_loading">Loading…</string>
     <string name="pro_loading_price">Loading price information…</string>

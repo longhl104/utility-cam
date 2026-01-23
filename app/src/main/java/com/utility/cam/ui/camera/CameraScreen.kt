@@ -1,5 +1,6 @@
 package com.utility.cam.ui.camera
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -20,9 +21,10 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.FlipCameraAndroid
-import androidx.compose.material.icons.filled.Videocam
 import androidx.compose.material.icons.filled.FiberManualRecord
+import androidx.compose.material.icons.filled.FlipCameraAndroid
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Videocam
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -47,6 +49,8 @@ import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import androidx.compose.ui.res.stringResource
+import com.utility.cam.data.BillingManager
+import com.utility.cam.data.PreferencesManager
 
 enum class CaptureMode {
     PHOTO, VIDEO
@@ -57,8 +61,17 @@ enum class CaptureMode {
 fun CameraScreen(
     initialMode: String = "photo",
     onPhotoCapture: (File, String) -> Unit,
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
+    onNavigateToPro: () -> Unit = {}
 ) {
+    val context = LocalContext.current
+    val billingManager = remember { BillingManager(context) }
+    val preferencesManager = remember { PreferencesManager(context) }
+
+    val isProUser by billingManager.isProUser.collectAsState()
+    val debugProOverride by preferencesManager.getDebugProOverride().collectAsState(initial = false)
+    val actualIsProUser = isProUser || (com.utility.cam.BuildConfig.DEBUG && debugProOverride)
+
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
     val audioPermissionState = rememberPermissionState(android.Manifest.permission.RECORD_AUDIO)
 
@@ -77,7 +90,9 @@ fun CameraScreen(
                 initialMode = initialMode,
                 onPhotoCapture = onPhotoCapture,
                 onNavigateBack = onNavigateBack,
-                hasAudioPermission = audioPermissionState.status.isGranted
+                onNavigateToPro = onNavigateToPro,
+                hasAudioPermission = audioPermissionState.status.isGranted,
+                isProUser = actualIsProUser
             )
         }
         else -> {
@@ -102,7 +117,9 @@ fun CameraPreviewScreen(
     initialMode: String = "photo",
     onPhotoCapture: (File, String) -> Unit,
     onNavigateBack: () -> Unit,
-    hasAudioPermission: Boolean
+    onNavigateToPro: () -> Unit,
+    hasAudioPermission: Boolean,
+    isProUser: Boolean
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -110,9 +127,10 @@ fun CameraPreviewScreen(
 
     var captureMode by remember {
         mutableStateOf(
-            if (initialMode == "video") CaptureMode.VIDEO else CaptureMode.PHOTO
+            if (initialMode == "video" && isProUser) CaptureMode.VIDEO else CaptureMode.PHOTO
         )
     }
+    var showProLockedDialog by remember { mutableStateOf(false) }
     var lensFacing by remember { mutableIntStateOf(CameraSelector.LENS_FACING_BACK) }
     var imageCapture: ImageCapture? by remember { mutableStateOf(null) }
     var videoCapture: VideoCapture<Recorder>? by remember { mutableStateOf(null) }
@@ -268,7 +286,15 @@ fun CameraPreviewScreen(
                     }
                 }
                 OutlinedButton(
-                    onClick = { if (!isRecording) captureMode = CaptureMode.VIDEO },
+                    onClick = {
+                        if (!isRecording) {
+                            if (isProUser) {
+                                captureMode = CaptureMode.VIDEO
+                            } else {
+                                showProLockedDialog = true
+                            }
+                        }
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .height(40.dp),
@@ -289,7 +315,7 @@ fun CameraPreviewScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            Icons.Default.Videocam,
+                            if (isProUser) Icons.Default.Videocam else Icons.Default.Lock,
                             contentDescription = null,
                             modifier = Modifier.size(18.dp)
                         )
@@ -433,6 +459,28 @@ fun CameraPreviewScreen(
             }
         }
     }
+
+    // Pro locked dialog
+    if (showProLockedDialog) {
+        AlertDialog(
+            onDismissRequest = { showProLockedDialog = false },
+            title = { Text(stringResource(R.string.camera_video_pro_only_title)) },
+            text = { Text(stringResource(R.string.camera_video_pro_only_message)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    showProLockedDialog = false
+                    onNavigateToPro()
+                }) {
+                    Text(stringResource(R.string.camera_video_pro_only_upgrade))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showProLockedDialog = false }) {
+                    Text(stringResource(R.string.camera_video_pro_only_cancel))
+                }
+            }
+        )
+    }
 }
 
 private suspend fun Context.getCameraProvider(): ProcessCameraProvider =
@@ -524,6 +572,7 @@ private suspend fun takePicture(
     )
 }
 
+@SuppressLint("MissingPermission")
 private suspend fun startVideoRecording(
     context: Context,
     videoCapture: VideoCapture<Recorder>,

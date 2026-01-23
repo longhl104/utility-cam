@@ -57,6 +57,10 @@
     <string name="camera_close">Fechar</string>
     <string name="camera_zoom_format">%.1fx</string>
     <string name="camera_recording_time">%02d:%02d</string>
+    <string name="camera_video_pro_only_title">Gravação de Vídeo - Recurso PRO</string>
+    <string name="camera_video_pro_only_message">A gravação de vídeo está disponível no Utility Cam PRO. Atualize para desbloquear gravações de vídeo ilimitadas!</string>
+    <string name="camera_video_pro_only_upgrade">Atualizar para PRO</string>
+    <string name="camera_video_pro_only_cancel">Cancelar</string>
 
     <!-- Capture Review Screen -->
     <string name="capture_review_title">Revisar Foto</string>
@@ -192,14 +196,14 @@
     <string name="pro_already_purchased">Você é um Usuário Pro!</string>
     <string name="pro_thank_you">Obrigado por apoiar o Utility Cam</string>
     <string name="pro_features_title">Recursos Pro</string>
-    <string name="pro_feature_1_title">Experiência Sem Anúncios</string>
-    <string name="pro_feature_1_description">Aproveite o app sem propagandas</string>
-    <string name="pro_feature_2_title">Suporte Prioritário</string>
-    <string name="pro_feature_2_description">Obtenha respostas mais rápidas para suas perguntas e problemas</string>
-    <string name="pro_feature_3_title">Apoie o Desenvolvimento</string>
-    <string name="pro_feature_3_description">Ajude-nos a continuar melhorando e adicionando novos recursos</string>
-    <string name="pro_feature_4_title">Recursos Pro Futuros</string>
-    <string name="pro_feature_4_description">Tenha acesso a todos os recursos premium futuros sem custo extra</string>
+    <string name="pro_feature_video_title">Gravação de Vídeo</string>
+    <string name="pro_feature_video_description">Capture e salve gravações de vídeo com timers de exclusão automática</string>
+    <string name="pro_feature_priority_support_title">Suporte Prioritário</string>
+    <string name="pro_feature_priority_support_description">Obtenha respostas mais rápidas para suas perguntas e problemas</string>
+    <string name="pro_feature_support_dev_title">Apoie o Desenvolvimento</string>
+    <string name="pro_feature_support_dev_description">Ajude-nos a continuar melhorando e adicionando novos recursos</string>
+    <string name="pro_feature_future_title">Recursos Pro Futuros</string>
+    <string name="pro_feature_future_description">Tenha acesso a todos os recursos premium futuros sem custo extra</string>
     <string name="pro_one_time_payment">Pagamento Único</string>
     <string name="pro_price_loading">Carregando…</string>
     <string name="pro_loading_price">Carregando informações de preço…</string>

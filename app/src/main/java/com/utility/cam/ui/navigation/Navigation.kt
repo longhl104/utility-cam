@@ -76,6 +76,9 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
                 },
                 onNavigateBack = {
                     navController.popBackStack()
+                },
+                onNavigateToPro = {
+                    navController.navigate(Screen.Pro.route)
                 }
             )
         }

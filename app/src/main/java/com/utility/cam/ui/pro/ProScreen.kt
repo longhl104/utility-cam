@@ -160,33 +160,33 @@ fun ProScreen(
 
             // Feature items
             ProFeatureItem(
-                icon = Icons.Default.CloudOff,
-                title = stringResource(R.string.pro_feature_1_title),
-                description = stringResource(R.string.pro_feature_1_description)
+                icon = Icons.Default.Videocam,
+                title = stringResource(R.string.pro_feature_video_title),
+                description = stringResource(R.string.pro_feature_video_description)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             ProFeatureItem(
-                icon = Icons.Default.Star,
-                title = stringResource(R.string.pro_feature_2_title),
-                description = stringResource(R.string.pro_feature_2_description)
+                icon = Icons.Default.HeadsetMic,
+                title = stringResource(R.string.pro_feature_priority_support_title),
+                description = stringResource(R.string.pro_feature_priority_support_description)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             ProFeatureItem(
                 icon = Icons.Default.Favorite,
-                title = stringResource(R.string.pro_feature_3_title),
-                description = stringResource(R.string.pro_feature_3_description)
+                title = stringResource(R.string.pro_feature_support_dev_title),
+                description = stringResource(R.string.pro_feature_support_dev_description)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             ProFeatureItem(
-                icon = Icons.Default.Lock,
-                title = stringResource(R.string.pro_feature_4_title),
-                description = stringResource(R.string.pro_feature_4_description)
+                icon = Icons.Default.Star,
+                title = stringResource(R.string.pro_feature_future_title),
+                description = stringResource(R.string.pro_feature_future_description)
             )
 
             Spacer(modifier = Modifier.height(32.dp))
