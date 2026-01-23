@@ -3,9 +3,12 @@ package com.utility.cam.ui.camera
 import android.content.Context
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.video.*
+import androidx.camera.video.VideoCapture
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
@@ -18,6 +21,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.FlipCameraAndroid
+import androidx.compose.material.icons.filled.Videocam
+import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -34,6 +39,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.utility.cam.R
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
@@ -42,25 +48,36 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import androidx.compose.ui.res.stringResource
 
+enum class CaptureMode {
+    PHOTO, VIDEO
+}
+
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CameraScreen(
-    onPhotoCapture: (File) -> Unit,
+    initialMode: String = "photo",
+    onPhotoCapture: (File, String) -> Unit,
     onNavigateBack: () -> Unit
 ) {
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
-    
+    val audioPermissionState = rememberPermissionState(android.Manifest.permission.RECORD_AUDIO)
+
     LaunchedEffect(Unit) {
         if (!cameraPermissionState.status.isGranted) {
             cameraPermissionState.launchPermissionRequest()
         }
+        if (!audioPermissionState.status.isGranted) {
+            audioPermissionState.launchPermissionRequest()
+        }
     }
-    
+
     when {
         cameraPermissionState.status.isGranted -> {
             CameraPreviewScreen(
+                initialMode = initialMode,
                 onPhotoCapture = onPhotoCapture,
-                onNavigateBack = onNavigateBack
+                onNavigateBack = onNavigateBack,
+                hasAudioPermission = audioPermissionState.status.isGranted
             )
         }
         else -> {
@@ -82,33 +99,59 @@ fun CameraScreen(
 
 @Composable
 fun CameraPreviewScreen(
-    onPhotoCapture: (File) -> Unit,
-    onNavigateBack: () -> Unit
+    initialMode: String = "photo",
+    onPhotoCapture: (File, String) -> Unit,
+    onNavigateBack: () -> Unit,
+    hasAudioPermission: Boolean
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
-    
+
+    var captureMode by remember {
+        mutableStateOf(
+            if (initialMode == "video") CaptureMode.VIDEO else CaptureMode.PHOTO
+        )
+    }
     var lensFacing by remember { mutableIntStateOf(CameraSelector.LENS_FACING_BACK) }
     var imageCapture: ImageCapture? by remember { mutableStateOf(null) }
+    var videoCapture: VideoCapture<Recorder>? by remember { mutableStateOf(null) }
     var camera: Camera? by remember { mutableStateOf(null) }
     var previewView: PreviewView? by remember { mutableStateOf(null) }
     var isCapturing by remember { mutableStateOf(false) }
+    var isRecording by remember { mutableStateOf(false) }
+    var recordingTime by remember { mutableIntStateOf(0) }
+    var activeRecording: Recording? by remember { mutableStateOf(null) }
     var zoomRatio by remember { mutableFloatStateOf(1f) }
 
-    LaunchedEffect(lensFacing) {
+    // Timer for recording duration
+    LaunchedEffect(isRecording) {
+        if (isRecording) {
+            recordingTime = 0
+            while (isRecording) {
+                delay(1000)
+                recordingTime++
+            }
+        } else {
+            recordingTime = 0
+        }
+    }
+
+    LaunchedEffect(lensFacing, captureMode) {
         val cameraProvider = context.getCameraProvider()
         val result = setupCamera(
             cameraProvider,
             previewView,
             lifecycleOwner,
-            lensFacing
+            lensFacing,
+            captureMode
         )
         imageCapture = result.first
-        camera = result.second
+        videoCapture = result.second
+        camera = result.third
         zoomRatio = camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
     }
-    
+
     Box(modifier = Modifier.fillMaxSize()) {
         CameraPreview(
             onPreviewViewCreated = { previewView = it },
@@ -134,27 +177,48 @@ fun CameraPreviewScreen(
             }
         )
 
-        // Zoom indicator
-        Box(
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .padding(top = 60.dp)
-                .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(16.dp))
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .pointerInput(Unit) {
-                    detectTapGestures {
-                        camera?.let { cam ->
-                            cam.cameraControl.setZoomRatio(1f)
-                            zoomRatio = 1f
+        // Recording time indicator (visible only when recording)
+        if (isRecording) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 60.dp)
+                    .background(Color.Red.copy(alpha = 0.8f), RoundedCornerShape(16.dp))
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                val minutes = recordingTime / 60
+                val seconds = recordingTime % 60
+                Text(
+                    text = String.format(Locale.US, "%02d:%02d", minutes, seconds),
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+        }
+
+        // Zoom indicator (visible only when not recording)
+        if (!isRecording) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 60.dp)
+                    .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(16.dp))
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .pointerInput(Unit) {
+                        detectTapGestures {
+                            camera?.let { cam ->
+                                cam.cameraControl.setZoomRatio(1f)
+                                zoomRatio = 1f
+                            }
                         }
                     }
-                }
-        ) {
-            Text(
-                text = String.format(Locale.US, "%.1fx", zoomRatio),
-                color = Color.White,
-                style = MaterialTheme.typography.bodyLarge
-            )
+            ) {
+                Text(
+                    text = String.format(Locale.US, "%.1fx", zoomRatio),
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
 
         // Camera controls
@@ -166,6 +230,75 @@ fun CameraPreviewScreen(
                 .windowInsetsPadding(WindowInsets.systemBars)
                 .padding(24.dp)
         ) {
+            // Mode toggle
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                OutlinedButton(
+                    onClick = { if (!isRecording) captureMode = CaptureMode.PHOTO },
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(40.dp),
+                    enabled = !isRecording,
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        containerColor = if (captureMode == CaptureMode.PHOTO)
+                            Color.White.copy(alpha = 0.3f) else Color.Transparent,
+                        contentColor = Color.White,
+                        disabledContainerColor = if (captureMode == CaptureMode.PHOTO)
+                            Color.White.copy(alpha = 0.2f) else Color.Transparent,
+                        disabledContentColor = Color.White.copy(alpha = 0.5f)
+                    ),
+                    border = BorderStroke(1.dp, Color.White.copy(alpha = 0.5f)),
+                    shape = RoundedCornerShape(topStart = 20.dp, bottomStart = 20.dp)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            Icons.Default.CameraAlt,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(stringResource(R.string.camera_mode_photo))
+                    }
+                }
+                OutlinedButton(
+                    onClick = { if (!isRecording) captureMode = CaptureMode.VIDEO },
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(40.dp),
+                    enabled = !isRecording,
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        containerColor = if (captureMode == CaptureMode.VIDEO)
+                            Color.White.copy(alpha = 0.3f) else Color.Transparent,
+                        contentColor = Color.White,
+                        disabledContainerColor = if (captureMode == CaptureMode.VIDEO)
+                            Color.White.copy(alpha = 0.2f) else Color.Transparent,
+                        disabledContentColor = Color.White.copy(alpha = 0.5f)
+                    ),
+                    border = BorderStroke(1.dp, Color.White.copy(alpha = 0.5f)),
+                    shape = RoundedCornerShape(topEnd = 20.dp, bottomEnd = 20.dp)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            Icons.Default.Videocam,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(stringResource(R.string.camera_mode_video))
+                    }
+                }
+            }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -174,15 +307,18 @@ fun CameraPreviewScreen(
                 // Flip camera button
                 IconButton(
                     onClick = {
-                        lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK) {
-                            CameraSelector.LENS_FACING_FRONT
-                        } else {
-                            CameraSelector.LENS_FACING_BACK
+                        if (!isRecording) {
+                            lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK) {
+                                CameraSelector.LENS_FACING_FRONT
+                            } else {
+                                CameraSelector.LENS_FACING_BACK
+                            }
                         }
                     },
                     modifier = Modifier
                         .size(56.dp)
-                        .background(Color.White.copy(alpha = 0.2f), CircleShape)
+                        .background(Color.White.copy(alpha = 0.2f), CircleShape),
+                    enabled = !isRecording
                 ) {
                     Icon(
                         Icons.Default.FlipCameraAndroid,
@@ -190,45 +326,100 @@ fun CameraPreviewScreen(
                         tint = Color.White
                     )
                 }
-                
-                // Capture button
+
+                // Capture button (Photo or Video)
                 IconButton(
                     onClick = {
-                        if (!isCapturing) {
-                            isCapturing = true
-                            coroutineScope.launch {
-                                try {
-                                    imageCapture?.let { capture ->
-                                        val photoFile = takePicture(context, capture)
-                                        if (photoFile != null) {
-                                            onPhotoCapture(photoFile)
+                        when (captureMode) {
+                            CaptureMode.PHOTO -> {
+                                if (!isCapturing) {
+                                    isCapturing = true
+                                    coroutineScope.launch {
+                                        try {
+                                            imageCapture?.let { capture ->
+                                                val photoFile = takePicture(context, capture)
+                                                if (photoFile != null) {
+                                                    onPhotoCapture(photoFile, "photo")
+                                                }
+                                            }
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+                                        } finally {
+                                            isCapturing = false
                                         }
                                     }
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                } finally {
-                                    isCapturing = false
+                                }
+                            }
+                            CaptureMode.VIDEO -> {
+                                if (isRecording) {
+                                    // Stop recording
+                                    activeRecording?.stop()
+                                    activeRecording = null
+                                    isRecording = false
+                                } else {
+                                    // Start recording
+                                    coroutineScope.launch {
+                                        try {
+                                            videoCapture?.let { capture ->
+                                                val videoFile = startVideoRecording(
+                                                    context,
+                                                    capture,
+                                                    hasAudioPermission,
+                                                    onRecordingStarted = { recording ->
+                                                        activeRecording = recording
+                                                        isRecording = true
+                                                    },
+                                                    onRecordingStopped = { file ->
+                                                        if (file != null) {
+                                                            onPhotoCapture(file, "video")
+                                                        }
+                                                        isRecording = false
+                                                    }
+                                                )
+                                            }
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+                                            isRecording = false
+                                        }
+                                    }
                                 }
                             }
                         }
                     },
                     modifier = Modifier
                         .size(72.dp)
-                        .background(Color.White, CircleShape)
+                        .background(
+                            if (isRecording) Color.Red else Color.White,
+                            CircleShape
+                        )
                         .border(4.dp, Color.White.copy(alpha = 0.5f), CircleShape),
                     enabled = !isCapturing
                 ) {
                     Icon(
-                        Icons.Default.CameraAlt,
-                        contentDescription = stringResource(R.string.camera_take_photo),
-                        tint = Color.Black,
+                        imageVector = when {
+                            isRecording -> Icons.Default.FiberManualRecord
+                            captureMode == CaptureMode.VIDEO -> Icons.Default.Videocam
+                            else -> Icons.Default.CameraAlt
+                        },
+                        contentDescription = when {
+                            isRecording -> stringResource(R.string.camera_stop_recording)
+                            captureMode == CaptureMode.VIDEO -> stringResource(R.string.camera_start_recording)
+                            else -> stringResource(R.string.camera_take_photo)
+                        },
+                        tint = if (isRecording) Color.White else Color.Black,
                         modifier = Modifier.size(36.dp)
                     )
                 }
-                
+
                 // Back button
                 IconButton(
-                    onClick = onNavigateBack,
+                    onClick = {
+                        if (isRecording) {
+                            activeRecording?.stop()
+                            activeRecording = null
+                        }
+                        onNavigateBack()
+                    },
                     modifier = Modifier
                         .size(56.dp)
                         .background(Color.White.copy(alpha = 0.2f), CircleShape)
@@ -258,34 +449,50 @@ private fun setupCamera(
     cameraProvider: ProcessCameraProvider,
     previewView: PreviewView?,
     lifecycleOwner: LifecycleOwner,
-    lensFacing: Int
-): Pair<ImageCapture?, Camera?> {
+    lensFacing: Int,
+    captureMode: CaptureMode
+): Triple<ImageCapture?, VideoCapture<Recorder>?, Camera?> {
     return try {
         cameraProvider.unbindAll()
-        
+
         val preview = Preview.Builder().build().also {
             it.surfaceProvider = previewView?.surfaceProvider
         }
-        
-        val imageCapture = ImageCapture.Builder()
-            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-            .build()
-        
+
         val cameraSelector = CameraSelector.Builder()
             .requireLensFacing(lensFacing)
             .build()
-        
-        val camera = cameraProvider.bindToLifecycle(
-            lifecycleOwner,
-            cameraSelector,
-            preview,
-            imageCapture
-        )
-        
-        Pair(imageCapture, camera)
+
+        val imageCapture = ImageCapture.Builder()
+            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+            .build()
+
+        val recorder = Recorder.Builder()
+            .setQualitySelector(QualitySelector.from(Quality.HD))
+            .build()
+        val videoCapture = VideoCapture.withOutput(recorder)
+
+        // Bind use cases based on capture mode
+        val camera = if (captureMode == CaptureMode.PHOTO) {
+            cameraProvider.bindToLifecycle(
+                lifecycleOwner,
+                cameraSelector,
+                preview,
+                imageCapture
+            )
+        } else {
+            cameraProvider.bindToLifecycle(
+                lifecycleOwner,
+                cameraSelector,
+                preview,
+                videoCapture
+            )
+        }
+
+        Triple(imageCapture, videoCapture, camera)
     } catch (e: Exception) {
         e.printStackTrace()
-        Pair(null, null)
+        Triple(null, null, null)
     }
 }
 
@@ -298,9 +505,9 @@ private suspend fun takePicture(
         SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
             .format(System.currentTimeMillis()) + ".jpg"
     )
-    
+
     val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-    
+
     imageCapture.takePicture(
         outputOptions,
         ContextCompat.getMainExecutor(context),
@@ -308,13 +515,59 @@ private suspend fun takePicture(
             override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                 continuation.resume(photoFile)
             }
-            
+
             override fun onError(exception: ImageCaptureException) {
                 exception.printStackTrace()
                 continuation.resume(null)
             }
         }
     )
+}
+
+private suspend fun startVideoRecording(
+    context: Context,
+    videoCapture: VideoCapture<Recorder>,
+    hasAudioPermission: Boolean,
+    onRecordingStarted: (Recording) -> Unit,
+    onRecordingStopped: (File?) -> Unit
+): Recording? = suspendCoroutine { continuation ->
+    val videoFile = File(
+        context.cacheDir,
+        SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
+            .format(System.currentTimeMillis()) + ".mp4"
+    )
+
+    val outputOptions = FileOutputOptions.Builder(videoFile).build()
+
+    val pendingRecording = videoCapture.output
+        .prepareRecording(context, outputOptions)
+
+    // Enable audio only if permission is granted
+    val recordingWithAudio = if (hasAudioPermission) {
+        pendingRecording.withAudioEnabled()
+    } else {
+        pendingRecording
+    }
+
+    val recording = recordingWithAudio
+        .start(ContextCompat.getMainExecutor(context)) { event ->
+            when (event) {
+                is VideoRecordEvent.Start -> {
+                    // Recording started successfully
+                }
+                is VideoRecordEvent.Finalize -> {
+                    if (event.hasError()) {
+                        videoFile.delete()
+                        onRecordingStopped(null)
+                    } else {
+                        onRecordingStopped(videoFile)
+                    }
+                }
+            }
+        }
+
+    onRecordingStarted(recording)
+    continuation.resume(recording)
 }
 
 @Composable

@@ -15,11 +15,15 @@ import com.utility.cam.ui.pro.ProScreen
 
 sealed class Screen(val route: String) {
     object Gallery : Screen("gallery")
-    object Camera : Screen("camera")
-    object CaptureReview : Screen("capture_review?imagePath={imagePath}") {
-        fun createRoute(imagePath: String): String {
+    object Camera : Screen("camera?mode={mode}") {
+        fun createRoute(mode: String = "photo"): String {
+            return "camera?mode=$mode"
+        }
+    }
+    object CaptureReview : Screen("capture_review?imagePath={imagePath}&mode={mode}") {
+        fun createRoute(imagePath: String, mode: String = "photo"): String {
             val encodedPath = Uri.encode(imagePath)
-            return "capture_review?imagePath=$encodedPath"
+            return "capture_review?imagePath=$encodedPath&mode=$mode"
         }
     }
     object PhotoDetail : Screen("photo_detail/{photoId}") {
@@ -50,7 +54,7 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
         composable(Screen.Gallery.route) {
             GalleryScreen(
                 onNavigateToCamera = {
-                    navController.navigate(Screen.Camera.route)
+                    navController.navigate(Screen.Camera.createRoute())
                 },
                 onNavigateToSettings = {
                     navController.navigate(Screen.Settings.route)
@@ -60,12 +64,14 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
                 }
             )
         }
-        
-        composable(Screen.Camera.route) {
+
+        composable(Screen.Camera.route) { backStackEntry ->
+            val initialMode = backStackEntry.arguments?.getString("mode") ?: "photo"
             CameraScreen(
-                onPhotoCapture = { imageFile ->
+                initialMode = initialMode,
+                onPhotoCapture = { imageFile, currentMode ->
                     navController.navigate(
-                        Screen.CaptureReview.createRoute(imageFile.absolutePath)
+                        Screen.CaptureReview.createRoute(imageFile.absolutePath, currentMode)
                     )
                 },
                 onNavigateBack = {
@@ -73,10 +79,11 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
                 }
             )
         }
-        
+
         composable(Screen.CaptureReview.route) { backStackEntry ->
             val encodedImagePath = backStackEntry.arguments?.getString("imagePath")
             val imagePath = encodedImagePath?.let { Uri.decode(it) }
+            val mode = backStackEntry.arguments?.getString("mode") ?: "photo"
 
             imagePath?.let {
                 CaptureReviewScreen(
@@ -86,14 +93,15 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
                     },
                     onRetake = {
                         navController.popBackStack()
+                        navController.navigate(Screen.Camera.createRoute(mode))
                     }
                 )
             }
         }
-        
+
         composable(Screen.PhotoDetail.route) { backStackEntry ->
             val photoId = backStackEntry.arguments?.getString("photoId")
-            
+
             photoId?.let {
                 PhotoDetailScreen(
                     photoId = it,
@@ -103,7 +111,7 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
                 )
             }
         }
-        
+
         composable(Screen.Settings.route) {
             SettingsScreen(
                 onNavigateBack = {

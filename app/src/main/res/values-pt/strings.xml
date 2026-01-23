@@ -49,11 +49,18 @@
     <string name="camera_grant_permission">Conceder Permissão</string>
     <string name="camera_flip">Virar Câmera</string>
     <string name="camera_take_photo">Tirar Foto</string>
+    <string name="camera_record_video">Gravar Vídeo</string>
+    <string name="camera_start_recording">Iniciar Gravação</string>
+    <string name="camera_stop_recording">Parar Gravação</string>
+    <string name="camera_mode_photo">Foto</string>
+    <string name="camera_mode_video">Vídeo</string>
     <string name="camera_close">Fechar</string>
     <string name="camera_zoom_format">%.1fx</string>
+    <string name="camera_recording_time">%02d:%02d</string>
 
     <!-- Capture Review Screen -->
     <string name="capture_review_title">Revisar Foto</string>
+    <string name="capture_review_title_video">Revisar Vídeo</string>
     <string name="capture_review_delete_after">Excluir após:</string>
     <string name="capture_review_description_label">Descrição (opcional)</string>
     <string name="capture_review_description_hint">ex., Vaga de Estacionamento: Nível 4</string>

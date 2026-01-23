@@ -1,13 +1,21 @@
 package com.utility.cam.ui.capturereview
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.BuildConfig
@@ -30,19 +38,43 @@ fun CaptureReviewScreen(
     val storageManager = remember { PhotoStorageManager(context) }
     val preferencesManager = remember { PreferencesManager(context) }
     val coroutineScope = rememberCoroutineScope()
-    
+
     val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
-    
+
     var selectedTTL by remember { mutableStateOf<TTLDuration?>(null) }
     var description by remember { mutableStateOf("") }
     var isSaving by remember { mutableStateOf(false) }
-    
+
     val ttl = selectedTTL ?: defaultTTL
-    
+
+    // Detect if the file is a video
+    val isVideo = capturedImagePath.endsWith(".mp4", ignoreCase = true)
+    val titleRes = if (isVideo) R.string.capture_review_title_video else R.string.capture_review_title
+
+    var exoPlayer by remember { mutableStateOf<ExoPlayer?>(null) }
+
+    // Create and configure ExoPlayer
+    DisposableEffect(isVideo) {
+        if (isVideo) {
+            val player = ExoPlayer.Builder(context).build().apply {
+                val mediaItem = MediaItem.fromUri(capturedImagePath)
+                setMediaItem(mediaItem)
+                repeatMode = Player.REPEAT_MODE_ALL
+                prepare()
+                playWhenReady = true
+            }
+            exoPlayer = player
+        }
+        onDispose {
+            exoPlayer?.release()
+            exoPlayer = null
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.capture_review_title)) }
+                title = { Text(stringResource(titleRes)) }
             )
         }
     ) { padding ->
@@ -51,23 +83,48 @@ fun CaptureReviewScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // Image preview
-            val painter = rememberAsyncImagePainter(
-                ImageRequest.Builder(context)
-                    .data(File(capturedImagePath))
-                    .crossfade(true)
-                    .build()
-            )
-            
-            Image(
-                painter = painter,
-                contentDescription = stringResource(R.string.capture_review_title),
+            // Media preview (Image or Video)
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f),
-                contentScale = ContentScale.Fit
-            )
-            
+                    .weight(1f)
+                    .background(Color.Black)
+            ) {
+                if (isVideo) {
+                    // Video player with ExoPlayer's built-in controls
+                    AndroidView(
+                        factory = { context ->
+                            PlayerView(context).apply {
+                                player = exoPlayer
+                                useController = true
+                                keepScreenOn = true
+                                setShowNextButton(false)
+                                setShowPreviousButton(false)
+                            }
+                        },
+                        update = { playerView ->
+                            playerView.player = exoPlayer
+                        },
+                        modifier = Modifier.fillMaxSize()
+                    )
+                } else {
+                    // Image preview
+                    val painter = rememberAsyncImagePainter(
+                        ImageRequest.Builder(context)
+                            .data(File(capturedImagePath))
+                            .crossfade(true)
+                            .build()
+                    )
+
+                    Image(
+                        painter = painter,
+                        contentDescription = stringResource(R.string.capture_review_title),
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Fit
+                    )
+                }
+            }
+
             // Controls
             Column(
                 modifier = Modifier
@@ -79,9 +136,9 @@ fun CaptureReviewScreen(
                     stringResource(R.string.capture_review_delete_after),
                     style = MaterialTheme.typography.titleMedium
                 )
-                
+
                 Spacer(modifier = Modifier.height(8.dp))
-                
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -97,9 +154,9 @@ fun CaptureReviewScreen(
                             )
                         }
                 }
-                
+
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 // Description
                 OutlinedTextField(
                     value = description,
@@ -109,9 +166,9 @@ fun CaptureReviewScreen(
                     modifier = Modifier.fillMaxWidth(),
                     maxLines = 2
                 )
-                
+
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 // Action buttons
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -124,7 +181,7 @@ fun CaptureReviewScreen(
                     ) {
                         Text(stringResource(R.string.capture_review_retake))
                     }
-                    
+
                     Button(
                         onClick = {
                             isSaving = true

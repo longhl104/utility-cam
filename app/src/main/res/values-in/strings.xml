@@ -48,11 +48,18 @@
     <string name="camera_grant_permission">Berikan Izin</string>
     <string name="camera_flip">Balik Kamera</string>
     <string name="camera_take_photo">Ambil Foto</string>
+    <string name="camera_record_video">Rekam Video</string>
+    <string name="camera_start_recording">Mulai Merekam</string>
+    <string name="camera_stop_recording">Berhenti Merekam</string>
+    <string name="camera_mode_photo">Foto</string>
+    <string name="camera_mode_video">Video</string>
     <string name="camera_close">Tutup</string>
     <string name="camera_zoom_format">%.1fx</string>
+    <string name="camera_recording_time">%02d:%02d</string>
 
     <!-- Capture Review Screen -->
     <string name="capture_review_title">Tinjau Foto</string>
+    <string name="capture_review_title_video">Tinjau Video</string>
     <string name="capture_review_delete_after">Hapus setelah:</string>
     <string name="capture_review_description_label">Deskripsi (opsional)</string>
     <string name="capture_review_description_hint">contoh, Tempat Parkir: Lantai 4</string>
