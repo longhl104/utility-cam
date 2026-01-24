@@ -204,7 +204,7 @@
     <string name="settings_media_permission_info">💡 Wskazówka: Na Androidzie 14+ możesz wybrać udostępnianie tylko wybranych zdjęć zamiast udzielania pełnego dostępu.</string>
     <string name="settings_warning_uninstall">⚠️ Ostrzeżenie: Odinstalowanie aplikacji trwale usunie wszystkie zdjęcia w niej przechowywane. Przed odinstalowaniem zapisz ważne zdjęcia.</string>
     <string name="settings_send_feedback">Wyślij opinię</string>
-    <string name="settings_love_utility_cam">Podoba Ci się Utility Cam?</string>
+    <string name="settings_love_utility_cam">Zostaw nam recenzję</string>
     <string name="settings_feedback_email_subject">Opinia o Utility Cam (v%s)</string>
     <string name="settings_feedback_email_body">Witam zespół Utility Cam,\n\nChciałbym/chciałabym podzielić się opinią:\n\n[Proszę wpisać opinię lub zgłoszenie błędu tutaj]\n\n---\nWersja aplikacji: %1$s (%2$d)\nWersja Androida: %3$d\nUrządzenie: %4$s %5$s</string>
     <string name="settings_feedback_chooser_title">Wyślij opinię przez</string>

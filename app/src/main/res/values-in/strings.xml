@@ -201,7 +201,7 @@
     <string name="settings_media_permission_info">💡 Tip: Di Android 14+, Anda dapat memilih untuk membagikan hanya foto yang dipilih daripada memberikan akses penuh.</string>
     <string name="settings_warning_uninstall">⚠️ Peringatan: Mencopot aplikasi akan menghapus secara permanen semua foto yang disimpan di dalamnya. Pastikan untuk menyimpan foto penting sebelum mencopot.</string>
     <string name="settings_send_feedback">Kirim Masukan</string>
-    <string name="settings_love_utility_cam">Suka Utility Cam?</string>
+    <string name="settings_love_utility_cam">Beri kami ulasan</string>
     <string name="settings_feedback_email_subject">Masukan Utility Cam (v%s)</string>
     <string name="settings_feedback_email_body">Hai Tim Utility Cam,\n\nSaya ingin berbagi masukan saya:\n\n[Silakan tulis masukan atau laporan bug Anda di sini]\n\n---\nVersi Aplikasi: %1$s (%2$d)\nVersi Android: %3$d\nPerangkat: %4$s %5$s</string>
     <string name="settings_feedback_chooser_title">Kirim masukan via</string>

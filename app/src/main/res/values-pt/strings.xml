@@ -202,7 +202,7 @@
     <string name="settings_media_permission_info">💡 Dica: No Android 14+, você pode escolher compartilhar apenas fotos selecionadas em vez de conceder acesso total.</string>
     <string name="settings_warning_uninstall">⚠️ Aviso: Desinstalar o app excluirá permanentemente todas as fotos armazenadas nele. Certifique-se de salvar quaisquer fotos importantes antes de desinstalar.</string>
     <string name="settings_send_feedback">Enviar Feedback</string>
-    <string name="settings_love_utility_cam">Ama o Utility Cam?</string>
+    <string name="settings_love_utility_cam">Deixe-nos uma avaliação</string>
     <string name="settings_feedback_email_subject">Feedback do Utility Cam (v%s)</string>
     <string name="settings_feedback_email_body">Olá equipe Utility Cam,\n\nGostaria de compartilhar meu feedback:\n\n[Por favor, escreva seu feedback ou relatório de bug aqui]\n\n---\nVersão do App: %1$s (%2$d)\nVersão do Android: %3$d\nDispositivo: %4$s %5$s</string>
     <string name="settings_feedback_chooser_title">Enviar feedback via</string>
