@@ -1,28 +1,65 @@
 package com.utility.cam.ui.settings
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import android.widget.Toast
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
@@ -30,18 +67,15 @@ import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
-import com.utility.cam.data.BillingManager
 import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
-import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
 import com.utility.cam.ui.common.rememberProUserStateWithManagers
 import com.utility.cam.ui.permissions.isNotificationPermissionGranted
 import com.utility.cam.worker.PhotoCleanupWorker
 import kotlinx.coroutines.launch
 import java.util.Locale
-import androidx.core.net.toUri
 
 @SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -734,6 +768,60 @@ fun SettingsScreen(
                 Text(stringResource(R.string.settings_send_feedback))
             }
 
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Love Utility Cam? Button - Triggers Google Play In-App Review
+            Button(
+                onClick = {
+                    val activity = context as? Activity
+                    if (activity != null) {
+                        val reviewManager = ReviewManagerFactory.create(context)
+                        val request = reviewManager.requestReviewFlow()
+                        request.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val reviewInfo = task.result
+                                val flow = reviewManager.launchReviewFlow(activity, reviewInfo)
+                                flow.addOnCompleteListener {
+                                    // Review flow has finished, no need to show anything
+                                    // User may or may not have left a review
+                                }
+                            } else {
+                                // Fallback: Open Play Store page
+                                try {
+                                    val intent = Intent(Intent.ACTION_VIEW).apply {
+                                        data = "market://details?id=${context.packageName}".toUri()
+                                    }
+                                    context.startActivity(intent)
+                                } catch (_: Exception) {
+                                    // If Play Store is not available, open in browser
+                                    try {
+                                        val intent = Intent(Intent.ACTION_VIEW).apply {
+                                            data = "https://play.google.com/store/apps/details?id=${context.packageName}".toUri()
+                                        }
+                                        context.startActivity(intent)
+                                    } catch (_: Exception) {
+                                        Toast.makeText(
+                                            context,
+                                            "Unable to open Play Store",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Unable to launch review",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(stringResource(R.string.settings_love_utility_cam))
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
 
             HorizontalDivider()
@@ -794,7 +882,7 @@ fun SettingsScreen(
                                                                 isDownloadingLanguage = false
                                                                 showLanguageDialog = false
                                                                 // Recreate activity to apply language
-                                                                (context as? android.app.Activity)?.recreate()
+                                                                (context as? Activity)?.recreate()
                                                             }
 
                                                             SplitInstallSessionStatus.FAILED -> {
@@ -830,7 +918,7 @@ fun SettingsScreen(
                                                         )
                                                         // Fallback: just recreate activity
                                                         showLanguageDialog = false
-                                                        (context as? android.app.Activity)?.recreate()
+                                                        (context as? Activity)?.recreate()
                                                     }
                                             } else {
                                                 // System default - no download needed
