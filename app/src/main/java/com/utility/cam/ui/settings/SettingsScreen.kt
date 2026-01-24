@@ -59,7 +59,6 @@ import androidx.core.net.toUri
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
@@ -100,13 +99,18 @@ fun SettingsScreen(
     val splitInstallManager = remember { SplitInstallManagerFactory.create(context) }
     var isDownloadingLanguage by remember { mutableStateOf(false) }
 
-    val defaultTTL by preferencesManager.getDefaultTTL().collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
-    val notificationsEnabled by preferencesManager.getNotificationsEnabled().collectAsState(initial = true)
-    val reminderNotificationsEnabled by preferencesManager.getReminderNotificationsEnabled().collectAsState(initial = true)
+    val defaultTTL by preferencesManager.getDefaultTTL()
+        .collectAsState(initial = TTLDuration.TWENTY_FOUR_HOURS)
+    val notificationsEnabled by preferencesManager.getNotificationsEnabled()
+        .collectAsState(initial = true)
+    val reminderNotificationsEnabled by preferencesManager.getReminderNotificationsEnabled()
+        .collectAsState(initial = true)
     val analyticsEnabled by preferencesManager.getAnalyticsEnabled().collectAsState(initial = true)
     val hasNotificationPermission = isNotificationPermissionGranted()
-    val cleanupDelaySeconds by preferencesManager.getCleanupDelaySeconds().collectAsState(initial = 10)
-    val selectedLanguage by localeManager.getSelectedLanguage().collectAsState(initial = LocaleManager.SYSTEM_DEFAULT)
+    val cleanupDelaySeconds by preferencesManager.getCleanupDelaySeconds()
+        .collectAsState(initial = 10)
+    val selectedLanguage by localeManager.getSelectedLanguage()
+        .collectAsState(initial = LocaleManager.SYSTEM_DEFAULT)
 
     var showLanguageDialog by remember { mutableStateOf(false) }
     val supportedLanguages = remember { localeManager.getSupportedLanguages() }
@@ -148,7 +152,10 @@ fun SettingsScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.settings_back))
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.settings_back)
+                        )
                     }
                 }
             )
@@ -246,7 +253,9 @@ fun SettingsScreen(
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                if (actualIsProUser) stringResource(R.string.settings_pro_thank_you) else stringResource(R.string.settings_go_pro_hint),
+                                if (actualIsProUser) stringResource(R.string.settings_pro_thank_you) else stringResource(
+                                    R.string.settings_go_pro_hint
+                                ),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = if (actualIsProUser)
                                     MaterialTheme.colorScheme.onPrimaryContainer
@@ -411,9 +420,10 @@ fun SettingsScreen(
                         Button(
                             onClick = {
                                 // Open app settings
-                                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                                    data = Uri.fromParts("package", context.packageName, null)
-                                }
+                                val intent =
+                                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                        data = Uri.fromParts("package", context.packageName, null)
+                                    }
                                 context.startActivity(intent)
                             },
                             modifier = Modifier.fillMaxWidth(),
@@ -513,7 +523,10 @@ fun SettingsScreen(
                                         hasUserEdited = false
                                         Toast.makeText(
                                             context,
-                                            context.getString(R.string.settings_cleanup_delay_updated, seconds),
+                                            context.getString(
+                                                R.string.settings_cleanup_delay_updated,
+                                                seconds
+                                            ),
                                             Toast.LENGTH_LONG
                                         ).show()
                                     }
@@ -571,7 +584,11 @@ fun SettingsScreen(
                 Button(
                     onClick = {
                         // Trigger immediate cleanup
-                        Toast.makeText(context, context.getString(R.string.settings_trigger_cleanup_started), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.settings_trigger_cleanup_started),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         val cleanupRequest = OneTimeWorkRequestBuilder<PhotoCleanupWorker>().build()
                         WorkManager.getInstance(context).enqueue(cleanupRequest)
 
@@ -581,14 +598,29 @@ fun SettingsScreen(
                             .observeForever { workInfo ->
                                 when (workInfo?.state) {
                                     WorkInfo.State.SUCCEEDED -> {
-                                        Toast.makeText(context, context.getString(R.string.settings_cleanup_completed), Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            context,
+                                            context.getString(R.string.settings_cleanup_completed),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
+
                                     WorkInfo.State.FAILED -> {
-                                        Toast.makeText(context, context.getString(R.string.settings_cleanup_failed), Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            context,
+                                            context.getString(R.string.settings_cleanup_failed),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
+
                                     WorkInfo.State.RUNNING -> {
-                                        Toast.makeText(context, context.getString(R.string.settings_cleanup_running), Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            context,
+                                            context.getString(R.string.settings_cleanup_running),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
+
                                     else -> {}
                                 }
                             }
@@ -603,7 +635,11 @@ fun SettingsScreen(
                 OutlinedButton(
                     onClick = {
                         // Test notification directly
-                        Toast.makeText(context, context.getString(R.string.settings_test_notification_sent), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.settings_test_notification_sent),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         NotificationHelper.sendPhotoCleanupNotification(context, 1)
                     },
                     modifier = Modifier.fillMaxWidth()
@@ -620,7 +656,11 @@ fun SettingsScreen(
                         val workInfos = workManager.getWorkInfosForUniqueWork("photo_cleanup").get()
 
                         if (workInfos.isEmpty()) {
-                            Toast.makeText(context, context.getString(R.string.settings_worker_not_scheduled), Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.settings_worker_not_scheduled),
+                                Toast.LENGTH_LONG
+                            ).show()
                         } else {
                             val workInfo = workInfos[0]
                             val status = context.getString(
@@ -637,25 +677,7 @@ fun SettingsScreen(
                     Text(stringResource(R.string.settings_check_worker_status))
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
-
-                OutlinedButton(
-                    onClick = {
-                        coroutineScope.launch {
-                            feedbackManager.resetFeedbackState()
-                            Toast.makeText(
-                                context,
-                                context.getString(R.string.settings_feedback_reset_success),
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(stringResource(R.string.settings_reset_feedback))
-                }
-
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 HorizontalDivider()
 
@@ -736,10 +758,16 @@ fun SettingsScreen(
                 onClick = {
                     val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
                         data = "mailto:".toUri()
-                        putExtra(Intent.EXTRA_EMAIL, arrayOf("longcode10041998@gmail.com")) // Replace with your email
+                        putExtra(
+                            Intent.EXTRA_EMAIL,
+                            arrayOf("longcode10041998@gmail.com")
+                        ) // Replace with your email
                         putExtra(
                             Intent.EXTRA_SUBJECT,
-                            context.getString(R.string.settings_feedback_email_subject, BuildConfig.VERSION_NAME)
+                            context.getString(
+                                R.string.settings_feedback_email_subject,
+                                BuildConfig.VERSION_NAME
+                            )
                         )
                         putExtra(
                             Intent.EXTRA_TEXT,
@@ -754,7 +782,12 @@ fun SettingsScreen(
                         )
                     }
                     try {
-                        context.startActivity(Intent.createChooser(emailIntent, context.getString(R.string.settings_feedback_chooser_title)))
+                        context.startActivity(
+                            Intent.createChooser(
+                                emailIntent,
+                                context.getString(R.string.settings_feedback_chooser_title)
+                            )
+                        )
                     } catch (_: Exception) {
                         Toast.makeText(
                             context,
@@ -775,41 +808,55 @@ fun SettingsScreen(
                 onClick = {
                     val activity = context as? Activity
                     if (activity != null) {
-                        val reviewManager = ReviewManagerFactory.create(context)
+                        Log.d("SettingsScreen", "Manual review request from button")
+                        val reviewManager =
+                            com.google.android.play.core.review.ReviewManagerFactory.create(
+                                context
+                            )
                         val request = reviewManager.requestReviewFlow()
+
                         request.addOnCompleteListener { task ->
                             if (task.isSuccessful) {
+                                Log.d(
+                                    "SettingsScreen",
+                                    "Review request successful, launching flow"
+                                )
                                 val reviewInfo = task.result
                                 val flow = reviewManager.launchReviewFlow(activity, reviewInfo)
+
                                 flow.addOnCompleteListener {
-                                    // Review flow has finished, no need to show anything
-                                    // User may or may not have left a review
+                                    Log.d("SettingsScreen", "Review flow completed")
+                                    // Mark that user has rated (same as FeedbackDialog)
+                                    coroutineScope.launch {
+                                        feedbackManager.markUserRated()
+                                    }
+                                }
+
+                                flow.addOnFailureListener { exception ->
+                                    Log.e(
+                                        "SettingsScreen",
+                                        "Review flow failed: ${exception.message}"
+                                    )
+                                    openPlayStoreForReview(context)
                                 }
                             } else {
-                                // Fallback: Open Play Store page
-                                try {
-                                    val intent = Intent(Intent.ACTION_VIEW).apply {
-                                        data = "market://details?id=${context.packageName}".toUri()
-                                    }
-                                    context.startActivity(intent)
-                                } catch (_: Exception) {
-                                    // If Play Store is not available, open in browser
-                                    try {
-                                        val intent = Intent(Intent.ACTION_VIEW).apply {
-                                            data = "https://play.google.com/store/apps/details?id=${context.packageName}".toUri()
-                                        }
-                                        context.startActivity(intent)
-                                    } catch (_: Exception) {
-                                        Toast.makeText(
-                                            context,
-                                            "Unable to open Play Store",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
+                                Log.e(
+                                    "SettingsScreen",
+                                    "Review request failed, opening Play Store"
+                                )
+                                openPlayStoreForReview(context)
                             }
                         }
+
+                        request.addOnFailureListener { exception ->
+                            Log.e(
+                                "SettingsScreen",
+                                "Review request exception: ${exception.message}"
+                            )
+                            openPlayStoreForReview(context)
+                        }
                     } else {
+                        Log.e("SettingsScreen", "No activity context available")
                         Toast.makeText(
                             context,
                             "Unable to launch review",
@@ -837,7 +884,11 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                stringResource(R.string.settings_version_format, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE),
+                stringResource(
+                    R.string.settings_version_format,
+                    BuildConfig.VERSION_NAME,
+                    BuildConfig.VERSION_CODE
+                ),
                 style = MaterialTheme.typography.bodyMedium
             )
         }
@@ -923,7 +974,7 @@ fun SettingsScreen(
                                             } else {
                                                 // System default - no download needed
                                                 showLanguageDialog = false
-                                                (context as? android.app.Activity)?.recreate()
+                                                (context as? Activity)?.recreate()
                                             }
                                         }
                                     }
@@ -953,3 +1004,28 @@ fun SettingsScreen(
         )
     }
 }
+
+/**
+ * Opens the app's page in Google Play Store for review
+ */
+private fun openPlayStoreForReview(context: android.content.Context) {
+    try {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = "market://details?id=${context.packageName}".toUri()
+            setPackage("com.android.vending")
+        }
+        context.startActivity(intent)
+    } catch (_: Exception) {
+        // Fallback to browser if Play Store is not installed
+        try {
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data =
+                    "https://play.google.com/store/apps/details?id=${context.packageName}".toUri()
+            }
+            context.startActivity(intent)
+        } catch (_: Exception) {
+            Log.e("SettingsScreen", "Unable to open Play Store")
+        }
+    }
+}
+
