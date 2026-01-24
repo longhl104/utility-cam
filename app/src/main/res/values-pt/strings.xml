@@ -227,8 +227,8 @@
     <string name="pro_features_title">Recursos Pro</string>
     <string name="pro_feature_video_title">Gravação de Vídeo</string>
     <string name="pro_feature_video_description">Capture e salve gravações de vídeo com temporizadores de exclusão automática</string>
-    <string name="pro_feature_biometric_lock_title">Bloqueio Biométrico do App</string>
-    <string name="pro_feature_biometric_lock_description">Proteja seu aplicativo com autenticação de impressão digital ou reconhecimento facial</string>
+    <string name="pro_feature_biometric_lock_title">Bloqueio do App</string>
+    <string name="pro_feature_biometric_lock_description">Proteja seu aplicativo com impressão digital, reconhecimento facial, PIN, padrão ou senha</string>
     <string name="pro_feature_custom_expiration_title">Personalizar Tempo de Expiração</string>
     <string name="pro_feature_custom_expiration_description">Defina tempos de expiração personalizados em horas, dias ou semanas para suas fotos e vídeos</string>
     <string name="pro_feature_priority_support_title">Suporte Prioritário</string>
@@ -250,14 +250,14 @@
     <string name="settings_pro_thank_you">Obrigado pelo seu apoio!</string>
 
     <!-- Biometric Lock -->
-    <string name="settings_biometric_lock">Bloqueio Biométrico do App</string>
-    <string name="settings_biometric_lock_hint">Proteja seu aplicativo com impressão digital ou reconhecimento facial (recurso Pro)</string>
+    <string name="settings_biometric_lock">Bloqueio do App</string>
+    <string name="settings_biometric_lock_hint">Proteja seu aplicativo com impressão digital, reconhecimento facial ou bloqueio do dispositivo (recurso Pro)</string>
     <string name="settings_biometric_lock_title">Ativar Bloqueio do App</string>
-    <string name="settings_biometric_enable_title">Ativar Bloqueio Biométrico</string>
+    <string name="settings_biometric_enable_title">Ativar Bloqueio do App</string>
     <string name="settings_biometric_enable_subtitle">Autentique para ativar</string>
-    <string name="settings_biometric_enable_description">Sua impressão digital ou rosto será necessário para abrir o aplicativo</string>
-    <string name="settings_biometric_enabled">Bloqueio biométrico ativado</string>
-    <string name="settings_biometric_disabled">Bloqueio biométrico desativado</string>
+    <string name="settings_biometric_enable_description">Use impressão digital, reconhecimento facial, PIN, padrão ou senha para desbloquear o aplicativo</string>
+    <string name="settings_biometric_enabled">Bloqueio do app ativado</string>
+    <string name="settings_biometric_disabled">Bloqueio do app desativado</string>
     <string name="settings_biometric_pro_required">Bloqueio biométrico é um recurso Pro. Atualize para desbloquear!</string>
     <string name="settings_biometric_open_device_settings">Abrir Configurações do Dispositivo</string>
     <string name="settings_biometric_cannot_open_settings">Não é possível abrir as configurações do dispositivo</string>

@@ -226,8 +226,8 @@
     <string name="pro_features_title">Fitur Pro</string>
     <string name="pro_feature_video_title">Rekaman Video</string>
     <string name="pro_feature_video_description">Tangkap dan simpan rekaman video dengan timer hapus otomatis</string>
-    <string name="pro_feature_biometric_lock_title">Kunci Aplikasi Biometrik</string>
-    <string name="pro_feature_biometric_lock_description">Amankan aplikasi Anda dengan autentikasi sidik jari atau pengenalan wajah</string>
+    <string name="pro_feature_biometric_lock_title">Kunci Aplikasi</string>
+    <string name="pro_feature_biometric_lock_description">Amankan aplikasi Anda dengan sidik jari, pengenalan wajah, PIN, pola, atau kata sandi</string>
     <string name="pro_feature_custom_expiration_title">Sesuaikan Waktu Kedaluwarsa</string>
     <string name="pro_feature_custom_expiration_description">Atur waktu kedaluwarsa kustom dalam jam, hari, atau minggu untuk foto dan video Anda</string>
     <string name="pro_feature_priority_support_title">Dukungan Prioritas</string>
@@ -249,14 +249,14 @@
     <string name="settings_pro_thank_you">Terima kasih atas dukungan Anda!</string>
 
     <!-- Biometric Lock -->
-    <string name="settings_biometric_lock">Kunci Aplikasi Biometrik</string>
-    <string name="settings_biometric_lock_hint">Amankan aplikasi Anda dengan sidik jari atau pengenalan wajah (fitur Pro)</string>
+    <string name="settings_biometric_lock">Kunci Aplikasi</string>
+    <string name="settings_biometric_lock_hint">Amankan aplikasi Anda dengan sidik jari, pengenalan wajah, atau kunci perangkat (fitur Pro)</string>
     <string name="settings_biometric_lock_title">Aktifkan Kunci Aplikasi</string>
-    <string name="settings_biometric_enable_title">Aktifkan Kunci Biometrik</string>
+    <string name="settings_biometric_enable_title">Aktifkan Kunci Aplikasi</string>
     <string name="settings_biometric_enable_subtitle">Autentikasi untuk mengaktifkan</string>
-    <string name="settings_biometric_enable_description">Sidik jari atau wajah Anda akan diperlukan untuk membuka aplikasi</string>
-    <string name="settings_biometric_enabled">Kunci biometrik diaktifkan</string>
-    <string name="settings_biometric_disabled">Kunci biometrik dinonaktifkan</string>
+    <string name="settings_biometric_enable_description">Gunakan sidik jari, pengenalan wajah, PIN, pola, atau kata sandi untuk membuka kunci aplikasi</string>
+    <string name="settings_biometric_enabled">Kunci aplikasi diaktifkan</string>
+    <string name="settings_biometric_disabled">Kunci aplikasi dinonaktifkan</string>
     <string name="settings_biometric_pro_required">Kunci biometrik adalah fitur Pro. Tingkatkan untuk membuka!</string>
     <string name="settings_biometric_open_device_settings">Buka Pengaturan Perangkat</string>
     <string name="settings_biometric_cannot_open_settings">Tidak dapat membuka pengaturan perangkat</string>

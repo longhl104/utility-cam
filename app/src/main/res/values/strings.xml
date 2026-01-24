@@ -227,8 +227,8 @@
     <string name="pro_features_title">Pro Features</string>
     <string name="pro_feature_video_title">Video Recording</string>
     <string name="pro_feature_video_description">Capture and save video recordings with auto-delete timers</string>
-    <string name="pro_feature_biometric_lock_title">Biometric App Lock</string>
-    <string name="pro_feature_biometric_lock_description">Secure your app with fingerprint or face unlock authentication</string>
+    <string name="pro_feature_biometric_lock_title">App Lock</string>
+    <string name="pro_feature_biometric_lock_description">Secure your app with fingerprint, face unlock, PIN, pattern, or password</string>
     <string name="pro_feature_custom_expiration_title">Customize Expiration Time</string>
     <string name="pro_feature_custom_expiration_description">Set custom expiration times in hours, days, or weeks for your photos and videos</string>
     <string name="pro_feature_priority_support_title">Priority Support</string>
@@ -250,31 +250,31 @@
     <string name="settings_pro_thank_you">Thank you for your support!</string>
 
     <!-- Biometric Lock -->
-    <string name="settings_biometric_lock">Biometric App Lock</string>
-    <string name="settings_biometric_lock_hint">Secure your app with fingerprint or face unlock (Pro feature)</string>
+    <string name="settings_biometric_lock">App Lock</string>
+    <string name="settings_biometric_lock_hint">Secure your app with fingerprint, face unlock, or device lock (Pro feature)</string>
     <string name="settings_biometric_lock_title">Enable App Lock</string>
-    <string name="settings_biometric_enable_title">Enable Biometric Lock</string>
+    <string name="settings_biometric_enable_title">Enable App Lock</string>
     <string name="settings_biometric_enable_subtitle">Authenticate to enable</string>
-    <string name="settings_biometric_enable_description">Your fingerprint or face will be required to open the app</string>
-    <string name="settings_biometric_enabled">Biometric lock enabled</string>
-    <string name="settings_biometric_disabled">Biometric lock disabled</string>
+    <string name="settings_biometric_enable_description">Use fingerprint, face unlock, PIN, pattern, or password to unlock the app</string>
+    <string name="settings_biometric_enabled">App lock enabled</string>
+    <string name="settings_biometric_disabled">App lock disabled</string>
     <string name="settings_biometric_pro_required">Biometric lock is a Pro feature. Upgrade to unlock!</string>
     <string name="settings_biometric_open_device_settings">Open Device Settings</string>
     <string name="settings_biometric_cannot_open_settings">Cannot open device settings</string>
-    <string name="settings_biometric_pro_locked_title">Biometric App Lock is a Pro Feature</string>
-    <string name="settings_biometric_pro_locked_message">Secure your app with fingerprint or face unlock authentication. Upgrade to Pro to unlock this premium feature!</string>
+    <string name="settings_biometric_pro_locked_title">App Lock is a Pro Feature</string>
+    <string name="settings_biometric_pro_locked_message">Secure your app with fingerprint, face unlock, PIN, pattern, or password. Upgrade to Pro to unlock this premium feature!</string>
     <string name="settings_biometric_pro_locked_upgrade">Upgrade to Pro</string>
     <string name="settings_biometric_pro_locked_cancel">Cancel</string>
     <string name="biometric_unlock_title">Unlock Utility Cam</string>
     <string name="biometric_unlock_subtitle">Authenticate to continue</string>
-    <string name="biometric_unlock_description">Use your fingerprint or face to unlock the app</string>
+    <string name="biometric_unlock_description">Use fingerprint, face unlock, PIN, pattern, or password to unlock the app</string>
 
     <!-- Biometric Availability Messages -->
-    <string name="biometric_availability_available">Biometric authentication is available</string>
-    <string name="biometric_availability_no_hardware">No biometric hardware available</string>
+    <string name="biometric_availability_available">Biometric or device lock authentication is available</string>
+    <string name="biometric_availability_no_hardware">No biometric hardware available and no device lock set</string>
     <string name="biometric_availability_hardware_unavailable">Biometric hardware is currently unavailable</string>
-    <string name="biometric_availability_none_enrolled">No biometric credentials enrolled. Please set up fingerprint or face unlock in device settings</string>
+    <string name="biometric_availability_none_enrolled">No authentication method set up. Please set up fingerprint, face unlock, PIN, pattern, or password in device settings</string>
     <string name="biometric_availability_security_update_required">Security update required for biometric authentication</string>
     <string name="biometric_availability_unsupported">Biometric authentication is not supported on this device</string>
-    <string name="biometric_availability_unknown">Unknown biometric status</string>
+    <string name="biometric_availability_unknown">Unknown authentication status</string>
 </resources>

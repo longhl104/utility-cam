@@ -1,6 +1,7 @@
 package com.utility.cam.data
 
 import android.content.Context
+import android.util.Log
 import androidx.biometric.BiometricManager as AndroidBiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
@@ -21,24 +22,61 @@ private val Context.biometricDataStore by preferencesDataStore(name = "biometric
 class BiometricManager(private val context: Context) {
 
     companion object {
+        private const val TAG = "BiometricManager"
         private val BIOMETRIC_ENABLED_KEY = booleanPreferencesKey("biometric_enabled")
     }
 
     /**
-     * Check if biometric authentication is available on this device
+     * Check if biometric authentication is available on this device.
+     * This checks for BIOMETRIC_STRONG OR DEVICE_CREDENTIAL, so it will return Available
+     * if either biometric or device lock (PIN/pattern/password) is set up.
      */
     fun isBiometricAvailable(): BiometricAvailability {
         val biometricManager = AndroidBiometricManager.from(context)
-        return when (biometricManager.canAuthenticate(AndroidBiometricManager.Authenticators.BIOMETRIC_STRONG)) {
-            AndroidBiometricManager.BIOMETRIC_SUCCESS -> BiometricAvailability.Available
-            AndroidBiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> BiometricAvailability.NoHardware
-            AndroidBiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> BiometricAvailability.HardwareUnavailable
-            AndroidBiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> BiometricAvailability.NoneEnrolled
-            AndroidBiometricManager.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED -> BiometricAvailability.SecurityUpdateRequired
-            AndroidBiometricManager.BIOMETRIC_ERROR_UNSUPPORTED -> BiometricAvailability.Unsupported
-            AndroidBiometricManager.BIOMETRIC_STATUS_UNKNOWN -> BiometricAvailability.Unknown
-            else -> BiometricAvailability.Unknown
+        // Check for biometric OR device credential (PIN, pattern, password)
+        val canAuthenticateResult = biometricManager.canAuthenticate(
+            AndroidBiometricManager.Authenticators.BIOMETRIC_STRONG or
+            AndroidBiometricManager.Authenticators.DEVICE_CREDENTIAL
+        )
+
+        Log.d(TAG, "isBiometricAvailable() - canAuthenticate result: $canAuthenticateResult")
+
+        val availability = when (canAuthenticateResult) {
+            AndroidBiometricManager.BIOMETRIC_SUCCESS -> {
+                Log.d(TAG, "Biometric or device credential authentication is available")
+                BiometricAvailability.Available
+            }
+            AndroidBiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
+                Log.w(TAG, "No biometric hardware and no device credential")
+                BiometricAvailability.NoHardware
+            }
+            AndroidBiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
+                Log.w(TAG, "Biometric hardware unavailable")
+                BiometricAvailability.HardwareUnavailable
+            }
+            AndroidBiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+                Log.w(TAG, "No biometric credentials enrolled and no device lock set")
+                BiometricAvailability.NoneEnrolled
+            }
+            AndroidBiometricManager.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED -> {
+                Log.w(TAG, "Security update required")
+                BiometricAvailability.SecurityUpdateRequired
+            }
+            AndroidBiometricManager.BIOMETRIC_ERROR_UNSUPPORTED -> {
+                Log.w(TAG, "Biometric authentication unsupported")
+                BiometricAvailability.Unsupported
+            }
+            AndroidBiometricManager.BIOMETRIC_STATUS_UNKNOWN -> {
+                Log.w(TAG, "Biometric status unknown")
+                BiometricAvailability.Unknown
+            }
+            else -> {
+                Log.w(TAG, "Unknown biometric status: $canAuthenticateResult")
+                BiometricAvailability.Unknown
+            }
         }
+
+        return availability
     }
 
     /**
@@ -86,7 +124,14 @@ class BiometricManager(private val context: Context) {
         onSuccess: () -> Unit,
         onError: (errorCode: Int, errorMessage: String) -> Unit
     ) {
+        Log.d(TAG, "authenticate() called")
+        Log.d(TAG, "Activity: ${activity::class.simpleName}")
+        Log.d(TAG, "Title: $title")
+        Log.d(TAG, "Subtitle: $subtitle")
+        Log.d(TAG, "Description: $description")
+
         val executor = ContextCompat.getMainExecutor(context)
+        Log.d(TAG, "Executor created: $executor")
 
         val biometricPrompt = BiometricPrompt(
             activity,
@@ -94,33 +139,50 @@ class BiometricManager(private val context: Context) {
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
+                    Log.d(TAG, "onAuthenticationSucceeded")
                     onSuccess()
                 }
 
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
+                    Log.e(TAG, "onAuthenticationError: errorCode=$errorCode, errString=$errString")
                     onError(errorCode, errString.toString())
                 }
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
+                    Log.w(TAG, "onAuthenticationFailed (user can retry)")
                     // Failed attempt but user can try again
                     // Don't call onError here to allow retry
                 }
             }
         )
+        Log.d(TAG, "BiometricPrompt created: $biometricPrompt")
 
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle(title)
             .apply {
-                if (subtitle.isNotEmpty()) setSubtitle(subtitle)
-                if (description.isNotEmpty()) setDescription(description)
+                if (subtitle.isNotEmpty()) {
+                    Log.d(TAG, "Setting subtitle: $subtitle")
+                    setSubtitle(subtitle)
+                }
+                if (description.isNotEmpty()) {
+                    Log.d(TAG, "Setting description: $description")
+                    setDescription(description)
+                }
             }
-            .setNegativeButtonText("Cancel")
-            .setAllowedAuthenticators(AndroidBiometricManager.Authenticators.BIOMETRIC_STRONG)
+            // Use BIOMETRIC_STRONG OR DEVICE_CREDENTIAL to allow both biometric and device lock
+            // Note: Cannot use setNegativeButtonText() with DEVICE_CREDENTIAL
+            .setAllowedAuthenticators(
+                AndroidBiometricManager.Authenticators.BIOMETRIC_STRONG or
+                AndroidBiometricManager.Authenticators.DEVICE_CREDENTIAL
+            )
             .build()
+        Log.d(TAG, "PromptInfo built successfully with BIOMETRIC_STRONG | DEVICE_CREDENTIAL")
 
+        Log.d(TAG, "Calling biometricPrompt.authenticate(promptInfo)...")
         biometricPrompt.authenticate(promptInfo)
+        Log.d(TAG, "biometricPrompt.authenticate() called - dialog should appear now")
     }
 
     sealed class BiometricAvailability {

@@ -300,7 +300,14 @@ fun SettingsScreen(
 
             val biometricManager = remember { BiometricManager(context) }
             val isBiometricEnabled by biometricManager.isBiometricEnabled().collectAsState(initial = false)
-            val biometricAvailability = remember { biometricManager.isBiometricAvailable() }
+            val biometricAvailability = remember {
+                biometricManager.isBiometricAvailable().also { availability ->
+                    Log.d("SettingsScreen", "Biometric availability: ${availability::class.simpleName}")
+                    Log.d("SettingsScreen", "Biometric available: ${availability.isAvailable()}")
+                    Log.d("SettingsScreen", "Biometric enabled: $isBiometricEnabled")
+                    Log.d("SettingsScreen", "Is Pro User: $actualIsProUser")
+                }
+            }
 
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -354,28 +361,33 @@ fun SettingsScreen(
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.error
                             )
-                            // Show button to navigate to settings if biometrics can be enrolled
+                            // Show button to navigate to settings if biometrics or device lock can be enrolled
                             if (biometricAvailability is BiometricManager.BiometricAvailability.NoneEnrolled) {
                                 Spacer(modifier = Modifier.height(8.dp))
                                 OutlinedButton(
                                     onClick = {
+                                        Log.d("SettingsScreen", "User clicked 'Open Device Settings' for authentication setup")
                                         try {
                                             // Try to open biometric enrollment on Android 11+ (API 30+)
                                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                                Log.d("SettingsScreen", "Opening ACTION_BIOMETRIC_ENROLL (API ${Build.VERSION.SDK_INT})")
                                                 val intent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
                                                     putExtra(
                                                         Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
-                                                        AndroidBiometricManager.Authenticators.BIOMETRIC_STRONG
+                                                        AndroidBiometricManager.Authenticators.BIOMETRIC_STRONG or
+                                                        AndroidBiometricManager.Authenticators.DEVICE_CREDENTIAL
                                                     )
                                                 }
                                                 context.startActivity(intent)
                                             } else {
                                                 // Fallback to security settings for older Android versions
+                                                Log.d("SettingsScreen", "Opening ACTION_SECURITY_SETTINGS (API ${Build.VERSION.SDK_INT})")
                                                 val intent = Intent(Settings.ACTION_SECURITY_SETTINGS)
                                                 context.startActivity(intent)
                                             }
-                                        } catch (_: Exception) {
+                                        } catch (e: Exception) {
                                             // Final fallback if intents fail
+                                            Log.e("SettingsScreen", "Failed to open device settings: ${e.message}", e)
                                             Toast.makeText(
                                                 context,
                                                 context.getString(R.string.settings_biometric_cannot_open_settings),
@@ -399,19 +411,26 @@ fun SettingsScreen(
                     Switch(
                         checked = isBiometricEnabled && actualIsProUser,
                         onCheckedChange = { enabled ->
+                            Log.d("SettingsScreen", "Biometric switch toggled: $enabled")
+                            Log.d("SettingsScreen", "Is Pro User: $actualIsProUser, Biometric Available: ${biometricAvailability.isAvailable()}")
+
                             if (actualIsProUser && biometricAvailability.isAvailable()) {
                                 if (enabled) {
                                     // Require authentication before enabling
-                                    val activity = context as? Activity
-                                    if (activity is FragmentActivity) {
+                                    Log.d("SettingsScreen", "Attempting to enable biometric lock")
+                                    val activity = context as? FragmentActivity
+                                    if (activity != null) {
+                                        Log.d("SettingsScreen", "Launching biometric authentication with FragmentActivity")
                                         biometricManager.authenticate(
                                             activity = activity,
                                             title = context.getString(R.string.settings_biometric_enable_title),
                                             subtitle = context.getString(R.string.settings_biometric_enable_subtitle),
                                             description = context.getString(R.string.settings_biometric_enable_description),
                                             onSuccess = {
+                                                Log.d("SettingsScreen", "Biometric authentication successful")
                                                 coroutineScope.launch {
                                                     biometricManager.enableBiometric()
+                                                    Log.d("SettingsScreen", "Biometric lock enabled")
                                                     Toast.makeText(
                                                         context,
                                                         context.getString(R.string.settings_biometric_enabled),
@@ -419,7 +438,8 @@ fun SettingsScreen(
                                                     ).show()
                                                 }
                                             },
-                                            onError = { _, message ->
+                                            onError = { errorCode, message ->
+                                                Log.e("SettingsScreen", "Biometric authentication failed: errorCode=$errorCode, message=$message")
                                                 Toast.makeText(
                                                     context,
                                                     message,
@@ -427,10 +447,14 @@ fun SettingsScreen(
                                                 ).show()
                                             }
                                         )
+                                    } else {
+                                        Log.e("SettingsScreen", "Context is not FragmentActivity, cannot launch biometric authentication")
                                     }
                                 } else {
+                                    Log.d("SettingsScreen", "Disabling biometric lock")
                                     coroutineScope.launch {
                                         biometricManager.disableBiometric()
+                                        Log.d("SettingsScreen", "Biometric lock disabled")
                                         Toast.makeText(
                                             context,
                                             context.getString(R.string.settings_biometric_disabled),
@@ -440,6 +464,7 @@ fun SettingsScreen(
                                 }
                             } else if (!actualIsProUser) {
                                 // Show ProLockedDialog for non-Pro users
+                                Log.d("SettingsScreen", "Non-Pro user attempted to toggle biometric lock, showing ProLockedDialog")
                                 showBiometricProDialog = true
                             }
                         },

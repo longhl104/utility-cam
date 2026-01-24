@@ -229,8 +229,8 @@
     <string name="pro_features_title">Funkcje Pro</string>
     <string name="pro_feature_video_title">Nagrywanie wideo</string>
     <string name="pro_feature_video_description">Nagrywaj i zapisuj wideo z automatycznymi czasomierzami usuwania</string>
-    <string name="pro_feature_biometric_lock_title">Blokada biometryczna aplikacji</string>
-    <string name="pro_feature_biometric_lock_description">Zabezpiecz swoją aplikację uwierzytelnianiem odciskiem palca lub rozpoznawaniem twarzy</string>
+    <string name="pro_feature_biometric_lock_title">Blokada aplikacji</string>
+    <string name="pro_feature_biometric_lock_description">Zabezpiecz swoją aplikację odciskiem palca, rozpoznawaniem twarzy, PIN, wzorem lub hasłem</string>
     <string name="pro_feature_custom_expiration_title">Dostosuj czas wygaśnięcia</string>
     <string name="pro_feature_custom_expiration_description">Ustaw niestandardowe czasy wygaśnięcia w godzinach, dniach lub tygodniach dla swoich zdjęć i filmów</string>
     <string name="pro_feature_priority_support_title">Wsparcie priorytetowe</string>
@@ -252,14 +252,14 @@
     <string name="settings_pro_thank_you">Dziękujemy za wsparcie!</string>
 
     <!-- Biometric Lock -->
-    <string name="settings_biometric_lock">Blokada biometryczna aplikacji</string>
-    <string name="settings_biometric_lock_hint">Zabezpiecz swoją aplikację odciskiem palca lub rozpoznawaniem twarzy (funkcja Pro)</string>
+    <string name="settings_biometric_lock">Blokada aplikacji</string>
+    <string name="settings_biometric_lock_hint">Zabezpiecz swoją aplikację odciskiem palca, rozpoznawaniem twarzy lub blokadą urządzenia (funkcja Pro)</string>
     <string name="settings_biometric_lock_title">Włącz blokadę aplikacji</string>
-    <string name="settings_biometric_enable_title">Włącz blokadę biometryczną</string>
+    <string name="settings_biometric_enable_title">Włącz blokadę aplikacji</string>
     <string name="settings_biometric_enable_subtitle">Uwierzytelnij się, aby włączyć</string>
-    <string name="settings_biometric_enable_description">Twój odcisk palca lub twarz będą wymagane do otwarcia aplikacji</string>
-    <string name="settings_biometric_enabled">Blokada biometryczna włączona</string>
-    <string name="settings_biometric_disabled">Blokada biometryczna wyłączona</string>
+    <string name="settings_biometric_enable_description">Użyj odcisku palca, rozpoznawania twarzy, PIN, wzoru lub hasła, aby odblokować aplikację</string>
+    <string name="settings_biometric_enabled">Blokada aplikacji włączona</string>
+    <string name="settings_biometric_disabled">Blokada aplikacji wyłączona</string>
     <string name="settings_biometric_pro_required">Blokada biometryczna to funkcja Pro. Przejdź na Pro, aby odblokować!</string>
     <string name="settings_biometric_open_device_settings">Otwórz Ustawienia Urządzenia</string>
     <string name="settings_biometric_cannot_open_settings">Nie można otworzyć ustawień urządzenia</string>
