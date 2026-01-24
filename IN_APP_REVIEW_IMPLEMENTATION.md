@@ -57,18 +57,52 @@ The review prompt is shown when **ALL** conditions are met:
 
 - Google controls when/how often the dialog actually appears
 - Has internal quotas to prevent spam
-- May not show in debug builds or testing
+- **Does NOT work in all environments** ⚠️
 - When quota is exceeded, silently fails (by design)
-- If it doesn't show, automatically falls back to Play Store
+- Automatic fallback to Play Store when it fails
 
-### 6. Testing
+### 6. Environmental Limitations ⚠️
+
+The In-App Review API has strict requirements and **will NOT work** in these environments:
+
+#### Does NOT Work
+
+- ❌ **Debug builds** - API is disabled, always falls back to Play Store
+- ❌ **Emulators/Simulators** - Requires real device
+- ❌ **Internal testing** - Must be published to production
+- ❌ **Sideloaded APKs** - Must be installed from Play Store
+- ❌ **Quota exceeded** - Google limits frequency per user
+- ❌ **First install** - Rarely works immediately after install
+- ❌ **Developer accounts** - Often disabled for app developers
+
+#### DOES Work
+
+- ✅ **Production builds** from Play Store
+- ✅ **Real devices** (not emulators)
+- ✅ **Published apps** on Play Store
+- ✅ **Regular users** (not developers)
+- ✅ **After app usage** (not immediately after install)
+- ✅ **Within quota limits** (not asked too frequently)
+
+#### Fallback Strategy
+
+Our implementation handles all failure cases:
+
+1. **SettingsScreen button**: Shows toast and opens Play Store
+2. **FeedbackDialog**: Automatically opens Play Store on failure
+3. **Debug builds**: Explicitly opens Play Store after In-App Review attempt
+4. **User feedback**: Toast notification when opening Play Store
+
+### 7. Testing
 
 **Manual Testing:**
+
 - Use "Love Utility Cam?" button in Settings
 - Instantly triggers In-App Review API (no conditions)
 - Check logs for "SettingsScreen" tag
 
 **Automatic Trigger Testing:**
+
 - Reset feedback state: Settings → Debug Tools → "Reset Feedback State"
 - Manually trigger conditions by:
   - Taking 3+ photos

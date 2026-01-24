@@ -830,6 +830,12 @@ fun SettingsScreen(
                                     coroutineScope.launch {
                                         feedbackManager.markUserRated()
                                     }
+                                    // Note: In-App Review might not show in debug/test environments
+                                    // If nothing appeared, open Play Store as fallback
+                                    if (BuildConfig.DEBUG) {
+                                        Log.w("SettingsScreen", "Debug build - In-App Review may not work, opening Play Store")
+                                        openPlayStoreForReview(context)
+                                    }
                                 }
 
                                 flow.addOnFailureListener { exception ->
@@ -837,13 +843,23 @@ fun SettingsScreen(
                                         "SettingsScreen",
                                         "Review flow failed: ${exception.message}"
                                     )
+                                    Toast.makeText(
+                                        context,
+                                        "Opening Play Store...",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                     openPlayStoreForReview(context)
                                 }
                             } else {
                                 Log.e(
                                     "SettingsScreen",
-                                    "Review request failed, opening Play Store"
+                                    "Review request failed: ${task.exception?.message}"
                                 )
+                                Toast.makeText(
+                                    context,
+                                    "Opening Play Store...",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 openPlayStoreForReview(context)
                             }
                         }
@@ -853,15 +869,17 @@ fun SettingsScreen(
                                 "SettingsScreen",
                                 "Review request exception: ${exception.message}"
                             )
+                            Toast.makeText(
+                                context,
+                                "Opening Play Store...",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             openPlayStoreForReview(context)
                         }
                     } else {
                         Log.e("SettingsScreen", "No activity context available")
-                        Toast.makeText(
-                            context,
-                            "Unable to launch review",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        // Direct fallback if no activity
+                        openPlayStoreForReview(context)
                     }
                 },
                 modifier = Modifier.fillMaxWidth()

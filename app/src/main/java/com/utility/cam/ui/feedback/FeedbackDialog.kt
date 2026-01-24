@@ -54,6 +54,9 @@ fun FeedbackDialog(
 
                                 flow.addOnCompleteListener {
                                     Log.d("FeedbackDialog", "Review flow completed")
+                                    // Note: In-App Review API doesn't work in all environments
+                                    // (debug builds, emulators, quotas exceeded)
+                                    // If it silently failed, user sees nothing - that's expected behavior
                                 }
 
                                 flow.addOnFailureListener { exception ->
@@ -61,7 +64,7 @@ fun FeedbackDialog(
                                     openPlayStore(context)
                                 }
                             } else {
-                                Log.e("FeedbackDialog", "Review request failed, opening Play Store")
+                                Log.e("FeedbackDialog", "Review request failed: ${task.exception?.message}, opening Play Store")
                                 openPlayStore(context)
                             }
                         }
