@@ -156,6 +156,11 @@
     <string name="settings_language_hindi">हिन्दी</string>
     <string name="settings_language_polish">Polski</string>
     <string name="settings_language_restart_hint">Język zostanie natychmiast zaktualizowany</string>
+    <string name="settings_theme">Motyw</string>
+    <string name="settings_theme_hint">Wybierz preferowany motyw</string>
+    <string name="settings_theme_system">Domyślny systemowy</string>
+    <string name="settings_theme_light">Jasny</string>
+    <string name="settings_theme_dark">Ciemny</string>
     <string name="settings_default_expiration">Domyślny czas wygaśnięcia</string>
     <string name="settings_default_expiration_hint">Wybierz, jak długo zdjęcia mają być przechowywane przed automatycznym usunięciem</string>
     <string name="settings_notifications">Powiadomienia</string>

@@ -69,6 +69,7 @@ import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
+import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
 import com.utility.cam.ui.common.rememberProUserStateWithManagers
 import com.utility.cam.ui.permissions.isNotificationPermissionGranted
@@ -111,8 +112,11 @@ fun SettingsScreen(
         .collectAsState(initial = 10)
     val selectedLanguage by localeManager.getSelectedLanguage()
         .collectAsState(initial = LocaleManager.SYSTEM_DEFAULT)
+    val themeMode by preferencesManager.getThemeMode()
+        .collectAsState(initial = PreferencesManager.THEME_MODE_SYSTEM)
 
     var showLanguageDialog by remember { mutableStateOf(false) }
+    var showThemeDialog by remember { mutableStateOf(false) }
     val supportedLanguages = remember { localeManager.getSupportedLanguages() }
 
     var cleanupDelayInput by remember { mutableStateOf("") }
@@ -209,6 +213,54 @@ fun SettingsScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
+
+                    Text("▼", style = MaterialTheme.typography.bodyMedium)
+                }
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            HorizontalDivider()
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Theme Selection
+            Text(
+                stringResource(R.string.settings_theme),
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                stringResource(R.string.settings_theme_hint),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            OutlinedCard(
+                onClick = { showThemeDialog = true },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                ) {
+                    val themeName = when (themeMode) {
+                        PreferencesManager.THEME_MODE_LIGHT -> stringResource(R.string.settings_theme_light)
+                        PreferencesManager.THEME_MODE_DARK -> stringResource(R.string.settings_theme_dark)
+                        else -> stringResource(R.string.settings_theme_system)
+                    }
+
+                    Text(
+                        themeName,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
 
                     Text("▼", style = MaterialTheme.typography.bodyMedium)
                 }
@@ -1016,6 +1068,51 @@ fun SettingsScreen(
             },
             confirmButton = {
                 TextButton(onClick = { showLanguageDialog = false }) {
+                    Text(stringResource(R.string.photo_detail_cancel))
+                }
+            }
+        )
+    }
+
+    // Theme selection dialog
+    if (showThemeDialog) {
+        AlertDialog(
+            onDismissRequest = { showThemeDialog = false },
+            title = { Text(stringResource(R.string.settings_theme)) },
+            text = {
+                Column {
+                    listOf(
+                        PreferencesManager.THEME_MODE_SYSTEM to R.string.settings_theme_system,
+                        PreferencesManager.THEME_MODE_LIGHT to R.string.settings_theme_light,
+                        PreferencesManager.THEME_MODE_DARK to R.string.settings_theme_dark
+                    ).forEach { (mode, nameRes) ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    coroutineScope.launch {
+                                        preferencesManager.setThemeMode(mode)
+                                        showThemeDialog = false
+                                    }
+                                }
+                                .padding(vertical = 12.dp),
+                            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = themeMode == mode,
+                                onClick = null // Handled by Row's clickable
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                stringResource(nameRes),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showThemeDialog = false }) {
                     Text(stringResource(R.string.photo_detail_cancel))
                 }
             }

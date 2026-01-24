@@ -27,6 +27,12 @@ class PreferencesManager(private val context: Context) {
         val ANALYTICS_ENABLED_KEY = booleanPreferencesKey("analytics_enabled")
         val ANALYTICS_CONSENT_SHOWN_KEY = booleanPreferencesKey("analytics_consent_shown")
         val DEBUG_PRO_OVERRIDE_KEY = booleanPreferencesKey("debug_pro_override")
+        val THEME_MODE_KEY = stringPreferencesKey("theme_mode")
+
+        // Theme mode values
+        const val THEME_MODE_SYSTEM = "system"
+        const val THEME_MODE_LIGHT = "light"
+        const val THEME_MODE_DARK = "dark"
     }
 
     /**
@@ -161,6 +167,22 @@ class PreferencesManager(private val context: Context) {
     suspend fun setDebugProOverride(enabled: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[DEBUG_PRO_OVERRIDE_KEY] = enabled
+        }
+    }
+
+    /**
+     * Get the current theme mode
+     */
+    fun getThemeMode(): Flow<String> = context.dataStore.data.map { preferences ->
+        preferences[THEME_MODE_KEY] ?: THEME_MODE_SYSTEM
+    }
+
+    /**
+     * Set the theme mode
+     */
+    suspend fun setThemeMode(mode: String) {
+        context.dataStore.edit { preferences ->
+            preferences[THEME_MODE_KEY] = mode
         }
     }
 }

@@ -6,9 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ExistingWorkPolicy
@@ -46,10 +50,10 @@ class MainActivity : ComponentActivity() {
             Locale.setDefault(locale)
             configuration.setLocale(locale)
         }
-        
+
         val context = newBase.createConfigurationContext(configuration)
         super.attachBaseContext(context)
-        
+
         // Install split resources for App Bundle language support
         SplitCompat.installActivity(this)
     }
@@ -83,7 +87,7 @@ class MainActivity : ComponentActivity() {
 
         // Schedule periodic cleanup worker
         schedulePhotoCleanup()
-        
+
         // Schedule expiring photo reminder worker
         scheduleExpiringPhotoReminder()
 
@@ -98,7 +102,17 @@ class MainActivity : ComponentActivity() {
         val photoId = intent?.extras?.getString("photo_id")
 
         setContent {
-            UtilityCamTheme {
+            val preferencesManager = remember { PreferencesManager(this) }
+            val themeMode by preferencesManager.getThemeMode().collectAsState(initial = PreferencesManager.THEME_MODE_SYSTEM)
+
+            // Determine if dark theme should be used based on preference
+            val darkTheme = when (themeMode) {
+                PreferencesManager.THEME_MODE_LIGHT -> false
+                PreferencesManager.THEME_MODE_DARK -> true
+                else -> isSystemInDarkTheme() // THEME_MODE_SYSTEM or any other value
+            }
+
+            UtilityCamTheme(darkTheme = darkTheme) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -108,7 +122,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-    
+
     private fun schedulePhotoCleanup() {
         if (BuildConfig.DEBUG) {
             // In debug mode, use chained one-time work to bypass 15-minute minimum
