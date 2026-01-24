@@ -17,12 +17,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -59,6 +62,8 @@ import androidx.core.net.toUri
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import androidx.biometric.BiometricManager as AndroidBiometricManager
+import androidx.fragment.app.FragmentActivity
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
@@ -66,12 +71,14 @@ import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
+import com.utility.cam.data.BiometricManager
 import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.InAppReviewManager
 import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
+import com.utility.cam.ui.common.ProLockedDialog
 import com.utility.cam.ui.common.rememberProUserStateWithManagers
 import com.utility.cam.ui.permissions.isNotificationPermissionGranted
 import com.utility.cam.worker.PhotoCleanupWorker
@@ -119,6 +126,7 @@ fun SettingsScreen(
 
     var showLanguageDialog by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
+    var showBiometricProDialog by remember { mutableStateOf(false) }
     val supportedLanguages = remember { localeManager.getSupportedLanguages() }
 
     var cleanupDelayInput by remember { mutableStateOf("") }
@@ -265,6 +273,178 @@ fun SettingsScreen(
                     )
 
                     Text("▼", style = MaterialTheme.typography.bodyMedium)
+                }
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            HorizontalDivider()
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Biometric App Lock Section (Pro Feature)
+            Text(
+                stringResource(R.string.settings_biometric_lock),
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                stringResource(R.string.settings_biometric_lock_hint),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            val biometricManager = remember { BiometricManager(context) }
+            val isBiometricEnabled by biometricManager.isBiometricEnabled().collectAsState(initial = false)
+            val biometricAvailability = remember { biometricManager.isBiometricAvailable() }
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = if (actualIsProUser && biometricAvailability.isAvailable())
+                        MaterialTheme.colorScheme.surfaceVariant
+                    else
+                        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                            Icon(
+                                Icons.Default.Lock,
+                                contentDescription = null,
+                                modifier = Modifier.size(20.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                stringResource(R.string.settings_biometric_lock_title),
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = androidx.compose.ui.text.font.FontWeight.Medium
+                            )
+                            if (!actualIsProUser) {
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Surface(
+                                    color = MaterialTheme.colorScheme.primary,
+                                    shape = MaterialTheme.shapes.small
+                                ) {
+                                    Text(
+                                        "PRO",
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = MaterialTheme.colorScheme.onPrimary
+                                    )
+                                }
+                            }
+                        }
+                        if (!biometricAvailability.isAvailable()) {
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                biometricAvailability.getErrorMessage(context),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.error
+                            )
+                            // Show button to navigate to settings if biometrics can be enrolled
+                            if (biometricAvailability is BiometricManager.BiometricAvailability.NoneEnrolled) {
+                                Spacer(modifier = Modifier.height(8.dp))
+                                OutlinedButton(
+                                    onClick = {
+                                        try {
+                                            // Try to open biometric enrollment on Android 11+ (API 30+)
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                                val intent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
+                                                    putExtra(
+                                                        Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+                                                        AndroidBiometricManager.Authenticators.BIOMETRIC_STRONG
+                                                    )
+                                                }
+                                                context.startActivity(intent)
+                                            } else {
+                                                // Fallback to security settings for older Android versions
+                                                val intent = Intent(Settings.ACTION_SECURITY_SETTINGS)
+                                                context.startActivity(intent)
+                                            }
+                                        } catch (_: Exception) {
+                                            // Final fallback if intents fail
+                                            Toast.makeText(
+                                                context,
+                                                context.getString(R.string.settings_biometric_cannot_open_settings),
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    },
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Settings,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text(stringResource(R.string.settings_biometric_open_device_settings))
+                                }
+                            }
+                        }
+                    }
+                    Switch(
+                        checked = isBiometricEnabled && actualIsProUser,
+                        onCheckedChange = { enabled ->
+                            if (actualIsProUser && biometricAvailability.isAvailable()) {
+                                if (enabled) {
+                                    // Require authentication before enabling
+                                    val activity = context as? Activity
+                                    if (activity is FragmentActivity) {
+                                        biometricManager.authenticate(
+                                            activity = activity,
+                                            title = context.getString(R.string.settings_biometric_enable_title),
+                                            subtitle = context.getString(R.string.settings_biometric_enable_subtitle),
+                                            description = context.getString(R.string.settings_biometric_enable_description),
+                                            onSuccess = {
+                                                coroutineScope.launch {
+                                                    biometricManager.enableBiometric()
+                                                    Toast.makeText(
+                                                        context,
+                                                        context.getString(R.string.settings_biometric_enabled),
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+                                            },
+                                            onError = { _, message ->
+                                                Toast.makeText(
+                                                    context,
+                                                    message,
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        )
+                                    }
+                                } else {
+                                    coroutineScope.launch {
+                                        biometricManager.disableBiometric()
+                                        Toast.makeText(
+                                            context,
+                                            context.getString(R.string.settings_biometric_disabled),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            } else if (!actualIsProUser) {
+                                // Show ProLockedDialog for non-Pro users
+                                showBiometricProDialog = true
+                            }
+                        },
+                        enabled = biometricAvailability.isAvailable() // Enable for all users with biometric hardware
+                    )
                 }
             }
 
@@ -1072,6 +1252,18 @@ fun SettingsScreen(
                     Text(stringResource(R.string.photo_detail_cancel))
                 }
             }
+        )
+    }
+
+    // Biometric Pro Locked Dialog
+    if (showBiometricProDialog) {
+        ProLockedDialog(
+            onDismiss = { showBiometricProDialog = false },
+            onUpgrade = onNavigateToPro,
+            titleResId = R.string.settings_biometric_pro_locked_title,
+            messageResId = R.string.settings_biometric_pro_locked_message,
+            upgradeButtonResId = R.string.settings_biometric_pro_locked_upgrade,
+            cancelButtonResId = R.string.settings_biometric_pro_locked_cancel
         )
     }
 }

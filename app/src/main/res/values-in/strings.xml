@@ -226,6 +226,8 @@
     <string name="pro_features_title">Fitur Pro</string>
     <string name="pro_feature_video_title">Rekaman Video</string>
     <string name="pro_feature_video_description">Tangkap dan simpan rekaman video dengan timer hapus otomatis</string>
+    <string name="pro_feature_biometric_lock_title">Kunci Aplikasi Biometrik</string>
+    <string name="pro_feature_biometric_lock_description">Amankan aplikasi Anda dengan autentikasi sidik jari atau pengenalan wajah</string>
     <string name="pro_feature_custom_expiration_title">Sesuaikan Waktu Kedaluwarsa</string>
     <string name="pro_feature_custom_expiration_description">Atur waktu kedaluwarsa kustom dalam jam, hari, atau minggu untuk foto dan video Anda</string>
     <string name="pro_feature_priority_support_title">Dukungan Prioritas</string>
@@ -245,4 +247,33 @@
     <string name="settings_go_pro">Tingkatkan ke Pro</string>
     <string name="settings_go_pro_hint">Buka fitur premium dengan pembelian sekali bayar</string>
     <string name="settings_pro_thank_you">Terima kasih atas dukungan Anda!</string>
+
+    <!-- Biometric Lock -->
+    <string name="settings_biometric_lock">Kunci Aplikasi Biometrik</string>
+    <string name="settings_biometric_lock_hint">Amankan aplikasi Anda dengan sidik jari atau pengenalan wajah (fitur Pro)</string>
+    <string name="settings_biometric_lock_title">Aktifkan Kunci Aplikasi</string>
+    <string name="settings_biometric_enable_title">Aktifkan Kunci Biometrik</string>
+    <string name="settings_biometric_enable_subtitle">Autentikasi untuk mengaktifkan</string>
+    <string name="settings_biometric_enable_description">Sidik jari atau wajah Anda akan diperlukan untuk membuka aplikasi</string>
+    <string name="settings_biometric_enabled">Kunci biometrik diaktifkan</string>
+    <string name="settings_biometric_disabled">Kunci biometrik dinonaktifkan</string>
+    <string name="settings_biometric_pro_required">Kunci biometrik adalah fitur Pro. Tingkatkan untuk membuka!</string>
+    <string name="settings_biometric_open_device_settings">Buka Pengaturan Perangkat</string>
+    <string name="settings_biometric_cannot_open_settings">Tidak dapat membuka pengaturan perangkat</string>
+    <string name="settings_biometric_pro_locked_title">Kunci Aplikasi Biometrik adalah Fitur Pro</string>
+    <string name="settings_biometric_pro_locked_message">Amankan aplikasi Anda dengan autentikasi sidik jari atau pengenalan wajah. Tingkatkan ke Pro untuk membuka fitur premium ini!</string>
+    <string name="settings_biometric_pro_locked_upgrade">Tingkatkan ke Pro</string>
+    <string name="settings_biometric_pro_locked_cancel">Batal</string>
+    <string name="biometric_unlock_title">Buka Kunci Utility Cam</string>
+    <string name="biometric_unlock_subtitle">Autentikasi untuk melanjutkan</string>
+    <string name="biometric_unlock_description">Gunakan sidik jari atau wajah Anda untuk membuka kunci aplikasi</string>
+
+    <!-- Biometric Availability Messages -->
+    <string name="biometric_availability_available">Autentikasi biometrik tersedia</string>
+    <string name="biometric_availability_no_hardware">Tidak ada perangkat keras biometrik yang tersedia</string>
+    <string name="biometric_availability_hardware_unavailable">Perangkat keras biometrik saat ini tidak tersedia</string>
+    <string name="biometric_availability_none_enrolled">Tidak ada kredensial biometrik yang terdaftar. Harap siapkan sidik jari atau pembukaan wajah di pengaturan perangkat</string>
+    <string name="biometric_availability_security_update_required">Pembaruan keamanan diperlukan untuk autentikasi biometrik</string>
+    <string name="biometric_availability_unsupported">Autentikasi biometrik tidak didukung di perangkat ini</string>
+    <string name="biometric_availability_unknown">Status biometrik tidak diketahui</string>
 </resources>

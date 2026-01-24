@@ -227,6 +227,8 @@
     <string name="pro_features_title">Pro सुविधाएं</string>
     <string name="pro_feature_video_title">वीडियो रिकॉर्डिंग</string>
     <string name="pro_feature_video_description">स्वतः-हटाने वाले टाइमर के साथ वीडियो रिकॉर्डिंग कैप्चर और सहेजें</string>
+    <string name="pro_feature_biometric_lock_title">बायोमेट्रिक ऐप लॉक</string>
+    <string name="pro_feature_biometric_lock_description">फिंगरप्रिंट या फेस अनलॉक प्रमाणीकरण से अपने ऐप को सुरक्षित करें</string>
     <string name="pro_feature_custom_expiration_title">समाप्ति समय कस्टमाइज़ करें</string>
     <string name="pro_feature_custom_expiration_description">अपनी फोटो और वीडियो के लिए घंटों, दिनों या सप्ताहों में कस्टम समाप्ति समय सेट करें</string>
     <string name="pro_feature_priority_support_title">प्राथमिकता समर्थन</string>
@@ -246,4 +248,33 @@
     <string name="settings_go_pro">Pro में अपग्रेड करें</string>
     <string name="settings_go_pro_hint">एकमुश्त खरीद के साथ प्रीमियम सुविधाएं अनलॉक करें</string>
     <string name="settings_pro_thank_you">आपके समर्थन के लिए धन्यवाद!</string>
+
+    <!-- Biometric Lock -->
+    <string name="settings_biometric_lock">बायोमेट्रिक ऐप लॉक</string>
+    <string name="settings_biometric_lock_hint">फिंगरप्रिंट या फेस अनलॉक से अपने ऐप को सुरक्षित करें (Pro सुविधा)</string>
+    <string name="settings_biometric_lock_title">ऐप लॉक सक्षम करें</string>
+    <string name="settings_biometric_enable_title">बायोमेट्रिक लॉक सक्षम करें</string>
+    <string name="settings_biometric_enable_subtitle">सक्षम करने के लिए प्रमाणित करें</string>
+    <string name="settings_biometric_enable_description">ऐप खोलने के लिए आपकी फिंगरप्रिंट या चेहरे की आवश्यकता होगी</string>
+    <string name="settings_biometric_enabled">बायोमेट्रिक लॉक सक्षम किया गया</string>
+    <string name="settings_biometric_disabled">बायोमेट्रिक लॉक अक्षम किया गया</string>
+    <string name="settings_biometric_pro_required">बायोमेट्रिक लॉक एक Pro सुविधा है। अनलॉक करने के लिए अपग्रेड करें!</string>
+    <string name="settings_biometric_open_device_settings">डिवाइस सेटिंग्स खोलें</string>
+    <string name="settings_biometric_cannot_open_settings">डिवाइस सेटिंग्स नहीं खोल सकते</string>
+    <string name="settings_biometric_pro_locked_title">बायोमेट्रिक ऐप लॉक एक Pro सुविधा है</string>
+    <string name="settings_biometric_pro_locked_message">फिंगरप्रिंट या फेस अनलॉक प्रमाणीकरण से अपने ऐप को सुरक्षित करें। इस प्रीमियम सुविधा को अनलॉक करने के लिए Pro में अपग्रेड करें!</string>
+    <string name="settings_biometric_pro_locked_upgrade">Pro में अपग्रेड करें</string>
+    <string name="settings_biometric_pro_locked_cancel">रद्द करें</string>
+    <string name="biometric_unlock_title">Utility Cam अनलॉक करें</string>
+    <string name="biometric_unlock_subtitle">जारी रखने के लिए प्रमाणित करें</string>
+    <string name="biometric_unlock_description">ऐप को अनलॉक करने के लिए अपनी फिंगरप्रिंट या चेहरे का उपयोग करें</string>
+
+    <!-- Biometric Availability Messages -->
+    <string name="biometric_availability_available">बायोमेट्रिक प्रमाणीकरण उपलब्ध है</string>
+    <string name="biometric_availability_no_hardware">कोई बायोमेट्रिक हार्डवेयर उपलब्ध नहीं है</string>
+    <string name="biometric_availability_hardware_unavailable">बायोमेट्रिक हार्डवेयर वर्तमान में अनुपलब्ध है</string>
+    <string name="biometric_availability_none_enrolled">कोई बायोमेट्रिक क्रेडेंशियल पंजीकृत नहीं है। कृपया डिवाइस सेटिंग्स में फिंगरप्रिंट या फेस अनलॉक सेट करें</string>
+    <string name="biometric_availability_security_update_required">बायोमेट्रिक प्रमाणीकरण के लिए सुरक्षा अपडेट आवश्यक है</string>
+    <string name="biometric_availability_unsupported">इस डिवाइस पर बायोमेट्रिक प्रमाणीकरण समर्थित नहीं है</string>
+    <string name="biometric_availability_unknown">अज्ञात बायोमेट्रिक स्थिति</string>
 </resources>

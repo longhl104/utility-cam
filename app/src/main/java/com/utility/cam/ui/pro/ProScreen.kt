@@ -171,6 +171,14 @@ fun ProScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             ProFeatureItem(
+                icon = Icons.Default.Lock,
+                title = stringResource(R.string.pro_feature_biometric_lock_title),
+                description = stringResource(R.string.pro_feature_biometric_lock_description)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ProFeatureItem(
                 icon = Icons.Default.Schedule,
                 title = stringResource(R.string.pro_feature_custom_expiration_title),
                 description = stringResource(R.string.pro_feature_custom_expiration_description)
