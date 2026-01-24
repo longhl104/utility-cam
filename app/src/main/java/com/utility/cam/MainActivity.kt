@@ -11,7 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.FragmentActivity
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -20,6 +21,8 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.google.android.play.core.splitcompat.SplitCompat
+import com.utility.cam.data.BiometricManager
+import com.utility.cam.data.BillingManager
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.LocaleManager
@@ -101,8 +104,52 @@ class MainActivity : FragmentActivity() {
         // Get photo ID from intent extras
         val photoId = intent?.extras?.getString("photo_id")
 
+        // Check if biometric lock is enabled before showing content
+        val biometricManager = BiometricManager(this)
+        val billingManager = BillingManager(this)
+        val preferencesManager = PreferencesManager(this)
+
+        var isAuthenticated by mutableStateOf(false)
+        var authenticationRequired by mutableStateOf(false)
+
+        // Check if authentication is required
+        runBlocking {
+            val isBiometricEnabled = biometricManager.isBiometricEnabled().first()
+            val isProUser = billingManager.isProUser.value
+            val debugProOverride = preferencesManager.getDebugProOverride().first()
+            val actualIsProUser = if (BuildConfig.DEBUG) debugProOverride else isProUser
+
+            authenticationRequired = isBiometricEnabled && actualIsProUser
+
+            Log.d("MainActivity", "Biometric lock enabled: $isBiometricEnabled")
+            Log.d("MainActivity", "Is Pro user: $actualIsProUser")
+            Log.d("MainActivity", "Authentication required: $authenticationRequired")
+
+            if (authenticationRequired) {
+                // Show authentication prompt
+                Log.d("MainActivity", "Launching biometric authentication on app start")
+                biometricManager.authenticate(
+                    activity = this@MainActivity,
+                    title = getString(R.string.biometric_unlock_title),
+                    subtitle = getString(R.string.biometric_unlock_subtitle),
+                    description = getString(R.string.biometric_unlock_description),
+                    onSuccess = {
+                        Log.d("MainActivity", "Authentication successful")
+                        isAuthenticated = true
+                    },
+                    onError = { errorCode, message ->
+                        Log.e("MainActivity", "Authentication failed: errorCode=$errorCode, message=$message")
+                        // If authentication fails or is cancelled, close the app
+                        finish()
+                    }
+                )
+            } else {
+                // No authentication required
+                isAuthenticated = true
+            }
+        }
+
         setContent {
-            val preferencesManager = remember { PreferencesManager(this) }
             val themeMode by preferencesManager.getThemeMode().collectAsState(initial = PreferencesManager.THEME_MODE_SYSTEM)
 
             // Determine if dark theme should be used based on preference
@@ -117,7 +164,10 @@ class MainActivity : FragmentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    UtilityCamNavigation(initialPhotoId = photoId)
+                    // Only show content if authenticated or no authentication required
+                    if (isAuthenticated || !authenticationRequired) {
+                        UtilityCamNavigation(initialPhotoId = photoId)
+                    }
                 }
             }
         }
