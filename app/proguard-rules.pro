@@ -34,6 +34,10 @@
 -keep class com.google.android.play.core.** { *; }
 -keep interface com.google.android.play.core.** { *; }
 
+# Google Play Services - Keep annotations
+-dontwarn com.google.android.gms.common.annotation.**
+-keep class com.google.android.gms.common.annotation.** { *; }
+
 # Glance
 -keep class androidx.glance.** { *; }
 
