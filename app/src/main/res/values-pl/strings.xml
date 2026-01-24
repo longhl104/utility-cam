@@ -1,0 +1,246 @@
+<resources>
+    <string name="app_name">Utility Cam</string>
+
+    <!-- Notifications -->
+    <string name="notification_cleanup_title">Zdjęcia wyczyszczone</string>
+    <plurals name="notification_cleanup_message">
+        <item quantity="one">%d wygasłe zdjęcie zostało automatycznie usunięte</item>
+        <item quantity="few">%d wygasłe zdjęcia zostały automatycznie usunięte</item>
+        <item quantity="many">%d wygasłych zdjęć zostało automatycznie usuniętych</item>
+        <item quantity="other">%d wygasłych zdjęć zostało automatycznie usuniętych</item>
+    </plurals>
+    <string name="notification_reminder_title">Zdjęcie wkrótce wygaśnie</string>
+    <string name="notification_reminder_message">Zdjęcie zostanie usunięte za %s</string>
+    <string name="notification_reminder_message_with_description" formatted="false">\"%s\" zostanie usunięte za %s</string>
+    <string name="notification_channel_name">Czyszczenie zdjęć</string>
+    <string name="notification_channel_description">Powiadomienia o automatycznym czyszczeniu zdjęć</string>
+
+    <!-- TTL Durations -->
+    <string name="ttl_test_3_seconds">3 sekundy (Test)</string>
+    <string name="ttl_24_hours">24 godziny</string>
+    <string name="ttl_3_days">3 dni</string>
+    <string name="ttl_1_week">1 tydzień</string>
+
+    <!-- Time formatting -->
+    <string name="time_format_days_hours" formatted="false">%dd %dg</string>
+    <string name="time_format_hours_minutes" formatted="false">%dg %dm</string>
+    <string name="time_format_minutes">%dm</string>
+
+    <!-- Gallery Screen -->
+    <string name="gallery_title">Utility Cam</string>
+    <string name="gallery_settings">Ustawienia</string>
+    <string name="gallery_take_photo">Zrób</string>
+    <string name="gallery_no_photos">Brak multimediów użytkowych</string>
+    <string name="gallery_no_photos_hint">Dotknij przycisku aparatu, aby zrobić pierwsze zdjęcie lub nagrać wideo</string>
+    <string name="gallery_expires_in">Wygasa za: %s</string>
+    <string name="gallery_selection_count">Zaznaczono: %d</string>
+    <string name="gallery_exit_selection">Wyjdź z trybu zaznaczania</string>
+    <string name="gallery_share_selected">Udostępnij zaznaczone</string>
+    <string name="gallery_save_selected">Zapisz zaznaczone</string>
+    <string name="gallery_delete_selected">Usuń zaznaczone</string>
+    <string name="gallery_delete_confirm_title">Usunąć %d elementów?</string>
+    <string name="gallery_delete_confirm_message">Tej czynności nie można cofnąć.</string>
+    <string name="gallery_delete_button">Usuń</string>
+    <string name="gallery_cancel_button">Anuluj</string>
+    <string name="gallery_save_confirm_title">Zapisać trwale %d elementów?</string>
+    <string name="gallery_save_confirm_message">Elementy zostaną zapisane w galerii i usunięte z tej aplikacji.</string>
+    <string name="gallery_save_button">Zapisz</string>
+
+    <!-- Camera Screen -->
+    <string name="camera_permission_required">Wymagane uprawnienie do aparatu</string>
+    <string name="camera_grant_permission">Przyznaj uprawnienie</string>
+    <string name="camera_flip">Przełącz aparat</string>
+    <string name="camera_take_photo">Zrób zdjęcie</string>
+    <string name="camera_record_video">Nagraj wideo</string>
+    <string name="camera_start_recording">Rozpocznij nagrywanie</string>
+    <string name="camera_stop_recording">Zatrzymaj nagrywanie</string>
+    <string name="camera_mode_photo">Zdjęcie</string>
+    <string name="camera_mode_video">Wideo</string>
+    <string name="camera_close">Zamknij</string>
+    <string name="camera_zoom_format">%.1fx</string>
+    <string name="camera_recording_time">%02d:%02d</string>
+    <string name="camera_video_pro_only_title">Nagrywanie wideo - funkcja PRO</string>
+    <string name="camera_video_pro_only_message">Nagrywanie wideo jest dostępne w Utility Cam PRO. Przejdź na wersję PRO, aby odblokować nieograniczone nagrywanie wideo!</string>
+    <string name="camera_video_pro_only_upgrade">Przejdź na PRO</string>
+    <string name="camera_video_pro_only_cancel">Anuluj</string>
+
+    <!-- Capture Review Screen -->
+    <string name="capture_review_title">Przejrzyj zdjęcie</string>
+    <string name="capture_review_title_video">Przejrzyj wideo</string>
+    <string name="capture_review_delete_after">Usuń po:</string>
+    <string name="capture_review_description_label">Opis (opcjonalnie)</string>
+    <string name="capture_review_description_hint">np. Miejsce parkingowe: Poziom 4</string>
+    <string name="capture_review_retake">Zrób ponownie</string>
+    <string name="capture_review_save">Zapisz</string>
+    <string name="capture_review_gallery">Zobacz galerię</string>
+    <string name="capture_review_custom">Niestandardowy</string>
+    <string name="capture_review_custom_hours_suffix">g</string>
+    <string name="capture_review_custom_pro_title">Niestandardowy czas - funkcja PRO</string>
+    <string name="capture_review_custom_pro_message">Ustaw niestandardowy czas wygaśnięcia z Utility Cam PRO. Przejdź na wersję PRO, aby odblokować tę funkcję!</string>
+    <string name="capture_review_custom_pro_ok">OK</string>
+    <string name="capture_review_custom_dialog_title">Niestandardowy czas wygaśnięcia</string>
+    <string name="capture_review_custom_dialog_message">Ustaw, jak długo to zdjęcie ma być przechowywane:</string>
+    <string name="capture_review_unit_hours">Godziny</string>
+    <string name="capture_review_unit_days">Dni</string>
+    <string name="capture_review_unit_weeks">Tygodnie</string>
+    <string name="capture_review_custom_hours_label">Godziny</string>
+    <string name="capture_review_custom_days_label">Dni</string>
+    <string name="capture_review_custom_weeks_label">Tygodnie</string>
+    <string name="capture_review_custom_dialog_ok">Ustaw</string>
+    <string name="capture_review_custom_dialog_cancel">Anuluj</string>
+
+    <!-- Photo Detail Screen -->
+    <string name="photo_detail_title">Szczegóły zdjęcia</string>
+    <string name="photo_detail_title_video">Szczegóły wideo</string>
+    <string name="photo_detail_save">Zapisz w galerii</string>
+    <string name="photo_detail_share">Udostępnij</string>
+    <string name="photo_detail_delete">Usuń</string>
+    <string name="photo_detail_back">Wstecz</string>
+    <string name="photo_detail_share_title">Udostępnij zdjęcie przez</string>
+    <string name="photo_detail_expires_in">Wygasa za %s</string>
+    <string name="photo_detail_captured">Zrobione</string>
+    <string name="photo_detail_description">Opis</string>
+    <string name="photo_detail_add">Dodaj</string>
+    <string name="photo_detail_edit">Edytuj</string>
+    <string name="photo_detail_no_description">Brak opisu</string>
+    <string name="photo_detail_keep_forever">Zachowaj na zawsze (zapisz w galerii)</string>
+    <string name="photo_detail_delete_title">Usunąć zdjęcie?</string>
+    <string name="photo_detail_delete_message">Tej czynności nie można cofnąć.</string>
+    <string name="photo_detail_delete_confirm">Usuń</string>
+    <string name="photo_detail_cancel">Anuluj</string>
+    <string name="photo_detail_save_title">Zapisać w galerii?</string>
+    <string name="photo_detail_save_message">Spowoduje to zapisanie zdjęcia w galerii urządzenia i usunięcie go z Utility Cam.</string>
+    <string name="photo_detail_save_confirm">Zapisz</string>
+    <string name="photo_detail_saved_success">Zdjęcie zapisane w galerii</string>
+    <string name="photo_detail_save_failed">Nie udało się zapisać zdjęcia</string>
+    <string name="photo_detail_deleted_success">Zdjęcie usunięte</string>
+    <string name="photo_detail_edit_description_title">Edytuj opis</string>
+    <string name="photo_detail_edit_description_hint">Wprowadź opis tego zdjęcia</string>
+
+    <!-- Media Detail Screen -->
+    <string name="media_detail_title">Szczegóły multimediów</string>
+    <string name="media_detail_save">Zapisz w galerii</string>
+    <string name="media_detail_share">Udostępnij</string>
+    <string name="media_detail_delete">Usuń</string>
+    <string name="media_detail_back">Wstecz</string>
+    <string name="media_detail_share_title">Udostępnij multimedia przez</string>
+    <string name="media_detail_expires_in">Wygasa za %s</string>
+    <string name="media_detail_captured">Zrobione</string>
+    <string name="media_detail_description">Opis</string>
+    <string name="media_detail_add">Dodaj</string>
+    <string name="media_detail_edit">Edytuj</string>
+    <string name="media_detail_no_description">Brak opisu</string>
+    <string name="media_detail_keep_forever">Zachowaj na zawsze (zapisz w galerii)</string>
+    <string name="media_detail_delete_title">Usunąć multimedia?</string>
+    <string name="media_detail_delete_message">Tej czynności nie można cofnąć.</string>
+    <string name="media_detail_delete_confirm">Usuń</string>
+    <string name="media_detail_cancel">Anuluj</string>
+    <string name="media_detail_save_title">Zapisać w galerii?</string>
+    <string name="media_detail_save_message">Spowoduje to zapisanie multimediów w galerii urządzenia i usunięcie ich z Utility Cam.</string>
+    <string name="media_detail_save_confirm">Zapisz</string>
+    <string name="media_detail_saved_success">Multimedia zapisane w galerii</string>
+    <string name="media_detail_save_failed">Nie udało się zapisać multimediów</string>
+    <string name="media_detail_deleted_success">Multimedia usunięte</string>
+    <string name="media_detail_edit_description_title">Edytuj opis</string>
+    <string name="media_detail_edit_description_hint">Wprowadź opis tych multimediów</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Ustawienia</string>
+    <string name="settings_back">Wstecz</string>
+    <string name="settings_language">Język</string>
+    <string name="settings_language_hint">Wybierz preferowany język</string>
+    <string name="settings_language_system_default">Domyślny systemowy</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_portuguese">Português</string>
+    <string name="settings_language_indonesian">Bahasa Indonesia</string>
+    <string name="settings_language_hindi">हिन्दी</string>
+    <string name="settings_language_polish">Polski</string>
+    <string name="settings_language_restart_hint">Język zostanie natychmiast zaktualizowany</string>
+    <string name="settings_default_expiration">Domyślny czas wygaśnięcia</string>
+    <string name="settings_default_expiration_hint">Wybierz, jak długo zdjęcia mają być przechowywane przed automatycznym usunięciem</string>
+    <string name="settings_notifications">Powiadomienia</string>
+    <string name="settings_cleanup_notifications">Powiadomienia o czyszczeniu</string>
+    <string name="settings_cleanup_notifications_hint">Otrzymuj powiadomienia, gdy wygasłe zdjęcia są usuwane</string>
+    <string name="settings_reminder_notifications">Przypomnienia o wygaśnięciu</string>
+    <string name="settings_reminder_notifications_hint">Otrzymuj przypomnienia, gdy zdjęcia wkrótce wygasną (za 1 godzinę)</string>
+    <string name="settings_notification_permission_required">Wymagane uprawnienie do powiadomień</string>
+    <string name="settings_notification_permission_message">Aby otrzymywać powiadomienia o czyszczeniu, musisz przyznać uprawnienie do powiadomień.</string>
+    <string name="settings_open_settings">Otwórz ustawienia</string>
+    <string name="settings_privacy">Prywatność</string>
+    <string name="settings_analytics_consent">Pomóż ulepszyć aplikację</string>
+    <string name="settings_analytics_consent_hint">Udostępnij anonimowe dane użycia, aby pomóc nam ulepszyć aplikację. Żadne dane osobowe nie są zbierane.</string>
+    <string name="settings_analytics_consent_dialog_title">Pomóż nam ulepszyć Utility Cam</string>
+    <string name="settings_analytics_consent_dialog_message">Chcielibyśmy zbierać anonimowe dane użycia, aby ulepszyć aplikację. Obejmuje to:\n\n• Korzystanie z funkcji aplikacji\n• Zdarzenia robienia zdjęć (czas trwania, nie zawartość)\n• Dane o wydajności aplikacji\n\nNIE zbieramy:\n• Twoich zdjęć ani ich zawartości\n• Wprowadzanych opisów\n• Danych osobowych\n\nMożesz zmienić to ustawienie w dowolnym momencie w Ustawienia > Prywatność.</string>
+    <string name="settings_analytics_consent_accept">Zezwól</string>
+    <string name="settings_analytics_consent_decline">Nie, dziękuję</string>
+    <string name="settings_debug_tools">Narzędzia debugowania</string>
+    <string name="settings_debug_tools_hint">Narzędzia testowe do rozwoju</string>
+    <string name="settings_cleanup_delay_label">Opóźnienie czyszczenia (sekundy)</string>
+    <string name="settings_cleanup_delay_hint">Czas między uruchomieniami czyszczenia (1–3600 sekund). Wymaga ponownego uruchomienia aplikacji.</string>
+    <string name="settings_cleanup_delay_updated">Opóźnienie czyszczenia zaktualizowane do %d sekund. Uruchom ponownie aplikację, aby zastosować.</string>
+    <string name="settings_trigger_cleanup">Uruchom czyszczenie teraz</string>
+    <string name="settings_trigger_cleanup_started">Uruchamianie czyszczenia…</string>
+    <string name="settings_cleanup_completed">Czyszczenie zakończone!</string>
+    <string name="settings_cleanup_failed">Czyszczenie nie powiodło się!</string>
+    <string name="settings_cleanup_running">Czyszczenie w toku…</string>
+    <string name="settings_test_notification">Testuj powiadomienie</string>
+    <string name="settings_test_notification_sent">Wysyłanie testowego powiadomienia…</string>
+    <string name="settings_check_worker_status">Sprawdź status</string>
+    <string name="settings_worker_not_scheduled">Brak zaplanowanych zadań!</string>
+    <string name="settings_worker_status_format">Status: %1$s\nPróby uruchomienia: %2$d\nTag: %3$s</string>
+    <string name="settings_reset_feedback">Zresetuj status opinii</string>
+    <string name="settings_reset_feedback_hint">Wyczyść wszystkie dane śledzenia opinii, aby ponownie przetestować monity</string>
+    <string name="settings_feedback_reset_success">Status opinii zresetowany! Otwórz ponownie galerię, aby zobaczyć monit.</string>
+    <string name="settings_about">O Utility Cam</string>
+    <string name="settings_about_description">Drugi aparat do tymczasowych zdjęć. Wszystko zrobione w tej aplikacji automatycznie się usunie po określonym czasie.</string>
+    <string name="settings_about_feature_1">• Zdjęcia są zapisywane w prywatnej pamięci aplikacji, a nie w głównej galerii</string>
+    <string name="settings_about_feature_2">• Dotknij \'Zachowaj na zawsze\' na dowolnym zdjęciu, aby zapisać je trwale</string>
+    <string name="settings_about_privacy">Prywatność: Zbieramy anonimowe dane użycia, aby ulepszyć aplikację. Żadne zdjęcia ani dane osobowe nie są udostępniane. Możesz to wyłączyć w Ustawienia > Prywatność.</string>
+    <string name="settings_media_permission_info">💡 Wskazówka: Na Androidzie 14+ możesz wybrać udostępnianie tylko wybranych zdjęć zamiast udzielania pełnego dostępu.</string>
+    <string name="settings_warning_uninstall">⚠️ Ostrzeżenie: Odinstalowanie aplikacji trwale usunie wszystkie zdjęcia w niej przechowywane. Przed odinstalowaniem zapisz ważne zdjęcia.</string>
+    <string name="settings_send_feedback">Wyślij opinię</string>
+    <string name="settings_love_utility_cam">Podoba Ci się Utility Cam?</string>
+    <string name="settings_feedback_email_subject">Opinia o Utility Cam (v%s)</string>
+    <string name="settings_feedback_email_body">Witam zespół Utility Cam,\n\nChciałbym/chciałabym podzielić się opinią:\n\n[Proszę wpisać opinię lub zgłoszenie błędu tutaj]\n\n---\nWersja aplikacji: %1$s (%2$d)\nWersja Androida: %3$d\nUrządzenie: %4$s %5$s</string>
+    <string name="settings_feedback_chooser_title">Wyślij opinię przez</string>
+    <string name="settings_feedback_no_email_app">Nie znaleziono aplikacji e-mail</string>
+    <string name="settings_app_version">Wersja aplikacji</string>
+    <string name="settings_version_format">Wersja %1$s (%2$d)</string>
+
+    <!-- Feedback Dialog -->
+    <string name="feedback_title">Podoba Ci się Utility Cam?</string>
+    <string name="feedback_message">Chcielibyśmy usłyszeć Twoją opinię! Twoja opinia pomaga nam się rozwijać i dotrzeć do większej liczby użytkowników.</string>
+    <string name="feedback_rate_now">Oceń w Play Store</string>
+    <string name="feedback_later">Może później</string>
+    <string name="feedback_no_thanks">Nie, dziękuję</string>
+
+    <!-- Pro Screen -->
+    <string name="pro_title">Pro na zawsze</string>
+    <string name="pro_back">Wstecz</string>
+    <string name="pro_upgrade_title">Przejdź na Pro na zawsze</string>
+    <string name="pro_upgrade_subtitle">Odblokuj funkcje premium jednorazowym zakupem</string>
+    <string name="pro_already_purchased">Jesteś użytkownikiem Pro!</string>
+    <string name="pro_thank_you">Dziękujemy za wsparcie Utility Cam</string>
+    <string name="pro_features_title">Funkcje Pro</string>
+    <string name="pro_feature_video_title">Nagrywanie wideo</string>
+    <string name="pro_feature_video_description">Nagrywaj i zapisuj wideo z automatycznymi czasomierzami usuwania</string>
+    <string name="pro_feature_custom_expiration_title">Dostosuj czas wygaśnięcia</string>
+    <string name="pro_feature_custom_expiration_description">Ustaw niestandardowe czasy wygaśnięcia w godzinach, dniach lub tygodniach dla swoich zdjęć i filmów</string>
+    <string name="pro_feature_priority_support_title">Wsparcie priorytetowe</string>
+    <string name="pro_feature_priority_support_description">Otrzymuj szybsze odpowiedzi na swoje pytania i problemy</string>
+    <string name="pro_feature_support_dev_title">Wspieraj rozwój</string>
+    <string name="pro_feature_support_dev_description">Pomóż nam dalej ulepszać i dodawać nowe funkcje</string>
+    <string name="pro_feature_future_title">Przyszłe funkcje Pro</string>
+    <string name="pro_feature_future_description">Uzyskaj dostęp do wszystkich przyszłych funkcji premium bez dodatkowych kosztów</string>
+    <string name="pro_one_time_payment">Jednorazowa płatność</string>
+    <string name="pro_price_loading">Ładowanie…</string>
+    <string name="pro_loading_price">Ładowanie informacji o cenie…</string>
+    <string name="pro_purchase_button">Kup Pro na zawsze</string>
+    <string name="pro_one_time_note">✓ Jednorazowa płatność, na zawsze Twoje\n✓ Bez subskrypcji ani opłat cyklicznych</string>
+    <string name="pro_purchase_success">Dziękujemy za przejście na Pro!</string>
+    <string name="pro_purchase_error">Zakup nie powiódł się: %s</string>
+    <string name="pro_purchase_unavailable">Zakup jest obecnie niedostępny</string>
+    <string name="settings_go_pro">Przejdź na Pro</string>
+    <string name="settings_go_pro_hint">Odblokuj funkcje premium jednorazowym zakupem</string>
+    <string name="settings_pro_thank_you">Dziękujemy za wsparcie!</string>
+</resources>

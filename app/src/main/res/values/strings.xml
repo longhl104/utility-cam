@@ -152,6 +152,7 @@
     <string name="settings_language_portuguese">Português</string>
     <string name="settings_language_indonesian">Bahasa Indonesia</string>
     <string name="settings_language_hindi">हिन्दी</string>
+    <string name="settings_language_polish">Polski</string>
     <string name="settings_language_restart_hint">Language will be updated immediately</string>
     <string name="settings_default_expiration">Default Expiration Time</string>
     <string name="settings_default_expiration_hint">Choose how long photos should be kept before automatically deleting</string>

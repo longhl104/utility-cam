@@ -1,13 +1,11 @@
 package com.utility.cam.data
 
 import android.content.Context
-import android.content.res.Configuration
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.util.Locale
 
 private val Context.localeDataStore by preferencesDataStore(name = "locale_preferences")
 
@@ -40,34 +38,16 @@ class LocaleManager(private val context: Context) {
     }
 
     /**
-     * Apply the locale to the context
-     */
-    @Suppress("DEPRECATION")
-    fun applyLocale(languageCode: String): Context {
-        val locale = if (languageCode == SYSTEM_DEFAULT) {
-            Locale.getDefault()
-        } else {
-            Locale.forLanguageTag(languageCode)
-        }
-
-        Locale.setDefault(locale)
-
-        val config = Configuration(context.resources.configuration)
-        config.setLocale(locale)
-
-        return context.createConfigurationContext(config)
-    }
-
-    /**
      * Get list of supported languages
      */
     fun getSupportedLanguages(): List<Language> {
         return listOf(
             Language(SYSTEM_DEFAULT, "System Default"),
             Language("en", "English"),
+            Language("hi", "हिन्दी"),
+            Language("pl", "Polski"),
             Language("pt", "Português"),
             Language("in", "Bahasa Indonesia"),
-            Language("hi", "हिन्दी")
         )
     }
 }

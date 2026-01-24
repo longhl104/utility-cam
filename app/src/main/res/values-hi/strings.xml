@@ -152,6 +152,7 @@
     <string name="settings_language_portuguese">Português</string>
     <string name="settings_language_indonesian">Bahasa Indonesia</string>
     <string name="settings_language_hindi">हिन्दी</string>
+    <string name="settings_language_polish">Polski</string>
     <string name="settings_language_restart_hint">भाषा तुरंत अपडेट हो जाएगी</string>
     <string name="settings_default_expiration">डिफ़ॉल्ट समाप्ति समय</string>
     <string name="settings_default_expiration_hint">फोटो स्वचालित रूप से हटाए जाने से पहले कब तक रखी जाएं चुनें</string>
