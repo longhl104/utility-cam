@@ -82,8 +82,21 @@ fun YourScreen() {
 
 The `InAppReviewManager` is currently used in:
 
-1. **SettingsScreen** - "Love Utility Cam?" button
-2. **FeedbackDialog** - "Rate Now" button
+1. **SettingsScreen** - "Love Utility Cam?" button (manual trigger)
+2. **FeedbackDialog** - "Rate Now" button (manual trigger)
+3. **GalleryScreen** - Automatic trigger after saving 5 photos to gallery
+4. **MediaDetailScreen** - Automatic trigger after saving photos to gallery
+
+### Automatic Review Triggers
+
+The app intelligently triggers in-app reviews when users demonstrate value by saving photos:
+
+- **Threshold**: After saving 5 photos total
+- **Cooldown**: Won't trigger more than once every 30 days
+- **Graceful**: If user has already rated, won't trigger again
+- **Silent fallback**: If review API is unavailable, it silently skips (no Play Store popup)
+
+This is managed by `FeedbackManager.shouldTriggerReviewAfterSave()`.
 
 ## Important Notes
 

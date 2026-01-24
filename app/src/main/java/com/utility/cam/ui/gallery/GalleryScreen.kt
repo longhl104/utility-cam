@@ -1,6 +1,8 @@
 package com.utility.cam.ui.gallery
 
+import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -68,6 +70,7 @@ import coil.request.ImageRequest
 import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.FeedbackManager
+import com.utility.cam.data.InAppReviewManager
 import com.utility.cam.data.PhotoEventBus
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.PreferencesManager
@@ -90,6 +93,7 @@ fun GalleryScreen(
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
     val feedbackManager = remember { FeedbackManager(context) }
+    val inAppReviewManager = remember { InAppReviewManager(context) }
     val preferencesManager = remember { PreferencesManager(context) }
     val actualIsProUser = rememberProUserState()
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -461,6 +465,38 @@ fun GalleryScreen(
                                     savedCount++
                                 }
                             }
+
+                            // Track saved photos for review trigger
+                            if (savedCount > 0) {
+                                feedbackManager.incrementSavedPhotoCount(savedCount)
+
+                                // Check if we should trigger in-app review
+                                val shouldTriggerReview = feedbackManager.shouldTriggerReviewAfterSave()
+                                if (shouldTriggerReview) {
+                                    // Small delay to let the UI settle
+                                    delay(1000)
+
+                                    val activity = context as? Activity
+                                    if (activity != null) {
+                                        Log.d("GalleryScreen", "Triggering in-app review after saving $savedCount photos")
+
+                                        inAppReviewManager.launchReviewFlow(
+                                            activity = activity,
+                                            onComplete = {
+                                                Log.d("GalleryScreen", "Review flow completed after save")
+                                                coroutineScope.launch {
+                                                    feedbackManager.markUserRated()
+                                                }
+                                            },
+                                            onFallback = {
+                                                Log.d("GalleryScreen", "Review flow not available, skipping")
+                                                // Don't open Play Store automatically, just skip silently
+                                            }
+                                        )
+                                    }
+                                }
+                            }
+
                             AnalyticsHelper.logBatchSave(savedCount)
                             isSelectionMode = false
                             selectedPhotoIds = emptySet()
