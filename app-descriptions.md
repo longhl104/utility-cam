@@ -2,97 +2,135 @@
 
 ## Short Description (80 characters)
 
-Temporary photo storage with auto-delete. Keep your gallery clean and organized.
+Temporary photos & videos with auto-delete. Keep your gallery clean & organized.
 
 ## Alternative Short Descriptions
 
-- Camera for temporary photos that auto-delete after 24hrs, 3 days, or 1 week
-- Snap temporary photos that vanish automatically. Save only what matters.
-- Quick photos with auto-delete timer. Keep your gallery clutter-free.
+- Camera for temporary photos & videos that auto-delete. Pro customization available.
+- Snap temporary media that vanishes automatically. Save only what matters.
+- Quick photos & videos with auto-delete timer. Keep your gallery clutter-free.
+- Temporary media with smart auto-delete. 5 languages. Video recording available.
 
 ---
 
 ## Full Description (4000 characters max)
 
-**Utility Cam - Smart Temporary Photo Storage**
+**Utility Cam - Smart Temporary Media Storage**
 
-Take temporary photos that automatically delete themselves after a set time. Perfect for parking spots, shopping lists, temporary receipts, event info, or anything you need to remember briefly but don't want cluttering your main gallery forever.
+Take temporary photos and videos that automatically delete themselves after a set time. Perfect for parking spots, shopping lists, temporary receipts, event info, quick reminders, or anything you need briefly but don't want cluttering your gallery forever.
 
 **WHY UTILITY CAM?**
 
-Your gallery is full of photos you only needed temporarily - parking lot locations, store hours, product labels, reminder notes, or quick reference shots. Utility Cam solves this by automatically deleting these utility photos after you're done with them, keeping your main gallery clean and organized.
+Your gallery is overflowing with photos you only needed temporarily - parking locations, store hours, product labels, reminder notes, quick reference shots, or temporary videos. Utility Cam solves this by automatically deleting these utility media after you're done with them, keeping your main gallery clean and organized.
 
 **HOW IT WORKS**
 
-1. **Snap a Photo**: Use the built-in camera to capture temporary photos
-2. **Set Expiration**: Choose 24 hours (default), 3 days, or 1 week
-3. **Add Context**: Optionally add a description like "Parking Spot: Level 4"
-4. **Auto-Delete**: Photos automatically vanish when time's up
-5. **Keep Important Ones**: Tap "Save to Gallery" to keep photos permanently
+1. **Capture Media**: Built-in camera for photos and videos (Pro)
+2. **Set Expiration**: Choose 24 hours, 3 days, 1 week, or custom duration (Pro)
+3. **Add Context**: Optionally add descriptions like "Parking Spot: Level 4"
+4. **Auto-Delete**: Media automatically vanishes when time expires
+5. **Keep Important Ones**: Tap "Save to Gallery" to keep permanently
 
 **KEY FEATURES**
 
 ⏱️ **Automatic Expiration**
 
-- Photos auto-delete after 24 hours, 3 days, or 1 week
-- Background cleanup runs automatically every 15 minutes
-- Never worry about deleting temporary photos manually
-- Set different expiration times for different photos
+- Media auto-deletes after 24 hours, 3 days, or 1 week
+- PRO: Custom expiration times (hours, days, or weeks)
+- Background cleanup runs automatically
+- Never manually delete temporary media again
+- Different expiration times for different items
 
-📸 **Simple Camera Interface**
+🎥 **Photo & Video Support**
 
+- Take quick photos instantly
+- PRO: Record videos with auto-delete timers
 - Front and back camera support
-- Quick capture with minimal steps
 - Review before saving with retake option
-- Add descriptions to photos for context
+- Proper orientation handling
 
 📱 **Home Screen Widget**
 
-- View up to 5 active photos at a glance
-- See countdown timers for each photo
-- Quick overview of temporary photo inventory
-- No need to open the app to check photos
+- View up to 5 active items at a glance
+- See countdown timers for each item
+- Quick media inventory overview
+- Check without opening the app
 
-🖼️ **Gallery View**
+🖼️ **Smart Gallery View**
 
-- Grid layout showing all active photos
+- Grid layout showing all active media
 - Visual countdown indicators
-- Expiration warnings for photos about to vanish
+- Expiration warnings for items about to vanish
 - Tap to view full-size with details
+- Multi-select for batch operations
+- Share multiple items at once
 
-💾 **Smart Storage**
+🌍 **Multilingual Support**
 
-- Photos stored in app's private space
+- English, Português, Bahasa Indonesia
+- हिन्दी (Hindi), Polski
+- Automatic language detection
+- Easy language switching in settings
+
+💾 **Intelligent Storage**
+
+- Media stored in app's private space
 - Keeps your main gallery completely clean
-- No cluttered DCIM folder with temporary shots
+- No cluttered DCIM folder
 - Efficient thumbnail generation
+- Optimized memory usage
 
 🔒 **"Keep Forever" Option**
 
 - Found an important photo? Save it permanently!
 - One-tap save to device gallery
 - Moved to DCIM folder for permanent storage
-- Removed from temporary storage after saving
+- Share with other apps easily
 
-📝 **Photo Descriptions**
+📝 **Media Descriptions**
 
 - Add notes to remember context
 - Perfect for parking locations, product info, etc.
 - Edit descriptions anytime
-- Quick reference without opening photos
+- Quick reference without opening media
+
+🎨 **Modern Material 3 Design**
+
+- Beautiful, intuitive interface
+- Dark mode support
+- Smooth animations
+- Clean, minimal design
+- Gesture-based navigation
+
+🔔 **Smart Notifications**
+
+- Cleanup notifications when media expires
+- Reminder notifications 1 hour before expiration
+- Configurable notification preferences
+- Never lose track of important temporary media
 
 🔐 **Privacy First**
 
-- All photos stored locally on your device
+- All media stored locally on your device
 - No cloud uploads or external servers
 - No account required
 - Minimal permissions - only camera and storage
 - Complete data control
+- Optional anonymous analytics (can be disabled)
+
+**PRO FEATURES (One-Time Purchase)**
+
+⭐ **Video Recording** - Capture and save videos with auto-delete timers
+⭐ **Custom Expiration Times** - Set exact duration in hours, days, or weeks
+⭐ **Priority Support** - Get faster responses to questions
+⭐ **Support Development** - Help us add more features
+⭐ **Future Features** - All upcoming premium features included
+⭐ **No Subscriptions** - One-time payment, yours forever
 
 **PERFECT FOR:**
 
-✅ **Parking Spots** - Remember where you parked without cluttering your gallery
-✅ **Shopping Lists** - Snap a photo of your list, auto-delete after shopping
+✅ **Parking Spots** - Remember where you parked without cluttering gallery
+✅ **Shopping Lists** - Snap photos of lists, auto-delete after shopping
 ✅ **Product Info** - Capture model numbers or specs temporarily
 ✅ **Receipts** - Keep temporary receipts that expire automatically
 ✅ **Event Details** - Save tickets, schedules, or location info briefly
@@ -101,53 +139,39 @@ Your gallery is full of photos you only needed temporarily - parking lot locatio
 ✅ **WiFi Passwords** - Capture passwords at hotels or cafes temporarily
 ✅ **Meeting Notes** - Whiteboard or presentation slides that expire
 ✅ **Address Information** - Remember locations without saving permanently
+✅ **Quick Videos** - Record brief instructions or demonstrations (Pro)
+✅ **Temporary Reminders** - Visual notes that auto-delete when done
 
-**TECHNICAL DETAILS**
+**TECHNICAL HIGHLIGHTS**
 
-- Built with modern Jetpack Compose and Material 3 design
+- Built with Jetpack Compose and Material 3 design
 - CameraX integration for reliable camera functionality
 - WorkManager for background cleanup scheduling
-- Efficient image handling with thumbnail generation
+- Efficient image/video handling with thumbnails
 - Proper EXIF rotation support
+- ExoPlayer for smooth video playback
 - Android 8.0+ compatible
+- Google Play In-App Review integration
+- In-app billing for Pro upgrade
 
 **PERMISSIONS EXPLAINED**
 
-- **Camera**: Required to capture temporary photos
-- **Storage**: Required to save photos and access them later
-- **Optional**: Save permanently to device gallery when needed
+- **Camera**: Capture temporary photos and videos
+- **Storage**: Save and access media
+- **Notifications**: Alert you about expiring media (optional)
 
 **NO BLOAT, NO CONFUSION**
 
-Unlike complex camera apps with hundreds of filters and features you'll never use, Utility Cam does one thing exceptionally well: temporary photo storage with automatic deletion. Simple, fast, and effective.
-
-**UPCOMING FEATURES**
-
-We're constantly improving based on user feedback:
-
-- Custom expiration durations
-- Notification reminders before photos expire
-- Tags and categories for organization
-- Video support
-- Optional cloud backup for important photos
-- Batch operations
-
-**FREE WITH ADS**
-
-Utility Cam is free with optional ad support to keep development ongoing. All core features are available to everyone.
-
-**AGE REQUIREMENT**
-
-This app is intended for users aged 13 and above. No personal data is collected.
+Unlike complex camera apps with hundreds of filters and features you'll never use, Utility Cam does one thing exceptionally well: temporary media storage with automatic deletion. Simple, fast, and effective.
 
 **KEEP YOUR GALLERY CLEAN**
 
-Download Utility Cam today and never manually delete temporary photos again!
+Download Utility Cam today and never manually delete temporary media again!
 
 ---
 
-**Character Count:** ~3,998 characters (including spaces)
+**Character Count:** ~3,996 characters (including spaces)
 
 ## Additional Keywords for ASO (App Store Optimization)
 
-temporary photos, auto delete photos, self destructing photos, expiring photos, photo timer, temporary storage, clean gallery, photo organizer, parking spot camera, quick reference photos, utility photos, ephemeral photos, time limited photos, auto cleanup, gallery cleaner, temporary camera, disposable photos, photo expiration, timed photos, smart cleanup
+temporary photos, temporary videos, auto delete photos, auto delete videos, self destructing photos, expiring photos, expiring videos, photo timer, video timer, temporary storage, clean gallery, photo organizer, video organizer, parking spot camera, quick reference photos, utility photos, ephemeral photos, ephemeral videos, time limited photos, auto cleanup, gallery cleaner, temporary camera, disposable photos, photo expiration, video expiration, timed photos, timed videos, smart cleanup, media auto delete, temporary media, pro camera, custom expiration, multilingual camera, privacy camera, local storage camera, video recording, photo descriptions, batch operations, material design camera, widget camera, notification reminders
