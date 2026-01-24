@@ -28,8 +28,8 @@
     <string name="gallery_title">Utility Cam</string>
     <string name="gallery_settings">Configurações</string>
     <string name="gallery_take_photo">Capturar</string>
-    <string name="gallery_no_photos">Nenhuma mídia utilitária ainda</string>
-    <string name="gallery_no_photos_hint">Toque em + para capturar sua primeira foto ou vídeo</string>
+    <string name="gallery_no_photos">Nenhuma mídia útil ainda</string>
+    <string name="gallery_no_photos_hint">Toque no botão da câmera para capturar sua primeira foto ou vídeo</string>
     <string name="gallery_expires_in">Expira em: %s</string>
     <string name="gallery_selection_count">%d selecionado(s)</string>
     <string name="gallery_exit_selection">Sair do modo de seleção</string>

@@ -28,7 +28,7 @@
     <string name="gallery_settings">Pengaturan</string>
     <string name="gallery_take_photo">Ambil</string>
     <string name="gallery_no_photos">Belum ada media utilitas</string>
-    <string name="gallery_no_photos_hint">Ketuk + untuk mengambil foto atau video pertama Anda</string>
+    <string name="gallery_no_photos_hint">Ketuk tombol kamera untuk mengambil foto atau video pertama Anda</string>
     <string name="gallery_expires_in">Kedaluwarsa dalam: %s</string>
     <string name="gallery_selection_count">%d dipilih</string>
     <string name="gallery_exit_selection">Keluar dari mode pilihan</string>
