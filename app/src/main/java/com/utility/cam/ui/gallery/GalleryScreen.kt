@@ -549,14 +549,22 @@ fun PhotoGridItem(
                 }
             )
     ) {
-        // Use thumbnail for both photos and videos
-        val thumbnailPath = photo.thumbnailPath ?: photo.filePath
+        // Use full image for photos (Coil resizes efficiently), thumbnail for videos
+        val isVideo = photo.filePath.endsWith(".mp4", ignoreCase = true)
+        val imagePath = if (isVideo) {
+            // Use thumbnail for videos to avoid loading large video files
+            photo.thumbnailPath ?: photo.filePath
+        } else {
+            // Use full image for photos to avoid grainy thumbnails
+            photo.filePath
+        }
+
         val painter = rememberAsyncImagePainter(
             ImageRequest.Builder(LocalContext.current)
-                .data(File(thumbnailPath))
+                .data(File(imagePath))
                 .crossfade(true)
                 .allowHardware(false)
-                .size(800, 800) // Higher quality for grid items
+                .size(800, 800) // Coil will resize efficiently
                 .build()
         )
 
@@ -568,7 +576,6 @@ fun PhotoGridItem(
         )
 
         // Video indicator overlay
-        val isVideo = photo.filePath.endsWith(".mp4", ignoreCase = true)
         if (isVideo) {
             Box(
                 modifier = Modifier
