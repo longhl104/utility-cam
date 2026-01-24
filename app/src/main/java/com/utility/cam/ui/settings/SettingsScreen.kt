@@ -67,6 +67,7 @@ import com.utility.cam.BuildConfig
 import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.FeedbackManager
+import com.utility.cam.data.InAppReviewManager
 import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
@@ -93,6 +94,7 @@ fun SettingsScreen(
 
     val localeManager = remember { LocaleManager(context) }
     val feedbackManager = remember { FeedbackManager(context) }
+    val inAppReviewManager = remember { InAppReviewManager(context) }
     val coroutineScope = rememberCoroutineScope()
 
 
@@ -860,78 +862,32 @@ fun SettingsScreen(
                 onClick = {
                     val activity = context as? Activity
                     if (activity != null) {
-                        Log.d("SettingsScreen", "Manual review request from button")
-                        val reviewManager =
-                            com.google.android.play.core.review.ReviewManagerFactory.create(
-                                context
-                            )
-                        val request = reviewManager.requestReviewFlow()
+                        Log.d("SettingsScreen", "Launching in-app review flow")
 
-                        request.addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Log.d(
-                                    "SettingsScreen",
-                                    "Review request successful, launching flow"
-                                )
-                                val reviewInfo = task.result
-                                val flow = reviewManager.launchReviewFlow(activity, reviewInfo)
-
-                                flow.addOnCompleteListener {
-                                    Log.d("SettingsScreen", "Review flow completed")
-                                    // Mark that user has rated (same as FeedbackDialog)
-                                    coroutineScope.launch {
-                                        feedbackManager.markUserRated()
-                                    }
-                                    // Note: In-App Review might not show in debug/test environments
-                                    // If nothing appeared, open Play Store as fallback
-                                    if (BuildConfig.DEBUG) {
-                                        Log.w("SettingsScreen", "Debug build - In-App Review may not work, opening Play Store")
-                                        openPlayStoreForReview(context)
-                                    }
+                        inAppReviewManager.launchReviewFlow(
+                            activity = activity,
+                            onComplete = {
+                                // Mark that user has rated
+                                coroutineScope.launch {
+                                    feedbackManager.markUserRated()
                                 }
-
-                                flow.addOnFailureListener { exception ->
-                                    Log.e(
-                                        "SettingsScreen",
-                                        "Review flow failed: ${exception.message}"
-                                    )
-                                    Toast.makeText(
-                                        context,
-                                        "Opening Play Store...",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    openPlayStoreForReview(context)
-                                }
-                            } else {
-                                Log.e(
-                                    "SettingsScreen",
-                                    "Review request failed: ${task.exception?.message}"
-                                )
+                                Log.d("SettingsScreen", "Review flow completed")
+                            },
+                            onFallback = {
+                                // Fallback to Play Store
+                                Log.w("SettingsScreen", "Review flow not available, opening Play Store")
                                 Toast.makeText(
                                     context,
                                     "Opening Play Store...",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                openPlayStoreForReview(context)
+                                inAppReviewManager.openPlayStoreForReview()
                             }
-                        }
-
-                        request.addOnFailureListener { exception ->
-                            Log.e(
-                                "SettingsScreen",
-                                "Review request exception: ${exception.message}"
-                            )
-                            Toast.makeText(
-                                context,
-                                "Opening Play Store...",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            openPlayStoreForReview(context)
-                        }
+                        )
                     } else {
+                        // No activity context, open Play Store directly
                         Log.e("SettingsScreen", "No activity context available")
-                        // Direct fallback if no activity
-                        openPlayStoreForReview(context)
+                        inAppReviewManager.openPlayStoreForReview()
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
@@ -1120,27 +1076,4 @@ fun SettingsScreen(
     }
 }
 
-/**
- * Opens the app's page in Google Play Store for review
- */
-private fun openPlayStoreForReview(context: android.content.Context) {
-    try {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = "market://details?id=${context.packageName}".toUri()
-            setPackage("com.android.vending")
-        }
-        context.startActivity(intent)
-    } catch (_: Exception) {
-        // Fallback to browser if Play Store is not installed
-        try {
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                data =
-                    "https://play.google.com/store/apps/details?id=${context.packageName}".toUri()
-            }
-            context.startActivity(intent)
-        } catch (_: Exception) {
-            Log.e("SettingsScreen", "Unable to open Play Store")
-        }
-    }
-}
 
