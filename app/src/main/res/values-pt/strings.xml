@@ -151,6 +151,7 @@
     <string name="settings_language_english">English</string>
     <string name="settings_language_portuguese">Português</string>
     <string name="settings_language_indonesian">Bahasa Indonesia</string>
+    <string name="settings_language_hindi">हिन्दी</string>
     <string name="settings_language_restart_hint">O idioma será atualizado imediatamente</string>
     <string name="settings_default_expiration">Tempo de Expiração Padrão</string>
     <string name="settings_default_expiration_hint">Escolha por quanto tempo as fotos devem ser mantidas antes de serem excluídas automaticamente</string>
