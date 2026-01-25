@@ -2,9 +2,9 @@ package com.utility.cam.ui.gallery
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -124,7 +124,7 @@ fun GalleryScreen(
     val sortMode = remember(sortModeString) {
         try {
             GallerySortMode.valueOf(sortModeString)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             GallerySortMode.BY_EXPIRATION
         }
     }
@@ -559,18 +559,15 @@ fun GalleryScreen(
 
                                     val activity = context as? Activity
                                     if (activity != null) {
-                                        Log.d("GalleryScreen", "Triggering in-app review after saving $savedCount photos")
 
                                         inAppReviewManager.launchReviewFlow(
                                             activity = activity,
                                             onComplete = {
-                                                Log.d("GalleryScreen", "Review flow completed after save")
                                                 coroutineScope.launch {
                                                     feedbackManager.markUserRated()
                                                 }
                                             },
                                             onFallback = {
-                                                Log.d("GalleryScreen", "Review flow not available, skipping")
                                                 // Don't open Play Store automatically, just skip silently
                                             }
                                         )
@@ -654,10 +651,32 @@ fun PhotoGridItem(
 ) {
     val haptic = LocalHapticFeedback.current
 
+    // Calculate urgency level based on time remaining
+    val timeRemaining = photo.getTimeRemaining()
+    val oneHour = TimeUnit.HOURS.toMillis(1)
+    val oneDay = TimeUnit.DAYS.toMillis(1)
+
+    val isUrgent = timeRemaining <= oneHour // Expiring within 1 hour
+    val isWarning = timeRemaining in (oneHour + 1)..oneDay // Expiring within 1 day
+
+    // Choose colors based on urgency
+    val borderColor = when {
+        isUrgent -> MaterialTheme.colorScheme.error
+        isWarning -> Color(0xFFFFA726) // Orange for warning
+        else -> Color.Transparent
+    }
+
+    val borderWidth = when {
+        isUrgent -> 4.dp
+        isWarning -> 3.dp
+        else -> 0.dp
+    }
+
     Box(
         modifier = Modifier
             .aspectRatio(1f)
             .clip(RoundedCornerShape(8.dp))
+            .border(borderWidth, borderColor, RoundedCornerShape(8.dp))
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = {
@@ -738,17 +757,55 @@ fun PhotoGridItem(
             }
         }
 
-        // Timer overlay
+        // Urgent/Warning badge
+        if (isUrgent || isWarning) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(8.dp)
+                    .background(
+                        color = when {
+                            isUrgent -> MaterialTheme.colorScheme.error
+                            else -> Color(0xFFFFA726)
+                        },
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            ) {
+                Text(
+                    text = when {
+                        isUrgent -> "⚠️ URGENT"
+                        else -> "⏰ SOON"
+                    },
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Color.White,
+                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                )
+            }
+        }
+
+        // Timer overlay with enhanced styling for urgent/warning items
         Box(
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .background(Color.Black.copy(alpha = 0.7f))
+                .background(
+                    when {
+                        isUrgent -> MaterialTheme.colorScheme.error.copy(alpha = 0.9f)
+                        isWarning -> Color(0xFFFFA726).copy(alpha = 0.9f)
+                        else -> Color.Black.copy(alpha = 0.7f)
+                    }
+                )
                 .padding(horizontal = 8.dp, vertical = 4.dp)
         ) {
             Text(
                 text = photo.getFormattedTimeRemaining(),
                 style = MaterialTheme.typography.labelSmall,
-                color = Color.White
+                color = Color.White,
+                fontWeight = if (isUrgent || isWarning) {
+                    androidx.compose.ui.text.font.FontWeight.Bold
+                } else {
+                    androidx.compose.ui.text.font.FontWeight.Normal
+                }
             )
         }
 
