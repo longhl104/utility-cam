@@ -12,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -108,53 +109,49 @@ class MainActivity : FragmentActivity() {
         // Get photo ID from intent extras
         val photoId = intent?.extras?.getString("photo_id")
 
-        // Check if biometric lock is enabled before showing content
+        // Initialize managers
         val biometricManager = BiometricManager(this)
         val billingManager = BillingManager(this)
         val preferencesManager = PreferencesManager(this)
 
-        var isAuthenticated by mutableStateOf(false)
-        var authenticationRequired by mutableStateOf(false)
-
-        // Check if authentication is required
-        runBlocking {
-            val isBiometricEnabled = biometricManager.isBiometricEnabled().first()
-            val isProUser = billingManager.isProUser.value
-            val debugProOverride = preferencesManager.getDebugProOverride().first()
-            val actualIsProUser = if (BuildConfig.DEBUG) debugProOverride else isProUser
-
-            authenticationRequired = isBiometricEnabled && actualIsProUser
-
-            Log.d("MainActivity", "Biometric lock enabled: $isBiometricEnabled")
-            Log.d("MainActivity", "Is Pro user: $actualIsProUser")
-            Log.d("MainActivity", "Authentication required: $authenticationRequired")
-
-            if (authenticationRequired) {
-                // Show authentication prompt
-                Log.d("MainActivity", "Launching biometric authentication on app start")
-                biometricManager.authenticate(
-                    activity = this@MainActivity,
-                    title = getString(R.string.biometric_unlock_title),
-                    subtitle = getString(R.string.biometric_unlock_subtitle),
-                    description = getString(R.string.biometric_unlock_description),
-                    onSuccess = {
-                        Log.d("MainActivity", "Authentication successful")
-                        isAuthenticated = true
-                    },
-                    onError = { errorCode, message ->
-                        Log.e("MainActivity", "Authentication failed: errorCode=$errorCode, message=$message")
-                        // If authentication fails or is cancelled, close the app
-                        finish()
-                    }
-                )
-            } else {
-                // No authentication required
-                isAuthenticated = true
-            }
-        }
-
         setContent {
             val themeMode by preferencesManager.getThemeMode().collectAsState(initial = PreferencesManager.THEME_MODE_SYSTEM)
+            val isBiometricEnabled by biometricManager.isBiometricEnabled().collectAsState(initial = false)
+            val isProUser by billingManager.isProUser.collectAsState()
+            val debugProOverride by preferencesManager.getDebugProOverride().collectAsState(initial = false)
+
+            val actualIsProUser = if (BuildConfig.DEBUG) debugProOverride || isProUser else isProUser
+            val authenticationRequired = isBiometricEnabled && actualIsProUser
+
+            var isAuthenticated by remember { mutableStateOf(!authenticationRequired) }
+            var hasAttemptedAuth by remember { mutableStateOf(false) }
+
+            // Trigger authentication when required
+            androidx.compose.runtime.LaunchedEffect(authenticationRequired) {
+                if (authenticationRequired && !hasAttemptedAuth) {
+                    hasAttemptedAuth = true
+                    Log.d("MainActivity", "Biometric lock enabled: $isBiometricEnabled")
+                    Log.d("MainActivity", "Is Pro user: $actualIsProUser")
+                    Log.d("MainActivity", "Authentication required: $authenticationRequired")
+                    Log.d("MainActivity", "Launching biometric authentication on app start")
+
+                    biometricManager.authenticate(
+                        activity = this@MainActivity,
+                        title = getString(R.string.biometric_unlock_title),
+                        subtitle = getString(R.string.biometric_unlock_subtitle),
+                        description = getString(R.string.biometric_unlock_description),
+                        onSuccess = {
+                            Log.d("MainActivity", "Authentication successful")
+                            isAuthenticated = true
+                        },
+                        onError = { errorCode, message ->
+                            Log.e("MainActivity", "Authentication failed: errorCode=$errorCode, message=$message")
+                            // If authentication fails or is cancelled, close the app
+                            finish()
+                        }
+                    )
+                }
+            }
 
             // Determine if dark theme should be used based on preference
             val darkTheme = when (themeMode) {
@@ -169,7 +166,7 @@ class MainActivity : FragmentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     // Only show content if authenticated or no authentication required
-                    if (isAuthenticated || !authenticationRequired) {
+                    if (isAuthenticated) {
                         UtilityCamNavigation(initialPhotoId = photoId)
                     }
                 }

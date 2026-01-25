@@ -98,7 +98,6 @@ fun CameraScreen(
     onNavigateBack: () -> Unit,
     onNavigateToPro: () -> Unit = {}
 ) {
-    val context = LocalContext.current
     val actualIsProUser = rememberProUserState()
 
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
