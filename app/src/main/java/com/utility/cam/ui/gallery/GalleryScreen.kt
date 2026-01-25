@@ -102,7 +102,8 @@ enum class GallerySortMode {
 fun GalleryScreen(
     onNavigateToCamera: () -> Unit,
     onNavigateToSettings: () -> Unit,
-    onNavigateToMediaDetail: (String) -> Unit
+    onNavigateToMediaDetail: (String) -> Unit,
+    onNavigateToBin: () -> Unit
 ) {
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
@@ -278,6 +279,9 @@ fun GalleryScreen(
                         }
                     },
                     actions = {
+                        IconButton(onClick = onNavigateToBin) {
+                            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.gallery_bin))
+                        }
                         IconButton(onClick = onNavigateToSettings) {
                             Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.gallery_settings))
                         }

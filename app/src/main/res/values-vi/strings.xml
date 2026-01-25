@@ -44,6 +44,31 @@
     <string name="gallery_save_button">Lưu</string>
     <string name="gallery_sort_by_expiration">Theo hết hạn</string>
     <string name="gallery_sort_by_capture">Theo ngày</string>
+    <string name="gallery_bin">Thùng rác</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">Thùng rác</string>
+    <string name="bin_back">Quay lại</string>
+    <string name="bin_no_items">Không có mục nào trong thùng rác</string>
+    <string name="bin_no_items_hint">Phương tiện hết hạn sẽ được chuyển đến đây và giữ trong 30 ngày</string>
+    <string name="bin_days_remaining">Còn %d ngày</string>
+    <string name="bin_restore">Khôi phục</string>
+    <string name="bin_delete_permanently">Xóa</string>
+    <string name="bin_selection_count">%d đã chọn</string>
+    <string name="bin_exit_selection">Thoát chế độ chọn</string>
+    <string name="bin_restore_selected">Khôi phục mục đã chọn</string>
+    <string name="bin_delete_selected">Xóa vĩnh viễn</string>
+    <string name="bin_delete_confirm_title">Xóa vĩnh viễn %d mục?</string>
+    <string name="bin_delete_confirm_message">Hành động này không thể hoàn tác. Các mục sẽ bị xóa vĩnh viễn.</string>
+    <string name="bin_delete_button">Xóa Vĩnh Viễn</string>
+    <string name="bin_cancel_button">Hủy</string>
+    <string name="bin_restore_confirm_title">Khôi phục %d mục?</string>
+    <string name="bin_restore_confirm_message">Các mục sẽ được khôi phục với thời gian hết hạn 24 giờ.</string>
+    <string name="bin_restore_button">Khôi phục</string>
+    <string name="bin_empty">Làm trống thùng rác</string>
+    <string name="bin_empty_confirm_title">Làm trống toàn bộ thùng rác?</string>
+    <string name="bin_empty_confirm_message">Tất cả các mục trong thùng rác sẽ bị xóa vĩnh viễn. Hành động này không thể hoàn tác.</string>
+    <string name="bin_empty_button">Làm trống thùng rác</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Cần quyền truy cập máy ảnh</string>

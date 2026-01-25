@@ -12,6 +12,7 @@ import com.utility.cam.ui.mediadetail.MediaDetailScreen
 import com.utility.cam.ui.permissions.NotificationPermissionHandler
 import com.utility.cam.ui.settings.SettingsScreen
 import com.utility.cam.ui.pro.ProScreen
+import com.utility.cam.ui.bin.BinScreen
 
 sealed class Screen(val route: String) {
     object Gallery : Screen("gallery")
@@ -31,6 +32,7 @@ sealed class Screen(val route: String) {
     }
     object Settings : Screen("settings")
     object Pro : Screen("pro")
+    object Bin : Screen("bin")
 }
 
 @Composable
@@ -61,6 +63,9 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
                 },
                 onNavigateToMediaDetail = { mediaId ->
                     navController.navigate(Screen.MediaDetail.createRoute(mediaId))
+                },
+                onNavigateToBin = {
+                    navController.navigate(Screen.Bin.route)
                 }
             )
         }
@@ -134,6 +139,14 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
 
         composable(Screen.Pro.route) {
             ProScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Screen.Bin.route) {
+            BinScreen(
                 onNavigateBack = {
                     navController.popBackStack()
                 }

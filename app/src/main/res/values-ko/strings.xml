@@ -45,6 +45,31 @@
     <string name="gallery_save_button">저장</string>
     <string name="gallery_sort_by_expiration">만료 기준</string>
     <string name="gallery_sort_by_capture">날짜 기준</string>
+    <string name="gallery_bin">휴지통</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">휴지통</string>
+    <string name="bin_back">뒤로</string>
+    <string name="bin_no_items">휴지통에 항목이 없습니다</string>
+    <string name="bin_no_items_hint">만료된 미디어가 여기로 이동되어 30일 동안 보관됩니다</string>
+    <string name="bin_days_remaining">%d일 남음</string>
+    <string name="bin_restore">복원</string>
+    <string name="bin_delete_permanently">삭제</string>
+    <string name="bin_selection_count">%d개 선택됨</string>
+    <string name="bin_exit_selection">선택 모드 종료</string>
+    <string name="bin_restore_selected">선택 항목 복원</string>
+    <string name="bin_delete_selected">영구 삭제</string>
+    <string name="bin_delete_confirm_title">%d개 항목을 영구 삭제하시겠습니까?</string>
+    <string name="bin_delete_confirm_message">이 작업은 취소할 수 없습니다. 항목이 영구적으로 삭제됩니다.</string>
+    <string name="bin_delete_button">영구 삭제</string>
+    <string name="bin_cancel_button">취소</string>
+    <string name="bin_restore_confirm_title">%d개 항목을 복원하시겠습니까?</string>
+    <string name="bin_restore_confirm_message">항목이 24시간 만료 시간으로 복원됩니다.</string>
+    <string name="bin_restore_button">복원</string>
+    <string name="bin_empty">휴지통 비우기</string>
+    <string name="bin_empty_confirm_title">전체 휴지통을 비우시겠습니까?</string>
+    <string name="bin_empty_confirm_message">휴지통의 모든 항목이 영구적으로 삭제됩니다. 이 작업은 취소할 수 없습니다.</string>
+    <string name="bin_empty_button">휴지통 비우기</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">카메라 권한이 필요합니다</string>

@@ -13,13 +13,37 @@ data class UtilityMedia(
     val captureTimestamp: Long,
     val expirationTimestamp: Long,
     val thumbnailPath: String? = null,
-    val description: String? = null
+    val description: String? = null,
+    val inBin: Boolean = false,
+    val deletedAt: Long? = null // Timestamp when moved to bin
 ) {
+    companion object {
+        const val BIN_RETENTION_DAYS = 30
+        const val BIN_RETENTION_MILLIS = BIN_RETENTION_DAYS * 24 * 60 * 60 * 1000L
+    }
+
     /**
      * Check if this photo has expired
      */
     fun isExpired(): Boolean {
         return System.currentTimeMillis() > expirationTimestamp
+    }
+
+    /**
+     * Check if this photo should be permanently deleted from bin
+     */
+    fun shouldBePermanentlyDeleted(): Boolean {
+        if (!inBin || deletedAt == null) return false
+        return System.currentTimeMillis() > (deletedAt + BIN_RETENTION_MILLIS)
+    }
+
+    /**
+     * Get days remaining in bin before permanent deletion
+     */
+    fun getDaysRemainingInBin(): Int {
+        if (!inBin || deletedAt == null) return 0
+        val timeRemaining = (deletedAt + BIN_RETENTION_MILLIS) - System.currentTimeMillis()
+        return (timeRemaining / (24 * 60 * 60 * 1000)).toInt().coerceAtLeast(0)
     }
 
     /**

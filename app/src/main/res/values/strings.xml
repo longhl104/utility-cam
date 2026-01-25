@@ -45,6 +45,31 @@
     <string name="gallery_save_button">Save</string>
     <string name="gallery_sort_by_expiration">By Expiration</string>
     <string name="gallery_sort_by_capture">By Date</string>
+    <string name="gallery_bin">Bin</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">Bin</string>
+    <string name="bin_back">Back</string>
+    <string name="bin_no_items">No items in bin</string>
+    <string name="bin_no_items_hint">Expired media will be moved here and kept for 30 days</string>
+    <string name="bin_days_remaining">%d days left</string>
+    <string name="bin_restore">Restore</string>
+    <string name="bin_delete_permanently">Delete</string>
+    <string name="bin_selection_count">%d selected</string>
+    <string name="bin_exit_selection">Exit selection mode</string>
+    <string name="bin_restore_selected">Restore selected</string>
+    <string name="bin_delete_selected">Delete permanently</string>
+    <string name="bin_delete_confirm_title">Permanently delete %d item(s)?</string>
+    <string name="bin_delete_confirm_message">This action cannot be undone. Items will be deleted forever.</string>
+    <string name="bin_delete_button">Delete Forever</string>
+    <string name="bin_cancel_button">Cancel</string>
+    <string name="bin_restore_confirm_title">Restore %d item(s)?</string>
+    <string name="bin_restore_confirm_message">Items will be restored with 24 hours expiration time.</string>
+    <string name="bin_restore_button">Restore</string>
+    <string name="bin_empty">Empty Bin</string>
+    <string name="bin_empty_confirm_title">Empty entire bin?</string>
+    <string name="bin_empty_confirm_message">All items in bin will be permanently deleted. This action cannot be undone.</string>
+    <string name="bin_empty_button">Empty Bin</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Camera permission is required</string>

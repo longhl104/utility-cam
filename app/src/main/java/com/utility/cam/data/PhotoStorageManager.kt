@@ -203,10 +203,17 @@ class PhotoStorageManager(private val context: Context) {
     }
 
     /**
-     * Get all active photos (non-expired)
+     * Get all active photos (non-expired and not in bin)
      */
     suspend fun getAllPhotos(): List<UtilityMedia> = withContext(Dispatchers.IO) {
-        loadPhotoMetadata().filterNot { it.isExpired() }
+        loadPhotoMetadata().filter { !it.isExpired() && !it.inBin }
+    }
+
+    /**
+     * Get all bin items
+     */
+    suspend fun getBinItems(): List<UtilityMedia> = withContext(Dispatchers.IO) {
+        loadPhotoMetadata().filter { it.inBin }
     }
 
     /**
@@ -241,54 +248,120 @@ class PhotoStorageManager(private val context: Context) {
     }
 
     /**
-     * Delete all expired photos
+     * Move expired photos to bin
      */
-    suspend fun deleteExpiredPhotos(): Int = withContext(Dispatchers.IO) {
-        Log.d(TAG, "deleteExpiredPhotos: Starting cleanup process")
+    suspend fun moveExpiredPhotosToBin(): Int = withContext(Dispatchers.IO) {
         val currentTime = System.currentTimeMillis()
-        Log.d(TAG, "deleteExpiredPhotos: Current time = $currentTime")
+        val photos = loadPhotoMetadata().toMutableList()
 
-        val photos = loadPhotoMetadata()
-        Log.d(TAG, "deleteExpiredPhotos: Loaded ${photos.size} total photos from metadata")
+        val (expired, notExpired) = photos.partition { it.isExpired() && !it.inBin }
 
-        // Log each photo's expiration status
-        photos.forEachIndexed { index, photo ->
-            val isExpired = photo.isExpired()
-            val timeRemaining = photo.getTimeRemaining()
-            Log.d(TAG, "deleteExpiredPhotos: Photo $index - ID: ${photo.id}, " +
-                    "Expiration: ${photo.expirationTimestamp}, " +
-                    "IsExpired: $isExpired, " +
-                    "TimeRemaining: ${timeRemaining}ms (${timeRemaining / 1000}s)")
+        // Move expired photos to bin
+        val updatedPhotos = notExpired + expired.map { photo ->
+            photo.copy(inBin = true, deletedAt = currentTime)
         }
 
-        val (expired, active) = photos.partition { it.isExpired() }
-        Log.d(TAG, "deleteExpiredPhotos: Found ${expired.size} expired photos and ${active.size} active photos")
+        saveAllPhotoMetadata(updatedPhotos)
 
-        // Delete expired files
-        expired.forEachIndexed { index, photo ->
-            Log.d(TAG, "deleteExpiredPhotos: Deleting expired photo ${index + 1}/${expired.size} - ID: ${photo.id}")
-            val mainFileDeleted = File(photo.filePath).delete()
-            Log.d(TAG, "deleteExpiredPhotos: Main file deleted: $mainFileDeleted - ${photo.filePath}")
-
-            photo.thumbnailPath?.let { thumbPath ->
-                val thumbDeleted = File(thumbPath).delete()
-                Log.d(TAG, "deleteExpiredPhotos: Thumbnail deleted: $thumbDeleted - $thumbPath")
-            }
-        }
-
-        // Save active photos metadata
-        Log.d(TAG, "deleteExpiredPhotos: Saving ${active.size} active photos to metadata")
-        saveAllPhotoMetadata(active)
-
-        Log.d(TAG, "deleteExpiredPhotos: Cleanup complete. Deleted ${expired.size} photos")
-
-        // Emit event if photos were deleted
+        // Emit event if photos were moved to bin
         if (expired.isNotEmpty()) {
-            Log.d(TAG, "deleteExpiredPhotos: Emitting PhotosDeleted event")
             PhotoEventBus.emit(PhotoEvent.PhotosDeleted)
         }
 
         expired.size
+    }
+
+    /**
+     * Delete all expired photos (legacy method - now moves to bin)
+     */
+    suspend fun deleteExpiredPhotos(): Int = moveExpiredPhotosToBin()
+
+    /**
+     * Permanently delete items from bin that exceeded retention period
+     */
+    suspend fun deletePermanentlyFromBin(): Int = withContext(Dispatchers.IO) {
+        val photos = loadPhotoMetadata().toMutableList()
+
+        val (toDelete, toKeep) = photos.partition { it.shouldBePermanentlyDeleted() }
+
+        // Delete files permanently
+        toDelete.forEach { photo ->
+            File(photo.filePath).delete()
+            photo.thumbnailPath?.let { File(it).delete() }
+        }
+
+        saveAllPhotoMetadata(toKeep)
+
+        if (toDelete.isNotEmpty()) {
+            PhotoEventBus.emit(PhotoEvent.PhotosDeleted)
+        }
+
+        toDelete.size
+    }
+
+    /**
+     * Move a photo to bin
+     */
+    suspend fun moveToBin(photoId: String): Boolean = withContext(Dispatchers.IO) {
+        val photos = loadPhotoMetadata().toMutableList()
+        val index = photos.indexOfFirst { it.id == photoId }
+
+        if (index == -1) return@withContext false
+
+        photos[index] = photos[index].copy(
+            inBin = true,
+            deletedAt = System.currentTimeMillis()
+        )
+
+        saveAllPhotoMetadata(photos)
+        PhotoEventBus.emit(PhotoEvent.PhotosDeleted)
+
+        true
+    }
+
+    /**
+     * Restore a photo from bin
+     */
+    suspend fun restoreFromBin(photoId: String): Boolean = withContext(Dispatchers.IO) {
+        val photos = loadPhotoMetadata().toMutableList()
+        val index = photos.indexOfFirst { it.id == photoId }
+
+        if (index == -1 || !photos[index].inBin) return@withContext false
+
+        // Restore with new expiration time (24 hours from now)
+        val newExpirationTime = System.currentTimeMillis() + TTLDuration.TWENTY_FOUR_HOURS.toMilliseconds()
+
+        photos[index] = photos[index].copy(
+            inBin = false,
+            deletedAt = null,
+            expirationTimestamp = newExpirationTime
+        )
+
+        saveAllPhotoMetadata(photos)
+        PhotoEventBus.emit(PhotoEvent.PhotoAdded)
+
+        true
+    }
+
+    /**
+     * Permanently delete a photo from bin
+     */
+    suspend fun deletePermanently(photoId: String): Boolean = withContext(Dispatchers.IO) {
+        val photos = loadPhotoMetadata().toMutableList()
+        val photo = photos.find { it.id == photoId && it.inBin } ?: return@withContext false
+
+        // Delete files
+        File(photo.filePath).delete()
+        photo.thumbnailPath?.let { File(it).delete() }
+
+        // Update metadata
+        photos.remove(photo)
+        saveAllPhotoMetadata(photos)
+
+        // Emit event
+        PhotoEventBus.emit(PhotoEvent.PhotosDeleted)
+
+        true
     }
 
     /**

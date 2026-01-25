@@ -45,6 +45,31 @@
     <string name="gallery_save_button">सुरक्षित गर्नुहोस्</string>
     <string name="gallery_sort_by_expiration">समाप्ति अनुसार</string>
     <string name="gallery_sort_by_capture">मिति अनुसार</string>
+    <string name="gallery_bin">बिन</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">बिन</string>
+    <string name="bin_back">पछाडि</string>
+    <string name="bin_no_items">बिनमा कुनै वस्तु छैन</string>
+    <string name="bin_no_items_hint">समाप्त भएको मिडिया यहाँ सारिनेछ र ३० दिनसम्म राखिनेछ</string>
+    <string name="bin_days_remaining">%d दिन बाँकी</string>
+    <string name="bin_restore">पुनर्स्थापना गर्नुहोस्</string>
+    <string name="bin_delete_permanently">मेटाउनुहोस्</string>
+    <string name="bin_selection_count">%d चयनित</string>
+    <string name="bin_exit_selection">चयन मोडबाट बाहिर निस्कनुहोस्</string>
+    <string name="bin_restore_selected">चयनित पुनर्स्थापना गर्नुहोस्</string>
+    <string name="bin_delete_selected">स्थायी रूपमा मेटाउनुहोस्</string>
+    <string name="bin_delete_confirm_title">%d वस्तु(हरू) स्थायी रूपमा मेटाउने?</string>
+    <string name="bin_delete_confirm_message">यो कार्य पूर्ववत गर्न सकिँदैन। वस्तुहरू सधैंको लागि मेटाइनेछ।</string>
+    <string name="bin_delete_button">सधैंको लागि मेटाउनुहोस्</string>
+    <string name="bin_cancel_button">रद्द गर्नुहोस्</string>
+    <string name="bin_restore_confirm_title">%d वस्तु(हरू) पुनर्स्थापना गर्ने?</string>
+    <string name="bin_restore_confirm_message">वस्तुहरू २४ घण्टाको समाप्ति समयसँग पुनर्स्थापना गरिनेछ।</string>
+    <string name="bin_restore_button">पुनर्स्थापना गर्नुहोस्</string>
+    <string name="bin_empty">बिन खाली गर्नुहोस्</string>
+    <string name="bin_empty_confirm_title">सम्पूर्ण बिन खाली गर्ने?</string>
+    <string name="bin_empty_confirm_message">बिनमा भएका सबै वस्तुहरू स्थायी रूपमा मेटाइनेछ। यो कार्य पूर्ववत गर्न सकिँदैन।</string>
+    <string name="bin_empty_button">बिन खाली गर्नुहोस्</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">क्यामेरा अनुमति आवश्यक छ</string>

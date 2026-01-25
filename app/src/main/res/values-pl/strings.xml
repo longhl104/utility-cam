@@ -47,6 +47,31 @@
     <string name="gallery_save_button">Zapisz</string>
     <string name="gallery_sort_by_expiration">Według wygaśnięcia</string>
     <string name="gallery_sort_by_capture">Według daty</string>
+    <string name="gallery_bin">Kosz</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">Kosz</string>
+    <string name="bin_back">Wstecz</string>
+    <string name="bin_no_items">Brak elementów w koszu</string>
+    <string name="bin_no_items_hint">Wygasłe multimedia zostaną przeniesione tutaj i przechowywane przez 30 dni</string>
+    <string name="bin_days_remaining">Pozostało %d dni</string>
+    <string name="bin_restore">Przywróć</string>
+    <string name="bin_delete_permanently">Usuń</string>
+    <string name="bin_selection_count">Wybrano: %d</string>
+    <string name="bin_exit_selection">Wyjdź z trybu zaznaczania</string>
+    <string name="bin_restore_selected">Przywróć wybrane</string>
+    <string name="bin_delete_selected">Usuń na stałe</string>
+    <string name="bin_delete_confirm_title">Trwale usunąć %d element(ów)?</string>
+    <string name="bin_delete_confirm_message">Tej czynności nie można cofnąć. Elementy zostaną usunięte na zawsze.</string>
+    <string name="bin_delete_button">Usuń na zawsze</string>
+    <string name="bin_cancel_button">Anuluj</string>
+    <string name="bin_restore_confirm_title">Przywrócić %d element(ów)?</string>
+    <string name="bin_restore_confirm_message">Elementy zostaną przywrócone z 24-godzinnym czasem wygaśnięcia.</string>
+    <string name="bin_restore_button">Przywróć</string>
+    <string name="bin_empty">Opróżnij kosz</string>
+    <string name="bin_empty_confirm_title">Opróżnić cały kosz?</string>
+    <string name="bin_empty_confirm_message">Wszystkie elementy w koszu zostaną trwale usunięte. Tej czynności nie można cofnąć.</string>
+    <string name="bin_empty_button">Opróżnij kosz</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Wymagane uprawnienie do aparatu</string>

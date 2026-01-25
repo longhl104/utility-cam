@@ -44,6 +44,31 @@
     <string name="gallery_save_button">Simpan</string>
     <string name="gallery_sort_by_expiration">Berdasarkan Kedaluwarsa</string>
     <string name="gallery_sort_by_capture">Berdasarkan Tanggal</string>
+    <string name="gallery_bin">Tempat Sampah</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">Tempat Sampah</string>
+    <string name="bin_back">Kembali</string>
+    <string name="bin_no_items">Tidak ada item di tempat sampah</string>
+    <string name="bin_no_items_hint">Media yang kedaluwarsa akan dipindahkan ke sini dan disimpan selama 30 hari</string>
+    <string name="bin_days_remaining">%d hari tersisa</string>
+    <string name="bin_restore">Pulihkan</string>
+    <string name="bin_delete_permanently">Hapus</string>
+    <string name="bin_selection_count">%d dipilih</string>
+    <string name="bin_exit_selection">Keluar dari mode pilihan</string>
+    <string name="bin_restore_selected">Pulihkan yang dipilih</string>
+    <string name="bin_delete_selected">Hapus secara permanen</string>
+    <string name="bin_delete_confirm_title">Hapus %d item secara permanen?</string>
+    <string name="bin_delete_confirm_message">Tindakan ini tidak dapat dibatalkan. Item akan dihapus selamanya.</string>
+    <string name="bin_delete_button">Hapus Selamanya</string>
+    <string name="bin_cancel_button">Batal</string>
+    <string name="bin_restore_confirm_title">Pulihkan %d item?</string>
+    <string name="bin_restore_confirm_message">Item akan dipulihkan dengan waktu kedaluwarsa 24 jam.</string>
+    <string name="bin_restore_button">Pulihkan</string>
+    <string name="bin_empty">Kosongkan Tempat Sampah</string>
+    <string name="bin_empty_confirm_title">Kosongkan seluruh tempat sampah?</string>
+    <string name="bin_empty_confirm_message">Semua item di tempat sampah akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.</string>
+    <string name="bin_empty_button">Kosongkan Tempat Sampah</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Izin kamera diperlukan</string>

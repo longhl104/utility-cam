@@ -45,6 +45,31 @@
     <string name="gallery_save_button">सहेजें</string>
     <string name="gallery_sort_by_expiration">समाप्ति के अनुसार</string>
     <string name="gallery_sort_by_capture">तारीख के अनुसार</string>
+    <string name="gallery_bin">बिन</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">बिन</string>
+    <string name="bin_back">वापस</string>
+    <string name="bin_no_items">बिन में कोई आइटम नहीं</string>
+    <string name="bin_no_items_hint">समाप्त हो चुकी मीडिया यहां स्थानांतरित की जाएगी और 30 दिनों तक रखी जाएगी</string>
+    <string name="bin_days_remaining">%d दिन शेष</string>
+    <string name="bin_restore">पुनर्स्थापित करें</string>
+    <string name="bin_delete_permanently">हटाएं</string>
+    <string name="bin_selection_count">%d चयनित</string>
+    <string name="bin_exit_selection">चयन मोड से बाहर निकलें</string>
+    <string name="bin_restore_selected">चयनित को पुनर्स्थापित करें</string>
+    <string name="bin_delete_selected">स्थायी रूप से हटाएं</string>
+    <string name="bin_delete_confirm_title">%d आइटम को स्थायी रूप से हटाएं?</string>
+    <string name="bin_delete_confirm_message">इस क्रिया को पूर्ववत नहीं किया जा सकता। आइटम हमेशा के लिए हटा दिए जाएंगे।</string>
+    <string name="bin_delete_button">हमेशा के लिए हटाएं</string>
+    <string name="bin_cancel_button">रद्द करें</string>
+    <string name="bin_restore_confirm_title">%d आइटम पुनर्स्थापित करें?</string>
+    <string name="bin_restore_confirm_message">आइटम 24 घंटे की समाप्ति समय के साथ पुनर्स्थापित किए जाएंगे।</string>
+    <string name="bin_restore_button">पुनर्स्थापित करें</string>
+    <string name="bin_empty">बिन खाली करें</string>
+    <string name="bin_empty_confirm_title">पूरा बिन खाली करें?</string>
+    <string name="bin_empty_confirm_message">बिन में सभी आइटम स्थायी रूप से हटा दिए जाएंगे। इस क्रिया को पूर्ववत नहीं किया जा सकता।</string>
+    <string name="bin_empty_button">बिन खाली करें</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">कैमरा अनुमति आवश्यक है</string>

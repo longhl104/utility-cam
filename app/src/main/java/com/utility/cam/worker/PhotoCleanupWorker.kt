@@ -21,52 +21,30 @@ class PhotoCleanupWorker(
     appContext: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(appContext, workerParams) {
-    
+
     companion object {
         private const val TAG = "PhotoCleanupWorker"
     }
 
     override suspend fun doWork(): Result {
-        val startMessage = "PhotoCleanupWorker started at ${System.currentTimeMillis()}"
-        Log.d(TAG, startMessage)
-
         return try {
             val storageManager = PhotoStorageManager(applicationContext)
 
-            // Log all photos before cleanup
-            val allPhotos = storageManager.getAllPhotos()
-            Log.d(TAG, "Total active photos before cleanup: ${allPhotos.size}")
+            // Move expired photos to bin
+            val movedToBin = storageManager.moveExpiredPhotosToBin()
 
-            val deletedCount = storageManager.deleteExpiredPhotos()
-            
-            val deletedMessage = "Deleted $deletedCount expired photo(s)"
-            Log.d(TAG, deletedMessage)
+            // Permanently delete old bin items (30+ days)
+            val deletedFromBin = storageManager.deletePermanentlyFromBin()
 
-            // Log all photos after cleanup
-            val remainingPhotos = storageManager.getAllPhotos()
-            Log.d(TAG, "Total active photos after cleanup: ${remainingPhotos.size}")
-
-            // Send notification about deleted photos if enabled
-            if (deletedCount > 0) {
+            // Send notification about moved photos if enabled and count > 0
+            if (movedToBin > 0) {
                 val preferencesManager = PreferencesManager(applicationContext)
                 val notificationsEnabled = preferencesManager.getNotificationsEnabled().first()
 
-                val enabledMessage = "Notifications enabled: $notificationsEnabled"
-                Log.d(TAG, enabledMessage)
-
                 if (notificationsEnabled) {
-                    NotificationHelper.sendPhotoCleanupNotification(applicationContext, deletedCount)
-                } else {
-                    val skippedMessage = "Notifications disabled, skipping notification"
-                    Log.d(TAG, skippedMessage)
+                    NotificationHelper.sendPhotoCleanupNotification(applicationContext, movedToBin)
                 }
-            } else {
-                val noDeleteMessage = "No photos deleted, no notification needed"
-                Log.d(TAG, noDeleteMessage)
             }
-            
-            val successMessage = "PhotoCleanupWorker completed successfully"
-            Log.d(TAG, successMessage)
 
             // In debug mode, schedule the next run to create a repeating cycle
             if (BuildConfig.DEBUG) {
@@ -82,15 +60,10 @@ class PhotoCleanupWorker(
                     ExistingWorkPolicy.REPLACE,
                     nextCleanup
                 )
-
-                val chainMessage = "Scheduled next cleanup in $delaySeconds seconds"
-                Log.d(TAG, chainMessage)
             }
 
             Result.success()
         } catch (e: Exception) {
-            val errorMessage = "PhotoCleanupWorker failed: ${e.message}"
-            Log.e(TAG, errorMessage, e)
             e.printStackTrace()
             Result.retry()
         }

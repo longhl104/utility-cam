@@ -45,6 +45,31 @@
     <string name="gallery_save_button">সংরক্ষণ করুন</string>
     <string name="gallery_sort_by_expiration">মেয়াদ অনুযায়ী</string>
     <string name="gallery_sort_by_capture">তারিখ অনুযায়ী</string>
+    <string name="gallery_bin">বিন</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">বিন</string>
+    <string name="bin_back">পিছনে</string>
+    <string name="bin_no_items">বিনে কোনো আইটেম নেই</string>
+    <string name="bin_no_items_hint">মেয়াদোত্তীর্ণ মিডিয়া এখানে স্থানান্তরিত হবে এবং ৩০ দিনের জন্য রাখা হবে</string>
+    <string name="bin_days_remaining">%d দিন বাকি</string>
+    <string name="bin_restore">পুনরুদ্ধার করুন</string>
+    <string name="bin_delete_permanently">মুছুন</string>
+    <string name="bin_selection_count">%d নির্বাচিত</string>
+    <string name="bin_exit_selection">নির্বাচন মোড থেকে প্রস্থান করুন</string>
+    <string name="bin_restore_selected">নির্বাচিত পুনরুদ্ধার করুন</string>
+    <string name="bin_delete_selected">স্থায়ীভাবে মুছুন</string>
+    <string name="bin_delete_confirm_title">%d আইটেম স্থায়ীভাবে মুছবেন?</string>
+    <string name="bin_delete_confirm_message">এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না। আইটেমগুলি চিরতরে মুছে যাবে।</string>
+    <string name="bin_delete_button">চিরতরে মুছুন</string>
+    <string name="bin_cancel_button">বাতিল করুন</string>
+    <string name="bin_restore_confirm_title">%d আইটেম পুনরুদ্ধার করবেন?</string>
+    <string name="bin_restore_confirm_message">আইটেমগুলি ২৪ ঘণ্টার মেয়াদ সময়ের সাথে পুনরুদ্ধার করা হবে।</string>
+    <string name="bin_restore_button">পুনরুদ্ধার করুন</string>
+    <string name="bin_empty">বিন খালি করুন</string>
+    <string name="bin_empty_confirm_title">সম্পূর্ণ বিন খালি করবেন?</string>
+    <string name="bin_empty_confirm_message">বিনের সমস্ত আইটেম স্থায়ীভাবে মুছে ফেলা হবে। এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না।</string>
+    <string name="bin_empty_button">বিন খালি করুন</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">ক্যামেরা অনুমতি প্রয়োজন</string>
