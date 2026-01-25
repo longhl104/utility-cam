@@ -58,6 +58,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -75,6 +76,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -131,6 +133,7 @@ fun CameraScreen(
                 isProUser = actualIsProUser
             )
         }
+
         else -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -346,33 +349,55 @@ fun CameraPreviewScreen(
                         .padding(bottom = 16.dp),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    IconButton(
-                        onClick = {
-                            if (isProUser) {
-                                // Launch document scanner
-                                documentScanner.getStartScanIntent(context as Activity)
-                                    .addOnSuccessListener { intentSender ->
-                                        scannerLauncher.launch(
-                                            IntentSenderRequest.Builder(intentSender).build()
-                                        )
-                                    }
-                                    .addOnFailureListener { e ->
-                                        e.printStackTrace()
-                                    }
-                            } else {
-                                showProLockedDialog = true
+                    Box {
+                        IconButton(
+                            onClick = {
+                                if (isProUser) {
+                                    // Launch document scanner
+                                    documentScanner.getStartScanIntent(context as Activity)
+                                        .addOnSuccessListener { intentSender ->
+                                            scannerLauncher.launch(
+                                                IntentSenderRequest.Builder(intentSender).build()
+                                            )
+                                        }
+                                        .addOnFailureListener { e ->
+                                            e.printStackTrace()
+                                        }
+                                } else {
+                                    showProLockedDialog = true
+                                }
+                            },
+                            modifier = Modifier
+                                .size(48.dp)
+                                .background(Color.White.copy(alpha = 0.2f), CircleShape),
+                            enabled = !isRecording && !isCapturing
+                        ) {
+                            Icon(
+                                Icons.Default.DocumentScanner,
+                                contentDescription = stringResource(R.string.camera_scan_document),
+                                tint = Color.White
+                            )
+                        }
+
+                        // PRO badge for normal users
+                        if (!isProUser) {
+                            Surface(
+                                modifier = Modifier
+                                    .align(Alignment.TopEnd)
+                                    .padding(top = 2.dp, end = 2.dp),
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = RoundedCornerShape(4.dp)
+                            ) {
+                                Text(
+                                    text = "PRO",
+                                    modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    fontSize = 8.sp,
+                                    color = Color.White,
+                                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                                )
                             }
-                        },
-                        modifier = Modifier
-                            .size(48.dp)
-                            .background(Color.White.copy(alpha = 0.2f), CircleShape),
-                        enabled = !isRecording && !isCapturing
-                    ) {
-                        Icon(
-                            if (isProUser) Icons.Default.DocumentScanner else Icons.Default.Lock,
-                            contentDescription = stringResource(R.string.camera_scan_document),
-                            tint = Color.White
-                        )
+                        }
                     }
                 }
             }
@@ -505,6 +530,7 @@ fun CameraPreviewScreen(
                                     }
                                 }
                             }
+
                             CaptureMode.VIDEO -> {
                                 if (isRecording) {
                                     // Stop recording
@@ -516,21 +542,22 @@ fun CameraPreviewScreen(
                                     coroutineScope.launch {
                                         try {
                                             videoCapture?.let { capture ->
-                                                @Suppress("UnusedVariable") val videoFile = startVideoRecording(
-                                                    context,
-                                                    capture,
-                                                    audioPermissionState.status.isGranted,
-                                                    onRecordingStarted = { recording ->
-                                                        activeRecording = recording
-                                                        isRecording = true
-                                                    },
-                                                    onRecordingStopped = { file ->
-                                                        if (file != null) {
-                                                            onPhotoCapture(file, "video")
+                                                @Suppress("UnusedVariable") val videoFile =
+                                                    startVideoRecording(
+                                                        context,
+                                                        capture,
+                                                        audioPermissionState.status.isGranted,
+                                                        onRecordingStarted = { recording ->
+                                                            activeRecording = recording
+                                                            isRecording = true
+                                                        },
+                                                        onRecordingStopped = { file ->
+                                                            if (file != null) {
+                                                                onPhotoCapture(file, "video")
+                                                            }
+                                                            isRecording = false
                                                         }
-                                                        isRecording = false
-                                                    }
-                                                )
+                                                    )
                                             }
                                         } catch (e: Exception) {
                                             e.printStackTrace()
@@ -719,6 +746,7 @@ private suspend fun startVideoRecording(
                 is VideoRecordEvent.Start -> {
                     // Recording started successfully
                 }
+
                 is VideoRecordEvent.Finalize -> {
                     if (event.hasError()) {
                         videoFile.delete()
