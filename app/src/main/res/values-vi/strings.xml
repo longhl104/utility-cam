@@ -42,6 +42,8 @@
     <string name="gallery_save_confirm_title">Lưu %d mục vĩnh viễn?</string>
     <string name="gallery_save_confirm_message">Các mục sẽ được lưu vào thư viện của bạn và xóa khỏi ứng dụng này.</string>
     <string name="gallery_save_button">Lưu</string>
+    <string name="gallery_sort_by_expiration">Theo hết hạn</string>
+    <string name="gallery_sort_by_capture">Theo ngày</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Cần quyền truy cập máy ảnh</string>

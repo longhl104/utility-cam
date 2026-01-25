@@ -43,6 +43,8 @@
     <string name="gallery_save_confirm_title">Save %d item(s) permanently?</string>
     <string name="gallery_save_confirm_message">Items will be saved to your gallery and removed from this app.</string>
     <string name="gallery_save_button">Save</string>
+    <string name="gallery_sort_by_expiration">By Expiration</string>
+    <string name="gallery_sort_by_capture">By Date</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Camera permission is required</string>

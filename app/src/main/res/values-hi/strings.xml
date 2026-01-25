@@ -43,6 +43,8 @@
     <string name="gallery_save_confirm_title">%d आइटम स्थायी रूप से सहेजें?</string>
     <string name="gallery_save_confirm_message">आइटम आपकी गैलरी में सहेजे जाएंगे और इस ऐप से हटा दिए जाएंगे।</string>
     <string name="gallery_save_button">सहेजें</string>
+    <string name="gallery_sort_by_expiration">समाप्ति के अनुसार</string>
+    <string name="gallery_sort_by_capture">तारीख के अनुसार</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">कैमरा अनुमति आवश्यक है</string>

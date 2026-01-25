@@ -28,6 +28,7 @@ class PreferencesManager(private val context: Context) {
         val ANALYTICS_CONSENT_SHOWN_KEY = booleanPreferencesKey("analytics_consent_shown")
         val DEBUG_PRO_OVERRIDE_KEY = booleanPreferencesKey("debug_pro_override")
         val THEME_MODE_KEY = stringPreferencesKey("theme_mode")
+        val GALLERY_SORT_MODE_KEY = stringPreferencesKey("gallery_sort_mode")
 
         // Theme mode values
         const val THEME_MODE_SYSTEM = "system"
@@ -183,6 +184,22 @@ class PreferencesManager(private val context: Context) {
     suspend fun setThemeMode(mode: String) {
         context.dataStore.edit { preferences ->
             preferences[THEME_MODE_KEY] = mode
+        }
+    }
+
+    /**
+     * Get the gallery sort mode
+     */
+    fun getGallerySortMode(): Flow<String> = context.dataStore.data.map { preferences ->
+        preferences[GALLERY_SORT_MODE_KEY] ?: "BY_EXPIRATION"
+    }
+
+    /**
+     * Set the gallery sort mode
+     */
+    suspend fun setGallerySortMode(mode: String) {
+        context.dataStore.edit { preferences ->
+            preferences[GALLERY_SORT_MODE_KEY] = mode
         }
     }
 }

@@ -32,10 +32,14 @@ import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -45,6 +49,7 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -82,6 +87,15 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.io.File
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.concurrent.TimeUnit
+
+enum class GallerySortMode {
+    BY_EXPIRATION,
+    BY_CAPTURE_TIME
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -104,6 +118,16 @@ fun GalleryScreen(
     var isRefreshing by remember { mutableStateOf(false) }
     var showFeedbackDialog by remember { mutableStateOf(false) }
     var showAnalyticsConsentDialog by remember { mutableStateOf(false) }
+
+    // Persist sort mode preference
+    val sortModeString by preferencesManager.getGallerySortMode().collectAsState(initial = "BY_EXPIRATION")
+    val sortMode = remember(sortModeString) {
+        try {
+            GallerySortMode.valueOf(sortModeString)
+        } catch (e: Exception) {
+            GallerySortMode.BY_EXPIRATION
+        }
+    }
 
     // Multi-select state
     var isSelectionMode by remember { mutableStateOf(false) }
@@ -300,41 +324,98 @@ fun GalleryScreen(
                     }
                 }
             } else {
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(minSize = 150.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(8.dp)
-                ) {
-                    items(photos, key = { it.id }) { photo ->
-                        PhotoGridItem(
-                            photo = photo,
-                            isSelected = selectedPhotoIds.contains(photo.id),
-                            isSelectionMode = isSelectionMode,
-                            onClick = {
-                                if (isSelectionMode) {
-                                    // Toggle selection
-                                    selectedPhotoIds = if (photo.id in selectedPhotoIds) {
-                                        selectedPhotoIds - photo.id
-                                    } else {
-                                        selectedPhotoIds + photo.id
+                Column(modifier = Modifier.fillMaxSize()) {
+                    // Sort mode selector
+                    if (!isSelectionMode) {
+                        SingleChoiceSegmentedButtonRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        ) {
+                            SegmentedButton(
+                                selected = sortMode == GallerySortMode.BY_EXPIRATION,
+                                onClick = {
+                                    coroutineScope.launch {
+                                        preferencesManager.setGallerySortMode(GallerySortMode.BY_EXPIRATION.name)
                                     }
-                                    // Exit selection mode if no photos selected
-                                    if (selectedPhotoIds.isEmpty()) {
-                                        isSelectionMode = false
-                                    }
-                                } else {
-                                    onNavigateToMediaDetail(photo.id)
-                                }
-                            },
-                            onLongClick = {
-                                // Enter selection mode and select this photo
-                                isSelectionMode = true
-                                selectedPhotoIds = selectedPhotoIds + photo.id
+                                },
+                                shape = SegmentedButtonDefaults.itemShape(index = 0, count = 2)
+                            ) {
+                                Text(stringResource(R.string.gallery_sort_by_expiration))
                             }
-                        )
+                            SegmentedButton(
+                                selected = sortMode == GallerySortMode.BY_CAPTURE_TIME,
+                                onClick = {
+                                    coroutineScope.launch {
+                                        preferencesManager.setGallerySortMode(GallerySortMode.BY_CAPTURE_TIME.name)
+                                    }
+                                },
+                                shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2)
+                            ) {
+                                Text(stringResource(R.string.gallery_sort_by_capture))
+                            }
+                        }
+                    }
+
+                    // Grouped media display
+                    val groupedMedia = when (sortMode) {
+                        GallerySortMode.BY_EXPIRATION -> groupByExpiration(photos)
+                        GallerySortMode.BY_CAPTURE_TIME -> groupByCapture(photos)
+                    }
+
+                    LazyVerticalGrid(
+                        columns = GridCells.Adaptive(minSize = 150.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 8.dp)
+                    ) {
+                        groupedMedia.forEach { (sectionTitle, sectionPhotos) ->
+                            // Section header
+                            item(key = "header_$sectionTitle", span = { androidx.compose.foundation.lazy.grid.GridItemSpan(maxLineSpan) }) {
+                                Column {
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Text(
+                                        text = sectionTitle,
+                                        style = MaterialTheme.typography.titleMedium,
+                                        modifier = Modifier.padding(vertical = 8.dp)
+                                    )
+                                    HorizontalDivider()
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                }
+                            }
+
+                            // Section items
+                            items(sectionPhotos, key = { it.id }) { photo ->
+                                PhotoGridItem(
+                                    photo = photo,
+                                    isSelected = selectedPhotoIds.contains(photo.id),
+                                    isSelectionMode = isSelectionMode,
+                                    onClick = {
+                                        if (isSelectionMode) {
+                                            // Toggle selection
+                                            selectedPhotoIds = if (photo.id in selectedPhotoIds) {
+                                                selectedPhotoIds - photo.id
+                                            } else {
+                                                selectedPhotoIds + photo.id
+                                            }
+                                            // Exit selection mode if no photos selected
+                                            if (selectedPhotoIds.isEmpty()) {
+                                                isSelectionMode = false
+                                            }
+                                        } else {
+                                            onNavigateToMediaDetail(photo.id)
+                                        }
+                                    },
+                                    onLongClick = {
+                                        // Enter selection mode and select this photo
+                                        isSelectionMode = true
+                                        selectedPhotoIds = selectedPhotoIds + photo.id
+                                    }
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -690,3 +771,130 @@ fun PhotoGridItem(
         }
     }
 }
+
+/**
+ * Group photos by expiration time sections
+ */
+private fun groupByExpiration(photos: List<UtilityMedia>): List<Pair<String, List<UtilityMedia>>> {
+    val now = System.currentTimeMillis()
+    val sections = mutableListOf<Pair<String, List<UtilityMedia>>>()
+
+    // Define time ranges (in milliseconds)
+    val oneHour = TimeUnit.HOURS.toMillis(1)
+    val threeHours = TimeUnit.HOURS.toMillis(3)
+    val sixHours = TimeUnit.HOURS.toMillis(6)
+    val twelveHours = TimeUnit.HOURS.toMillis(12)
+    val oneDay = TimeUnit.DAYS.toMillis(1)
+    val threeDays = TimeUnit.DAYS.toMillis(3)
+    val oneWeek = TimeUnit.DAYS.toMillis(7)
+
+    // Group photos by time until expiration
+    val expiringInOneHour = mutableListOf<UtilityMedia>()
+    val expiringInThreeHours = mutableListOf<UtilityMedia>()
+    val expiringInSixHours = mutableListOf<UtilityMedia>()
+    val expiringInTwelveHours = mutableListOf<UtilityMedia>()
+    val expiringInOneDay = mutableListOf<UtilityMedia>()
+    val expiringInThreeDays = mutableListOf<UtilityMedia>()
+    val expiringInOneWeek = mutableListOf<UtilityMedia>()
+    val expiringLater = mutableListOf<UtilityMedia>()
+
+    photos.forEach { photo ->
+        val timeUntilExpiration = photo.expirationTimestamp - now
+
+        when {
+            timeUntilExpiration <= oneHour -> expiringInOneHour.add(photo)
+            timeUntilExpiration <= threeHours -> expiringInThreeHours.add(photo)
+            timeUntilExpiration <= sixHours -> expiringInSixHours.add(photo)
+            timeUntilExpiration <= twelveHours -> expiringInTwelveHours.add(photo)
+            timeUntilExpiration <= oneDay -> expiringInOneDay.add(photo)
+            timeUntilExpiration <= threeDays -> expiringInThreeDays.add(photo)
+            timeUntilExpiration <= oneWeek -> expiringInOneWeek.add(photo)
+            else -> expiringLater.add(photo)
+        }
+    }
+
+    // Add sections in order (most urgent first)
+    if (expiringInOneHour.isNotEmpty()) {
+        sections.add("Expiring within 1 hour" to expiringInOneHour.sortedBy { it.expirationTimestamp })
+    }
+    if (expiringInThreeHours.isNotEmpty()) {
+        sections.add("Expiring within 3 hours" to expiringInThreeHours.sortedBy { it.expirationTimestamp })
+    }
+    if (expiringInSixHours.isNotEmpty()) {
+        sections.add("Expiring within 6 hours" to expiringInSixHours.sortedBy { it.expirationTimestamp })
+    }
+    if (expiringInTwelveHours.isNotEmpty()) {
+        sections.add("Expiring within 12 hours" to expiringInTwelveHours.sortedBy { it.expirationTimestamp })
+    }
+    if (expiringInOneDay.isNotEmpty()) {
+        sections.add("Expiring within 1 day" to expiringInOneDay.sortedBy { it.expirationTimestamp })
+    }
+    if (expiringInThreeDays.isNotEmpty()) {
+        sections.add("Expiring within 3 days" to expiringInThreeDays.sortedBy { it.expirationTimestamp })
+    }
+    if (expiringInOneWeek.isNotEmpty()) {
+        sections.add("Expiring within 1 week" to expiringInOneWeek.sortedBy { it.expirationTimestamp })
+    }
+    if (expiringLater.isNotEmpty()) {
+        sections.add("Expiring later" to expiringLater.sortedBy { it.expirationTimestamp })
+    }
+
+    return sections
+}
+
+/**
+ * Group photos by capture time sections
+ */
+private fun groupByCapture(photos: List<UtilityMedia>): List<Pair<String, List<UtilityMedia>>> {
+    val now = LocalDateTime.now()
+    val sections = mutableListOf<Pair<String, List<UtilityMedia>>>()
+
+    // Group photos by capture date
+    val today = mutableListOf<UtilityMedia>()
+    val yesterday = mutableListOf<UtilityMedia>()
+    val thisWeek = mutableListOf<UtilityMedia>()
+    val lastWeek = mutableListOf<UtilityMedia>()
+    val thisMonth = mutableListOf<UtilityMedia>()
+    val older = mutableListOf<UtilityMedia>()
+
+    photos.forEach { photo ->
+        val captureDate = LocalDateTime.ofInstant(
+            Instant.ofEpochMilli(photo.captureTimestamp),
+            ZoneId.systemDefault()
+        )
+
+        val daysDiff = java.time.temporal.ChronoUnit.DAYS.between(captureDate.toLocalDate(), now.toLocalDate())
+
+        when (daysDiff) {
+            0L -> today.add(photo)
+            1L -> yesterday.add(photo)
+            in 2..6 -> thisWeek.add(photo)
+            in 7..13 -> lastWeek.add(photo)
+            in 14..30 -> thisMonth.add(photo)
+            else -> older.add(photo)
+        }
+    }
+
+    // Add sections in order (most recent first)
+    if (today.isNotEmpty()) {
+        sections.add("Today" to today.sortedByDescending { it.captureTimestamp })
+    }
+    if (yesterday.isNotEmpty()) {
+        sections.add("Yesterday" to yesterday.sortedByDescending { it.captureTimestamp })
+    }
+    if (thisWeek.isNotEmpty()) {
+        sections.add("This week" to thisWeek.sortedByDescending { it.captureTimestamp })
+    }
+    if (lastWeek.isNotEmpty()) {
+        sections.add("Last week" to lastWeek.sortedByDescending { it.captureTimestamp })
+    }
+    if (thisMonth.isNotEmpty()) {
+        sections.add("This month" to thisMonth.sortedByDescending { it.captureTimestamp })
+    }
+    if (older.isNotEmpty()) {
+        sections.add("Older" to older.sortedByDescending { it.captureTimestamp })
+    }
+
+    return sections
+}
+

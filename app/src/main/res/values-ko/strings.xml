@@ -43,6 +43,8 @@
     <string name="gallery_save_confirm_title">%d개 항목을 영구적으로 저장하시겠습니까?</string>
     <string name="gallery_save_confirm_message">항목이 갤러리에 저장되고 이 앱에서 제거됩니다.</string>
     <string name="gallery_save_button">저장</string>
+    <string name="gallery_sort_by_expiration">만료 기준</string>
+    <string name="gallery_sort_by_capture">날짜 기준</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">카메라 권한이 필요합니다</string>

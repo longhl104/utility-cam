@@ -43,6 +43,8 @@
     <string name="gallery_save_confirm_title">%d वस्तु(हरू) स्थायी रूपमा सुरक्षित गर्ने?</string>
     <string name="gallery_save_confirm_message">वस्तुहरू तपाईंको ग्यालेरीमा सुरक्षित गरिनेछ र यस एपबाट हटाइनेछ।</string>
     <string name="gallery_save_button">सुरक्षित गर्नुहोस्</string>
+    <string name="gallery_sort_by_expiration">समाप्ति अनुसार</string>
+    <string name="gallery_sort_by_capture">मिति अनुसार</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">क्यामेरा अनुमति आवश्यक छ</string>

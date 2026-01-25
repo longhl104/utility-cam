@@ -42,6 +42,8 @@
     <string name="gallery_save_confirm_title">Simpan %d item secara permanen?</string>
     <string name="gallery_save_confirm_message">Item akan disimpan ke galeri Anda dan dihapus dari aplikasi ini.</string>
     <string name="gallery_save_button">Simpan</string>
+    <string name="gallery_sort_by_expiration">Berdasarkan Kedaluwarsa</string>
+    <string name="gallery_sort_by_capture">Berdasarkan Tanggal</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Izin kamera diperlukan</string>

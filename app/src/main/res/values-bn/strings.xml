@@ -43,6 +43,8 @@
     <string name="gallery_save_confirm_title">%d আইটেম স্থায়ীভাবে সংরক্ষণ করবেন?</string>
     <string name="gallery_save_confirm_message">আইটেমগুলি আপনার গ্যালারিতে সংরক্ষিত হবে এবং এই অ্যাপ থেকে সরানো হবে।</string>
     <string name="gallery_save_button">সংরক্ষণ করুন</string>
+    <string name="gallery_sort_by_expiration">মেয়াদ অনুযায়ী</string>
+    <string name="gallery_sort_by_capture">তারিখ অনুযায়ী</string>
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">ক্যামেরা অনুমতি প্রয়োজন</string>
