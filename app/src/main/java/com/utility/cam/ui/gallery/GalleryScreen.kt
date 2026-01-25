@@ -768,33 +768,6 @@ fun PhotoGridItem(
             }
         }
 
-        // Urgent/Warning badge
-        if (isUrgent || isWarning) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(8.dp)
-                    .background(
-                        color = when {
-                            isUrgent -> MaterialTheme.colorScheme.error
-                            else -> Color(0xFFFFA726)
-                        },
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
-            ) {
-                Text(
-                    text = when {
-                        isUrgent -> "⚠️ URGENT"
-                        else -> "⏰ SOON"
-                    },
-                    style = MaterialTheme.typography.labelSmall,
-                    color = Color.White,
-                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
-                )
-            }
-        }
-
         // Timer overlay with enhanced styling for urgent/warning items
         Box(
             modifier = Modifier
