@@ -204,6 +204,7 @@
     <string name="settings_language_korean">한국어</string>
     <string name="settings_language_vietnamese">Tiếng Việt</string>
     <string name="settings_language_urdu">اردو</string>
+    <string name="settings_language_arabic">العربية</string>
     <string name="settings_language_restart_hint">Język zostanie natychmiast zaktualizowany</string>
     <string name="settings_theme">Motyw</string>
     <string name="settings_theme_hint">Wybierz preferowany motyw</string>

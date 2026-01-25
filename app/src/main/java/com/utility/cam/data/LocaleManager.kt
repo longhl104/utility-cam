@@ -49,6 +49,7 @@ class LocaleManager(private val context: Context) {
             Language("hi", "हिन्दी (Hindi)"),
             Language("bn", "বাংলা (Bengali)"),
             Language("ur", "اردو (Urdu)"),
+            Language("ar", "العربية (Arabic)"),
             Language("pl", "Polski (Polish)"),
             Language("pt", "Português (Portuguese)"),
             Language("in", "Bahasa Indonesia (Indonesian)"),

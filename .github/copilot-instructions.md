@@ -13,5 +13,6 @@ Support multiple languages. We currently have:
 - Korean (values-ko/strings.xml)
 - Vietnamese (values-vi/strings.xml)
 - Urdu (values-ur/strings.xml)
+- Arabic (values-ar/strings.xml)
 
 When adding new strings, update all language files to maintain consistency.
