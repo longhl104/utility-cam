@@ -29,8 +29,10 @@ class BillingManager(private val context: Context) {
     private val _purchaseState = MutableStateFlow<PurchaseState>(PurchaseState.Idle)
     val purchaseState: StateFlow<PurchaseState> = _purchaseState.asStateFlow()
 
-    private val _billingConnectionState = MutableStateFlow<BillingConnectionState>(BillingConnectionState.Disconnected)
-    val billingConnectionState: StateFlow<BillingConnectionState> = _billingConnectionState.asStateFlow()
+    private val _billingConnectionState =
+        MutableStateFlow<BillingConnectionState>(BillingConnectionState.Disconnected)
+    val billingConnectionState: StateFlow<BillingConnectionState> =
+        _billingConnectionState.asStateFlow()
 
     sealed class PurchaseState {
         object Idle : PurchaseState()
@@ -53,16 +55,22 @@ class BillingManager(private val context: Context) {
     private fun initializeBillingClient() {
         billingClient = BillingClient.newBuilder(context)
             .setListener { billingResult, purchases ->
-                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
-                    for (purchase in purchases) {
-                        handlePurchase(purchase)
+                when (billingResult.responseCode) {
+                    BillingClient.BillingResponseCode.OK if purchases != null -> {
+                        for (purchase in purchases) {
+                            handlePurchase(purchase)
+                        }
                     }
-                } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
-                    Log.d(TAG, "User canceled the purchase")
-                    _purchaseState.value = PurchaseState.Idle
-                } else {
-                    Log.e(TAG, "Purchase error: ${billingResult.debugMessage}")
-                    _purchaseState.value = PurchaseState.Error(billingResult.debugMessage)
+
+                    BillingClient.BillingResponseCode.USER_CANCELED -> {
+                        Log.d(TAG, "User canceled the purchase")
+                        _purchaseState.value = PurchaseState.Idle
+                    }
+
+                    else -> {
+                        Log.e(TAG, "Purchase error: ${billingResult.debugMessage}")
+                        _purchaseState.value = PurchaseState.Error(billingResult.debugMessage)
+                    }
                 }
             }
             .enablePendingPurchases(
@@ -86,7 +94,8 @@ class BillingManager(private val context: Context) {
                     queryProductDetails()
                 } else {
                     Log.e(TAG, "Billing setup failed: ${billingResult.debugMessage}")
-                    _billingConnectionState.value = BillingConnectionState.Failed(billingResult.debugMessage)
+                    _billingConnectionState.value =
+                        BillingConnectionState.Failed(billingResult.debugMessage)
                 }
             }
 
@@ -112,13 +121,19 @@ class BillingManager(private val context: Context) {
             .build()
 
         billingClient?.queryProductDetailsAsync(params) { billingResult, productDetailsResult ->
-            Log.d(TAG, "queryProductDetailsAsync callback: responseCode=${billingResult.responseCode}")
+            Log.d(
+                TAG,
+                "queryProductDetailsAsync callback: responseCode=${billingResult.responseCode}"
+            )
             if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                 // productDetailsList is a List<ProductDetails>
                 val productDetailsList = productDetailsResult.productDetailsList
                 Log.d(TAG, "Product details list size: ${productDetailsList.size}")
                 if (productDetailsList.isEmpty()) {
-                    Log.w(TAG, "Product details list is empty - product may not be configured in Play Console")
+                    Log.w(
+                        TAG,
+                        "Product details list is empty - product may not be configured in Play Console"
+                    )
                 } else {
                     _productDetails.value = productDetailsList[0]
                     Log.d(TAG, "Product details loaded: ${productDetailsList[0]}")
@@ -152,7 +167,7 @@ class BillingManager(private val context: Context) {
                 // Check if user has purchased Lifetime Pro
                 val hasLifetimePro = purchases.any {
                     it.products.contains(PRODUCT_ID_LIFETIME_PRO) &&
-                    it.purchaseState == Purchase.PurchaseState.PURCHASED
+                        it.purchaseState == Purchase.PurchaseState.PURCHASED
                 }
                 _isProUser.value = hasLifetimePro
                 Log.d(TAG, "User is pro: $hasLifetimePro")

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base app theme -->
     <style name="Theme.UtilityCam" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!-- Splash screen theme -->
+    <style name="Theme.UtilityCam.Starting" parent="Theme.SplashScreen">
+        <!-- Set splash screen background color -->
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <!-- Set splash screen animated icon (your app logo) -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <!-- Post splash screen theme -->
+        <item name="postSplashScreenTheme">@style/Theme.UtilityCam</item>
+    </style>
 </resources>

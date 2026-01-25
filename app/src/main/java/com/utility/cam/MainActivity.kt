@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentActivity
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ExistingWorkPolicy
@@ -62,6 +63,9 @@ class MainActivity : FragmentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Install splash screen
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
 
         // Initialize Firebase Analytics only if enabled for this build type
@@ -246,6 +250,7 @@ class MainActivity : FragmentActivity() {
                 ExistingWorkPolicy.REPLACE,
                 reminderRequest
             )
+
 
             val scheduleMessage = "Scheduled expiring photo reminder worker with $delayMinutes minute delay"
             Log.d("MainActivity", scheduleMessage)
