@@ -12,5 +12,6 @@ Support multiple languages. We currently have:
 - Bengali (values-bn/strings.xml)
 - Korean (values-ko/strings.xml)
 - Vietnamese (values-vi/strings.xml)
+- Urdu (values-ur/strings.xml)
 
 When adding new strings, update all language files to maintain consistency.

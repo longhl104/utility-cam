@@ -45,12 +45,13 @@ class LocaleManager(private val context: Context) {
             Language(SYSTEM_DEFAULT, "System Default"),
             Language("en", "English"),
             Language("vi", "Tiếng Việt (Vietnamese)"),
+            Language("ne", "नेपाली (Nepali)"),
             Language("hi", "हिन्दी (Hindi)"),
+            Language("bn", "বাংলা (Bengali)"),
+            Language("ur", "اردو (Urdu)"),
             Language("pl", "Polski (Polish)"),
             Language("pt", "Português (Portuguese)"),
             Language("in", "Bahasa Indonesia (Indonesian)"),
-            Language("ne", "नेपाली (Nepali)"),
-            Language("bn", "বাংলা (Bengali)"),
             Language("ko", "한국어 (Korean)"),
         )
     }

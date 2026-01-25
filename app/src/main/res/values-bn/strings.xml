@@ -184,7 +184,8 @@
     <string name="settings_language_bengali">বাংলা</string>
     <string name="settings_language_korean">한국어</string>
     <string name="settings_language_vietnamese">Tiếng Việt</string>
-    <string name="settings_language_restart_hint">ভাষা তাৎক্ষণিক আপডেট হবে</string>
+    <string name="settings_language_urdu">اردو</string>
+    <string name="settings_language_restart_hint">ভাষা তাৎক্ষণিকভাবে আপডেট হবে</string>
     <string name="settings_theme">থিম</string>
     <string name="settings_theme_hint">আপনার পছন্দের থিম নির্বাচন করুন</string>
     <string name="settings_theme_system">সিস্টেম ডিফল্ট</string>

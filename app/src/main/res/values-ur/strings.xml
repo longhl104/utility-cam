@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Utility Cam</string>
+
+    <!-- Notifications -->
+    <string name="notification_cleanup_title">تصاویر صاف کر دی گئیں</string>
+    <plurals name="notification_cleanup_message">
+        <item quantity="one">%d میعاد ختم شدہ تصویر خودکار طور پر حذف کر دی گئی</item>
+        <item quantity="other">%d میعاد ختم شدہ تصاویر خودکار طور پر حذف کر دی گئیں</item>
+    </plurals>
+    <string name="notification_reminder_title">تصویر جلد ختم ہو جائے گی</string>
+    <string name="notification_reminder_message">ایک تصویر %s میں حذف ہو جائے گی</string>
+    <string name="notification_reminder_message_with_description" formatted="false">\"%s\" %s میں حذف ہو جائے گا</string>
+    <string name="notification_channel_name">تصویر کی صفائی</string>
+    <string name="notification_channel_description">خودکار تصویر کی صفائی کے بارے میں اطلاعات</string>
+
+    <!-- TTL Durations -->
+    <string name="ttl_test_3_seconds">3 سیکنڈ (ٹیسٹ)</string>
+    <string name="ttl_24_hours">24 گھنٹے</string>
+    <string name="ttl_3_days">3 دن</string>
+    <string name="ttl_1_week">1 ہفتہ</string>
+
+    <!-- Time formatting -->
+    <string name="time_format_days_hours" formatted="false">%dd %dh</string>
+    <string name="time_format_hours_minutes" formatted="false">%dh %dm</string>
+    <string name="time_format_minutes">%dm</string>
+
+    <!-- Gallery Screen -->
+    <string name="gallery_title">Utility Cam</string>
+    <string name="gallery_settings">ترتیبات</string>
+    <string name="gallery_take_photo">کیپچر</string>
+    <string name="gallery_no_photos">ابھی تک کوئی یوٹیلیٹی میڈیا نہیں ہے</string>
+    <string name="gallery_no_photos_hint">اپنی پہلی تصویر یا ویڈیو کیپچر کرنے کے لیے کیمرہ بٹن پر ٹیپ کریں</string>
+    <string name="gallery_expires_in">ختم ہونے میں: %s</string>
+    <string name="gallery_selection_count">%d منتخب شدہ</string>
+    <string name="gallery_exit_selection">سلیکشن موڈ سے باہر نکلیں</string>
+    <string name="gallery_share_selected">منتخب شدہ کو شیئر کریں</string>
+    <string name="gallery_save_selected">منتخب شدہ کو محفوظ کریں</string>
+    <string name="gallery_delete_selected">منتخب شدہ کو حذف کریں</string>
+    <string name="gallery_delete_confirm_title">%d آئٹم(آئٹمز) کو حذف کریں؟</string>
+    <string name="gallery_delete_confirm_message">اس عمل کو واپس نہیں کیا جا سکتا۔</string>
+    <string name="gallery_delete_button">حذف کریں</string>
+    <string name="gallery_cancel_button">منسوخ کریں</string>
+    <string name="gallery_save_confirm_title">%d آئٹم(آئٹمز) کو مستقل طور پر محفوظ کریں؟</string>
+    <string name="gallery_save_confirm_message">آئٹمز آپ کی گیلری میں محفوظ ہو جائیں گی اور اس ایپ سے ہٹا دی جائیں گی۔</string>
+    <string name="gallery_save_button">محفوظ کریں</string>
+    <string name="gallery_sort_by_expiration">میعاد کے لحاظ سے</string>
+    <string name="gallery_sort_by_capture">تاریخ کے لحاظ سے</string>
+    <string name="gallery_bin">بن</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">بن</string>
+    <string name="bin_back">واپس</string>
+    <string name="bin_no_items">بن میں کوئی آئٹم نہیں ہیں</string>
+    <string name="bin_no_items_hint">میعاد ختم شدہ میڈیا یہاں منتقل کی جائے گی اور 30 دنوں تک رکھی جائے گی</string>
+    <string name="bin_days_remaining">%d دن باقی</string>
+    <string name="bin_restore">بحال کریں</string>
+    <string name="bin_delete_permanently">حذف کریں</string>
+    <string name="bin_selection_count">%d منتخب شدہ</string>
+    <string name="bin_exit_selection">سلیکشن موڈ سے باہر نکلیں</string>
+    <string name="bin_restore_selected">منتخب شدہ کو بحال کریں</string>
+    <string name="bin_delete_selected">مستقل طور پر حذف کریں</string>
+    <string name="bin_delete_confirm_title">%d آئٹم(آئٹمز) کو مستقل طور پر حذف کریں؟</string>
+    <string name="bin_delete_confirm_message">اس عمل کو واپس نہیں کیا جا سکتا۔ آئٹمز ہمیشہ کے لیے حذف ہو جائیں گی۔</string>
+    <string name="bin_delete_button">ہمیشہ کے لیے حذف کریں</string>
+    <string name="bin_cancel_button">منسوخ کریں</string>
+    <string name="bin_restore_confirm_title">%d آئٹم(آئٹمز) کو بحال کریں؟</string>
+    <string name="bin_restore_confirm_message">آئٹمز 24 گھنٹے کی میعاد کے ساتھ بحال کی جائیں گی۔</string>
+    <string name="bin_restore_button">بحال کریں</string>
+    <string name="bin_empty">بن خالی کریں</string>
+    <string name="bin_empty_confirm_title">پوری بن کو خالی کریں؟</string>
+    <string name="bin_empty_confirm_message">بن میں موجود تمام آئٹمز مستقل طور پر حذف ہو جائیں گی۔ اس عمل کو واپس نہیں کیا جا سکتا۔</string>
+    <string name="bin_empty_button">بن خالی کریں</string>
+
+    <!-- Camera Screen -->
+    <string name="camera_permission_required">کیمرہ کی اجازت درکار ہے</string>
+    <string name="camera_grant_permission">اجازت دیں</string>
+    <string name="camera_flip">کیمرہ بدلیں</string>
+    <string name="camera_take_photo">تصویر لیں</string>
+    <string name="camera_record_video">ویڈیو ریکارڈ کریں</string>
+    <string name="camera_start_recording">ریکارڈنگ شروع کریں</string>
+    <string name="camera_stop_recording">ریکارڈنگ روکیں</string>
+    <string name="camera_mode_photo">تصویر</string>
+    <string name="camera_mode_video">ویڈیو</string>
+    <string name="camera_close">بند کریں</string>
+    <string name="camera_zoom_format">%.1fx</string>
+    <string name="camera_recording_time">%02d:%02d</string>
+    <string name="camera_video_pro_only_title">ویڈیو ریکارڈنگ - PRO فیچر</string>
+    <string name="camera_video_pro_only_message">ویڈیو ریکارڈنگ Utility Cam PRO میں دستیاب ہے۔ لامحدود ویڈیو ریکارڈنگ کو غیر مقفل کرنے کے لیے PRO میں اپ گریڈ کریں!</string>
+    <string name="camera_video_pro_only_upgrade">PRO میں اپ گریڈ کریں</string>
+    <string name="camera_video_pro_only_cancel">منسوخ کریں</string>
+
+    <!-- Capture Review Screen -->
+    <string name="capture_review_title">تصویر کا جائزہ لیں</string>
+    <string name="capture_review_title_video">ویڈیو کا جائزہ لیں</string>
+    <string name="capture_review_delete_after">کے بعد حذف کریں:</string>
+    <string name="capture_review_description_label">تفصیل (اختیاری)</string>
+    <string name="capture_review_description_hint">مثال کے طور پر پارکنگ کی جگہ: لیول 4</string>
+    <string name="capture_review_retake">دوبارہ لیں</string>
+    <string name="capture_review_save">محفوظ کریں</string>
+    <string name="capture_review_gallery">گیلری دیکھیں</string>
+    <string name="capture_review_custom">حسب ضرورت</string>
+    <string name="capture_review_custom_hours_suffix">گھ</string>
+    <string name="capture_review_custom_pro_title">حسب ضرورت وقت - PRO فیچر</string>
+    <string name="capture_review_custom_pro_message">Utility Cam PRO کے ساتھ حسب ضرورت میعاد کا وقت سیٹ کریں۔ اس فیچر کو غیر مقفل کرنے کے لیے PRO میں اپ گریڈ کریں!</string>
+    <string name="capture_review_custom_pro_ok">ٹھیک ہے</string>
+    <string name="capture_review_custom_dialog_title">حسب ضرورت میعاد کا وقت</string>
+    <string name="capture_review_custom_dialog_message">سیٹ کریں کہ یہ تصویر کتنے عرصے تک رکھی جائے:</string>
+    <string name="capture_review_unit_hours">گھنٹے</string>
+    <string name="capture_review_unit_days">دن</string>
+    <string name="capture_review_unit_weeks">ہفتے</string>
+    <string name="capture_review_custom_hours_label">گھنٹے</string>
+    <string name="capture_review_custom_days_label">دن</string>
+    <string name="capture_review_custom_weeks_label">ہفتے</string>
+    <string name="capture_review_custom_dialog_ok">سیٹ کریں</string>
+    <string name="capture_review_custom_dialog_cancel">منسوخ کریں</string>
+
+    <!-- Photo Detail Screen -->
+    <string name="photo_detail_title">تصویر کی تفصیلات</string>
+    <string name="photo_detail_title_video">ویڈیو کی تفصیلات</string>
+    <string name="photo_detail_save">گیلری میں محفوظ کریں</string>
+    <string name="photo_detail_share">شیئر کریں</string>
+    <string name="photo_detail_delete">حذف کریں</string>
+    <string name="photo_detail_back">واپس</string>
+    <string name="photo_detail_share_title">تصویر شیئر کریں</string>
+    <string name="photo_detail_expires_in">%s میں ختم ہو جائے گی</string>
+    <string name="photo_detail_captured">کیپچر کیا گیا</string>
+    <string name="photo_detail_description">تفصیل</string>
+    <string name="photo_detail_add">شامل کریں</string>
+    <string name="photo_detail_edit">ترمیم کریں</string>
+    <string name="photo_detail_no_description">کوئی تفصیل نہیں</string>
+    <string name="photo_detail_keep_forever">ہمیشہ کے لیے رکھیں (گیلری میں محفوظ کریں)</string>
+    <string name="photo_detail_delete_title">تصویر حذف کریں؟</string>
+    <string name="photo_detail_delete_message">اس عمل کو واپس نہیں کیا جا سکتا۔</string>
+    <string name="photo_detail_delete_confirm">حذف کریں</string>
+    <string name="photo_detail_cancel">منسوخ کریں</string>
+    <string name="photo_detail_save_title">گیلری میں محفوظ کریں؟</string>
+    <string name="photo_detail_save_message">اس سے تصویر آپ کے ڈیوائس کی گیلری میں محفوظ ہو جائے گی اور Utility Cam سے ہٹا دی جائے گی۔</string>
+    <string name="photo_detail_save_confirm">محفوظ کریں</string>
+    <string name="photo_detail_saved_success">تصویر گیلری میں محفوظ ہو گئی</string>
+    <string name="photo_detail_save_failed">تصویر محفوظ کرنے میں ناکام</string>
+    <string name="photo_detail_deleted_success">تصویر حذف ہو گئی</string>
+    <string name="photo_detail_edit_description_title">تفصیل میں ترمیم کریں</string>
+    <string name="photo_detail_edit_description_hint">اس تصویر کی تفصیل درج کریں</string>
+
+    <!-- Media Detail Screen -->
+    <string name="media_detail_title">میڈیا کی تفصیلات</string>
+    <string name="media_detail_save">گیلری میں محفوظ کریں</string>
+    <string name="media_detail_share">شیئر کریں</string>
+    <string name="media_detail_delete">حذف کریں</string>
+    <string name="media_detail_back">واپس</string>
+    <string name="media_detail_share_title">میڈیا شیئر کریں</string>
+    <string name="media_detail_expires_in">%s میں ختم ہو جائے گی</string>
+    <string name="media_detail_captured">کیپچر کیا گیا</string>
+    <string name="media_detail_description">تفصیل</string>
+    <string name="media_detail_add">شامل کریں</string>
+    <string name="media_detail_edit">ترمیم کریں</string>
+    <string name="media_detail_no_description">کوئی تفصیل نہیں</string>
+    <string name="media_detail_keep_forever">ہمیشہ کے لیے رکھیں (گیلری میں محفوظ کریں)</string>
+    <string name="media_detail_delete_title">میڈیا حذف کریں؟</string>
+    <string name="media_detail_delete_message">اس عمل کو واپس نہیں کیا جا سکتا۔</string>
+    <string name="media_detail_delete_confirm">حذف کریں</string>
+    <string name="media_detail_cancel">منسوخ کریں</string>
+    <string name="media_detail_save_title">گیلری میں محفوظ کریں؟</string>
+    <string name="media_detail_save_message">اس سے میڈیا آپ کے ڈیوائس کی گیلری میں محفوظ ہو جائے گی اور Utility Cam سے ہٹا دی جائے گی۔</string>
+    <string name="media_detail_save_confirm">محفوظ کریں</string>
+    <string name="media_detail_saved_success">میڈیا گیلری میں محفوظ ہو گئی</string>
+    <string name="media_detail_save_failed">میڈیا محفوظ کرنے میں ناکام</string>
+    <string name="media_detail_deleted_success">میڈیا حذف ہو گئی</string>
+    <string name="media_detail_edit_description_title">تفصیل میں ترمیم کریں</string>
+    <string name="media_detail_edit_description_hint">اس میڈیا کی تفصیل درج کریں</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">ترتیبات</string>
+    <string name="settings_back">واپس</string>
+    <string name="settings_language">زبان</string>
+    <string name="settings_language_hint">اپنی پسندیدہ زبان منتخب کریں</string>
+    <string name="settings_language_system_default">سسٹم ڈیفالٹ</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_portuguese">Português</string>
+    <string name="settings_language_indonesian">Bahasa Indonesia</string>
+    <string name="settings_language_hindi">हिन्दी</string>
+    <string name="settings_language_polish">Polski</string>
+    <string name="settings_language_nepali">नेपाली</string>
+    <string name="settings_language_bengali">বাংলা</string>
+    <string name="settings_language_korean">한국어</string>
+    <string name="settings_language_vietnamese">Tiếng Việt</string>
+    <string name="settings_language_urdu">اردو</string>
+    <string name="settings_language_restart_hint">زبان فوری طور پر اپ ڈیٹ ہو جائے گی</string>
+    <string name="settings_theme">تھیم</string>
+    <string name="settings_theme_hint">اپنی پسندیدہ تھیم منتخب کریں</string>
+    <string name="settings_theme_system">سسٹم ڈیفالٹ</string>
+    <string name="settings_theme_light">روشن</string>
+    <string name="settings_theme_dark">تاریک</string>
+    <string name="settings_default_expiration">ڈیفالٹ میعاد کا وقت</string>
+    <string name="settings_default_expiration_hint">منتخب کریں کہ خودکار طور پر حذف ہونے سے پہلے تصاویر کتنے عرصے تک رکھی جائیں</string>
+    <string name="settings_notifications">اطلاعات</string>
+    <string name="settings_cleanup_notifications">صفائی کی اطلاعات</string>
+    <string name="settings_cleanup_notifications_hint">جب میعاد ختم شدہ تصاویر حذف ہوں تو اطلاع حاصل کریں</string>
+    <string name="settings_reminder_notifications">جلد ختم ہونے کی یاددہانی</string>
+    <string name="settings_reminder_notifications_hint">جب تصاویر جلد ختم ہونے والی ہوں تو یاددہانی حاصل کریں (1 گھنٹے کے اندر)</string>
+    <string name="settings_notification_permission_required">اطلاع کی اجازت درکار ہے</string>
+    <string name="settings_notification_permission_message">صفائی کی اطلاعات حاصل کرنے کے لیے، آپ کو اطلاع کی اجازت دینی ہو گی۔</string>
+    <string name="settings_open_settings">ترتیبات کھولیں</string>
+    <string name="settings_privacy">رازداری</string>
+    <string name="settings_analytics_consent">ایپ کو بہتر بنانے میں مدد کریں</string>
+    <string name="settings_analytics_consent_hint">ایپ کو بہتر بنانے میں ہماری مدد کرنے کے لیے گمنام استعمال کا ڈیٹا شیئر کریں۔ کوئی ذاتی ڈیٹا جمع نہیں کیا جاتا۔</string>
+    <string name="settings_analytics_consent_dialog_title">Utility Cam کو بہتر بنانے میں ہماری مدد کریں</string>
+    <string name="settings_analytics_consent_dialog_message">ہم ایپ کو بہتر بنانے کے لیے گمنام استعمال کا ڈیٹا جمع کرنا چاہیں گے۔ اس میں شامل ہے:\n\n• ایپ فیچر کا استعمال\n• تصویر کیپچر کرنے کے واقعات (دورانیہ، مواد نہیں)\n• ایپ کی کارکردگی کا ڈیٹا\n\nہم جمع نہیں کرتے:\n• آپ کی تصاویر یا ان کا مواد\n• آپ کی تفصیلات\n• ذاتی معلومات\n\nآپ یہ ترتیب کسی بھی وقت ترتیبات > رازداری میں تبدیل کر سکتے ہیں۔</string>
+    <string name="settings_analytics_consent_accept">اجازت دیں</string>
+    <string name="settings_analytics_consent_decline">نہیں، شکریہ</string>
+    <string name="settings_debug_tools">ڈیبگ ٹولز</string>
+    <string name="settings_debug_tools_hint">ترقی کے لیے ٹیسٹنگ ٹولز</string>
+    <string name="settings_cleanup_delay_label">صفائی میں تاخیر (سیکنڈ)</string>
+    <string name="settings_cleanup_delay_hint">صفائی کے درمیان وقت (1-3600 سیکنڈ)۔ ایپ دوبارہ شروع کرنے کی ضرورت ہے۔</string>
+    <string name="settings_cleanup_delay_updated">صفائی میں تاخیر %d سیکنڈ میں اپ ڈیٹ ہو گئی۔ لاگو کرنے کے لیے ایپ دوبارہ شروع کریں۔</string>
+    <string name="settings_trigger_cleanup">ابھی صفائی شروع کریں</string>
+    <string name="settings_trigger_cleanup_started">صفائی شروع ہو رہی ہے…</string>
+    <string name="settings_cleanup_completed">صفائی مکمل ہو گئی!</string>
+    <string name="settings_cleanup_failed">صفائی ناکام ہو گئی!</string>
+    <string name="settings_cleanup_running">صفائی جاری ہے…</string>
+    <string name="settings_test_notification">اطلاع ٹیسٹ کریں</string>
+    <string name="settings_test_notification_sent">ٹیسٹ اطلاع بھیجی جا رہی ہے…</string>
+    <string name="settings_check_worker_status">حیثیت چیک کریں</string>
+    <string name="settings_worker_not_scheduled">کوئی ورکرز شیڈول نہیں ہیں!</string>
+    <string name="settings_worker_status_format">حیثیت: %1$s\nرن کوششیں: %2$d\nٹیگ: %3$s</string>
+    <string name="settings_reset_feedback">فیڈبیک کی حیثیت ری سیٹ کریں</string>
+    <string name="settings_reset_feedback_hint">پرامپٹس کو دوبارہ ٹیسٹ کرنے کے لیے تمام فیڈبیک ٹریکنگ ڈیٹا صاف کریں</string>
+    <string name="settings_feedback_reset_success">فیڈبیک کی حیثیت ری سیٹ ہو گئی! پرامپٹ دیکھنے کے لیے گیلری دوبارہ کھولیں۔</string>
+    <string name="settings_about">Utility Cam کے بارے میں</string>
+    <string name="settings_about_description">عارضی تصاویر کے لیے دوسرا کیمرہ۔ اس ایپ میں جو کچھ بھی لیا گیا ہے وہ مقررہ وقت کے بعد خودکار طور پر حذف ہو جائے گا۔</string>
+    <string name="settings_about_feature_1">• تصاویر آپ کی مرکزی گیلری میں نہیں بلکہ ایپ کی نجی سینڈ باکس میں محفوظ کی جاتی ہیں</string>
+    <string name="settings_about_feature_2">• کسی بھی تصویر کو مستقل طور پر محفوظ کرنے کے لیے \'ہمیشہ کے لیے رکھیں\' پر ٹیپ کریں</string>
+    <string name="settings_about_privacy">رازداری: ہم ایپ کو بہتر بنانے کے لیے گمنام استعمال کا ڈیٹا جمع کرتے ہیں۔ کوئی تصاویر یا ذاتی ڈیٹا شیئر نہیں کیا جاتا۔ آپ اسے ترتیبات > رازداری میں غیر فعال کر سکتے ہیں۔</string>
+    <string name="settings_media_permission_info">💡 ٹِپ: Android 14+ پر، آپ مکمل رسائی دینے کے بجائے صرف منتخب تصاویر شیئر کرنے کا انتخاب کر سکتے ہیں۔</string>
+    <string name="settings_warning_uninstall">⚠️ انتباہ: ایپ کو ان انسٹال کرنے سے اس میں محفوظ تمام تصاویر مستقل طور پر حذف ہو جائیں گی۔ ان انسٹال کرنے سے پہلے اہم تصاویر محفوظ کریں۔</string>
+    <string name="settings_send_feedback">فیڈبیک بھیجیں</string>
+    <string name="settings_love_utility_cam">ہمیں جائزہ دیں</string>
+    <string name="settings_feedback_email_subject">Utility Cam فیڈبیک (v%s)</string>
+    <string name="settings_feedback_email_body">ہیلو Utility Cam ٹیم،\n\nمیں فیڈبیک شیئر کرنا چاہتا/چاہتی ہوں:\n\n[براہ کرم یہاں اپنا فیڈبیک یا بگ رپورٹ درج کریں]\n\n---\nایپ ورژن: %1$s (%2$d)\nAndroid ورژن: %3$d\nڈیوائس: %4$s %5$s</string>
+    <string name="settings_feedback_chooser_title">کے ذریعے فیڈبیک بھیجیں</string>
+    <string name="settings_feedback_no_email_app">کوئی ای میل ایپ نہیں ملی</string>
+    <string name="settings_app_version">ایپ ورژن</string>
+    <string name="settings_version_format">ورژن %1$s (%2$d)</string>
+
+    <!-- Feedback Dialog -->
+    <string name="feedback_title">Utility Cam پسند ہے؟</string>
+    <string name="feedback_message">ہم آپ کا فیڈبیک سننا چاہیں گے! آپ کے جائزے سے ہمیں بڑھنے اور مزید صارفین تک پہنچنے میں مدد ملتی ہے۔</string>
+    <string name="feedback_rate_now">Play Store پر درجہ بندی کریں</string>
+    <string name="feedback_later">شاید بعد میں</string>
+    <string name="feedback_no_thanks">نہیں شکریہ</string>
+
+    <!-- Pro Screen -->
+    <string name="pro_title">ہمیشہ کے لیے Pro</string>
+    <string name="pro_back">واپس</string>
+    <string name="pro_upgrade_title">ہمیشہ کے لیے Pro میں اپ گریڈ کریں</string>
+    <string name="pro_upgrade_subtitle">ایک بار کی خریداری کے ساتھ پریمیم فیچرز غیر مقفل کریں</string>
+    <string name="pro_already_purchased">آپ Pro صارف ہیں!</string>
+    <string name="pro_thank_you">Utility Cam کی حمایت کا شکریہ</string>
+    <string name="pro_features_title">Pro فیچرز</string>
+    <string name="pro_feature_video_title">ویڈیو ریکارڈنگ</string>
+    <string name="pro_feature_video_description">خودکار حذف ٹائمرز کے ساتھ ویڈیوز ریکارڈ اور محفوظ کریں</string>
+    <string name="pro_feature_biometric_lock_title">ایپ لاک</string>
+    <string name="pro_feature_biometric_lock_description">اپنی ایپ کو فنگر پرنٹ، چہرے کی شناخت، PIN، پیٹرن یا پاس ورڈ سے محفوظ کریں</string>
+    <string name="pro_feature_custom_expiration_title">میعاد کا وقت حسب ضرورت بنائیں</string>
+    <string name="pro_feature_custom_expiration_description">اپنی تصاویر اور ویڈیوز کے لیے گھنٹوں، دنوں یا ہفتوں میں حسب ضرورت میعاد کا وقت سیٹ کریں</string>
+    <string name="pro_feature_priority_support_title">ترجیحی سپورٹ</string>
+    <string name="pro_feature_priority_support_description">اپنے سوالات اور مسائل کے لیے تیز جوابات حاصل کریں</string>
+    <string name="pro_feature_support_dev_title">ترقی کی حمایت کریں</string>
+    <string name="pro_feature_support_dev_description">ہمیں بہتری جاری رکھنے اور نئے فیچرز شامل کرنے میں مدد کریں</string>
+    <string name="pro_feature_future_title">مستقبل کے Pro فیچرز</string>
+    <string name="pro_feature_future_description">بغیر کسی اضافی لاگت کے تمام مستقبل کے پریمیم فیچرز تک رسائی حاصل کریں</string>
+    <string name="pro_one_time_payment">ایک بار ادائیگی</string>
+    <string name="pro_price_loading">لوڈ ہو رہا ہے…</string>
+    <string name="pro_loading_price">قیمت کی معلومات لوڈ ہو رہی ہیں…</string>
+    <string name="pro_purchase_button">ہمیشہ کے لیے Pro خریدیں</string>
+    <string name="pro_one_time_note">✓ ایک بار ادائیگی، ہمیشہ کے لیے آپ کی\n✓ کوئی سبسکرپشن یا دوبارہ ہونے والے چارجز نہیں</string>
+    <string name="pro_purchase_success">Pro میں اپ گریڈ کرنے کا شکریہ!</string>
+    <string name="pro_purchase_error">خریداری ناکام: %s</string>
+    <string name="pro_purchase_unavailable">خریداری فی الوقت دستیاب نہیں ہے</string>
+    <string name="settings_go_pro">Pro میں جائیں</string>
+    <string name="settings_go_pro_hint">ایک بار کی خریداری کے ساتھ پریمیم فیچرز غیر مقفل کریں</string>
+    <string name="settings_pro_thank_you">آپ کی حمایت کا شکریہ!</string>
+
+    <!-- Biometric Lock -->
+    <string name="settings_biometric_lock">ایپ لاک</string>
+    <string name="settings_biometric_lock_hint">اپنی ایپ کو فنگر پرنٹ، چہرے کی شناخت یا ڈیوائس لاک سے محفوظ کریں (Pro فیچر)</string>
+    <string name="settings_biometric_lock_title">ایپ لاک فعال کریں</string>
+    <string name="settings_biometric_enable_title">ایپ لاک فعال کریں</string>
+    <string name="settings_biometric_enable_subtitle">فعال کرنے کے لیے تصدیق کریں</string>
+    <string name="settings_biometric_enable_description">ایپ کو غیر مقفل کرنے کے لیے فنگر پرنٹ، چہرے کی شناخت، PIN، پیٹرن یا پاس ورڈ استعمال کریں</string>
+    <string name="settings_biometric_enabled">ایپ لاک فعال ہے</string>
+    <string name="settings_biometric_disabled">ایپ لاک غیر فعال ہے</string>
+    <string name="settings_biometric_pro_required">بائیومیٹرک لاک Pro فیچر ہے۔ غیر مقفل کرنے کے لیے Pro میں اپ گریڈ کریں!</string>
+    <string name="settings_biometric_open_device_settings">ڈیوائس کی ترتیبات کھولیں</string>
+    <string name="settings_biometric_cannot_open_settings">ڈیوائس کی ترتیبات کھولنے میں ناکام</string>
+    <string name="settings_biometric_pro_locked_title">بائیومیٹرک ایپ لاک Pro فیچر ہے</string>
+    <string name="settings_biometric_pro_locked_message">اپنی ایپ کو فنگر پرنٹ یا چہرے کی شناخت سے محفوظ کریں۔ اس پریمیم فیچر کو غیر مقفل کرنے کے لیے Pro میں اپ گریڈ کریں!</string>
+    <string name="settings_biometric_pro_locked_upgrade">Pro میں اپ گریڈ کریں</string>
+    <string name="settings_biometric_pro_locked_cancel">منسوخ کریں</string>
+    <string name="biometric_unlock_title">Utility Cam غیر مقفل کریں</string>
+    <string name="biometric_unlock_subtitle">جاری رکھنے کے لیے تصدیق کریں</string>
+    <string name="biometric_unlock_description">ایپ کو غیر مقفل کرنے کے لیے فنگر پرنٹ، چہرے کی شناخت، PIN، پیٹرن یا پاس ورڈ استعمال کریں</string>
+
+    <!-- Biometric Availability Messages -->
+    <string name="biometric_availability_available">بائیومیٹرک یا ڈیوائس لاک کی تصدیق دستیاب ہے</string>
+    <string name="biometric_availability_no_hardware">کوئی بائیومیٹرک ہارڈ ویئر دستیاب نہیں اور کوئی ڈیوائس لاک سیٹ نہیں ہے</string>
+    <string name="biometric_availability_hardware_unavailable">بائیومیٹرک ہارڈ ویئر فی الوقت دستیاب نہیں ہے</string>
+    <string name="biometric_availability_none_enrolled">کوئی تصدیقی طریقہ سیٹ نہیں ہے۔ براہ کرم ڈیوائس کی ترتیبات میں فنگر پرنٹ، چہرے کی شناخت، PIN، پیٹرن یا پاس ورڈ سیٹ کریں</string>
+    <string name="biometric_availability_security_update_required">بائیومیٹرک تصدیق کے لیے سیکیورٹی اپ ڈیٹ درکار ہے</string>
+    <string name="biometric_availability_unsupported">بائیومیٹرک تصدیق اس ڈیوائس پر سپورٹ نہیں کی جاتی</string>
+    <string name="biometric_availability_unknown">نامعلوم بائیومیٹرک حیثیت</string>
+</resources>
