@@ -1,0 +1,282 @@
+<resources>
+    <string name="app_name">Utility Cam</string>
+
+    <!-- Notifications -->
+    <string name="notification_cleanup_title">사진 정리 완료</string>
+    <plurals name="notification_cleanup_message">
+        <item quantity="one">%d개의 만료된 사진이 자동으로 삭제되었습니다</item>
+        <item quantity="other">%d개의 만료된 사진이 자동으로 삭제되었습니다</item>
+    </plurals>
+    <string name="notification_reminder_title">사진이 곧 만료됩니다</string>
+    <string name="notification_reminder_message">%s 후에 사진이 삭제됩니다</string>
+    <string name="notification_reminder_message_with_description" formatted="false">\"%s\"이(가) %s 후에 삭제됩니다</string>
+    <string name="notification_channel_name">사진 정리</string>
+    <string name="notification_channel_description">자동 사진 정리에 대한 알림</string>
+
+    <!-- TTL Durations -->
+    <string name="ttl_test_3_seconds">3초 (테스트)</string>
+    <string name="ttl_24_hours">24시간</string>
+    <string name="ttl_3_days">3일</string>
+    <string name="ttl_1_week">1주</string>
+
+    <!-- Time formatting -->
+    <string name="time_format_days_hours" formatted="false">%d일 %d시간</string>
+    <string name="time_format_hours_minutes" formatted="false">%d시간 %d분</string>
+    <string name="time_format_minutes">%d분</string>
+
+    <!-- Gallery Screen -->
+    <string name="gallery_title">Utility Cam</string>
+    <string name="gallery_settings">설정</string>
+    <string name="gallery_take_photo">캡처</string>
+    <string name="gallery_no_photos">아직 유틸리티 미디어가 없습니다</string>
+    <string name="gallery_no_photos_hint">카메라 버튼을 탭하여 첫 번째 사진이나 동영상을 캡처하세요</string>
+    <string name="gallery_expires_in">만료: %s</string>
+    <string name="gallery_selection_count">%d개 선택됨</string>
+    <string name="gallery_exit_selection">선택 모드 종료</string>
+    <string name="gallery_share_selected">선택 항목 공유</string>
+    <string name="gallery_save_selected">선택 항목 저장</string>
+    <string name="gallery_delete_selected">선택 항목 삭제</string>
+    <string name="gallery_delete_confirm_title">%d개 항목을 삭제하시겠습니까?</string>
+    <string name="gallery_delete_confirm_message">이 작업은 취소할 수 없습니다.</string>
+    <string name="gallery_delete_button">삭제</string>
+    <string name="gallery_cancel_button">취소</string>
+    <string name="gallery_save_confirm_title">%d개 항목을 영구적으로 저장하시겠습니까?</string>
+    <string name="gallery_save_confirm_message">항목이 갤러리에 저장되고 이 앱에서 제거됩니다.</string>
+    <string name="gallery_save_button">저장</string>
+
+    <!-- Camera Screen -->
+    <string name="camera_permission_required">카메라 권한이 필요합니다</string>
+    <string name="camera_grant_permission">권한 부여</string>
+    <string name="camera_flip">카메라 전환</string>
+    <string name="camera_take_photo">사진 촬영</string>
+    <string name="camera_record_video">동영상 녹화</string>
+    <string name="camera_start_recording">녹화 시작</string>
+    <string name="camera_stop_recording">녹화 중지</string>
+    <string name="camera_mode_photo">사진</string>
+    <string name="camera_mode_video">동영상</string>
+    <string name="camera_close">닫기</string>
+    <string name="camera_zoom_format">%.1fx</string>
+    <string name="camera_recording_time">%02d:%02d</string>
+    <string name="camera_video_pro_only_title">동영상 녹화 - PRO 기능</string>
+    <string name="camera_video_pro_only_message">동영상 녹화는 Utility Cam PRO에서 사용할 수 있습니다. 무제한 동영상 녹화를 잠금 해제하려면 업그레이드하세요!</string>
+    <string name="camera_video_pro_only_upgrade">PRO로 업그레이드</string>
+    <string name="camera_video_pro_only_cancel">취소</string>
+
+    <!-- Capture Review Screen -->
+    <string name="capture_review_title">사진 검토</string>
+    <string name="capture_review_title_video">동영상 검토</string>
+    <string name="capture_review_delete_after">다음 시간 후 삭제:</string>
+    <string name="capture_review_description_label">설명 (선택사항)</string>
+    <string name="capture_review_description_hint">예: 주차 위치: 4층</string>
+    <string name="capture_review_retake">다시 촬영</string>
+    <string name="capture_review_save">저장</string>
+    <string name="capture_review_gallery">갤러리 보기</string>
+    <string name="capture_review_custom">사용자 지정</string>
+    <string name="capture_review_custom_hours_suffix">시간</string>
+    <string name="capture_review_custom_pro_title">사용자 지정 기간 - PRO 기능</string>
+    <string name="capture_review_custom_pro_message">Utility Cam PRO로 사용자 지정 만료 시간을 설정하세요. 이 기능을 잠금 해제하려면 업그레이드하세요!</string>
+    <string name="capture_review_custom_pro_ok">확인</string>
+    <string name="capture_review_custom_dialog_title">사용자 지정 만료 시간</string>
+    <string name="capture_review_custom_dialog_message">이 사진이 삭제될 때까지의 시간을 설정하세요:</string>
+    <string name="capture_review_unit_hours">시간</string>
+    <string name="capture_review_unit_days">일</string>
+    <string name="capture_review_unit_weeks">주</string>
+    <string name="capture_review_custom_hours_label">시간</string>
+    <string name="capture_review_custom_days_label">일</string>
+    <string name="capture_review_custom_weeks_label">주</string>
+    <string name="capture_review_custom_dialog_ok">설정</string>
+    <string name="capture_review_custom_dialog_cancel">취소</string>
+
+    <!-- Photo Detail Screen -->
+    <string name="photo_detail_title">사진 세부정보</string>
+    <string name="photo_detail_title_video">동영상 세부정보</string>
+    <string name="photo_detail_save">갤러리에 저장</string>
+    <string name="photo_detail_share">공유</string>
+    <string name="photo_detail_delete">삭제</string>
+    <string name="photo_detail_back">뒤로</string>
+    <string name="photo_detail_share_title">사진 공유</string>
+    <string name="photo_detail_expires_in">%s 후 만료</string>
+    <string name="photo_detail_captured">촬영됨</string>
+    <string name="photo_detail_description">설명</string>
+    <string name="photo_detail_add">추가</string>
+    <string name="photo_detail_edit">편집</string>
+    <string name="photo_detail_no_description">설명 없음</string>
+    <string name="photo_detail_keep_forever">영구 보관 (갤러리에 저장)</string>
+    <string name="photo_detail_delete_title">사진을 삭제하시겠습니까?</string>
+    <string name="photo_detail_delete_message">이 작업은 취소할 수 없습니다.</string>
+    <string name="photo_detail_delete_confirm">삭제</string>
+    <string name="photo_detail_cancel">취소</string>
+    <string name="photo_detail_save_title">갤러리에 저장하시겠습니까?</string>
+    <string name="photo_detail_save_message">사진이 기기의 갤러리에 저장되고 Utility Cam에서 제거됩니다.</string>
+    <string name="photo_detail_save_confirm">저장</string>
+    <string name="photo_detail_saved_success">사진이 갤러리에 저장되었습니다</string>
+    <string name="photo_detail_save_failed">사진 저장 실패</string>
+    <string name="photo_detail_deleted_success">사진이 삭제되었습니다</string>
+    <string name="photo_detail_edit_description_title">설명 편집</string>
+    <string name="photo_detail_edit_description_hint">이 사진에 대한 설명을 입력하세요</string>
+
+    <!-- Media Detail Screen -->
+    <string name="media_detail_title">미디어 세부정보</string>
+    <string name="media_detail_save">갤러리에 저장</string>
+    <string name="media_detail_share">공유</string>
+    <string name="media_detail_delete">삭제</string>
+    <string name="media_detail_back">뒤로</string>
+    <string name="media_detail_share_title">미디어 공유</string>
+    <string name="media_detail_expires_in">%s 후 만료</string>
+    <string name="media_detail_captured">촬영됨</string>
+    <string name="media_detail_description">설명</string>
+    <string name="media_detail_add">추가</string>
+    <string name="media_detail_edit">편집</string>
+    <string name="media_detail_no_description">설명 없음</string>
+    <string name="media_detail_keep_forever">영구 보관 (갤러리에 저장)</string>
+    <string name="media_detail_delete_title">미디어를 삭제하시겠습니까?</string>
+    <string name="media_detail_delete_message">이 작업은 취소할 수 없습니다.</string>
+    <string name="media_detail_delete_confirm">삭제</string>
+    <string name="media_detail_cancel">취소</string>
+    <string name="media_detail_save_title">갤러리에 저장하시겠습니까?</string>
+    <string name="media_detail_save_message">미디어가 기기의 갤러리에 저장되고 Utility Cam에서 제거됩니다.</string>
+    <string name="media_detail_save_confirm">저장</string>
+    <string name="media_detail_saved_success">미디어가 갤러리에 저장되었습니다</string>
+    <string name="media_detail_save_failed">미디어 저장 실패</string>
+    <string name="media_detail_deleted_success">미디어가 삭제되었습니다</string>
+    <string name="media_detail_edit_description_title">설명 편집</string>
+    <string name="media_detail_edit_description_hint">이 미디어에 대한 설명을 입력하세요</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">설정</string>
+    <string name="settings_back">뒤로</string>
+    <string name="settings_language">언어</string>
+    <string name="settings_language_hint">선호하는 언어를 선택하세요</string>
+    <string name="settings_language_system_default">시스템 기본값</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_portuguese">Português</string>
+    <string name="settings_language_indonesian">Bahasa Indonesia</string>
+    <string name="settings_language_hindi">हिन्दी</string>
+    <string name="settings_language_polish">Polski</string>
+    <string name="settings_language_nepali">नेपाली</string>
+    <string name="settings_language_bengali">বাংলা</string>
+    <string name="settings_language_korean">한국어</string>
+    <string name="settings_language_vietnamese">Tiếng Việt</string>
+    <string name="settings_language_restart_hint">언어가 즉시 업데이트됩니다</string>
+    <string name="settings_theme">테마</string>
+    <string name="settings_theme_hint">선호하는 테마를 선택하세요</string>
+    <string name="settings_theme_system">시스템 기본값</string>
+    <string name="settings_theme_light">라이트</string>
+    <string name="settings_theme_dark">다크</string>
+    <string name="settings_biometric_lock">앱 잠금</string>
+    <string name="settings_biometric_lock_hint">지문, 얼굴 인식 또는 기기 잠금으로 앱을 보호하세요 (Pro 기능)</string>
+    <string name="settings_biometric_lock_title">앱 잠금 활성화</string>
+    <string name="settings_biometric_enable_title">앱 잠금 활성화</string>
+    <string name="settings_biometric_enable_subtitle">활성화하려면 인증하세요</string>
+    <string name="settings_biometric_enable_description">앱 잠금 해제에 지문, 얼굴 인식, PIN, 패턴 또는 비밀번호를 사용하세요</string>
+    <string name="settings_biometric_enabled">앱 잠금이 활성화되었습니다</string>
+    <string name="settings_biometric_disabled">앱 잠금이 비활성화되었습니다</string>
+    <string name="settings_biometric_pro_required">생체 인식 잠금은 Pro 기능입니다. 잠금 해제하려면 업그레이드하세요!</string>
+    <string name="settings_biometric_open_device_settings">기기 설정 열기</string>
+    <string name="settings_biometric_cannot_open_settings">기기 설정을 열 수 없습니다</string>
+    <string name="settings_biometric_pro_locked_title">앱 잠금은 Pro 기능입니다</string>
+    <string name="settings_biometric_pro_locked_message">지문, 얼굴 인식, PIN, 패턴 또는 비밀번호로 앱을 보호하세요. 이 프리미엄 기능을 잠금 해제하려면 Pro로 업그레이드하세요!</string>
+    <string name="settings_biometric_pro_locked_upgrade">Pro로 업그레이드</string>
+    <string name="settings_biometric_pro_locked_cancel">취소</string>
+    <string name="biometric_unlock_title">Utility Cam 잠금 해제</string>
+    <string name="biometric_unlock_subtitle">계속하려면 인증하세요</string>
+    <string name="biometric_unlock_description">앱 잠금 해제에 지문, 얼굴 인식, PIN, 패턴 또는 비밀번호를 사용하세요</string>
+    <string name="settings_default_expiration">기본 만료 시간</string>
+    <string name="settings_default_expiration_hint">사진이 자동으로 삭제되기 전에 보관할 기간을 선택하세요</string>
+    <string name="settings_notifications">알림</string>
+    <string name="settings_cleanup_notifications">정리 알림</string>
+    <string name="settings_cleanup_notifications_hint">만료된 사진이 삭제될 때 알림 받기</string>
+    <string name="settings_reminder_notifications">만료 알림</string>
+    <string name="settings_reminder_notifications_hint">사진이 곧 만료될 때 알림 받기 (1시간 전)</string>
+    <string name="settings_notification_permission_required">알림 권한이 필요합니다</string>
+    <string name="settings_notification_permission_message">정리 알림을 받으려면 알림 권한을 부여해야 합니다.</string>
+    <string name="settings_open_settings">설정 열기</string>
+    <string name="settings_privacy">개인정보</string>
+    <string name="settings_analytics_consent">앱 개선에 도움 주기</string>
+    <string name="settings_analytics_consent_hint">앱 개선에 도움이 되도록 익명 사용 데이터를 공유하세요. 개인 정보는 수집되지 않습니다.</string>
+    <string name="settings_analytics_consent_dialog_title">Utility Cam을 더 좋게 만들어주세요</string>
+    <string name="settings_analytics_consent_dialog_message">앱을 개선하기 위해 익명 사용 데이터를 수집하고자 합니다. 여기에는 다음이 포함됩니다:\n\n• 앱 기능 사용\n• 사진 촬영 이벤트 (기간, 내용 아님)\n• 앱 성능 데이터\n\n수집하지 않는 것:\n• 사진 또는 내용\n• 입력한 설명\n• 개인 정보\n\n설정 > 개인정보에서 언제든지 변경할 수 있습니다.</string>
+    <string name="settings_analytics_consent_accept">허용</string>
+    <string name="settings_analytics_consent_decline">아니요, 괜찮습니다</string>
+    <string name="settings_debug_tools">디버그 도구</string>
+    <string name="settings_debug_tools_hint">개발용 테스트 유틸리티</string>
+    <string name="settings_cleanup_delay_label">정리 워커 지연 (초)</string>
+    <string name="settings_cleanup_delay_hint">정리 워커 실행 간격 (1–3600초). 앱 재시작이 필요합니다.</string>
+    <string name="settings_cleanup_delay_updated">정리 지연이 %d초로 업데이트되었습니다. 적용하려면 앱을 재시작하세요.</string>
+    <string name="settings_trigger_cleanup">지금 정리 실행</string>
+    <string name="settings_trigger_cleanup_started">정리 워커가 실행 중입니다…</string>
+    <string name="settings_cleanup_completed">정리 완료!</string>
+    <string name="settings_cleanup_failed">정리 실패!</string>
+    <string name="settings_cleanup_running">정리 실행 중…</string>
+    <string name="settings_test_notification">알림 테스트</string>
+    <string name="settings_test_notification_sent">테스트 알림을 보내는 중…</string>
+    <string name="settings_check_worker_status">워커 상태 확인</string>
+    <string name="settings_worker_not_scheduled">주기적인 워커가 예약되지 않았습니다!</string>
+    <string name="settings_worker_status_format">워커 상태: %1$s\n실행 시도: %2$d\n태그: %3$s</string>
+    <string name="settings_reset_feedback">피드백 상태 재설정</string>
+    <string name="settings_reset_feedback_hint">프롬프트를 다시 테스트하기 위해 모든 피드백 추적 데이터를 지웁니다</string>
+    <string name="settings_feedback_reset_success">피드백 상태가 재설정되었습니다! 프롬프트를 보려면 갤러리를 다시 여세요.</string>
+    <string name="settings_about">Utility Cam 정보</string>
+    <string name="settings_about_description">임시 사진을 위한 보조 카메라입니다. 이 앱에서 촬영한 모든 것은 설정된 시간이 지나면 자동으로 삭제됩니다.</string>
+    <string name="settings_about_feature_1">• 사진은 기본 갤러리가 아닌 앱의 비공개 저장소에 저장됩니다</string>
+    <string name="settings_about_feature_2">• 사진에서 \'영구 보관\'을 탭하여 영구적으로 저장하세요</string>
+    <string name="settings_about_privacy">개인정보: 앱 개선을 위해 익명 사용 데이터를 수집합니다. 사진이나 개인 정보는 공유되지 않습니다. 설정 > 개인정보에서 비활성화할 수 있습니다.</string>
+    <string name="settings_media_permission_info">💡 팁: Android 14+에서는 전체 액세스 권한을 부여하는 대신 선택한 사진만 공유할 수 있습니다.</string>
+    <string name="settings_warning_uninstall">⚠️ 경고: 앱을 제거하면 저장된 모든 사진이 영구적으로 삭제됩니다. 제거하기 전에 중요한 사진을 저장하세요.</string>
+    <string name="settings_send_feedback">피드백 보내기</string>
+    <string name="settings_love_utility_cam">리뷰 남기기</string>
+    <string name="settings_feedback_email_subject">Utility Cam 피드백 (v%s)</string>
+    <string name="settings_feedback_email_body">안녕하세요 Utility Cam 팀,\n\n피드백을 공유하고 싶습니다:\n\n[여기에 피드백이나 버그 보고서를 작성해주세요]\n\n---\n앱 버전: %1$s (%2$d)\nAndroid 버전: %3$d\n기기: %4$s %5$s</string>
+    <string name="settings_feedback_chooser_title">피드백 보내기</string>
+    <string name="settings_feedback_no_email_app">이메일 앱을 찾을 수 없습니다</string>
+    <string name="settings_app_version">앱 버전</string>
+    <string name="settings_version_format">버전 %1$s (%2$d)</string>
+
+    <!-- Feedback Dialog -->
+    <string name="feedback_title">Utility Cam이 마음에 드시나요?</string>
+    <string name="feedback_message">여러분의 의견을 듣고 싶습니다! 피드백은 개선하고 더 많은 사용자에게 다가가는 데 도움이 됩니다.</string>
+    <string name="feedback_rate_now">Play 스토어에서 평가하기</string>
+    <string name="feedback_later">나중에</string>
+    <string name="feedback_no_thanks">아니요, 괜찮습니다</string>
+
+    <!-- Pro Screen -->
+    <string name="pro_title">평생 Pro</string>
+    <string name="pro_back">뒤로</string>
+    <string name="pro_upgrade_title">평생 Pro로 업그레이드</string>
+    <string name="pro_upgrade_subtitle">한 번의 구매로 프리미엄 기능 잠금 해제</string>
+    <string name="pro_already_purchased">이미 Pro 사용자입니다!</string>
+    <string name="pro_thank_you">Utility Cam을 지원해 주셔서 감사합니다</string>
+    <string name="pro_features_title">Pro 기능</string>
+    <string name="pro_feature_video_title">동영상 녹화</string>
+    <string name="pro_feature_video_description">자동 삭제 타이머로 동영상 녹화를 캡처하고 저장하세요</string>
+    <string name="pro_feature_biometric_lock_title">앱 잠금</string>
+    <string name="pro_feature_biometric_lock_description">지문, 얼굴 인식, PIN, 패턴 또는 비밀번호로 앱을 보호하세요</string>
+    <string name="pro_feature_custom_expiration_title">만료 시간 사용자 지정</string>
+    <string name="pro_feature_custom_expiration_description">사진과 동영상의 만료 시간을 시간, 일 또는 주 단위로 사용자 지정하세요</string>
+    <string name="pro_feature_priority_support_title">우선 지원</string>
+    <string name="pro_feature_priority_support_description">질문과 문제에 대한 빠른 응답을 받으세요</string>
+    <string name="pro_feature_support_dev_title">개발 지원</string>
+    <string name="pro_feature_support_dev_description">개선 사항과 새로운 기능을 추가하는 데 도움을 주세요</string>
+    <string name="pro_feature_future_title">향후 Pro 기능</string>
+    <string name="pro_feature_future_description">추가 비용 없이 향후 모든 프리미엄 기능에 액세스하세요</string>
+    <string name="pro_one_time_payment">일회성 결제</string>
+    <string name="pro_price_loading">로드 중…</string>
+    <string name="pro_loading_price">가격 정보를 로드하는 중…</string>
+    <string name="pro_purchase_button">평생 Pro 구매</string>
+    <string name="pro_one_time_note">✓ 일회성 결제, 영구적으로 소유\n✓ 구독이나 반복 요금 없음</string>
+    <string name="pro_purchase_success">Pro로 업그레이드해 주셔서 감사합니다!</string>
+    <string name="pro_purchase_error">구매 실패: %s</string>
+    <string name="pro_purchase_unavailable">현재 구매를 사용할 수 없습니다</string>
+    <string name="settings_go_pro">Pro로 업그레이드</string>
+    <string name="settings_go_pro_hint">한 번의 구매로 프리미엄 기능 잠금 해제</string>
+    <string name="settings_pro_thank_you">지원해 주셔서 감사합니다!</string>
+
+    <!-- Biometric Availability Messages -->
+    <string name="biometric_availability_available">생체 인식 또는 기기 잠금 인증을 사용할 수 있습니다</string>
+    <string name="biometric_availability_no_hardware">생체 인식 하드웨어를 사용할 수 없고 기기 잠금이 설정되지 않았습니다</string>
+    <string name="biometric_availability_hardware_unavailable">생체 인식 하드웨어를 현재 사용할 수 없습니다</string>
+    <string name="biometric_availability_none_enrolled">인증 방법이 설정되지 않았습니다. 기기 설정에서 지문, 얼굴 인식, PIN, 패턴 또는 비밀번호를 설정하세요</string>
+    <string name="biometric_availability_security_update_required">생체 인식에 보안 업데이트가 필요합니다</string>
+    <string name="biometric_availability_unsupported">이 기기에서는 생체 인식 인증이 지원되지 않습니다</string>
+    <string name="biometric_availability_unknown">알 수 없는 인증 상태</string>
+</resources>

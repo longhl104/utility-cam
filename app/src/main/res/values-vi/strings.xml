@@ -1,0 +1,281 @@
+<resources>
+    <string name="app_name">Utility Cam</string>
+
+    <!-- Notifications -->
+    <string name="notification_cleanup_title">Đã dọn dẹp ảnh</string>
+    <plurals name="notification_cleanup_message">
+        <item quantity="other">%d ảnh hết hạn đã tự động xóa</item>
+    </plurals>
+    <string name="notification_reminder_title">Ảnh sắp hết hạn</string>
+    <string name="notification_reminder_message">Một ảnh sẽ bị xóa sau %s</string>
+    <string name="notification_reminder_message_with_description" formatted="false">\"%s\" sẽ bị xóa sau %s</string>
+    <string name="notification_channel_name">Dọn dẹp ảnh</string>
+    <string name="notification_channel_description">Thông báo về việc tự động dọn dẹp ảnh</string>
+
+    <!-- TTL Durations -->
+    <string name="ttl_test_3_seconds">3 giây (Thử nghiệm)</string>
+    <string name="ttl_24_hours">24 giờ</string>
+    <string name="ttl_3_days">3 ngày</string>
+    <string name="ttl_1_week">1 tuần</string>
+
+    <!-- Time formatting -->
+    <string name="time_format_days_hours" formatted="false">%d ngày %d giờ</string>
+    <string name="time_format_hours_minutes" formatted="false">%d giờ %d phút</string>
+    <string name="time_format_minutes">%d phút</string>
+
+    <!-- Gallery Screen -->
+    <string name="gallery_title">Utility Cam</string>
+    <string name="gallery_settings">Cài đặt</string>
+    <string name="gallery_take_photo">Chụp</string>
+    <string name="gallery_no_photos">Chưa có phương tiện tiện ích nào</string>
+    <string name="gallery_no_photos_hint">Nhấn vào nút máy ảnh để chụp ảnh hoặc video đầu tiên của bạn</string>
+    <string name="gallery_expires_in">Hết hạn sau: %s</string>
+    <string name="gallery_selection_count">%d đã chọn</string>
+    <string name="gallery_exit_selection">Thoát chế độ chọn</string>
+    <string name="gallery_share_selected">Chia sẻ mục đã chọn</string>
+    <string name="gallery_save_selected">Lưu mục đã chọn</string>
+    <string name="gallery_delete_selected">Xóa mục đã chọn</string>
+    <string name="gallery_delete_confirm_title">Xóa %d mục?</string>
+    <string name="gallery_delete_confirm_message">Hành động này không thể hoàn tác.</string>
+    <string name="gallery_delete_button">Xóa</string>
+    <string name="gallery_cancel_button">Hủy</string>
+    <string name="gallery_save_confirm_title">Lưu %d mục vĩnh viễn?</string>
+    <string name="gallery_save_confirm_message">Các mục sẽ được lưu vào thư viện của bạn và xóa khỏi ứng dụng này.</string>
+    <string name="gallery_save_button">Lưu</string>
+
+    <!-- Camera Screen -->
+    <string name="camera_permission_required">Cần quyền truy cập máy ảnh</string>
+    <string name="camera_grant_permission">Cấp quyền</string>
+    <string name="camera_flip">Lật máy ảnh</string>
+    <string name="camera_take_photo">Chụp ảnh</string>
+    <string name="camera_record_video">Quay video</string>
+    <string name="camera_start_recording">Bắt đầu quay</string>
+    <string name="camera_stop_recording">Dừng quay</string>
+    <string name="camera_mode_photo">Ảnh</string>
+    <string name="camera_mode_video">Video</string>
+    <string name="camera_close">Đóng</string>
+    <string name="camera_zoom_format">%.1fx</string>
+    <string name="camera_recording_time">%02d:%02d</string>
+    <string name="camera_video_pro_only_title">Quay video - Tính năng PRO</string>
+    <string name="camera_video_pro_only_message">Quay video có sẵn trong Utility Cam PRO. Nâng cấp để mở khóa quay video không giới hạn!</string>
+    <string name="camera_video_pro_only_upgrade">Nâng cấp lên PRO</string>
+    <string name="camera_video_pro_only_cancel">Hủy</string>
+
+    <!-- Capture Review Screen -->
+    <string name="capture_review_title">Xem lại ảnh</string>
+    <string name="capture_review_title_video">Xem lại video</string>
+    <string name="capture_review_delete_after">Xóa sau:</string>
+    <string name="capture_review_description_label">Mô tả (tùy chọn)</string>
+    <string name="capture_review_description_hint">Ví dụ: Vị trí đậu xe: Tầng 4</string>
+    <string name="capture_review_retake">Chụp lại</string>
+    <string name="capture_review_save">Lưu</string>
+    <string name="capture_review_gallery">Xem thư viện</string>
+    <string name="capture_review_custom">Tùy chỉnh</string>
+    <string name="capture_review_custom_hours_suffix">giờ</string>
+    <string name="capture_review_custom_pro_title">Thời gian tùy chỉnh - Tính năng PRO</string>
+    <string name="capture_review_custom_pro_message">Đặt thời gian hết hạn tùy chỉnh với Utility Cam PRO. Nâng cấp để mở khóa tính năng này!</string>
+    <string name="capture_review_custom_pro_ok">OK</string>
+    <string name="capture_review_custom_dialog_title">Thời gian hết hạn tùy chỉnh</string>
+    <string name="capture_review_custom_dialog_message">Đặt thời gian xóa ảnh này:</string>
+    <string name="capture_review_unit_hours">Giờ</string>
+    <string name="capture_review_unit_days">Ngày</string>
+    <string name="capture_review_unit_weeks">Tuần</string>
+    <string name="capture_review_custom_hours_label">Giờ</string>
+    <string name="capture_review_custom_days_label">Ngày</string>
+    <string name="capture_review_custom_weeks_label">Tuần</string>
+    <string name="capture_review_custom_dialog_ok">Đặt</string>
+    <string name="capture_review_custom_dialog_cancel">Hủy</string>
+
+    <!-- Photo Detail Screen -->
+    <string name="photo_detail_title">Chi tiết ảnh</string>
+    <string name="photo_detail_title_video">Chi tiết video</string>
+    <string name="photo_detail_save">Lưu vào thư viện</string>
+    <string name="photo_detail_share">Chia sẻ</string>
+    <string name="photo_detail_delete">Xóa</string>
+    <string name="photo_detail_back">Quay lại</string>
+    <string name="photo_detail_share_title">Chia sẻ ảnh</string>
+    <string name="photo_detail_expires_in">Hết hạn sau %s</string>
+    <string name="photo_detail_captured">Đã chụp</string>
+    <string name="photo_detail_description">Mô tả</string>
+    <string name="photo_detail_add">Thêm</string>
+    <string name="photo_detail_edit">Chỉnh sửa</string>
+    <string name="photo_detail_no_description">Không có mô tả</string>
+    <string name="photo_detail_keep_forever">Giữ mãi mãi (Lưu vào thư viện)</string>
+    <string name="photo_detail_delete_title">Xóa ảnh?</string>
+    <string name="photo_detail_delete_message">Hành động này không thể hoàn tác.</string>
+    <string name="photo_detail_delete_confirm">Xóa</string>
+    <string name="photo_detail_cancel">Hủy</string>
+    <string name="photo_detail_save_title">Lưu vào thư viện?</string>
+    <string name="photo_detail_save_message">Ảnh sẽ được lưu vào thư viện thiết bị và xóa khỏi Utility Cam.</string>
+    <string name="photo_detail_save_confirm">Lưu</string>
+    <string name="photo_detail_saved_success">Đã lưu ảnh vào thư viện</string>
+    <string name="photo_detail_save_failed">Lưu ảnh thất bại</string>
+    <string name="photo_detail_deleted_success">Đã xóa ảnh</string>
+    <string name="photo_detail_edit_description_title">Chỉnh sửa mô tả</string>
+    <string name="photo_detail_edit_description_hint">Nhập mô tả cho ảnh này</string>
+
+    <!-- Media Detail Screen -->
+    <string name="media_detail_title">Chi tiết phương tiện</string>
+    <string name="media_detail_save">Lưu vào thư viện</string>
+    <string name="media_detail_share">Chia sẻ</string>
+    <string name="media_detail_delete">Xóa</string>
+    <string name="media_detail_back">Quay lại</string>
+    <string name="media_detail_share_title">Chia sẻ phương tiện</string>
+    <string name="media_detail_expires_in">Hết hạn sau %s</string>
+    <string name="media_detail_captured">Đã chụp</string>
+    <string name="media_detail_description">Mô tả</string>
+    <string name="media_detail_add">Thêm</string>
+    <string name="media_detail_edit">Chỉnh sửa</string>
+    <string name="media_detail_no_description">Không có mô tả</string>
+    <string name="media_detail_keep_forever">Giữ mãi mãi (Lưu vào thư viện)</string>
+    <string name="media_detail_delete_title">Xóa phương tiện?</string>
+    <string name="media_detail_delete_message">Hành động này không thể hoàn tác.</string>
+    <string name="media_detail_delete_confirm">Xóa</string>
+    <string name="media_detail_cancel">Hủy</string>
+    <string name="media_detail_save_title">Lưu vào thư viện?</string>
+    <string name="media_detail_save_message">Phương tiện sẽ được lưu vào thư viện thiết bị và xóa khỏi Utility Cam.</string>
+    <string name="media_detail_save_confirm">Lưu</string>
+    <string name="media_detail_saved_success">Đã lưu phương tiện vào thư viện</string>
+    <string name="media_detail_save_failed">Lưu phương tiện thất bại</string>
+    <string name="media_detail_deleted_success">Đã xóa phương tiện</string>
+    <string name="media_detail_edit_description_title">Chỉnh sửa mô tả</string>
+    <string name="media_detail_edit_description_hint">Nhập mô tả cho phương tiện này</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Cài đặt</string>
+    <string name="settings_back">Quay lại</string>
+    <string name="settings_language">Ngôn ngữ</string>
+    <string name="settings_language_hint">Chọn ngôn ngữ bạn thích</string>
+    <string name="settings_language_system_default">Mặc định hệ thống</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_portuguese">Português</string>
+    <string name="settings_language_indonesian">Bahasa Indonesia</string>
+    <string name="settings_language_hindi">हिन्दी</string>
+    <string name="settings_language_polish">Polski</string>
+    <string name="settings_language_nepali">नेपाली</string>
+    <string name="settings_language_bengali">বাংলা</string>
+    <string name="settings_language_korean">한국어</string>
+    <string name="settings_language_vietnamese">Tiếng Việt</string>
+    <string name="settings_language_restart_hint">Ngôn ngữ sẽ cập nhật ngay lập tức</string>
+    <string name="settings_theme">Giao diện</string>
+    <string name="settings_theme_hint">Chọn giao diện bạn thích</string>
+    <string name="settings_theme_system">Mặc định hệ thống</string>
+    <string name="settings_theme_light">Sáng</string>
+    <string name="settings_theme_dark">Tối</string>
+    <string name="settings_biometric_lock">Khóa ứng dụng</string>
+    <string name="settings_biometric_lock_hint">Bảo mật ứng dụng bằng vân tay, mở khóa khuôn mặt hoặc khóa thiết bị (Tính năng Pro)</string>
+    <string name="settings_biometric_lock_title">Bật khóa ứng dụng</string>
+    <string name="settings_biometric_enable_title">Bật khóa ứng dụng</string>
+    <string name="settings_biometric_enable_subtitle">Xác thực để bật</string>
+    <string name="settings_biometric_enable_description">Sử dụng vân tay, mở khóa khuôn mặt, PIN, mẫu hình hoặc mật khẩu để mở khóa ứng dụng</string>
+    <string name="settings_biometric_enabled">Đã bật khóa ứng dụng</string>
+    <string name="settings_biometric_disabled">Đã tắt khóa ứng dụng</string>
+    <string name="settings_biometric_pro_required">Khóa sinh trắc học là tính năng Pro. Nâng cấp để mở khóa!</string>
+    <string name="settings_biometric_open_device_settings">Mở cài đặt thiết bị</string>
+    <string name="settings_biometric_cannot_open_settings">Không thể mở cài đặt thiết bị</string>
+    <string name="settings_biometric_pro_locked_title">Khóa ứng dụng là tính năng Pro</string>
+    <string name="settings_biometric_pro_locked_message">Bảo mật ứng dụng bằng vân tay, mở khóa khuôn mặt, PIN, mẫu hình hoặc mật khẩu. Nâng cấp lên Pro để mở khóa tính năng cao cấp này!</string>
+    <string name="settings_biometric_pro_locked_upgrade">Nâng cấp lên Pro</string>
+    <string name="settings_biometric_pro_locked_cancel">Hủy</string>
+    <string name="biometric_unlock_title">Mở khóa Utility Cam</string>
+    <string name="biometric_unlock_subtitle">Xác thực để tiếp tục</string>
+    <string name="biometric_unlock_description">Sử dụng vân tay, mở khóa khuôn mặt, PIN, mẫu hình hoặc mật khẩu để mở khóa ứng dụng</string>
+    <string name="settings_default_expiration">Thời gian hết hạn mặc định</string>
+    <string name="settings_default_expiration_hint">Chọn thời gian giữ ảnh trước khi tự động xóa</string>
+    <string name="settings_notifications">Thông báo</string>
+    <string name="settings_cleanup_notifications">Thông báo dọn dẹp</string>
+    <string name="settings_cleanup_notifications_hint">Nhận thông báo khi ảnh hết hạn bị xóa</string>
+    <string name="settings_reminder_notifications">Nhắc nhở hết hạn</string>
+    <string name="settings_reminder_notifications_hint">Nhận nhắc nhở khi ảnh sắp hết hạn (trong 1 giờ)</string>
+    <string name="settings_notification_permission_required">Cần quyền thông báo</string>
+    <string name="settings_notification_permission_message">Để nhận thông báo dọn dẹp, bạn cần cấp quyền thông báo.</string>
+    <string name="settings_open_settings">Mở cài đặt</string>
+    <string name="settings_privacy">Quyền riêng tư</string>
+    <string name="settings_analytics_consent">Giúp cải thiện ứng dụng</string>
+    <string name="settings_analytics_consent_hint">Chia sẻ dữ liệu sử dụng ẩn danh để giúp chúng tôi cải thiện ứng dụng. Không thu thập thông tin cá nhân.</string>
+    <string name="settings_analytics_consent_dialog_title">Giúp làm Utility Cam tốt hơn</string>
+    <string name="settings_analytics_consent_dialog_message">Chúng tôi muốn thu thập dữ liệu sử dụng ẩn danh để cải thiện ứng dụng. Bao gồm:\n\n• Sử dụng tính năng ứng dụng\n• Sự kiện chụp ảnh (thời lượng, không phải nội dung)\n• Dữ liệu hiệu suất ứng dụng\n\nChúng tôi không thu thập:\n• Ảnh hoặc nội dung của bạn\n• Mô tả bạn nhập\n• Thông tin cá nhân\n\nBạn có thể thay đổi điều này bất cứ lúc nào trong Cài đặt > Quyền riêng tư.</string>
+    <string name="settings_analytics_consent_accept">Cho phép</string>
+    <string name="settings_analytics_consent_decline">Không, cảm ơn</string>
+    <string name="settings_debug_tools">Công cụ gỡ lỗi</string>
+    <string name="settings_debug_tools_hint">Tiện ích kiểm tra cho phát triển</string>
+    <string name="settings_cleanup_delay_label">Độ trễ công việc dọn dẹp (giây)</string>
+    <string name="settings_cleanup_delay_hint">Thời gian giữa các lần chạy công việc dọn dẹp (1–3600 giây). Cần khởi động lại ứng dụng.</string>
+    <string name="settings_cleanup_delay_updated">Đã cập nhật độ trễ dọn dẹp thành %d giây. Khởi động lại ứng dụng để áp dụng.</string>
+    <string name="settings_trigger_cleanup">Chạy dọn dẹp ngay</string>
+    <string name="settings_trigger_cleanup_started">Công việc dọn dẹp đang chạy…</string>
+    <string name="settings_cleanup_completed">Dọn dẹp hoàn tất!</string>
+    <string name="settings_cleanup_failed">Dọn dẹp thất bại!</string>
+    <string name="settings_cleanup_running">Đang dọn dẹp…</string>
+    <string name="settings_test_notification">Kiểm tra thông báo</string>
+    <string name="settings_test_notification_sent">Đang gửi thông báo kiểm tra…</string>
+    <string name="settings_check_worker_status">Kiểm tra trạng thái công việc</string>
+    <string name="settings_worker_not_scheduled">Không có công việc định kỳ nào được lên lịch!</string>
+    <string name="settings_worker_status_format">Trạng thái công việc: %1$s\nLần chạy thử: %2$d\nThẻ: %3$s</string>
+    <string name="settings_reset_feedback">Đặt lại trạng thái phản hồi</string>
+    <string name="settings_reset_feedback_hint">Xóa tất cả dữ liệu theo dõi phản hồi để kiểm tra lại lời nhắc</string>
+    <string name="settings_feedback_reset_success">Đã đặt lại trạng thái phản hồi! Mở lại thư viện để xem lời nhắc.</string>
+    <string name="settings_about">Giới thiệu Utility Cam</string>
+    <string name="settings_about_description">Máy ảnh phụ cho ảnh tạm thời. Mọi thứ được chụp trong ứng dụng này sẽ tự động tự xóa sau khoảng thời gian đã đặt.</string>
+    <string name="settings_about_feature_1">• Ảnh được lưu trong bộ nhớ riêng của ứng dụng, không phải thư viện chính của bạn</string>
+    <string name="settings_about_feature_2">• Lưu ảnh vĩnh viễn bằng cách nhấn \'Giữ mãi mãi\' trên bất kỳ ảnh nào</string>
+    <string name="settings_about_privacy">Quyền riêng tư: Chúng tôi thu thập dữ liệu sử dụng ẩn danh để cải thiện ứng dụng. Không chia sẻ ảnh hoặc thông tin cá nhân. Bạn có thể tắt trong Cài đặt > Quyền riêng tư.</string>
+    <string name="settings_media_permission_info">💡 Mẹo: Trên Android 14+, bạn có thể chọn chỉ chia sẻ ảnh đã chọn thay vì cấp toàn quyền truy cập.</string>
+    <string name="settings_warning_uninstall">⚠️ Cảnh báo: Gỡ cài đặt ứng dụng sẽ xóa vĩnh viễn tất cả ảnh được lưu trong đó. Đảm bảo lưu ảnh quan trọng trước khi gỡ cài đặt.</string>
+    <string name="settings_send_feedback">Gửi phản hồi</string>
+    <string name="settings_love_utility_cam">Để lại đánh giá</string>
+    <string name="settings_feedback_email_subject">Phản hồi Utility Cam (v%s)</string>
+    <string name="settings_feedback_email_body">Xin chào đội ngũ Utility Cam,\n\nTôi muốn chia sẻ phản hồi:\n\n[Vui lòng viết phản hồi hoặc báo cáo lỗi của bạn ở đây]\n\n---\nPhiên bản ứng dụng: %1$s (%2$d)\nPhiên bản Android: %3$d\nThiết bị: %4$s %5$s</string>
+    <string name="settings_feedback_chooser_title">Gửi phản hồi</string>
+    <string name="settings_feedback_no_email_app">Không tìm thấy ứng dụng email</string>
+    <string name="settings_app_version">Phiên bản ứng dụng</string>
+    <string name="settings_version_format">Phiên bản %1$s (%2$d)</string>
+
+    <!-- Feedback Dialog -->
+    <string name="feedback_title">Bạn thích Utility Cam?</string>
+    <string name="feedback_message">Chúng tôi muốn nghe ý kiến của bạn! Phản hồi của bạn giúp chúng tôi cải thiện và tiếp cận nhiều người dùng hơn.</string>
+    <string name="feedback_rate_now">Đánh giá trên Play Store</string>
+    <string name="feedback_later">Có thể sau</string>
+    <string name="feedback_no_thanks">Không, cảm ơn</string>
+
+    <!-- Pro Screen -->
+    <string name="pro_title">Pro trọn đời</string>
+    <string name="pro_back">Quay lại</string>
+    <string name="pro_upgrade_title">Nâng cấp lên Pro trọn đời</string>
+    <string name="pro_upgrade_subtitle">Mở khóa tính năng cao cấp chỉ với một lần mua</string>
+    <string name="pro_already_purchased">Bạn là người dùng Pro!</string>
+    <string name="pro_thank_you">Cảm ơn bạn đã hỗ trợ Utility Cam</string>
+    <string name="pro_features_title">Tính năng Pro</string>
+    <string name="pro_feature_video_title">Quay video</string>
+    <string name="pro_feature_video_description">Chụp và lưu video quay với bộ hẹn giờ tự động xóa</string>
+    <string name="pro_feature_biometric_lock_title">Khóa ứng dụng</string>
+    <string name="pro_feature_biometric_lock_description">Bảo mật ứng dụng bằng vân tay, mở khóa khuôn mặt, PIN, mẫu hình hoặc mật khẩu</string>
+    <string name="pro_feature_custom_expiration_title">Tùy chỉnh thời gian hết hạn</string>
+    <string name="pro_feature_custom_expiration_description">Đặt thời gian hết hạn tùy chỉnh theo giờ, ngày hoặc tuần cho ảnh và video của bạn</string>
+    <string name="pro_feature_priority_support_title">Hỗ trợ ưu tiên</string>
+    <string name="pro_feature_priority_support_description">Nhận phản hồi nhanh cho câu hỏi và vấn đề của bạn</string>
+    <string name="pro_feature_support_dev_title">Hỗ trợ phát triển</string>
+    <string name="pro_feature_support_dev_description">Giúp chúng tôi cải thiện và thêm tính năng mới</string>
+    <string name="pro_feature_future_title">Tính năng Pro tương lai</string>
+    <string name="pro_feature_future_description">Truy cập tất cả tính năng cao cấp tương lai không mất thêm phí</string>
+    <string name="pro_one_time_payment">Thanh toán một lần</string>
+    <string name="pro_price_loading">Đang tải…</string>
+    <string name="pro_loading_price">Đang tải thông tin giá…</string>
+    <string name="pro_purchase_button">Mua Pro trọn đời</string>
+    <string name="pro_one_time_note">✓ Thanh toán một lần, sở hữu mãi mãi\n✓ Không đăng ký hoặc phí định kỳ</string>
+    <string name="pro_purchase_success">Cảm ơn bạn đã nâng cấp lên Pro!</string>
+    <string name="pro_purchase_error">Mua hàng thất bại: %s</string>
+    <string name="pro_purchase_unavailable">Mua hàng hiện không khả dụng</string>
+    <string name="settings_go_pro">Nâng cấp lên Pro</string>
+    <string name="settings_go_pro_hint">Mở khóa tính năng cao cấp chỉ với một lần mua</string>
+    <string name="settings_pro_thank_you">Cảm ơn sự hỗ trợ của bạn!</string>
+
+    <!-- Biometric Availability Messages -->
+    <string name="biometric_availability_available">Xác thực sinh trắc học hoặc khóa thiết bị có sẵn</string>
+    <string name="biometric_availability_no_hardware">Không có phần cứng sinh trắc học và không có khóa thiết bị được đặt</string>
+    <string name="biometric_availability_hardware_unavailable">Phần cứng sinh trắc học hiện không khả dụng</string>
+    <string name="biometric_availability_none_enrolled">Không có phương thức xác thực nào được đặt. Vui lòng đặt vân tay, mở khóa khuôn mặt, PIN, mẫu hình hoặc mật khẩu trong cài đặt thiết bị</string>
+    <string name="biometric_availability_security_update_required">Cần cập nhật bảo mật cho xác thực sinh trắc học</string>
+    <string name="biometric_availability_unsupported">Xác thực sinh trắc học không được hỗ trợ trên thiết bị này</string>
+    <string name="biometric_availability_unknown">Trạng thái xác thực không xác định</string>
+</resources>

@@ -153,6 +153,10 @@
     <string name="settings_language_indonesian">Bahasa Indonesia</string>
     <string name="settings_language_hindi">हिन्दी</string>
     <string name="settings_language_polish">Polski</string>
+    <string name="settings_language_nepali">नेपाली</string>
+    <string name="settings_language_bengali">বাংলা</string>
+    <string name="settings_language_korean">한국어</string>
+    <string name="settings_language_vietnamese">Tiếng Việt</string>
     <string name="settings_language_restart_hint">Language will be updated immediately</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_theme_hint">Choose your preferred theme</string>

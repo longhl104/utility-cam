@@ -44,10 +44,14 @@ class LocaleManager(private val context: Context) {
         return listOf(
             Language(SYSTEM_DEFAULT, "System Default"),
             Language("en", "English"),
-            Language("hi", "हिन्दी"),
-            Language("pl", "Polski"),
-            Language("pt", "Português"),
-            Language("in", "Bahasa Indonesia"),
+            Language("vi", "Tiếng Việt (Vietnamese)"),
+            Language("hi", "हिन्दी (Hindi)"),
+            Language("pl", "Polski (Polish)"),
+            Language("pt", "Português (Portuguese)"),
+            Language("in", "Bahasa Indonesia (Indonesian)"),
+            Language("ne", "नेपाली (Nepali)"),
+            Language("bn", "বাংলা (Bengali)"),
+            Language("ko", "한국어 (Korean)"),
         )
     }
 }

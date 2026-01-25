@@ -1,0 +1,282 @@
+<resources>
+    <string name="app_name">Utility Cam</string>
+
+    <!-- Notifications -->
+    <string name="notification_cleanup_title">फोटोहरू सफा गरियो</string>
+    <plurals name="notification_cleanup_message">
+        <item quantity="one">%d समाप्त भएको फोटो स्वचालित रूपमा मेटाइयो</item>
+        <item quantity="other">%d समाप्त भएका फोटोहरू स्वचालित रूपमा मेटाइयो</item>
+    </plurals>
+    <string name="notification_reminder_title">फोटो चाँडै समाप्त हुनेछ</string>
+    <string name="notification_reminder_message">%s मा एउटा फोटो मेटाइनेछ</string>
+    <string name="notification_reminder_message_with_description" formatted="false">\"%s\" %s मा मेटाइनेछ</string>
+    <string name="notification_channel_name">फोटो सफाई</string>
+    <string name="notification_channel_description">स्वचालित फोटो सफाई बारे सूचनाहरू</string>
+
+    <!-- TTL Durations -->
+    <string name="ttl_test_3_seconds">३ सेकेन्ड (परीक्षण)</string>
+    <string name="ttl_24_hours">२४ घण्टा</string>
+    <string name="ttl_3_days">३ दिन</string>
+    <string name="ttl_1_week">१ हप्ता</string>
+
+    <!-- Time formatting -->
+    <string name="time_format_days_hours" formatted="false">%dद %dघ</string>
+    <string name="time_format_hours_minutes" formatted="false">%dघ %dमि</string>
+    <string name="time_format_minutes">%dमि</string>
+
+    <!-- Gallery Screen -->
+    <string name="gallery_title">Utility Cam</string>
+    <string name="gallery_settings">सेटिङहरू</string>
+    <string name="gallery_take_photo">क्याप्चर गर्नुहोस्</string>
+    <string name="gallery_no_photos">अझैसम्म कुनै उपयोगिता मिडिया छैन</string>
+    <string name="gallery_no_photos_hint">आफ्नो पहिलो फोटो वा भिडियो क्याप्चर गर्न क्यामेरा बटनमा ट्याप गर्नुहोस्</string>
+    <string name="gallery_expires_in">समाप्त हुन्छ: %s मा</string>
+    <string name="gallery_selection_count">%d चयनित</string>
+    <string name="gallery_exit_selection">चयन मोडबाट बाहिर निस्कनुहोस्</string>
+    <string name="gallery_share_selected">चयनित साझेदारी गर्नुहोस्</string>
+    <string name="gallery_save_selected">चयनित सुरक्षित गर्नुहोस्</string>
+    <string name="gallery_delete_selected">चयनित मेटाउनुहोस्</string>
+    <string name="gallery_delete_confirm_title">%d वस्तु(हरू) मेटाउने?</string>
+    <string name="gallery_delete_confirm_message">यो कार्य पूर्ववत गर्न सकिँदैन।</string>
+    <string name="gallery_delete_button">मेटाउनुहोस्</string>
+    <string name="gallery_cancel_button">रद्द गर्नुहोस्</string>
+    <string name="gallery_save_confirm_title">%d वस्तु(हरू) स्थायी रूपमा सुरक्षित गर्ने?</string>
+    <string name="gallery_save_confirm_message">वस्तुहरू तपाईंको ग्यालेरीमा सुरक्षित गरिनेछ र यस एपबाट हटाइनेछ।</string>
+    <string name="gallery_save_button">सुरक्षित गर्नुहोस्</string>
+
+    <!-- Camera Screen -->
+    <string name="camera_permission_required">क्यामेरा अनुमति आवश्यक छ</string>
+    <string name="camera_grant_permission">अनुमति दिनुहोस्</string>
+    <string name="camera_flip">क्यामेरा फ्लिप गर्नुहोस्</string>
+    <string name="camera_take_photo">फोटो खिच्नुहोस्</string>
+    <string name="camera_record_video">भिडियो रेकर्ड गर्नुहोस्</string>
+    <string name="camera_start_recording">रेकर्डिङ सुरु गर्नुहोस्</string>
+    <string name="camera_stop_recording">रेकर्डिङ रोक्नुहोस्</string>
+    <string name="camera_mode_photo">फोटो</string>
+    <string name="camera_mode_video">भिडियो</string>
+    <string name="camera_close">बन्द गर्नुहोस्</string>
+    <string name="camera_zoom_format">%.1fx</string>
+    <string name="camera_recording_time">%02d:%02d</string>
+    <string name="camera_video_pro_only_title">भिडियो रेकर्डिङ - PRO सुविधा</string>
+    <string name="camera_video_pro_only_message">भिडियो रेकर्डिङ Utility Cam PRO मा उपलब्ध छ। असीमित भिडियो रेकर्डिङ अनलक गर्न अपग्रेड गर्नुहोस्!</string>
+    <string name="camera_video_pro_only_upgrade">PRO मा अपग्रेड गर्नुहोस्</string>
+    <string name="camera_video_pro_only_cancel">रद्द गर्नुहोस्</string>
+
+    <!-- Capture Review Screen -->
+    <string name="capture_review_title">फोटो समीक्षा गर्नुहोस्</string>
+    <string name="capture_review_title_video">भिडियो समीक्षा गर्नुहोस्</string>
+    <string name="capture_review_delete_after">यस पछि मेटाउनुहोस्:</string>
+    <string name="capture_review_description_label">विवरण (वैकल्पिक)</string>
+    <string name="capture_review_description_hint">उदा., पार्किङ स्थान: लेभल ४</string>
+    <string name="capture_review_retake">फेरि लिनुहोस्</string>
+    <string name="capture_review_save">सुरक्षित गर्नुहोस्</string>
+    <string name="capture_review_gallery">ग्यालेरी हेर्नुहोस्</string>
+    <string name="capture_review_custom">अनुकूलन</string>
+    <string name="capture_review_custom_hours_suffix">घ</string>
+    <string name="capture_review_custom_pro_title">अनुकूलन अवधि - PRO सुविधा</string>
+    <string name="capture_review_custom_pro_message">Utility Cam PRO सँग अनुकूलन समाप्ति समय सेट गर्नुहोस्। यो सुविधा अनलक गर्न अपग्रेड गर्नुहोस्!</string>
+    <string name="capture_review_custom_pro_ok">ठीक छ</string>
+    <string name="capture_review_custom_dialog_title">अनुकूलन समाप्ति समय</string>
+    <string name="capture_review_custom_dialog_message">यो फोटो कहिलेसम्म मेटाइने सेट गर्नुहोस्:</string>
+    <string name="capture_review_unit_hours">घण्टा</string>
+    <string name="capture_review_unit_days">दिन</string>
+    <string name="capture_review_unit_weeks">हप्ता</string>
+    <string name="capture_review_custom_hours_label">घण्टा</string>
+    <string name="capture_review_custom_days_label">दिन</string>
+    <string name="capture_review_custom_weeks_label">हप्ता</string>
+    <string name="capture_review_custom_dialog_ok">सेट गर्नुहोस्</string>
+    <string name="capture_review_custom_dialog_cancel">रद्द गर्नुहोस्</string>
+
+    <!-- Photo Detail Screen -->
+    <string name="photo_detail_title">फोटो विवरण</string>
+    <string name="photo_detail_title_video">भिडियो विवरण</string>
+    <string name="photo_detail_save">ग्यालेरीमा सुरक्षित गर्नुहोस्</string>
+    <string name="photo_detail_share">साझेदारी गर्नुहोस्</string>
+    <string name="photo_detail_delete">मेटाउनुहोस्</string>
+    <string name="photo_detail_back">पछाडि</string>
+    <string name="photo_detail_share_title">फोटो साझेदारी गर्नुहोस्</string>
+    <string name="photo_detail_expires_in">%s मा समाप्त हुन्छ</string>
+    <string name="photo_detail_captured">क्याप्चर गरिएको</string>
+    <string name="photo_detail_description">विवरण</string>
+    <string name="photo_detail_add">थप्नुहोस्</string>
+    <string name="photo_detail_edit">सम्पादन गर्नुहोस्</string>
+    <string name="photo_detail_no_description">कुनै विवरण छैन</string>
+    <string name="photo_detail_keep_forever">सधैंको लागि राख्नुहोस् (ग्यालेरीमा सुरक्षित गर्नुहोस्)</string>
+    <string name="photo_detail_delete_title">फोटो मेटाउने?</string>
+    <string name="photo_detail_delete_message">यो कार्य पूर्ववत गर्न सकिँदैन।</string>
+    <string name="photo_detail_delete_confirm">मेटाउनुहोस्</string>
+    <string name="photo_detail_cancel">रद्द गर्नुहोस्</string>
+    <string name="photo_detail_save_title">ग्यालेरीमा सुरक्षित गर्ने?</string>
+    <string name="photo_detail_save_message">यसले फोटो तपाईंको उपकरणको ग्यालेरीमा सुरक्षित गर्नेछ र Utility Cam बाट हटाउनेछ।</string>
+    <string name="photo_detail_save_confirm">सुरक्षित गर्नुहोस्</string>
+    <string name="photo_detail_saved_success">फोटो ग्यालेरीमा सुरक्षित गरियो</string>
+    <string name="photo_detail_save_failed">फोटो सुरक्षित गर्न असफल</string>
+    <string name="photo_detail_deleted_success">फोटो मेटाइयो</string>
+    <string name="photo_detail_edit_description_title">विवरण सम्पादन गर्नुहोस्</string>
+    <string name="photo_detail_edit_description_hint">यस फोटोको लागि विवरण प्रविष्ट गर्नुहोस्</string>
+
+    <!-- Media Detail Screen -->
+    <string name="media_detail_title">मिडिया विवरण</string>
+    <string name="media_detail_save">ग्यालेरीमा सुरक्षित गर्नुहोस्</string>
+    <string name="media_detail_share">साझेदारी गर्नुहोस्</string>
+    <string name="media_detail_delete">मेटाउनुहोस्</string>
+    <string name="media_detail_back">पछाडि</string>
+    <string name="media_detail_share_title">मिडिया साझेदारी गर्नुहोस्</string>
+    <string name="media_detail_expires_in">%s मा समाप्त हुन्छ</string>
+    <string name="media_detail_captured">क्याप्चर गरिएको</string>
+    <string name="media_detail_description">विवरण</string>
+    <string name="media_detail_add">थप्नुहोस्</string>
+    <string name="media_detail_edit">सम्पादन गर्नुहोस्</string>
+    <string name="media_detail_no_description">कुनै विवरण छैन</string>
+    <string name="media_detail_keep_forever">सधैंको लागि राख्नुहोस् (ग्यालेरीमा सुरक्षित गर्नुहोस्)</string>
+    <string name="media_detail_delete_title">मिडिया मेटाउने?</string>
+    <string name="media_detail_delete_message">यो कार्य पूर्ववत गर्न सकिँदैन।</string>
+    <string name="media_detail_delete_confirm">मेटाउनुहोस्</string>
+    <string name="media_detail_cancel">रद्द गर्नुहोस्</string>
+    <string name="media_detail_save_title">ग्यालेरीमा सुरक्षित गर्ने?</string>
+    <string name="media_detail_save_message">यसले मिडिया तपाईंको उपकरणको ग्यालेरीमा सुरक्षित गर्नेछ र Utility Cam बाट हटाउनेछ।</string>
+    <string name="media_detail_save_confirm">सुरक्षित गर्नुहोस्</string>
+    <string name="media_detail_saved_success">मिडिया ग्यालेरीमा सुरक्षित गरियो</string>
+    <string name="media_detail_save_failed">मिडिया सुरक्षित गर्न असफल</string>
+    <string name="media_detail_deleted_success">मिडिया मेटाइयो</string>
+    <string name="media_detail_edit_description_title">विवरण सम्पादन गर्नुहोस्</string>
+    <string name="media_detail_edit_description_hint">यस मिडियाको लागि विवरण प्रविष्ट गर्नुहोस्</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">सेटिङहरू</string>
+    <string name="settings_back">पछाडि</string>
+    <string name="settings_language">भाषा</string>
+    <string name="settings_language_hint">आफ्नो मनपर्ने भाषा छान्नुहोस्</string>
+    <string name="settings_language_system_default">प्रणाली पूर्वनिर्धारित</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_portuguese">Português</string>
+    <string name="settings_language_indonesian">Bahasa Indonesia</string>
+    <string name="settings_language_hindi">हिन्दी</string>
+    <string name="settings_language_polish">Polski</string>
+    <string name="settings_language_nepali">नेपाली</string>
+    <string name="settings_language_bengali">বাংলা</string>
+    <string name="settings_language_korean">한국어</string>
+    <string name="settings_language_vietnamese">Tiếng Việt</string>
+    <string name="settings_language_restart_hint">भाषा तुरुन्त अपडेट हुनेछ</string>
+    <string name="settings_theme">थिम</string>
+    <string name="settings_theme_hint">आफ्नो मनपर्ने थिम छान्नुहोस्</string>
+    <string name="settings_theme_system">प्रणाली पूर्वनिर्धारित</string>
+    <string name="settings_theme_light">उज्यालो</string>
+    <string name="settings_theme_dark">अँध्यारो</string>
+    <string name="settings_biometric_lock">एप लक</string>
+    <string name="settings_biometric_lock_hint">फिंगरप्रिन्ट, फेस अनलक वा उपकरण लकद्वारा आफ्नो एप सुरक्षित गर्नुहोस् (Pro सुविधा)</string>
+    <string name="settings_biometric_lock_title">एप लक सक्षम गर्नुहोस्</string>
+    <string name="settings_biometric_enable_title">एप लक सक्षम गर्नुहोस्</string>
+    <string name="settings_biometric_enable_subtitle">सक्षम गर्न प्रमाणीकरण गर्नुहोस्</string>
+    <string name="settings_biometric_enable_description">एप अनलक गर्न फिंगरप्रिन्ट, फेस अनलक, PIN, ढाँचा वा पासवर्ड प्रयोग गर्नुहोस्</string>
+    <string name="settings_biometric_enabled">एप लक सक्षम गरियो</string>
+    <string name="settings_biometric_disabled">एप लक अक्षम गरियो</string>
+    <string name="settings_biometric_pro_required">बायोमेट्रिक लक एक Pro सुविधा हो। अनलक गर्न अपग्रेड गर्नुहोस्!</string>
+    <string name="settings_biometric_open_device_settings">उपकरण सेटिङहरू खोल्नुहोस्</string>
+    <string name="settings_biometric_cannot_open_settings">उपकरण सेटिङहरू खोल्न सकिएन</string>
+    <string name="settings_biometric_pro_locked_title">एप लक एक Pro सुविधा हो</string>
+    <string name="settings_biometric_pro_locked_message">फिंगरप्रिन्ट, फेस अनलक, PIN, ढाँचा वा पासवर्डद्वारा आफ्नो एप सुरक्षित गर्नुहोस्। यो प्रिमियम सुविधा अनलक गर्न Pro मा अपग्रेड गर्नुहोस्!</string>
+    <string name="settings_biometric_pro_locked_upgrade">Pro मा अपग्रेड गर्नुहोस्</string>
+    <string name="settings_biometric_pro_locked_cancel">रद्द गर्नुहोस्</string>
+    <string name="biometric_unlock_title">Utility Cam अनलक गर्नुहोस्</string>
+    <string name="biometric_unlock_subtitle">जारी राख्न प्रमाणीकरण गर्नुहोस्</string>
+    <string name="biometric_unlock_description">एप अनलक गर्न आफ्नो फिंगरप्रिन्ट, फेस अनलक, PIN, ढाँचा वा पासवर्ड प्रयोग गर्नुहोस्</string>
+    <string name="settings_default_expiration">पूर्वनिर्धारित समाप्ति समय</string>
+    <string name="settings_default_expiration_hint">फोटोहरू स्वचालित रूपमा मेटाउनु अघि कति समयसम्म राख्ने छनौट गर्नुहोस्</string>
+    <string name="settings_notifications">सूचनाहरू</string>
+    <string name="settings_cleanup_notifications">सफाई सूचनाहरू</string>
+    <string name="settings_cleanup_notifications_hint">समाप्त भएका फोटोहरू मेटाइँदा सूचना प्राप्त गर्नुहोस्</string>
+    <string name="settings_reminder_notifications">समाप्ति स्मरणपत्र</string>
+    <string name="settings_reminder_notifications_hint">फोटो चाँडै समाप्त हुँदा स्मरणपत्र प्राप्त गर्नुहोस् (१ घण्टामा)</string>
+    <string name="settings_notification_permission_required">सूचना अनुमति आवश्यक छ</string>
+    <string name="settings_notification_permission_message">सफाई सूचनाहरू प्राप्त गर्न, तपाईंले सूचना अनुमति दिनु पर्छ।</string>
+    <string name="settings_open_settings">सेटिङहरू खोल्नुहोस्</string>
+    <string name="settings_privacy">गोपनीयता</string>
+    <string name="settings_analytics_consent">एप सुधार गर्न मद्दत गर्नुहोस्</string>
+    <string name="settings_analytics_consent_hint">हामीलाई एप सुधार गर्न मद्दत गर्न गुमनाम उपयोग डेटा साझेदारी गर्नुहोस्। कुनै व्यक्तिगत जानकारी सङ्कलन गरिएको छैन।</string>
+    <string name="settings_analytics_consent_dialog_title">Utility Cam लाई राम्रो बनाउन मद्दत गर्नुहोस्</string>
+    <string name="settings_analytics_consent_dialog_message">हामी एप सुधार गर्न गुमनाम उपयोग डेटा सङ्कलन गर्न चाहन्छौं। यसमा समावेश छ:\n\n• एप सुविधा उपयोग\n• फोटो क्याप्चर घटनाहरू (अवधि, सामग्री होइन)\n• एप प्रदर्शन डेटा\n\nहामी सङ्कलन गर्दैनौं:\n• तपाईंका फोटोहरू वा तिनीहरूको सामग्री\n• तपाईंले प्रविष्ट गर्नुभएको विवरण\n• व्यक्तिगत जानकारी\n\nतपाईं यसलाई जुनसुकै बेला सेटिङहरू > गोपनीयतामा परिवर्तन गर्न सक्नुहुन्छ।</string>
+    <string name="settings_analytics_consent_accept">अनुमति दिनुहोस्</string>
+    <string name="settings_analytics_consent_decline">होइन, धन्यवाद</string>
+    <string name="settings_debug_tools">डिबग उपकरणहरू</string>
+    <string name="settings_debug_tools_hint">विकासको लागि परीक्षण उपयोगिताहरू</string>
+    <string name="settings_cleanup_delay_label">सफाई वर्कर ढिलाइ (सेकेन्ड)</string>
+    <string name="settings_cleanup_delay_hint">सफाई वर्कर चल्ने बीचको समय (१–३६०० सेकेन्ड)। एप पुन:सुरु आवश्यक छ।</string>
+    <string name="settings_cleanup_delay_updated">सफाई ढिलाइ %d सेकेन्डमा अपडेट गरियो। लागू गर्न एप पुन:सुरु गर्नुहोस्।</string>
+    <string name="settings_trigger_cleanup">अहिले सफाई चलाउनुहोस्</string>
+    <string name="settings_trigger_cleanup_started">सफाई वर्कर चलिरहेको छ…</string>
+    <string name="settings_cleanup_completed">सफाई पूर्ण भयो!</string>
+    <string name="settings_cleanup_failed">सफाई असफल भयो!</string>
+    <string name="settings_cleanup_running">सफाई चलिरहेको छ…</string>
+    <string name="settings_test_notification">सूचना परीक्षण गर्नुहोस्</string>
+    <string name="settings_test_notification_sent">परीक्षण सूचना पठाइँदैछ…</string>
+    <string name="settings_check_worker_status">वर्कर स्थिति जाँच गर्नुहोस्</string>
+    <string name="settings_worker_not_scheduled">कुनै आवधिक वर्कर निर्धारित छैन!</string>
+    <string name="settings_worker_status_format">वर्कर स्थिति: %1$s\nरन प्रयासहरू: %2$d\nट्याग: %3$s</string>
+    <string name="settings_reset_feedback">प्रतिक्रिया स्थिति रिसेट गर्नुहोस्</string>
+    <string name="settings_reset_feedback_hint">प्रम्प्ट फेरि परीक्षण गर्न सबै प्रतिक्रिया ट्र्याकिङ डेटा सफा गर्नुहोस्</string>
+    <string name="settings_feedback_reset_success">प्रतिक्रिया स्थिति रिसेट गरियो! प्रम्प्ट हेर्न ग्यालेरी फेरि खोल्नुहोस्।</string>
+    <string name="settings_about">Utility Cam को बारेमा</string>
+    <string name="settings_about_description">अस्थायी फोटोहरूको लागि द्वितीयक क्यामेरा। यस एपमा क्याप्चर गरिएका सबै कुरा निर्धारित समय अवधि पछि स्वचालित रूपमा आफैं मेटिनेछ।</string>
+    <string name="settings_about_feature_1">• फोटोहरू तपाईंको मुख्य ग्यालेरीमा होइन, बरु एपको निजी भण्डारणमा सुरक्षित गरिन्छ</string>
+    <string name="settings_about_feature_2">• कुनै पनि फोटोमा \'सधैंको लागि राख्नुहोस्\' ट्याप गरेर स्थायी रूपमा सुरक्षित गर्नुहोस्</string>
+    <string name="settings_about_privacy">गोपनीयता: हामी एप सुधार गर्न गुमनाम उपयोग डेटा सङ्कलन गर्छौं। कुनै फोटो वा व्यक्तिगत जानकारी साझेदारी गरिएको छैन। तपाईं यसलाई सेटिङहरू > गोपनीयतामा अक्षम गर्न सक्नुहुन्छ।</string>
+    <string name="settings_media_permission_info">💡 सुझाव: Android 14+ मा, तपाईं पूर्ण पहुँच दिनुको सट्टा चयनित फोटोहरू मात्र साझेदारी गर्न छनौट गर्न सक्नुहुन्छ।</string>
+    <string name="settings_warning_uninstall">⚠️ चेतावनी: एप अनइन्स्टल गर्दा यसमा भण्डारण गरिएका सबै फोटोहरू स्थायी रूपमा मेटिनेछ। अनइन्स्टल गर्नु अघि महत्त्वपूर्ण फोटोहरू सुरक्षित गर्न निश्चित गर्नुहोस्।</string>
+    <string name="settings_send_feedback">प्रतिक्रिया पठाउनुहोस्</string>
+    <string name="settings_love_utility_cam">हामीलाई समीक्षा दिनुहोस्</string>
+    <string name="settings_feedback_email_subject">Utility Cam प्रतिक्रिया (v%s)</string>
+    <string name="settings_feedback_email_body">नमस्ते Utility Cam टोली,\n\nम आफ्नो प्रतिक्रिया साझेदारी गर्न चाहन्छु:\n\n[कृपया यहाँ आफ्नो प्रतिक्रिया वा बग रिपोर्ट लेख्नुहोस्]\n\n---\nएप संस्करण: %1$s (%2$d)\nAndroid संस्करण: %3$d\nउपकरण: %4$s %5$s</string>
+    <string name="settings_feedback_chooser_title">प्रतिक्रिया पठाउनुहोस्</string>
+    <string name="settings_feedback_no_email_app">कुनै इमेल एप फेला परेन</string>
+    <string name="settings_app_version">एप संस्करण</string>
+    <string name="settings_version_format">संस्करण %1$s (%2$d)</string>
+
+    <!-- Feedback Dialog -->
+    <string name="feedback_title">Utility Cam को आनन्द लिइरहनु भएको छ?</string>
+    <string name="feedback_message">हामी तपाईंको विचारहरू सुन्न चाहन्छौं! तपाईंको प्रतिक्रियाले हामीलाई सुधार गर्न र थप प्रयोगकर्ताहरूसम्म पुग्न मद्दत गर्छ।</string>
+    <string name="feedback_rate_now">Play Store मा मूल्याङ्कन गर्नुहोस्</string>
+    <string name="feedback_later">सायद पछि</string>
+    <string name="feedback_no_thanks">होइन, धन्यवाद</string>
+
+    <!-- Pro Screen -->
+    <string name="pro_title">लाइफटाइम Pro</string>
+    <string name="pro_back">पछाडि</string>
+    <string name="pro_upgrade_title">लाइफटाइम Pro मा अपग्रेड गर्नुहोस्</string>
+    <string name="pro_upgrade_subtitle">एक पटकको खरिदसँग प्रिमियम सुविधाहरू अनलक गर्नुहोस्</string>
+    <string name="pro_already_purchased">तपाईं Pro प्रयोगकर्ता हुनुहुन्छ!</string>
+    <string name="pro_thank_you">Utility Cam लाई समर्थन गर्नुभएकोमा धन्यवाद</string>
+    <string name="pro_features_title">Pro सुविधाहरू</string>
+    <string name="pro_feature_video_title">भिडियो रेकर्डिङ</string>
+    <string name="pro_feature_video_description">स्वचालित-मेटाउने टाइमरसँग भिडियो रेकर्डिङहरू क्याप्चर र सुरक्षित गर्नुहोस्</string>
+    <string name="pro_feature_biometric_lock_title">एप लक</string>
+    <string name="pro_feature_biometric_lock_description">फिंगरप्रिन्ट, फेस अनलक, PIN, ढाँचा वा पासवर्डद्वारा आफ्नो एप सुरक्षित गर्नुहोस्</string>
+    <string name="pro_feature_custom_expiration_title">समाप्ति समय अनुकूलन गर्नुहोस्</string>
+    <string name="pro_feature_custom_expiration_description">आफ्ना फोटो र भिडियोहरूको लागि घण्टा, दिन वा हप्तामा अनुकूलन समाप्ति समय सेट गर्नुहोस्</string>
+    <string name="pro_feature_priority_support_title">प्राथमिकता समर्थन</string>
+    <string name="pro_feature_priority_support_description">आफ्ना प्रश्न र समस्याहरूको लागि छिटो प्रतिक्रिया प्राप्त गर्नुहोस्</string>
+    <string name="pro_feature_support_dev_title">विकासलाई समर्थन गर्नुहोस्</string>
+    <string name="pro_feature_support_dev_description">हामीलाई सुधार र नयाँ सुविधाहरू थप्न मद्दत गर्नुहोस्</string>
+    <string name="pro_feature_future_title">भविष्यका Pro सुविधाहरू</string>
+    <string name="pro_feature_future_description">कुनै अतिरिक्त लागत बिना सबै भविष्यका प्रिमियम सुविधाहरूमा पहुँच प्राप्त गर्नुहोस्</string>
+    <string name="pro_one_time_payment">एक पटकको भुक्तानी</string>
+    <string name="pro_price_loading">लोड हुँदैछ…</string>
+    <string name="pro_loading_price">मूल्य जानकारी लोड हुँदैछ…</string>
+    <string name="pro_purchase_button">लाइफटाइम Pro खरिद गर्नुहोस्</string>
+    <string name="pro_one_time_note">✓ एक पटकको भुक्तानी, सधैंको लागि तपाईंको\n✓ कुनै सदस्यता वा आवर्ती शुल्क छैन</string>
+    <string name="pro_purchase_success">Pro मा अपग्रेड गर्नुभएकोमा धन्यवाद!</string>
+    <string name="pro_purchase_error">खरिद असफल: %s</string>
+    <string name="pro_purchase_unavailable">खरिद हाल उपलब्ध छैन</string>
+    <string name="settings_go_pro">Pro मा अपग्रेड गर्नुहोस्</string>
+    <string name="settings_go_pro_hint">एक पटकको खरिदसँग प्रिमियम सुविधाहरू अनलक गर्नुहोस्</string>
+    <string name="settings_pro_thank_you">तपाईंको समर्थनको लागि धन्यवाद!</string>
+
+    <!-- Biometric Availability Messages -->
+    <string name="biometric_availability_available">बायोमेट्रिक वा उपकरण लक प्रमाणीकरण उपलब्ध छ</string>
+    <string name="biometric_availability_no_hardware">कुनै बायोमेट्रिक हार्डवेयर उपलब्ध छैन र कुनै उपकरण लक सेट गरिएको छैन</string>
+    <string name="biometric_availability_hardware_unavailable">बायोमेट्रिक हार्डवेयर हाल उपलब्ध छैन</string>
+    <string name="biometric_availability_none_enrolled">कुनै प्रमाणीकरण विधि सेट गरिएको छैन। कृपया उपकरण सेटिङहरूमा फिंगरप्रिन्ट, फेस अनलक, PIN, ढाँचा वा पासवर्ड सेट गर्नुहोस्</string>
+    <string name="biometric_availability_security_update_required">बायोमेट्रिक प्रमाणीकरणको लागि सुरक्षा अपडेट आवश्यक छ</string>
+    <string name="biometric_availability_unsupported">यस उपकरणमा बायोमेट्रिक प्रमाणीकरण समर्थित छैन</string>
+    <string name="biometric_availability_unknown">अज्ञात प्रमाणीकरण स्थिति</string>
+</resources>
