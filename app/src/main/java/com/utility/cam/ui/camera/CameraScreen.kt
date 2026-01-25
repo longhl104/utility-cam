@@ -102,15 +102,12 @@ fun CameraScreen(
     val actualIsProUser = rememberProUserState()
 
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
-    val audioPermissionState = rememberPermissionState(android.Manifest.permission.RECORD_AUDIO)
 
     LaunchedEffect(Unit) {
         if (!cameraPermissionState.status.isGranted) {
             cameraPermissionState.launchPermissionRequest()
         }
-        if (!audioPermissionState.status.isGranted) {
-            audioPermissionState.launchPermissionRequest()
-        }
+        // Audio permission will be requested only when switching to video mode
     }
 
     when {
@@ -120,7 +117,6 @@ fun CameraScreen(
                 onPhotoCapture = onPhotoCapture,
                 onNavigateBack = onNavigateBack,
                 onNavigateToPro = onNavigateToPro,
-                hasAudioPermission = audioPermissionState.status.isGranted,
                 isProUser = actualIsProUser
             )
         }
@@ -141,23 +137,33 @@ fun CameraScreen(
     }
 }
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CameraPreviewScreen(
     initialMode: String = "photo",
     onPhotoCapture: (File, String) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToPro: () -> Unit,
-    hasAudioPermission: Boolean,
     isProUser: Boolean
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
 
+    // Audio permission state for requesting when switching to video
+    val audioPermissionState = rememberPermissionState(android.Manifest.permission.RECORD_AUDIO)
+
     var captureMode by remember {
         mutableStateOf(
             if (initialMode == "video" && isProUser) CaptureMode.VIDEO else CaptureMode.PHOTO
         )
+    }
+
+    // Request audio permission when switching to video mode
+    LaunchedEffect(captureMode) {
+        if (captureMode == CaptureMode.VIDEO && !audioPermissionState.status.isGranted) {
+            audioPermissionState.launchPermissionRequest()
+        }
     }
     var showProLockedDialog by remember { mutableStateOf(false) }
     var lensFacing by remember { mutableIntStateOf(CameraSelector.LENS_FACING_BACK) }
@@ -419,7 +425,7 @@ fun CameraPreviewScreen(
                                                 val videoFile = startVideoRecording(
                                                     context,
                                                     capture,
-                                                    hasAudioPermission,
+                                                    audioPermissionState.status.isGranted,
                                                     onRecordingStarted = { recording ->
                                                         activeRecording = recording
                                                         isRecording = true
