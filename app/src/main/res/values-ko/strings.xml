@@ -4,7 +4,6 @@
     <!-- Notifications -->
     <string name="notification_cleanup_title">사진 정리 완료</string>
     <plurals name="notification_cleanup_message">
-        <item quantity="one">%d개의 만료된 사진이 자동으로 삭제되었습니다</item>
         <item quantity="other">%d개의 만료된 사진이 자동으로 삭제되었습니다</item>
     </plurals>
     <string name="notification_reminder_title">사진이 곧 만료됩니다</string>
@@ -203,6 +202,7 @@
     <string name="settings_language_vietnamese">Tiếng Việt</string>
     <string name="settings_language_urdu">اردو</string>
     <string name="settings_language_arabic">العربية</string>
+    <string name="settings_language_finnish">Suomi</string>
     <string name="settings_language_restart_hint">언어가 즉시 업데이트됩니다</string>
     <string name="settings_theme">테마</string>
     <string name="settings_theme_hint">선호하는 테마를 선택하세요</string>

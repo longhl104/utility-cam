@@ -208,6 +208,7 @@
     <string name="settings_language_vietnamese">Tiếng Việt</string>
     <string name="settings_language_urdu">اردو</string>
     <string name="settings_language_arabic">العربية</string>
+    <string name="settings_language_finnish">Suomi</string>
     <string name="settings_language_restart_hint">سيتم تحديث اللغة فورًا</string>
     <string name="settings_theme">المظهر</string>
     <string name="settings_theme_hint">اختر المظهر المفضل لديك</string>
@@ -234,7 +235,7 @@
     <string name="settings_debug_tools">أدوات التصحيح</string>
     <string name="settings_debug_tools_hint">أدوات اختبار للتطوير</string>
     <string name="settings_cleanup_delay_label">تأخير التنظيف (ثوانٍ)</string>
-    <string name="settings_cleanup_delay_hint">الوقت بين عمليات التنظيف (1-3600 ثانية). يتطلب إعادة تشغيل التطبيق.</string>
+    <string name="settings_cleanup_delay_hint">الوقت بين عمليات التنظيف 1–3600 ثانية). يتطلب إعادة تشغيل التطبيق.</string>
     <string name="settings_cleanup_delay_updated">تم تحديث تأخير التنظيف إلى %d ثانية. أعد تشغيل التطبيق للتطبيق.</string>
     <string name="settings_trigger_cleanup">بدء التنظيف الآن</string>
     <string name="settings_trigger_cleanup_started">بدء التنظيف…</string>

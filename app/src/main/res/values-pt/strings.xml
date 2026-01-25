@@ -203,6 +203,7 @@
     <string name="settings_language_vietnamese">Tiếng Việt</string>
     <string name="settings_language_urdu">اردو</string>
     <string name="settings_language_arabic">العربية</string>
+    <string name="settings_language_finnish">Suomi</string>
     <string name="settings_language_restart_hint">O idioma será atualizado imediatamente</string>
     <string name="settings_theme">Tema</string>
     <string name="settings_theme_hint">Escolha seu tema preferido</string>

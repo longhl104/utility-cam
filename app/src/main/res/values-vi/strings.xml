@@ -202,6 +202,7 @@
     <string name="settings_language_vietnamese">Tiếng Việt</string>
     <string name="settings_language_urdu">اردو</string>
     <string name="settings_language_arabic">العربية</string>
+    <string name="settings_language_finnish">Suomi</string>
     <string name="settings_language_restart_hint">Ngôn ngữ sẽ được cập nhật ngay lập tức</string>
     <string name="settings_theme">Giao diện</string>
     <string name="settings_theme_hint">Chọn giao diện bạn thích</string>

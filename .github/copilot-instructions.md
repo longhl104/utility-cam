@@ -14,5 +14,6 @@ Support multiple languages. We currently have:
 - Vietnamese (values-vi/strings.xml)
 - Urdu (values-ur/strings.xml)
 - Arabic (values-ar/strings.xml)
+- Finnish (values-fi/strings.xml)
 
 When adding new strings, update all language files to maintain consistency.
