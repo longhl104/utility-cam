@@ -76,6 +76,7 @@
     <string name="camera_permission_required">کیمرہ کی اجازت درکار ہے</string>
     <string name="camera_grant_permission">اجازت دیں</string>
     <string name="camera_flip">کیمرہ بدلیں</string>
+    <string name="camera_scan_document">دستاویز اسکین کریں</string>
     <string name="camera_take_photo">تصویر لیں</string>
     <string name="camera_record_video">ویڈیو ریکارڈ کریں</string>
     <string name="camera_start_recording">ریکارڈنگ شروع کریں</string>
@@ -259,7 +260,9 @@
     <string name="pro_thank_you">Utility Cam کی حمایت کا شکریہ</string>
     <string name="pro_features_title">Pro فیچرز</string>
     <string name="pro_feature_video_title">ویڈیو ریکارڈنگ</string>
-    <string name="pro_feature_video_description">خودکار حذف ٹائمرز کے ساتھ ویڈیوز ریکارڈ اور محفوظ کریں</string>
+    <string name="pro_feature_video_description">خودکار حذف ٹائمرز کے ساتھ ویڈیو ریکارڈنگ کیپچر اور محفوظ کریں</string>
+    <string name="pro_feature_document_scanner_title">دستاویز اسکینر</string>
+    <string name="pro_feature_document_scanner_description">خودکار کناروں کی شناخت اور نقطہ نظر کی اصلاح کے ساتھ دستاویزات اسکین کریں</string>
     <string name="pro_feature_biometric_lock_title">ایپ لاک</string>
     <string name="pro_feature_biometric_lock_description">اپنی ایپ کو فنگر پرنٹ، چہرے کی شناخت، PIN، پیٹرن یا پاس ورڈ سے محفوظ کریں</string>
     <string name="pro_feature_custom_expiration_title">میعاد کا وقت حسب ضرورت بنائیں</string>

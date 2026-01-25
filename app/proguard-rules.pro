@@ -96,4 +96,9 @@
 -keepnames class com.utility.cam.data.BiometricManager$BiometricAvailability$Unsupported
 -keepnames class com.utility.cam.data.BiometricManager$BiometricAvailability$Unknown
 
+# ML Kit Document Scanner
+-keep class com.google.mlkit.vision.documentscanner.** { *; }
+-keep interface com.google.mlkit.vision.documentscanner.** { *; }
+-keep class com.google.android.gms.internal.mlkit_document_scanner.** { *; }
+
 -dontwarn java.lang.invoke.StringConcatFactory

@@ -1,6 +1,7 @@
 package com.utility.cam.ui.camera
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
@@ -28,6 +29,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,9 +40,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.only
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.DocumentScanner
 import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material.icons.filled.FlipCameraAndroid
 import androidx.compose.material.icons.filled.Lock
@@ -75,6 +82,11 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
+import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
+import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.RESULT_FORMAT_JPEG
+import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.SCANNER_MODE_FULL
+import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
+import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 import com.utility.cam.R
 import com.utility.cam.ui.common.ProLockedDialog
 import com.utility.cam.ui.common.rememberProUserState
@@ -136,6 +148,7 @@ fun CameraScreen(
     }
 }
 
+@Suppress("unused")
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CameraPreviewScreen(
@@ -151,6 +164,49 @@ fun CameraPreviewScreen(
 
     // Audio permission state for requesting when switching to video
     val audioPermissionState = rememberPermissionState(android.Manifest.permission.RECORD_AUDIO)
+
+    // Document scanner setup
+    val documentScanner = remember {
+        val options = GmsDocumentScannerOptions.Builder()
+            .setScannerMode(SCANNER_MODE_FULL)
+            .setGalleryImportAllowed(false)
+            .setPageLimit(1)
+            .setResultFormats(RESULT_FORMAT_JPEG)
+            .build()
+        GmsDocumentScanning.getClient(options)
+    }
+
+    // Document scanner result launcher
+    val scannerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val scanningResult = GmsDocumentScanningResult.fromActivityResultIntent(result.data)
+            scanningResult?.pages?.let { pages ->
+                // Get the first page's image URI and convert to File
+                pages.firstOrNull()?.imageUri?.let { uri ->
+                    try {
+                        // Copy the scanned image to cache directory
+                        val inputStream = context.contentResolver.openInputStream(uri)
+                        val scannedFile = File(
+                            context.cacheDir,
+                            SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
+                                .format(System.currentTimeMillis()) + "_scan.jpg"
+                        )
+                        inputStream?.use { input ->
+                            scannedFile.outputStream().use { output ->
+                                input.copyTo(output)
+                            }
+                        }
+                        // Navigate to review screen with scanned document
+                        onPhotoCapture(scannedFile, "photo")
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        }
+    }
 
     var captureMode by remember {
         mutableStateOf(
@@ -279,9 +335,48 @@ fun CameraPreviewScreen(
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
                 .background(Color.Black.copy(alpha = 0.5f))
-                .windowInsetsPadding(WindowInsets.systemBars)
+                .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
                 .padding(24.dp)
         ) {
+            // Scan document button (Pro only, Photo mode only) - Above mode toggle
+            if (captureMode == CaptureMode.PHOTO) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    IconButton(
+                        onClick = {
+                            if (isProUser) {
+                                // Launch document scanner
+                                documentScanner.getStartScanIntent(context as Activity)
+                                    .addOnSuccessListener { intentSender ->
+                                        scannerLauncher.launch(
+                                            IntentSenderRequest.Builder(intentSender).build()
+                                        )
+                                    }
+                                    .addOnFailureListener { e ->
+                                        e.printStackTrace()
+                                    }
+                            } else {
+                                showProLockedDialog = true
+                            }
+                        },
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(Color.White.copy(alpha = 0.2f), CircleShape),
+                        enabled = !isRecording && !isCapturing
+                    ) {
+                        Icon(
+                            if (isProUser) Icons.Default.DocumentScanner else Icons.Default.Lock,
+                            contentDescription = stringResource(R.string.camera_scan_document),
+                            tint = Color.White
+                        )
+                    }
+                }
+            }
+
             // Mode toggle
             Row(
                 modifier = Modifier
@@ -421,7 +516,7 @@ fun CameraPreviewScreen(
                                     coroutineScope.launch {
                                         try {
                                             videoCapture?.let { capture ->
-                                                val videoFile = startVideoRecording(
+                                                @Suppress("UnusedVariable") val videoFile = startVideoRecording(
                                                     context,
                                                     capture,
                                                     audioPermissionState.status.isGranted,

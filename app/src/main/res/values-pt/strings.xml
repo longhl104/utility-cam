@@ -73,9 +73,10 @@
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Permissão de câmera é necessária</string>
-    <string name="camera_grant_permission">Conceder Permissão</string>
-    <string name="camera_flip">Virar Câmera</string>
-    <string name="camera_take_photo">Tirar Foto</string>
+    <string name="camera_grant_permission">Conceder permissão</string>
+    <string name="camera_flip">Virar câmera</string>
+    <string name="camera_scan_document">Digitalizar documento</string>
+    <string name="camera_take_photo">Tirar foto</string>
     <string name="camera_record_video">Gravar Vídeo</string>
     <string name="camera_start_recording">Iniciar Gravação</string>
     <string name="camera_stop_recording">Parar Gravação</string>
@@ -259,7 +260,9 @@
     <string name="pro_features_title">Recursos Pro</string>
     <string name="pro_feature_video_title">Gravação de Vídeo</string>
     <string name="pro_feature_video_description">Capture e salve gravações de vídeo com temporizadores de exclusão automática</string>
-    <string name="pro_feature_biometric_lock_title">Bloqueio do App</string>
+    <string name="pro_feature_document_scanner_title">Scanner de Documentos</string>
+    <string name="pro_feature_document_scanner_description">Digitalize documentos com detecção automática de bordas e correção de perspectiva</string>
+    <string name="pro_feature_biometric_lock_title">Bloqueio de Aplicativo</string>
     <string name="pro_feature_biometric_lock_description">Proteja seu aplicativo com impressão digital, reconhecimento facial, PIN, padrão ou senha</string>
     <string name="pro_feature_custom_expiration_title">Personalizar Tempo de Expiração</string>
     <string name="pro_feature_custom_expiration_description">Defina tempos de expiração personalizados em horas, dias ou semanas para suas fotos e vídeos</string>

@@ -71,9 +71,10 @@
     <string name="bin_empty_button">Làm trống thùng rác</string>
 
     <!-- Camera Screen -->
-    <string name="camera_permission_required">Cần quyền truy cập máy ảnh</string>
+    <string name="camera_permission_required">Yêu cầu quyền truy cập máy ảnh</string>
     <string name="camera_grant_permission">Cấp quyền</string>
     <string name="camera_flip">Lật máy ảnh</string>
+    <string name="camera_scan_document">Quét tài liệu</string>
     <string name="camera_take_photo">Chụp ảnh</string>
     <string name="camera_record_video">Quay video</string>
     <string name="camera_start_recording">Bắt đầu quay</string>
@@ -275,8 +276,10 @@
     <string name="pro_thank_you">Cảm ơn bạn đã hỗ trợ Utility Cam</string>
     <string name="pro_features_title">Tính năng Pro</string>
     <string name="pro_feature_video_title">Quay video</string>
-    <string name="pro_feature_video_description">Chụp và lưu video quay với bộ hẹn giờ tự động xóa</string>
-    <string name="pro_feature_biometric_lock_title">Khóa ứng dụng</string>
+    <string name="pro_feature_video_description">Quay và lưu video với bộ hẹn giờ tự động xóa</string>
+    <string name="pro_feature_document_scanner_title">Máy Quét Tài Liệu</string>
+    <string name="pro_feature_document_scanner_description">Quét tài liệu với tự động phát hiện cạnh và hiệu chỉnh góc nhìn</string>
+    <string name="pro_feature_biometric_lock_title">Khóa Ứng Dụng</string>
     <string name="pro_feature_biometric_lock_description">Bảo mật ứng dụng bằng vân tay, mở khóa khuôn mặt, PIN, mẫu hình hoặc mật khẩu</string>
     <string name="pro_feature_custom_expiration_title">Tùy chỉnh thời gian hết hạn</string>
     <string name="pro_feature_custom_expiration_description">Đặt thời gian hết hạn tùy chỉnh theo giờ, ngày hoặc tuần cho ảnh và video của bạn</string>

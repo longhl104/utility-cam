@@ -72,10 +72,11 @@
     <string name="bin_empty_button">বিন খালি করুন</string>
 
     <!-- Camera Screen -->
-    <string name="camera_permission_required">ক্যামেরা অনুমতি প্রয়োজন</string>
+    <string name="camera_permission_required">ক্যামেরার অনুমতি প্রয়োজন</string>
     <string name="camera_grant_permission">অনুমতি দিন</string>
-    <string name="camera_flip">ক্যামেরা ফ্লিপ করুন</string>
-    <string name="camera_take_photo">ফটো তুলুন</string>
+    <string name="camera_flip">ক্যামেরা ঘুরান</string>
+    <string name="camera_scan_document">নথি স্ক্যান করুন</string>
+    <string name="camera_take_photo">ছবি তুলুন</string>
     <string name="camera_record_video">ভিডিও রেকর্ড করুন</string>
     <string name="camera_start_recording">রেকর্ডিং শুরু করুন</string>
     <string name="camera_stop_recording">রেকর্ডিং বন্ধ করুন</string>
@@ -276,7 +277,9 @@
     <string name="pro_thank_you">Utility Cam কে সমর্থন করার জন্য ধন্যবাদ</string>
     <string name="pro_features_title">Pro ফিচার</string>
     <string name="pro_feature_video_title">ভিডিও রেকর্ডিং</string>
-    <string name="pro_feature_video_description">স্বয়ংক্রিয়-মুছে ফেলা টাইমার সহ ভিডিও রেকর্ডিং ক্যাপচার এবং সংরক্ষণ করুন</string>
+    <string name="pro_feature_video_description">অটো-ডিলিট টাইমার সহ ভিডিও রেকর্ডিং ক্যাপচার এবং সংরক্ষণ করুন</string>
+    <string name="pro_feature_document_scanner_title">ডকুমেন্ট স্ক্যানার</string>
+    <string name="pro_feature_document_scanner_description">স্বয়ংক্রিয় প্রান্ত সনাক্তকরণ এবং দৃষ্টিকোণ সংশোধন সহ নথি স্ক্যান করুন</string>
     <string name="pro_feature_biometric_lock_title">অ্যাপ লক</string>
     <string name="pro_feature_biometric_lock_description">ফিঙ্গারপ্রিন্ট, ফেস আনলক, PIN, প্যাটার্ন বা পাসওয়ার্ড দিয়ে আপনার অ্যাপ সুরক্ষিত করুন</string>
     <string name="pro_feature_custom_expiration_title">মেয়াদ সময় কাস্টমাইজ করুন</string>

@@ -72,9 +72,10 @@
     <string name="bin_empty_button">बिन खाली करें</string>
 
     <!-- Camera Screen -->
-    <string name="camera_permission_required">कैमरा अनुमति आवश्यक है</string>
+    <string name="camera_permission_required">कैमरा की अनुमति आवश्यक है</string>
     <string name="camera_grant_permission">अनुमति दें</string>
-    <string name="camera_flip">कैमरा फ्लिप करें</string>
+    <string name="camera_flip">कैमरा पलटें</string>
+    <string name="camera_scan_document">दस्तावेज़ स्कैन करें</string>
     <string name="camera_take_photo">फोटो लें</string>
     <string name="camera_record_video">वीडियो रिकॉर्ड करें</string>
     <string name="camera_start_recording">रिकॉर्डिंग शुरू करें</string>
@@ -258,7 +259,9 @@
     <string name="pro_thank_you">Utility Cam का समर्थन करने के लिए धन्यवाद</string>
     <string name="pro_features_title">Pro सुविधाएं</string>
     <string name="pro_feature_video_title">वीडियो रिकॉर्डिंग</string>
-    <string name="pro_feature_video_description">स्वतः-हटाने वाले टाइमर के साथ वीडियो रिकॉर्डिंग कैप्चर और सहेजें</string>
+    <string name="pro_feature_video_description">ऑटो-डिलीट टाइमर के साथ वीडियो रिकॉर्डिंग कैप्चर और सेव करें</string>
+    <string name="pro_feature_document_scanner_title">दस्तावेज़ स्कैनर</string>
+    <string name="pro_feature_document_scanner_description">स्वचालित किनारे का पता लगाने और परिप्रेक्ष्य सुधार के साथ दस्तावेज़ स्कैन करें</string>
     <string name="pro_feature_biometric_lock_title">ऐप लॉक</string>
     <string name="pro_feature_biometric_lock_description">फिंगरप्रिंट, फेस अनलॉक, PIN, पैटर्न या पासवर्ड से अपने ऐप को सुरक्षित करें</string>
     <string name="pro_feature_custom_expiration_title">समाप्ति समय कस्टमाइज़ करें</string>

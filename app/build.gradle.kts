@@ -152,6 +152,9 @@ dependencies {
     // Biometric authentication (Fingerprint / FaceID)
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
 
+    // ML Kit Document Scanner
+    implementation("com.google.android.gms:play-services-mlkit-document-scanner:16.0.0")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 

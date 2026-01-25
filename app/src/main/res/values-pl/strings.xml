@@ -74,9 +74,10 @@
     <string name="bin_empty_button">Opróżnij kosz</string>
 
     <!-- Camera Screen -->
-    <string name="camera_permission_required">Wymagane uprawnienie do aparatu</string>
+    <string name="camera_permission_required">Wymagane jest uprawnienie kamery</string>
     <string name="camera_grant_permission">Przyznaj uprawnienie</string>
-    <string name="camera_flip">Przełącz aparat</string>
+    <string name="camera_flip">Przełącz kamerę</string>
+    <string name="camera_scan_document">Skanuj dokument</string>
     <string name="camera_take_photo">Zrób zdjęcie</string>
     <string name="camera_record_video">Nagraj wideo</string>
     <string name="camera_start_recording">Rozpocznij nagrywanie</string>
@@ -260,8 +261,10 @@
     <string name="pro_thank_you">Dziękujemy za wsparcie Utility Cam</string>
     <string name="pro_features_title">Funkcje Pro</string>
     <string name="pro_feature_video_title">Nagrywanie wideo</string>
-    <string name="pro_feature_video_description">Nagrywaj i zapisuj wideo z automatycznymi czasomierzami usuwania</string>
-    <string name="pro_feature_biometric_lock_title">Blokada aplikacji</string>
+    <string name="pro_feature_video_description">Nagrywaj i zapisuj wideo z automatycznym usuwaniem</string>
+    <string name="pro_feature_document_scanner_title">Skaner Dokumentów</string>
+    <string name="pro_feature_document_scanner_description">Skanuj dokumenty z automatycznym wykrywaniem krawędzi i korekcją perspektywy</string>
+    <string name="pro_feature_biometric_lock_title">Blokada Aplikacji</string>
     <string name="pro_feature_biometric_lock_description">Zabezpiecz swoją aplikację odciskiem palca, rozpoznawaniem twarzy, PIN, wzorem lub hasłem</string>
     <string name="pro_feature_custom_expiration_title">Dostosuj czas wygaśnięcia</string>
     <string name="pro_feature_custom_expiration_description">Ustaw niestandardowe czasy wygaśnięcia w godzinach, dniach lub tygodniach dla swoich zdjęć i filmów</string>

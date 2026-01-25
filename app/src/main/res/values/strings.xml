@@ -73,9 +73,10 @@
 
     <!-- Camera Screen -->
     <string name="camera_permission_required">Camera permission is required</string>
-    <string name="camera_grant_permission">Grant Permission</string>
-    <string name="camera_flip">Flip Camera</string>
-    <string name="camera_take_photo">Take Photo</string>
+    <string name="camera_grant_permission">Grant permission</string>
+    <string name="camera_flip">Flip camera</string>
+    <string name="camera_scan_document">Scan document</string>
+    <string name="camera_take_photo">Take photo</string>
     <string name="camera_record_video">Record Video</string>
     <string name="camera_start_recording">Start Recording</string>
     <string name="camera_stop_recording">Stop Recording</string>
@@ -259,6 +260,8 @@
     <string name="pro_features_title">Pro Features</string>
     <string name="pro_feature_video_title">Video Recording</string>
     <string name="pro_feature_video_description">Capture and save video recordings with auto-delete timers</string>
+    <string name="pro_feature_document_scanner_title">Document Scanner</string>
+    <string name="pro_feature_document_scanner_description">Scan documents with automatic edge detection and perspective correction</string>
     <string name="pro_feature_biometric_lock_title">App Lock</string>
     <string name="pro_feature_biometric_lock_description">Secure your app with fingerprint, face unlock, PIN, pattern, or password</string>
     <string name="pro_feature_custom_expiration_title">Customize Expiration Time</string>

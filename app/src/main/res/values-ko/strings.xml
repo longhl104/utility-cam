@@ -75,6 +75,7 @@
     <string name="camera_permission_required">카메라 권한이 필요합니다</string>
     <string name="camera_grant_permission">권한 부여</string>
     <string name="camera_flip">카메라 전환</string>
+    <string name="camera_scan_document">문서 스캔</string>
     <string name="camera_take_photo">사진 촬영</string>
     <string name="camera_record_video">동영상 녹화</string>
     <string name="camera_start_recording">녹화 시작</string>
@@ -276,7 +277,9 @@
     <string name="pro_thank_you">Utility Cam을 지원해 주셔서 감사합니다</string>
     <string name="pro_features_title">Pro 기능</string>
     <string name="pro_feature_video_title">동영상 녹화</string>
-    <string name="pro_feature_video_description">자동 삭제 타이머로 동영상 녹화를 캡처하고 저장하세요</string>
+    <string name="pro_feature_video_description">자동 삭제 타이머로 비디오 녹화 및 저장</string>
+    <string name="pro_feature_document_scanner_title">문서 스캐너</string>
+    <string name="pro_feature_document_scanner_description">자동 가장자리 감지 및 원근 보정으로 문서 스캔</string>
     <string name="pro_feature_biometric_lock_title">앱 잠금</string>
     <string name="pro_feature_biometric_lock_description">지문, 얼굴 인식, PIN, 패턴 또는 비밀번호로 앱을 보호하세요</string>
     <string name="pro_feature_custom_expiration_title">만료 시간 사용자 지정</string>
