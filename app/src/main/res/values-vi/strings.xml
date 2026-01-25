@@ -70,6 +70,22 @@
     <string name="bin_empty_confirm_message">Tất cả các mục trong thùng rác sẽ bị xóa vĩnh viễn. Hành động này không thể hoàn tác.</string>
     <string name="bin_empty_button">Làm trống thùng rác</string>
 
+    <!-- PDF Generator Screen -->
+    <string name="pdf_generator_title">Trình Tạo PDF</string>
+    <string name="pdf_no_images">Không có hình ảnh nào</string>
+    <string name="pdf_no_images_hint">Chụp một số ảnh trước để tạo PDF</string>
+    <string name="pdf_instructions">Chọn Hình Ảnh cho PDF</string>
+    <string name="pdf_instructions_hint">Chạm vào hình ảnh để chọn, sau đó chạm vào nút tạo để tạo PDF</string>
+    <string name="pdf_selected_count">Đã chọn %d</string>
+    <string name="pdf_generate_button">Tạo PDF (%d)</string>
+    <string name="pdf_generating">Đang tạo PDF…</string>
+    <string name="pdf_success_title">Đã Tạo PDF</string>
+    <string name="pdf_success_message">PDF của bạn đã được lưu vào thư mục Tải xuống của thiết bị</string>
+    <string name="pdf_error_title">Tạo Thất Bại</string>
+    <string name="pdf_generation_failed">Không thể tạo PDF</string>
+    <string name="pdf_view_button">Xem PDF</string>
+    <string name="pdf_no_viewer">Không có ứng dụng xem PDF nào được cài đặt</string>
+
     <!-- Camera Screen -->
     <string name="camera_permission_required">Yêu cầu quyền truy cập máy ảnh</string>
     <string name="camera_grant_permission">Cấp quyền</string>

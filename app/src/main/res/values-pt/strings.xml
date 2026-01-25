@@ -71,6 +71,22 @@
     <string name="bin_empty_confirm_message">Todos os itens na lixeira serão excluídos permanentemente. Esta ação não pode ser desfeita.</string>
     <string name="bin_empty_button">Esvaziar Lixeira</string>
 
+    <!-- PDF Generator Screen -->
+    <string name="pdf_generator_title">Gerador de PDF</string>
+    <string name="pdf_no_images">Nenhuma imagem disponível</string>
+    <string name="pdf_no_images_hint">Capture algumas fotos primeiro para gerar PDFs</string>
+    <string name="pdf_instructions">Selecione Imagens para PDF</string>
+    <string name="pdf_instructions_hint">Toque nas imagens para selecioná-las e depois toque no botão gerar para criar um PDF</string>
+    <string name="pdf_selected_count">%d selecionado(s)</string>
+    <string name="pdf_generate_button">Gerar PDF (%d)</string>
+    <string name="pdf_generating">Gerando PDF…</string>
+    <string name="pdf_success_title">PDF Gerado</string>
+    <string name="pdf_success_message">Seu PDF foi salvo na pasta Downloads do dispositivo</string>
+    <string name="pdf_error_title">Falha na Geração</string>
+    <string name="pdf_generation_failed">Falha ao gerar PDF</string>
+    <string name="pdf_view_button">Ver PDF</string>
+    <string name="pdf_no_viewer">Nenhum aplicativo visualizador de PDF instalado</string>
+
     <!-- Camera Screen -->
     <string name="camera_permission_required">Permissão de câmera é necessária</string>
     <string name="camera_grant_permission">Conceder permissão</string>

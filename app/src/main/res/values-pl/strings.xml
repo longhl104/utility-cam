@@ -73,6 +73,22 @@
     <string name="bin_empty_confirm_message">Wszystkie elementy w koszu zostaną trwale usunięte. Tej czynności nie można cofnąć.</string>
     <string name="bin_empty_button">Opróżnij kosz</string>
 
+    <!-- PDF Generator Screen -->
+    <string name="pdf_generator_title">Generator PDF</string>
+    <string name="pdf_no_images">Brak dostępnych obrazów</string>
+    <string name="pdf_no_images_hint">Zrób najpierw zdjęcia, aby wygenerować PDF</string>
+    <string name="pdf_instructions">Wybierz obrazy do PDF</string>
+    <string name="pdf_instructions_hint">Dotknij obrazów, aby je wybrać, a następnie dotknij przycisku generowania, aby utworzyć PDF</string>
+    <string name="pdf_selected_count">Wybrano: %d</string>
+    <string name="pdf_generate_button">Generuj PDF (%d)</string>
+    <string name="pdf_generating">Generowanie PDF…</string>
+    <string name="pdf_success_title">PDF wygenerowany</string>
+    <string name="pdf_success_message">Twój PDF został zapisany w folderze Pobrane na urządzeniu</string>
+    <string name="pdf_error_title">Generowanie nie powiodło się</string>
+    <string name="pdf_generation_failed">Nie udało się wygenerować PDF</string>
+    <string name="pdf_view_button">Zobacz PDF</string>
+    <string name="pdf_no_viewer">Brak zainstalowanej aplikacji do przeglądania PDF</string>
+
     <!-- Camera Screen -->
     <string name="camera_permission_required">Wymagane jest uprawnienie kamery</string>
     <string name="camera_grant_permission">Przyznaj uprawnienie</string>

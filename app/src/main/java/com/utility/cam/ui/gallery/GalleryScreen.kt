@@ -25,6 +25,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayCircleOutline
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
@@ -103,7 +104,8 @@ fun GalleryScreen(
     onNavigateToCamera: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToMediaDetail: (String) -> Unit,
-    onNavigateToBin: () -> Unit
+    onNavigateToBin: () -> Unit,
+    onOpenDrawer: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
@@ -276,6 +278,11 @@ fun GalleryScreen(
                                     )
                                 }
                             }
+                        }
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onOpenDrawer) {
+                            Icon(Icons.Default.Menu, contentDescription = stringResource(R.string.gallery_title))
                         }
                     },
                     actions = {

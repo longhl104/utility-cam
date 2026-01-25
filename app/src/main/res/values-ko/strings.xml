@@ -71,6 +71,22 @@
     <string name="bin_empty_confirm_message">휴지통의 모든 항목이 영구적으로 삭제됩니다. 이 작업은 취소할 수 없습니다.</string>
     <string name="bin_empty_button">휴지통 비우기</string>
 
+    <!-- PDF Generator Screen -->
+    <string name="pdf_generator_title">PDF 생성기</string>
+    <string name="pdf_no_images">사용 가능한 이미지 없음</string>
+    <string name="pdf_no_images_hint">PDF를 생성하려면 먼저 사진을 캡처하세요</string>
+    <string name="pdf_instructions">PDF용 이미지 선택</string>
+    <string name="pdf_instructions_hint">이미지를 탭하여 선택한 다음 생성 버튼을 탭하여 PDF를 만드세요</string>
+    <string name="pdf_selected_count">%d개 선택됨</string>
+    <string name="pdf_generate_button">PDF 생성 (%d)</string>
+    <string name="pdf_generating">PDF 생성 중…</string>
+    <string name="pdf_success_title">PDF 생성됨</string>
+    <string name="pdf_success_message">PDF가 기기의 다운로드 폴더에 저장되었습니다</string>
+    <string name="pdf_error_title">생성 실패</string>
+    <string name="pdf_generation_failed">PDF 생성 실패</string>
+    <string name="pdf_view_button">PDF 보기</string>
+    <string name="pdf_no_viewer">PDF 뷰어 앱이 설치되어 있지 않습니다</string>
+
     <!-- Camera Screen -->
     <string name="camera_permission_required">카메라 권한이 필요합니다</string>
     <string name="camera_grant_permission">권한 부여</string>

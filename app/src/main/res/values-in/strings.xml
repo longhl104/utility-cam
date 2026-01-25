@@ -70,6 +70,22 @@
     <string name="bin_empty_confirm_message">Semua item di tempat sampah akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.</string>
     <string name="bin_empty_button">Kosongkan Tempat Sampah</string>
 
+    <!-- PDF Generator Screen -->
+    <string name="pdf_generator_title">Generator PDF</string>
+    <string name="pdf_no_images">Tidak ada gambar tersedia</string>
+    <string name="pdf_no_images_hint">Ambil beberapa foto terlebih dahulu untuk membuat PDF</string>
+    <string name="pdf_instructions">Pilih Gambar untuk PDF</string>
+    <string name="pdf_instructions_hint">Ketuk gambar untuk memilihnya, lalu ketuk tombol buat untuk membuat PDF</string>
+    <string name="pdf_selected_count">%d dipilih</string>
+    <string name="pdf_generate_button">Buat PDF (%d)</string>
+    <string name="pdf_generating">Membuat PDF…</string>
+    <string name="pdf_success_title">PDF Berhasil Dibuat</string>
+    <string name="pdf_success_message">PDF Anda telah disimpan di folder Downloads perangkat</string>
+    <string name="pdf_error_title">Pembuatan Gagal</string>
+    <string name="pdf_generation_failed">Gagal membuat PDF</string>
+    <string name="pdf_view_button">Lihat PDF</string>
+    <string name="pdf_no_viewer">Tidak ada aplikasi pembaca PDF yang terinstal</string>
+
     <!-- Camera Screen -->
     <string name="camera_permission_required">Izin kamera diperlukan</string>
     <string name="camera_grant_permission">Berikan izin</string>

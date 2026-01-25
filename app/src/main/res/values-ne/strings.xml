@@ -71,6 +71,22 @@
     <string name="bin_empty_confirm_message">बिनमा भएका सबै वस्तुहरू स्थायी रूपमा मेटाइनेछ। यो कार्य पूर्ववत गर्न सकिँदैन।</string>
     <string name="bin_empty_button">बिन खाली गर्नुहोस्</string>
 
+    <!-- PDF Generator Screen -->
+    <string name="pdf_generator_title">PDF जेनरेटर</string>
+    <string name="pdf_no_images">कुनै छविहरू उपलब्ध छैनन्</string>
+    <string name="pdf_no_images_hint">PDF उत्पन्न गर्न पहिले केही फोटोहरू क्याप्चर गर्नुहोस्</string>
+    <string name="pdf_instructions">PDF का लागि छविहरू चयन गर्नुहोस्</string>
+    <string name="pdf_instructions_hint">तिनीहरूलाई चयन गर्न छविहरूमा ट्याप गर्नुहोस्, त्यसपछि PDF सिर्जना गर्न उत्पन्न बटनमा ट्याप गर्नुहोस्</string>
+    <string name="pdf_selected_count">%d चयनित</string>
+    <string name="pdf_generate_button">PDF उत्पन्न गर्नुहोस् (%d)</string>
+    <string name="pdf_generating">PDF उत्पन्न गर्दै…</string>
+    <string name="pdf_success_title">PDF उत्पन्न भयो</string>
+    <string name="pdf_success_message">तपाईंको PDF तपाईंको यन्त्रको डाउनलोड फोल्डरमा सुरक्षित गरिएको छ</string>
+    <string name="pdf_error_title">जेनरेशन असफल भयो</string>
+    <string name="pdf_generation_failed">PDF उत्पन्न गर्न असफल</string>
+    <string name="pdf_view_button">PDF हेर्नुहोस्</string>
+    <string name="pdf_no_viewer">कुनै PDF दर्शक ऐप स्थापित छैन</string>
+
     <!-- Camera Screen -->
     <string name="camera_permission_required">क्यामेरा अनुमति आवश्यक छ</string>
     <string name="camera_grant_permission">अनुमति दिनुहोस्</string>

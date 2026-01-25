@@ -71,6 +71,22 @@
     <string name="bin_empty_confirm_message">All items in bin will be permanently deleted. This action cannot be undone.</string>
     <string name="bin_empty_button">Empty Bin</string>
 
+    <!-- PDF Generator Screen -->
+    <string name="pdf_generator_title">PDF Generator</string>
+    <string name="pdf_no_images">No images available</string>
+    <string name="pdf_no_images_hint">Capture some photos first to generate PDFs</string>
+    <string name="pdf_instructions">Select Images for PDF</string>
+    <string name="pdf_instructions_hint">Tap images to select them, then tap the generate button to create a PDF</string>
+    <string name="pdf_selected_count">%d selected</string>
+    <string name="pdf_generate_button">Generate PDF (%d)</string>
+    <string name="pdf_generating">Generating PDF…</string>
+    <string name="pdf_success_title">PDF Generated</string>
+    <string name="pdf_success_message">Your PDF has been saved to your device\'s Downloads folder</string>
+    <string name="pdf_error_title">Generation Failed</string>
+    <string name="pdf_generation_failed">Failed to generate PDF</string>
+    <string name="pdf_view_button">View PDF</string>
+    <string name="pdf_no_viewer">No PDF viewer app installed</string>
+
     <!-- Camera Screen -->
     <string name="camera_permission_required">Camera permission is required</string>
     <string name="camera_grant_permission">Grant permission</string>

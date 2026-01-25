@@ -71,6 +71,22 @@
     <string name="bin_empty_confirm_message">বিনের সমস্ত আইটেম স্থায়ীভাবে মুছে ফেলা হবে। এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না।</string>
     <string name="bin_empty_button">বিন খালি করুন</string>
 
+    <!-- PDF Generator Screen -->
+    <string name="pdf_generator_title">PDF জেনারেটর</string>
+    <string name="pdf_no_images">কোনো ছবি উপলব্ধ নেই</string>
+    <string name="pdf_no_images_hint">PDF তৈরি করতে প্রথমে কিছু ছবি ক্যাপচার করুন</string>
+    <string name="pdf_instructions">PDF-এর জন্য ছবি নির্বাচন করুন</string>
+    <string name="pdf_instructions_hint">সেগুলি নির্বাচন করতে ছবিতে ট্যাপ করুন, তারপর PDF তৈরি করতে জেনারেট বোতামে ট্যাপ করুন</string>
+    <string name="pdf_selected_count">%d নির্বাচিত</string>
+    <string name="pdf_generate_button">PDF তৈরি করুন (%d)</string>
+    <string name="pdf_generating">PDF তৈরি হচ্ছে…</string>
+    <string name="pdf_success_title">PDF তৈরি হয়েছে</string>
+    <string name="pdf_success_message">আপনার PDF আপনার ডিভাইসের ডাউনলোড ফোল্ডারে সংরক্ষিত হয়েছে</string>
+    <string name="pdf_error_title">জেনারেশন ব্যর্থ</string>
+    <string name="pdf_generation_failed">PDF তৈরি করতে ব্যর্থ</string>
+    <string name="pdf_view_button">PDF দেখুন</string>
+    <string name="pdf_no_viewer">কোনো PDF ভিউয়ার অ্যাপ ইনস্টল নেই</string>
+
     <!-- Camera Screen -->
     <string name="camera_permission_required">ক্যামেরার অনুমতি প্রয়োজন</string>
     <string name="camera_grant_permission">অনুমতি দিন</string>
