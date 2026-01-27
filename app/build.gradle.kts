@@ -111,8 +111,8 @@ dependencies {
     implementation("androidx.camera:camera-video:1.5.2")
 
     // Media3 ExoPlayer
-    implementation("androidx.media3:media3-exoplayer:1.9.0")
-    implementation("androidx.media3:media3-ui:1.9.0")
+    implementation("androidx.media3:media3-exoplayer:1.9.1")
+    implementation("androidx.media3:media3-ui:1.9.1")
 
     // Coil for image loading
     implementation("io.coil-kt:coil-compose:2.7.0")
