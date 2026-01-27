@@ -1,28 +1,21 @@
 package com.utility.cam.ui.camera
 
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.FocusMeteringAction
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.video.FileOutputOptions
-import androidx.camera.video.Quality
-import androidx.camera.video.QualitySelector
 import androidx.camera.video.Recorder
 import androidx.camera.video.Recording
 import androidx.camera.video.VideoCapture
-import androidx.camera.video.VideoRecordEvent
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +26,7 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
@@ -40,10 +34,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.IntentSenderRequest
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.only
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Close
@@ -79,9 +69,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
@@ -100,12 +87,6 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
-
-enum class CaptureMode {
-    PHOTO, VIDEO
-}
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -367,6 +348,7 @@ fun CameraPreviewScreen(
                 )
             }
         }
+
 
         // Camera controls
         Column(
@@ -668,167 +650,4 @@ fun CameraPreviewScreen(
     }
 }
 
-private suspend fun Context.getCameraProvider(): ProcessCameraProvider =
-    suspendCoroutine { continuation ->
-        ProcessCameraProvider.getInstance(this).also { future ->
-            future.addListener(
-                { continuation.resume(future.get()) },
-                ContextCompat.getMainExecutor(this)
-            )
-        }
-    }
-
-private fun setupCamera(
-    cameraProvider: ProcessCameraProvider,
-    previewView: PreviewView?,
-    lifecycleOwner: LifecycleOwner,
-    lensFacing: Int,
-    captureMode: CaptureMode
-): Triple<ImageCapture?, VideoCapture<Recorder>?, Camera?> {
-    return try {
-        cameraProvider.unbindAll()
-
-        val preview = Preview.Builder().build().also {
-            it.surfaceProvider = previewView?.surfaceProvider
-        }
-
-        val cameraSelector = CameraSelector.Builder()
-            .requireLensFacing(lensFacing)
-            .build()
-
-        val imageCapture = ImageCapture.Builder()
-            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-            .build()
-
-        val recorder = Recorder.Builder()
-            .setQualitySelector(QualitySelector.from(Quality.HD))
-            .build()
-        val videoCapture = VideoCapture.withOutput(recorder)
-
-        // Bind use cases based on capture mode
-        val camera = if (captureMode == CaptureMode.PHOTO) {
-            cameraProvider.bindToLifecycle(
-                lifecycleOwner,
-                cameraSelector,
-                preview,
-                imageCapture
-            )
-        } else {
-            cameraProvider.bindToLifecycle(
-                lifecycleOwner,
-                cameraSelector,
-                preview,
-                videoCapture
-            )
-        }
-
-        Triple(imageCapture, videoCapture, camera)
-    } catch (e: Exception) {
-        e.printStackTrace()
-        Triple(null, null, null)
-    }
-}
-
-private suspend fun takePicture(
-    context: Context,
-    imageCapture: ImageCapture
-): File? = suspendCoroutine { continuation ->
-    val photoFile = File(
-        context.cacheDir,
-        SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
-            .format(System.currentTimeMillis()) + ".jpg"
-    )
-
-    val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-
-    imageCapture.takePicture(
-        outputOptions,
-        ContextCompat.getMainExecutor(context),
-        object : ImageCapture.OnImageSavedCallback {
-            override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                continuation.resume(photoFile)
-            }
-
-            override fun onError(exception: ImageCaptureException) {
-                exception.printStackTrace()
-                continuation.resume(null)
-            }
-        }
-    )
-}
-
-@SuppressLint("MissingPermission")
-private suspend fun startVideoRecording(
-    context: Context,
-    videoCapture: VideoCapture<Recorder>,
-    hasAudioPermission: Boolean,
-    onRecordingStarted: (Recording) -> Unit,
-    onRecordingStopped: (File?) -> Unit
-): Recording? = suspendCoroutine { continuation ->
-    val videoFile = File(
-        context.cacheDir,
-        SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
-            .format(System.currentTimeMillis()) + ".mp4"
-    )
-
-    val outputOptions = FileOutputOptions.Builder(videoFile).build()
-
-    val pendingRecording = videoCapture.output
-        .prepareRecording(context, outputOptions)
-
-    // Enable audio only if permission is granted
-    val recordingWithAudio = if (hasAudioPermission) {
-        pendingRecording.withAudioEnabled()
-    } else {
-        pendingRecording
-    }
-
-    val recording = recordingWithAudio
-        .start(ContextCompat.getMainExecutor(context)) { event ->
-            when (event) {
-                is VideoRecordEvent.Start -> {
-                    // Recording started successfully
-                }
-
-                is VideoRecordEvent.Finalize -> {
-                    if (event.hasError()) {
-                        videoFile.delete()
-                        onRecordingStopped(null)
-                    } else {
-                        onRecordingStopped(videoFile)
-                    }
-                }
-            }
-        }
-
-    onRecordingStarted(recording)
-    continuation.resume(recording)
-}
-
-@Composable
-fun CameraPreview(
-    onPreviewViewCreated: (PreviewView) -> Unit,
-    onZoomChange: (Float) -> Unit,
-    onFocus: (Float, Float) -> Unit
-) {
-    AndroidView(
-        factory = { context ->
-            PreviewView(context).also { previewView ->
-                onPreviewViewCreated(previewView)
-            }
-        },
-        modifier = Modifier
-            .fillMaxSize()
-            .pointerInput(Unit) {
-                detectTapGestures { offset ->
-                    onFocus(offset.x, offset.y)
-                }
-            }
-            .pointerInput(Unit) {
-                detectTransformGestures { _, _, zoom, _ ->
-                    onZoomChange(zoom)
-                }
-            }
-    )
-}
 
