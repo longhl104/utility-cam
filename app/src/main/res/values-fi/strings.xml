@@ -100,6 +100,9 @@
     <string name="camera_mode_photo">Kuva</string>
     <string name="camera_mode_video">Video</string>
     <string name="camera_close">Sulje</string>
+    <string name="camera_flash_on">Salama päällä</string>
+    <string name="camera_flash_off">Salama pois</string>
+    <string name="camera_flash_toggle">Vaihda salamaa</string>
     <string name="camera_zoom_format">%.1fx</string>
     <string name="camera_recording_time">%02d:%02d</string>
     <string name="camera_video_pro_only_title">Videon tallennus - PRO-ominaisuus</string>

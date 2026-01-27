@@ -99,6 +99,9 @@
     <string name="camera_mode_photo">Foto</string>
     <string name="camera_mode_video">Vídeo</string>
     <string name="camera_close">Fechar</string>
+    <string name="camera_flash_on">Flash Ligado</string>
+    <string name="camera_flash_off">Flash Desligado</string>
+    <string name="camera_flash_toggle">Alternar Flash</string>
     <string name="camera_zoom_format">%.1fx</string>
     <string name="camera_recording_time">%02d:%02d</string>
     <string name="camera_video_pro_only_title">Gravação de Vídeo - Recurso PRO</string>

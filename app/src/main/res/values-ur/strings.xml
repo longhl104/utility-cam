@@ -100,6 +100,9 @@
     <string name="camera_mode_photo">تصویر</string>
     <string name="camera_mode_video">ویڈیو</string>
     <string name="camera_close">بند کریں</string>
+    <string name="camera_flash_on">فلیش آن</string>
+    <string name="camera_flash_off">فلیش آف</string>
+    <string name="camera_flash_toggle">فلیش ٹوگل کریں</string>
     <string name="camera_zoom_format">%.1fx</string>
     <string name="camera_recording_time">%02d:%02d</string>
     <string name="camera_video_pro_only_title">ویڈیو ریکارڈنگ - PRO فیچر</string>

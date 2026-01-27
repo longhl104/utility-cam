@@ -99,6 +99,9 @@
     <string name="camera_mode_photo">Photo</string>
     <string name="camera_mode_video">Video</string>
     <string name="camera_close">Close</string>
+    <string name="camera_flash_on">Flash On</string>
+    <string name="camera_flash_off">Flash Off</string>
+    <string name="camera_flash_toggle">Toggle Flash</string>
     <string name="camera_zoom_format">%.1fx</string>
     <string name="camera_recording_time">%02d:%02d</string>
     <string name="camera_video_pro_only_title">Video Recording - PRO Feature</string>

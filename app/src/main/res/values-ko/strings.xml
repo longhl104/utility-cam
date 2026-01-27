@@ -98,6 +98,9 @@
     <string name="camera_mode_photo">사진</string>
     <string name="camera_mode_video">동영상</string>
     <string name="camera_close">닫기</string>
+    <string name="camera_flash_on">플래시 켜짐</string>
+    <string name="camera_flash_off">플래시 꺼짐</string>
+    <string name="camera_flash_toggle">플래시 전환</string>
     <string name="camera_zoom_format">%.1fx</string>
     <string name="camera_recording_time">%02d:%02d</string>
     <string name="camera_video_pro_only_title">동영상 녹화 - PRO 기능</string>

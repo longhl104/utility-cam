@@ -49,6 +49,8 @@ import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DocumentScanner
 import androidx.compose.material.icons.filled.FiberManualRecord
+import androidx.compose.material.icons.filled.FlashOff
+import androidx.compose.material.icons.filled.FlashOn
 import androidx.compose.material.icons.filled.FlipCameraAndroid
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Videocam
@@ -235,6 +237,7 @@ fun CameraPreviewScreen(
     var recordingTime by remember { mutableIntStateOf(0) }
     var activeRecording: Recording? by remember { mutableStateOf(null) }
     var zoomRatio by remember { mutableFloatStateOf(1f) }
+    var isFlashOn by remember { mutableStateOf(false) }
 
     // Timer for recording duration
     LaunchedEffect(isRecording) {
@@ -264,6 +267,11 @@ fun CameraPreviewScreen(
         zoomRatio = camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
     }
 
+    // Control flash mode
+    LaunchedEffect(isFlashOn, camera) {
+        camera?.cameraControl?.enableTorch(isFlashOn)
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
         CameraPreview(
             onPreviewViewCreated = { previewView = it },
@@ -288,6 +296,33 @@ fun CameraPreviewScreen(
                 }
             }
         )
+
+        // Flash toggle button at top right corner
+        Box(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = 16.dp, end = 16.dp)
+                .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top))
+        ) {
+            IconButton(
+                onClick = {
+                    isFlashOn = !isFlashOn
+                    AnalyticsHelper.logCameraFeatureUsed(if (isFlashOn) "flash_on" else "flash_off")
+                },
+                modifier = Modifier
+                    .size(56.dp)
+                    .background(Color.Black.copy(alpha = 0.6f), CircleShape)
+            ) {
+                Icon(
+                    imageVector = if (isFlashOn) Icons.Default.FlashOn else Icons.Default.FlashOff,
+                    contentDescription = stringResource(
+                        if (isFlashOn) R.string.camera_flash_on else R.string.camera_flash_off
+                    ),
+                    tint = if (isFlashOn) Color.Yellow else Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+        }
 
         // Recording time indicator (visible only when recording)
         if (isRecording) {

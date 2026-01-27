@@ -99,6 +99,9 @@
     <string name="camera_mode_photo">फोटो</string>
     <string name="camera_mode_video">वीडियो</string>
     <string name="camera_close">बंद करें</string>
+    <string name="camera_flash_on">फ्लैश चालू</string>
+    <string name="camera_flash_off">फ्लैश बंद</string>
+    <string name="camera_flash_toggle">फ्लैश टॉगल करें</string>
     <string name="camera_zoom_format">%.1fx</string>
     <string name="camera_recording_time">%02d:%02d</string>
     <string name="camera_video_pro_only_title">वीडियो रिकॉर्डिंग - PRO सुविधा</string>
