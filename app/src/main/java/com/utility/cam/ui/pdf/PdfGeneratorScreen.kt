@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.R
+import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityMedia
 import kotlinx.coroutines.launch
@@ -59,6 +60,7 @@ fun PdfGeneratorScreen(
 
     // Load available media
     LaunchedEffect(Unit) {
+        AnalyticsHelper.logScreenView("PDF Generator", "PdfGeneratorScreen")
         availableMedia = storageManager.getAllPhotos().filter { media ->
             // Only include images (not videos)
             !media.filePath.endsWith(".mp4", ignoreCase = true)
@@ -90,6 +92,7 @@ fun PdfGeneratorScreen(
                                         }
                                         val pdfUri = generatePdf(context, selectedMedia)
                                         if (pdfUri != null) {
+                                            AnalyticsHelper.logPdfGenerated(selectedMedia.size)
                                             generatedPdfUri = pdfUri
                                             showSuccessDialog = true
                                             selectedMediaIds = emptyList()

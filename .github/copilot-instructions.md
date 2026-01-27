@@ -17,3 +17,7 @@ Support multiple languages. We currently have:
 - Finnish (values-fi/strings.xml)
 
 When adding new strings, update all language files to maintain consistency.
+
+## Analytics
+
+Use `AnalyticsHelper` for tracking user interactions and app events.

@@ -132,6 +132,11 @@ fun SettingsScreen(
     var cleanupDelayInput by remember { mutableStateOf("") }
     var hasUserEdited by remember { mutableStateOf(false) }
 
+    // Track screen view
+    LaunchedEffect(Unit) {
+        AnalyticsHelper.logScreenView("Settings", "SettingsScreen")
+    }
+
     // Initialize input with current value from preferences
     LaunchedEffect(cleanupDelaySeconds) {
         // Only update if user hasn't edited the field yet
@@ -492,7 +497,12 @@ fun SettingsScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { onNavigateToPro() }
+                        .clickable {
+                            if (!actualIsProUser) {
+                                AnalyticsHelper.logUpgradeToProClicked("settings_screen")
+                            }
+                            onNavigateToPro()
+                        }
                         .padding(16.dp)
                 ) {
                     Row(

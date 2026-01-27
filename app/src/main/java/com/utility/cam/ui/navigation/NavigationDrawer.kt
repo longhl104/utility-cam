@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.utility.cam.R
+import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.ui.common.rememberProUserStateWithManagers
 
 @Composable
@@ -82,6 +83,7 @@ fun AppNavigationDrawer(
                 label = stringResource(R.string.gallery_title),
                 selected = currentRoute == Screen.Gallery.route,
                 onClick = {
+                    AnalyticsHelper.logNavigationItemClicked("gallery")
                     onNavigateToGallery()
                     onDismiss()
                 }
@@ -92,6 +94,7 @@ fun AppNavigationDrawer(
                 label = stringResource(R.string.bin_title),
                 selected = currentRoute == Screen.Bin.route,
                 onClick = {
+                    AnalyticsHelper.logNavigationItemClicked("bin")
                     onNavigateToBin()
                     onDismiss()
                 }
@@ -104,9 +107,12 @@ fun AppNavigationDrawer(
                 selected = currentRoute == Screen.PdfGenerator.route,
                 onClick = {
                     if (actualIsProUser) {
+                        AnalyticsHelper.logNavigationItemClicked("pdf_generator")
                         onNavigateToPdfGenerator()
                         onDismiss()
                     } else {
+                        AnalyticsHelper.logProFeatureAttempted("pdf_generator")
+                        AnalyticsHelper.logUpgradeToProClicked("navigation_drawer")
                         onNavigateToPro()
                         onDismiss()
                     }
@@ -121,6 +127,7 @@ fun AppNavigationDrawer(
                 label = stringResource(R.string.settings_title),
                 selected = currentRoute == Screen.Settings.route,
                 onClick = {
+                    AnalyticsHelper.logNavigationItemClicked("settings")
                     onNavigateToSettings()
                     onDismiss()
                 }
@@ -134,6 +141,7 @@ fun AppNavigationDrawer(
 
                 Button(
                     onClick = {
+                        AnalyticsHelper.logUpgradeToProClicked("navigation_drawer")
                         onNavigateToPro()
                         onDismiss()
                     },

@@ -61,6 +61,12 @@ fun MediaDetailScreen(
     LaunchedEffect(mediaId) {
         media = storageManager.getPhoto(mediaId)
         description = media?.description ?: ""
+
+        // Track media detail view
+        media?.let { currentMedia ->
+            val mediaType = if (currentMedia.filePath.endsWith(".mp4", ignoreCase = true)) "video" else "photo"
+            AnalyticsHelper.logMediaDetailViewed(mediaId, mediaType)
+        }
     }
 
     LaunchedEffect(snackbarMessage) {
@@ -298,6 +304,7 @@ fun MediaDetailScreen(
                                 val success = storageManager.saveToGallery(mediaId)
                                 showSaveDialog = false
                                 if (success) {
+                                    AnalyticsHelper.logMediaKeptForever(mediaId)
                                     snackbarMessage = context.getString(R.string.media_detail_saved_success)
 
                                     // Track saved photo for review trigger

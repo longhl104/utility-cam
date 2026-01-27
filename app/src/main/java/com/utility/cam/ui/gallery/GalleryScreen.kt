@@ -145,6 +145,10 @@ fun GalleryScreen(
 
     // Initial load and reload on trigger
     LaunchedEffect(refreshTrigger) {
+        if (refreshTrigger == 0) {
+            // First load - track screen view
+            AnalyticsHelper.logScreenView("Gallery", "GalleryScreen")
+        }
         if (refreshTrigger > 0) {
             isRefreshing = true
         }
@@ -347,6 +351,7 @@ fun GalleryScreen(
                                 selected = sortMode == GallerySortMode.BY_EXPIRATION,
                                 onClick = {
                                     coroutineScope.launch {
+                                        AnalyticsHelper.logGallerySortChanged(GallerySortMode.BY_EXPIRATION.name)
                                         preferencesManager.setGallerySortMode(GallerySortMode.BY_EXPIRATION.name)
                                     }
                                 },
@@ -358,6 +363,7 @@ fun GalleryScreen(
                                 selected = sortMode == GallerySortMode.BY_CAPTURE_TIME,
                                 onClick = {
                                     coroutineScope.launch {
+                                        AnalyticsHelper.logGallerySortChanged(GallerySortMode.BY_CAPTURE_TIME.name)
                                         preferencesManager.setGallerySortMode(GallerySortMode.BY_CAPTURE_TIME.name)
                                     }
                                 },

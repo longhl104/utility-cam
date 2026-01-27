@@ -90,6 +90,7 @@ import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.SCANNER
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 import com.utility.cam.R
+import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.ui.common.ProLockedDialog
 import com.utility.cam.ui.common.rememberProUserState
 import kotlinx.coroutines.delay
@@ -353,6 +354,7 @@ fun CameraPreviewScreen(
                         IconButton(
                             onClick = {
                                 if (isProUser) {
+                                    AnalyticsHelper.logCameraFeatureUsed("document_scan")
                                     // Launch document scanner
                                     documentScanner.getStartScanIntent(context as Activity)
                                         .addOnSuccessListener { intentSender ->
@@ -364,6 +366,7 @@ fun CameraPreviewScreen(
                                             e.printStackTrace()
                                         }
                                 } else {
+                                    AnalyticsHelper.logProFeatureAttempted("document_scan")
                                     showProLockedDialog = true
                                 }
                             },
@@ -445,6 +448,7 @@ fun CameraPreviewScreen(
                             if (isProUser) {
                                 captureMode = CaptureMode.VIDEO
                             } else {
+                                AnalyticsHelper.logProFeatureAttempted("video_capture")
                                 showProLockedDialog = true
                             }
                         }
@@ -488,6 +492,7 @@ fun CameraPreviewScreen(
                 IconButton(
                     onClick = {
                         if (!isRecording) {
+                            AnalyticsHelper.logCameraFeatureUsed("camera_flip")
                             lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK) {
                                 CameraSelector.LENS_FACING_FRONT
                             } else {
@@ -533,12 +538,15 @@ fun CameraPreviewScreen(
 
                             CaptureMode.VIDEO -> {
                                 if (isRecording) {
-                                    // Stop recording
+                                    // Stop recording and track duration
+                                    val duration = recordingTime * 1000L // Convert to milliseconds
+                                    AnalyticsHelper.logVideoCaptured(duration)
                                     activeRecording?.stop()
                                     activeRecording = null
                                     isRecording = false
                                 } else {
                                     // Start recording
+                                    AnalyticsHelper.logCameraFeatureUsed("video_recording_started")
                                     coroutineScope.launch {
                                         try {
                                             videoCapture?.let { capture ->

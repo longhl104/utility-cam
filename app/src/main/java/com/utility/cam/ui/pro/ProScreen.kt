@@ -21,8 +21,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
+import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.BillingManager
-import com.utility.cam.data.PreferencesManager
 import com.utility.cam.ui.common.rememberProUserStateWithManagers
 
 @SuppressLint("LocalContextGetResourceValueCall")
@@ -46,6 +46,7 @@ fun ProScreen(
 
     // Refresh product details when screen loads
     LaunchedEffect(Unit) {
+        AnalyticsHelper.logProScreenViewed()
         billingManager.refreshProductDetails()
     }
 
@@ -53,11 +54,13 @@ fun ProScreen(
     LaunchedEffect(purchaseState) {
         when (purchaseState) {
             is BillingManager.PurchaseState.Success -> {
+                AnalyticsHelper.logProPurchaseCompleted()
                 Toast.makeText(context, context.getString(R.string.pro_purchase_success), Toast.LENGTH_LONG).show()
                 billingManager.resetPurchaseState()
             }
             is BillingManager.PurchaseState.Error -> {
                 val message = (purchaseState as BillingManager.PurchaseState.Error).message
+                AnalyticsHelper.logProPurchaseFailed(message)
                 Toast.makeText(context, context.getString(R.string.pro_purchase_error, message), Toast.LENGTH_LONG).show()
                 billingManager.resetPurchaseState()
             }
@@ -248,6 +251,7 @@ fun ProScreen(
 
                         Button(
                             onClick = {
+                                AnalyticsHelper.logProPurchaseInitiated()
                                 activity?.let {
                                     billingManager.launchPurchaseFlow(it)
                                 } ?: run {

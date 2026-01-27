@@ -44,6 +44,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.utility.cam.BuildConfig
 import com.utility.cam.R
+import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.TTLDuration
 import com.utility.cam.ui.common.CustomTTLDialog
@@ -178,6 +179,7 @@ fun CaptureReviewScreen(
                         if (actualIsProUser) {
                             showCustomTTLDialog = true
                         } else {
+                            AnalyticsHelper.logProFeatureAttempted("custom_ttl")
                             showProLockedDialog = true
                         }
                     },
@@ -236,11 +238,19 @@ fun CaptureReviewScreen(
                             isSaving = true
                             coroutineScope.launch {
                                 // Use custom TTL milliseconds if set, otherwise use enum TTL
-                                storageManager.savePhoto(
+                                val savedPhoto = storageManager.savePhoto(
                                     imageFile = File(capturedImagePath),
                                     ttlMilliseconds = effectiveTTLMillis,
                                     description = description.takeIf { it.isNotBlank() }
                                 )
+
+                                // Track analytics based on media type
+                                if (isVideo) {
+                                    AnalyticsHelper.logVideoSavedToGallery(savedPhoto.id)
+                                } else {
+                                    AnalyticsHelper.logPhotoSavedToGallery(savedPhoto.id)
+                                }
+
                                 isSaving = false
                                 onMediaSaved()
                             }

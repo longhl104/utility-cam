@@ -5,11 +5,11 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.ui.camera.CameraScreen
 import com.utility.cam.ui.capturereview.CaptureReviewScreen
 import com.utility.cam.ui.gallery.GalleryScreen
@@ -64,6 +64,7 @@ fun UtilityCamNavigation(initialPhotoId: String? = null) {
     // Function to open drawer
     val openDrawer: () -> Unit = {
         scope.launch {
+            AnalyticsHelper.logNavigationDrawerOpened()
             drawerState.open()
         }
     }
