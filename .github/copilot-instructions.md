@@ -15,6 +15,8 @@ Support multiple languages. We currently have:
 - Urdu (values-ur/strings.xml)
 - Arabic (values-ar/strings.xml)
 - Finnish (values-fi/strings.xml)
+- Sinhala (values-si/strings.xml)
+- Tamil (values-ta/strings.xml)
 
 When adding new strings, update all language files to maintain consistency.
 

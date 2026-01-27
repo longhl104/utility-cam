@@ -1,0 +1,338 @@
+<resources>
+    <string name="app_name">Utility Cam</string>
+
+    <!-- Notifications -->
+    <string name="notification_cleanup_title">ඡායාරූප පිරිසිදු කරන ලදී</string>
+    <plurals name="notification_cleanup_message">
+        <item quantity="one">කල් ඉකුත් වූ ඡායාරූප %d ක් ස්වයංක්‍රීයව මකා දමන ලදී</item>
+        <item quantity="other">කල් ඉකුත් වූ ඡායාරූප %d ක් ස්වයංක්‍රීයව මකා දමන ලදී</item>
+    </plurals>
+    <string name="notification_reminder_title">ඡායාරූපය ඉක්මනින් කල් ඉකුත් වේ</string>
+    <string name="notification_reminder_message">ඡායාරූපයක් %s කින් මකා දමනු ලැබේ</string>
+    <string name="notification_reminder_message_with_description" formatted="false">\"%s\" %s කින් මකා දමනු ලැබේ</string>
+    <string name="notification_channel_name">ඡායාරූප පිරිසිදු කිරීම</string>
+    <string name="notification_channel_description">ස්වයංක්‍රීය ඡායාරූප පිරිසිදු කිරීම පිළිබඳ දැනුම්දීම්</string>
+
+    <!-- TTL Durations -->
+    <string name="ttl_test_3_seconds">තත්පර 3 (පරීක්ෂණය)</string>
+    <string name="ttl_24_hours">පැය 24</string>
+    <string name="ttl_3_days">දින 3</string>
+    <string name="ttl_1_week">සතියක්</string>
+
+    <!-- Time formatting -->
+    <string name="time_format_days_hours" formatted="false">%dd %dh</string>
+    <string name="time_format_hours_minutes" formatted="false">%dh %dm</string>
+    <string name="time_format_minutes">%dm</string>
+
+    <!-- Gallery Screen -->
+    <string name="gallery_title">Utility Cam</string>
+    <string name="gallery_settings">සැකසුම්</string>
+    <string name="gallery_take_photo">ග්‍රහණය</string>
+    <string name="gallery_no_photos">තවම උපයෝගී මාධ්‍ය නැත</string>
+    <string name="gallery_no_photos_hint">ඔබේ පළමු ඡායාරූපය හෝ වීඩියෝව ග්‍රහණය කිරීමට කැමරා බොත්තම ඔබන්න</string>
+    <string name="gallery_expires_in">කල් ඉකුත් වන්නේ: %s</string>
+    <string name="gallery_selection_count">%d තෝරාගෙන ඇත</string>
+    <string name="gallery_exit_selection">තේරීම් ප්‍රකාරයෙන් පිටවීම</string>
+    <string name="gallery_share_selected">තෝරාගත් ඒවා බෙදාගන්න</string>
+    <string name="gallery_save_selected">තෝරාගත් ඒවා සුරකින්න</string>
+    <string name="gallery_delete_selected">තෝරාගත් ඒවා මකන්න</string>
+    <string name="gallery_delete_confirm_title">අයිතම %d ක් මකන්නද?</string>
+    <string name="gallery_delete_confirm_message">මෙම ක්‍රියාව අහෝසි කළ නොහැක.</string>
+    <string name="gallery_delete_button">මකන්න</string>
+    <string name="gallery_cancel_button">අවලංගු කරන්න</string>
+    <string name="gallery_save_confirm_title">අයිතම %d ක් ස්ථිරව සුරකින්නද?</string>
+    <string name="gallery_save_confirm_message">අයිතම ඔබගේ ගැලරියට සුරකින අතර මෙම යෙදුමෙන් ඉවත් කරනු ලැබේ.</string>
+    <string name="gallery_save_button">සුරකින්න</string>
+    <string name="gallery_sort_by_expiration">කල් ඉකුත් වීම අනුව</string>
+    <string name="gallery_sort_by_capture">දිනය අනුව</string>
+    <string name="gallery_bin">කුණු බඳුන</string>
+
+    <!-- Bin Screen -->
+    <string name="bin_title">කුණු බඳුන</string>
+    <string name="bin_back">ආපසු</string>
+    <string name="bin_no_items">කුණු බඳුනේ අයිතම නැත</string>
+    <string name="bin_no_items_hint">කල් ඉකුත් වූ මාධ්‍ය මෙතැනට ගෙන දින 30ක් තබා ගනු ලැබේ</string>
+    <string name="bin_days_remaining">දින %d ක් ඉතිරිය</string>
+    <string name="bin_restore">ප්‍රතිස්ථාපනය</string>
+    <string name="bin_delete_permanently">මකන්න</string>
+    <string name="bin_selection_count">%d තෝරාගෙන ඇත</string>
+    <string name="bin_exit_selection">තේරීම් ප්‍රකාරයෙන් පිටවීම</string>
+    <string name="bin_restore_selected">තෝරාගත් ඒවා ප්‍රතිස්ථාපනය කරන්න</string>
+    <string name="bin_delete_selected">ස්ථිරව මකන්න</string>
+    <string name="bin_delete_confirm_title">අයිතම %d ක් ස්ථිරව මකන්නද?</string>
+    <string name="bin_delete_confirm_message">මෙම ක්‍රියාව අහෝසි කළ නොහැක. අයිතම සදහටම මකා දමනු ලැබේ.</string>
+    <string name="bin_delete_button">සදහටම මකන්න</string>
+    <string name="bin_cancel_button">අවලංගු කරන්න</string>
+    <string name="bin_restore_confirm_title">අයිතම %d ක් ප්‍රතිස්ථාපනය කරන්නද?</string>
+    <string name="bin_restore_confirm_message">අයිතම පැය 24 කල් ඉකුත් වීමේ කාලයක් සමඟ ප්‍රතිස්ථාපනය කරනු ලැබේ.</string>
+    <string name="bin_restore_button">ප්‍රතිස්ථාපනය</string>
+    <string name="bin_empty">කුණු බඳුන හිස් කරන්න</string>
+    <string name="bin_empty_confirm_title">සම්පූර්ණ කුණු බඳුන හිස් කරන්නද?</string>
+    <string name="bin_empty_confirm_message">කුණු බඳුනේ ඇති සියලුම අයිතම ස්ථිරව මකා දමනු ලැබේ. මෙම ක්‍රියාව අහෝසි කළ නොහැක.</string>
+    <string name="bin_empty_button">කුණු බඳුන හිස් කරන්න</string>
+
+    <!-- PDF Generator Screen -->
+    <string name="pdf_generator_title">PDF ජනකය</string>
+    <string name="pdf_no_images">පින්තූර නොමැත</string>
+    <string name="pdf_no_images_hint">PDF උත්පාදනය කිරීමට මුලින්ම ඡායාරූප ග්‍රහණය කරන්න</string>
+    <string name="pdf_instructions">PDF සඳහා පින්තූර තෝරන්න</string>
+    <string name="pdf_instructions_hint">පින්තූර තෝරාගැනීමට ඒවා තට්ටු කරන්න, පසුව PDF නිර්මාණය කිරීමට උත්පාදන බොත්තම තට්ටු කරන්න</string>
+    <string name="pdf_selected_count">%d තෝරාගෙන ඇත</string>
+    <string name="pdf_generate_button">PDF උත්පාදනය (%d)</string>
+    <string name="pdf_generating">PDF උත්පාදනය වෙමින්…</string>
+    <string name="pdf_success_title">PDF උත්පාදනය විය</string>
+    <string name="pdf_success_message">ඔබේ PDF ඔබේ උපාංගයේ බාගැනීම් ෆෝල්ඩරයට සුරකින ලදී</string>
+    <string name="pdf_error_title">උත්පාදනය අසාර්ථකයි</string>
+    <string name="pdf_generation_failed">PDF උත්පාදනය අසාර්ථක විය</string>
+    <string name="pdf_view_button">PDF බලන්න</string>
+    <string name="pdf_no_viewer">PDF නරඹන යෙදුමක් ස්ථාපනය කර නැත</string>
+
+    <!-- Camera Screen -->
+    <string name="camera_permission_required">කැමරා අවසරය අවශ්‍යයි</string>
+    <string name="camera_grant_permission">අවසරය දෙන්න</string>
+    <string name="camera_flip">කැමරාව පෙරලන්න</string>
+    <string name="camera_scan_document">ලේඛනය ස්කෑන් කරන්න</string>
+    <string name="camera_take_photo">ඡායාරූපය ගන්න</string>
+    <string name="camera_record_video">වීඩියෝව පටිගත කරන්න</string>
+    <string name="camera_start_recording">පටිගත කිරීම ආරම්භ කරන්න</string>
+    <string name="camera_stop_recording">පටිගත කිරීම නවත්වන්න</string>
+    <string name="camera_mode_photo">ඡායාරූපය</string>
+    <string name="camera_mode_video">වීඩියෝව</string>
+    <string name="camera_close">වසන්න</string>
+    <string name="camera_flash_on">ෆ්ලෑෂ් ක්‍රියාත්මකයි</string>
+    <string name="camera_flash_off">ෆ්ලෑෂ් අක්‍රියයි</string>
+    <string name="camera_flash_toggle">ෆ්ලෑෂ් ටොගල කරන්න</string>
+    <string name="camera_zoom_format">%.1fx</string>
+    <string name="camera_recording_time">%02d:%02d</string>
+    <string name="camera_video_pro_only_title">වීඩියෝ පටිගත කිරීම - PRO විශේෂාංගය</string>
+    <string name="camera_video_pro_only_message">වීඩියෝ පටිගත කිරීම Utility Cam PRO හි ලබා ගත හැකිය. අසීමිත වීඩියෝ පටිගත කිරීම් අගුළු ඇරීමට උත්ශ්‍රේණි කරන්න!</string>
+    <string name="camera_video_pro_only_upgrade">PRO වෙත උත්ශ්‍රේණි කරන්න</string>
+    <string name="camera_video_pro_only_cancel">අවලංගු කරන්න</string>
+
+    <!-- Capture Review Screen -->
+    <string name="capture_review_title">ඡායාරූපය සමාලෝචනය</string>
+    <string name="capture_review_title_video">වීඩියෝව සමාලෝචනය</string>
+    <string name="capture_review_delete_after">මකන්නේ:</string>
+    <string name="capture_review_description_label">විස්තරය (විකල්ප)</string>
+    <string name="capture_review_description_hint">උදා., වාහන නැවැත්වීමේ ස්ථානය: මට්ටම 4</string>
+    <string name="capture_review_retake">නැවත ගන්න</string>
+    <string name="capture_review_save">සුරකින්න</string>
+    <string name="capture_review_gallery">ගැලරිය බලන්න</string>
+    <string name="capture_review_custom">අභිරුචි</string>
+    <string name="capture_review_custom_hours_suffix">h</string>
+    <string name="capture_review_custom_pro_title">අභිරුචි කාලසීමාව - PRO විශේෂාංගය</string>
+    <string name="capture_review_custom_pro_message">Utility Cam PRO සමඟ අභිරුචි කල් ඉකුත් වීමේ කාල සකසන්න. මෙම විශේෂාංගය අගුළු ඇරීමට උත්ශ්‍රේණි කරන්න!</string>
+    <string name="capture_review_custom_pro_ok">හරි</string>
+    <string name="capture_review_custom_dialog_title">අභිරුචි කල් ඉකුත් වීමේ කාලය</string>
+    <string name="capture_review_custom_dialog_message">මෙම ඡායාරූපය මකා දමන තෙක් කොපමණ කාලයක් ගත වේදැයි සකසන්න:</string>
+    <string name="capture_review_unit_hours">පැය</string>
+    <string name="capture_review_unit_days">දින</string>
+    <string name="capture_review_unit_weeks">සති</string>
+    <string name="capture_review_custom_hours_label">පැය</string>
+    <string name="capture_review_custom_days_label">දින</string>
+    <string name="capture_review_custom_weeks_label">සති</string>
+    <string name="capture_review_custom_dialog_ok">සකසන්න</string>
+    <string name="capture_review_custom_dialog_cancel">අවලංගු කරන්න</string>
+
+    <!-- Photo Detail Screen -->
+    <string name="photo_detail_title">ඡායාරූප විස්තර</string>
+    <string name="photo_detail_title_video">වීඩියෝ විස්තර</string>
+    <string name="photo_detail_save">ගැලරියට සුරකින්න</string>
+    <string name="photo_detail_share">බෙදාගන්න</string>
+    <string name="photo_detail_delete">මකන්න</string>
+    <string name="photo_detail_back">ආපසු</string>
+    <string name="photo_detail_share_title">ඡායාරූපය බෙදාගන්න මගින්</string>
+    <string name="photo_detail_expires_in">%s කින් කල් ඉකුත් වේ</string>
+    <string name="photo_detail_captured">ග්‍රහණය කළා</string>
+    <string name="photo_detail_description">විස්තරය</string>
+    <string name="photo_detail_add">එකතු කරන්න</string>
+    <string name="photo_detail_edit">සංස්කරණය</string>
+    <string name="photo_detail_no_description">විස්තරයක් නැත</string>
+    <string name="photo_detail_keep_forever">සදහටම තබාගන්න (ගැලරියට සුරකින්න)</string>
+    <string name="photo_detail_delete_title">ඡායාරූපය මකන්නද?</string>
+    <string name="photo_detail_delete_message">මෙම ක්‍රියාව අහෝසි කළ නොහැක.</string>
+    <string name="photo_detail_delete_confirm">මකන්න</string>
+    <string name="photo_detail_cancel">අවලංගු කරන්න</string>
+    <string name="photo_detail_save_title">ගැලරියට සුරකින්නද?</string>
+    <string name="photo_detail_save_message">මෙය ඡායාරූපය ඔබේ උපාංගයේ ගැලරියට සුරකින අතර Utility Cam වෙතින් ඉවත් කරයි.</string>
+    <string name="photo_detail_save_confirm">සුරකින්න</string>
+    <string name="photo_detail_saved_success">ඡායාරූපය ගැලරියට සුරකින ලදී</string>
+    <string name="photo_detail_save_failed">ඡායාරූපය සුරැකීම අසාර්ථකයි</string>
+    <string name="photo_detail_deleted_success">ඡායාරූපය මකා දමන ලදී</string>
+    <string name="photo_detail_edit_description_title">විස්තරය සංස්කරණය</string>
+    <string name="photo_detail_edit_description_hint">මෙම ඡායාරූපය සඳහා විස්තරයක් ඇතුළත් කරන්න</string>
+
+    <!-- Media Detail Screen -->
+    <string name="media_detail_title">මාධ්‍ය විස්තර</string>
+    <string name="media_detail_save">ගැලරියට සුරකින්න</string>
+    <string name="media_detail_share">බෙදාගන්න</string>
+    <string name="media_detail_delete">මකන්න</string>
+    <string name="media_detail_back">ආපසු</string>
+    <string name="media_detail_share_title">මාධ්‍ය බෙදාගන්න මගින්</string>
+    <string name="media_detail_expires_in">%s කින් කල් ඉකුත් වේ</string>
+    <string name="media_detail_captured">ග්‍රහණය කළා</string>
+    <string name="media_detail_description">විස්තරය</string>
+    <string name="media_detail_add">එකතු කරන්න</string>
+    <string name="media_detail_edit">සංස්කරණය</string>
+    <string name="media_detail_no_description">විස්තරයක් නැත</string>
+    <string name="media_detail_keep_forever">සදහටම තබාගන්න (ගැලරියට සුරකින්න)</string>
+    <string name="media_detail_delete_title">මාධ්‍ය මකන්නද?</string>
+    <string name="media_detail_delete_message">මෙම ක්‍රියාව අහෝසි කළ නොහැක.</string>
+    <string name="media_detail_delete_confirm">මකන්න</string>
+    <string name="media_detail_cancel">අවලංගු කරන්න</string>
+    <string name="media_detail_save_title">ගැලරියට සුරකින්නද?</string>
+    <string name="media_detail_save_message">මෙය මාධ්‍ය ඔබේ උපාංගයේ ගැලරියට සුරකින අතර Utility Cam වෙතින් ඉවත් කරයි.</string>
+    <string name="media_detail_save_confirm">සුරකින්න</string>
+    <string name="media_detail_saved_success">මාධ්‍ය ගැලරියට සුරකින ලදී</string>
+    <string name="media_detail_save_failed">මාධ්‍ය සුරැකීම අසාර්ථකයි</string>
+    <string name="media_detail_deleted_success">මාධ්‍ය මකා දමන ලදී</string>
+    <string name="media_detail_edit_description_title">විස්තරය සංස්කරණය</string>
+    <string name="media_detail_edit_description_hint">මෙම මාධ්‍ය සඳහා විස්තරයක් ඇතුළත් කරන්න</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">සැකසුම්</string>
+    <string name="settings_back">ආපසු</string>
+    <string name="settings_language">භාෂාව</string>
+    <string name="settings_language_hint">ඔබගේ කැමති භාෂාව තෝරන්න</string>
+    <string name="settings_language_system_default">පද්ධති පෙරනිමිය</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_portuguese">Português</string>
+    <string name="settings_language_indonesian">Bahasa Indonesia</string>
+    <string name="settings_language_hindi">हिन्दी</string>
+    <string name="settings_language_polish">Polski</string>
+    <string name="settings_language_nepali">नेपाली</string>
+    <string name="settings_language_bengali">বাংলা</string>
+    <string name="settings_language_korean">한국어</string>
+    <string name="settings_language_vietnamese">Tiếng Việt</string>
+    <string name="settings_language_urdu">اردو</string>
+    <string name="settings_language_arabic">العربية</string>
+    <string name="settings_language_finnish">Suomi</string>
+    <string name="settings_language_sinhala">සිංහල</string>
+    <string name="settings_language_tamil">தமிழ்</string>
+    <string name="settings_language_restart_hint">භාෂාව වහාම යාවත්කාලීන වේ</string>
+    <string name="settings_theme">තේමාව</string>
+    <string name="settings_theme_hint">ඔබගේ කැමති තේමාව තෝරන්න</string>
+    <string name="settings_theme_system">පද්ධති පෙරනිමිය</string>
+    <string name="settings_theme_light">දීප්ත</string>
+    <string name="settings_theme_dark">අඳුරු</string>
+    <string name="settings_default_expiration">පෙරනිමි කල් ඉකුත් වීමේ කාලය</string>
+    <string name="settings_default_expiration_hint">ස්වයංක්‍රීයව මැකීමට පෙර ඡායාරූප කොපමණ කාලයක් තබා ගත යුතුද යන්න තෝරන්න</string>
+    <string name="settings_notifications">දැනුම්දීම්</string>
+    <string name="settings_cleanup_notifications">පිරිසිදු කිරීමේ දැනුම්දීම්</string>
+    <string name="settings_cleanup_notifications_hint">කල් ඉකුත් වූ ඡායාරූප මකා දැමූ විට දැනුම් දෙන්න</string>
+    <string name="settings_reminder_notifications">ඉක්මනින් කල් ඉකුත් වීමේ සිහිකැඳවීම්</string>
+    <string name="settings_reminder_notifications_hint">ඡායාරූප කල් ඉකුත් වීමට ආසන්න වන විට සිහිකැඳවීමක් ලබාගන්න (පැය 1ක් ඇතුළත)</string>
+    <string name="settings_notification_permission_required">දැනුම්දීම් අවසරය අවශ්‍යයි</string>
+    <string name="settings_notification_permission_message">පිරිසිදු කිරීමේ දැනුම්දීම් ලබා ගැනීමට, ඔබ දැනුම්දීම් අවසරය ලබා දිය යුතුය.</string>
+    <string name="settings_open_settings">සැකසුම් විවෘත කරන්න</string>
+    <string name="settings_privacy">පුද්ගලිකත්වය</string>
+    <string name="settings_analytics_consent">යෙදුම වැඩිදියුණු කිරීමට උදව් කරන්න</string>
+    <string name="settings_analytics_consent_hint">යෙදුම වැඩිදියුණු කිරීමට අපට උදව් කිරීමට නිර්නාමික භාවිත දත්ත බෙදාගන්න. කිසිදු පුද්ගලික තොරතුරු එකතු නොකරයි.</string>
+    <string name="settings_analytics_consent_dialog_title">Utility Cam වැඩිදියුණු කිරීමට අපට උදව් කරන්න</string>
+    <string name="settings_analytics_consent_dialog_message">යෙදුම වැඩිදියුණු කිරීම සඳහා අපි නිර්නාමික භාවිත දත්ත එකතු කිරීමට කැමතියි. මෙයට ඇතුළත් වන්නේ:\n\n• යෙදුම් විශේෂාංග භාවිතය\n• ඡායාරූප ග්‍රහණ සිදුවීම් (කාලසීමාව, අන්තර්ගතය නොවේ)\n• යෙදුම් ක්‍රියාකාරිත්ව දත්ත\n\nඅපි එකතු නොකරන දේවල්:\n• ඔබේ ඡායාරූප හෝ ඒවායේ අන්තර්ගතය\n• ඔබ ඇතුළත් කරන විස්තර\n• පුද්ගලික තොරතුරු\n\nඔබට ඕනෑම වේලාවක සැකසුම් > පුද්ගලිකත්වය තුළ මෙම සැකසුම වෙනස් කළ හැකිය.</string>
+    <string name="settings_analytics_consent_accept">අවසර දෙන්න</string>
+    <string name="settings_analytics_consent_decline">එපා ස්තූතියි</string>
+    <string name="settings_debug_tools">දෝෂ නිරාකරණ මෙවලම්</string>
+    <string name="settings_debug_tools_hint">සංවර්ධනය සඳහා පරීක්ෂණ උපයෝගීතා</string>
+    <string name="settings_cleanup_delay_label">පිරිසිදු කිරීමේ වැඩකරු ප්‍රමාදය (තත්පර)</string>
+    <string name="settings_cleanup_delay_hint">පිරිසිදු කිරීමේ වැඩකරු ධාවනයන් අතර කාලය (තත්පර 1–3600). යෙදුම නැවත ආරම්භ කිරීම අවශ්‍යයි.</string>
+    <string name="settings_cleanup_delay_updated">පිරිසිදු කිරීමේ ප්‍රමාදය තත්පර %d දක්වා යාවත්කාලීන කරන ලදී. යෙදුමට යෙදීමට යෙදුම නැවත ආරම්භ කරන්න.</string>
+    <string name="settings_trigger_cleanup">දැන් පිරිසිදු කිරීම ඇරඹීම</string>
+    <string name="settings_trigger_cleanup_started">පිරිසිදු කිරීමේ වැඩකරු ප්‍රේරණය වෙමින්…</string>
+    <string name="settings_cleanup_completed">පිරිසිදු කිරීම සම්පූර්ණයි!</string>
+    <string name="settings_cleanup_failed">පිරිසිදු කිරීම අසාර්ථක විය!</string>
+    <string name="settings_cleanup_running">පිරිසිදු කිරීම ධාවනය වෙමින්…</string>
+    <string name="settings_test_notification">පරීක්ෂණ දැනුම්දීම</string>
+    <string name="settings_test_notification_sent">පරීක්ෂණ දැනුම්දීම යැවෙමින්…</string>
+    <string name="settings_check_worker_status">වැඩකරු තත්ත්වය පරීක්ෂා කරන්න</string>
+    <string name="settings_worker_not_scheduled">කිසිදු ආවර්තිත වැඩකරුවෙකු සැලසුම් කර නැත!</string>
+    <string name="settings_worker_status_format">වැඩකරු තත්ත්වය: %1$s\nධාවන උත්සාහය: %2$d\nටැග්: %3$s</string>
+    <string name="settings_reset_feedback">ප්‍රතිපෝෂණ තත්ත්වය යළි සකසන්න</string>
+    <string name="settings_reset_feedback_hint">විමසුම නැවත පරීක්ෂා කිරීමට සියලුම ප්‍රතිපෝෂණ ලුහුබැඳීමේ දත්ත මකන්න</string>
+    <string name="settings_feedback_reset_success">ප්‍රතිපෝෂණ තත්ත්වය යළි සකසන ලදී! විමසුම දැකීමට ගැලරිය නැවත විවෘත කරන්න.</string>
+    <string name="settings_about">Utility Cam පිළිබඳව</string>
+    <string name="settings_about_description">තාවකාලික ඡායාරූප සඳහා ද්විතීයික කැමරාවක්. මෙම යෙදුමේ ග්‍රහණය කරන සියල්ල සකසන ලද කාල සීමාවෙන් පසු ස්වයංක්‍රීයව මකා දමයි.</string>
+    <string name="settings_about_feature_1">• ඡායාරූප ඔබේ ප්‍රධාන ගැලරියේ නොව පුද්ගලික යෙදුම් ගබඩාවේ ගබඩා වේ</string>
+    <string name="settings_about_feature_2">• එය ස්ථිරව සුරැකීමට ඕනෑම ඡායාරූපයක් මත \'සදහටම තබාගන්න\' තට්ටු කරන්න</string>
+    <string name="settings_about_privacy">පුද්ගලිකත්වය: අපි යෙදුම වැඩිදියුණු කිරීමට නිර්නාමික භාවිත දත්ත එකතු කරමු. කිසිදු ඡායාරූප හෝ පුද්ගලික තොරතුරු කිසි විටෙකත් බෙදාහරින්නේ නැත. ඔබට සැකසුම් > පුද්ගලිකත්වය තුළ මෙය අබල කළ හැකිය.</string>
+    <string name="settings_media_permission_info">💡 ඉඟිය: Android 14+ හි, ඔබට සම්පූර්ණ ප්‍රවේශය ලබා දීම වෙනුවට තෝරාගත් ඡායාරූප පමණක් බෙදාගැනීමට තෝරාගත හැකිය.</string>
+    <string name="settings_warning_uninstall">⚠️ අවවාදයයි: යෙදුම අස්ථාපනය කිරීමෙන් එහි ගබඩා කර ඇති සියලුම ඡායාරූප ස්ථිරව මකා දමනු ලැබේ. අස්ථාපනය කිරීමට පෙර ඕනෑම වැදගත් ඡායාරූප සුරක්ෂිත කර ගැනීමට වග බලා ගන්න.</string>
+    <string name="settings_send_feedback">ප්‍රතිපෝෂණ යවන්න</string>
+    <string name="settings_love_utility_cam">අපට සමාලෝචනයක් තබන්න</string>
+    <string name="settings_feedback_email_subject">Utility Cam ප්‍රතිපෝෂණය (v%s)</string>
+    <string name="settings_feedback_email_body">හායි Utility Cam කණ්ඩායම,\n\nමම මගේ ප්‍රතිපෝෂණ බෙදාගැනීමට කැමතියි:\n\n[කරුණාකර ඔබේ ප්‍රතිපෝෂණ හෝ දෝෂ වාර්තාව මෙහි ලියන්න]\n\n---\nයෙදුම් අනුවාදය: %1$s (%2$d)\nAndroid අනුවාදය: %3$d\nඋපාංගය: %4$s %5$s</string>
+    <string name="settings_feedback_chooser_title">ප්‍රතිපෝෂණ යවන්නේ මගින්</string>
+    <string name="settings_feedback_no_email_app">විද්‍යුත් තැපැල් යෙදුමක් හමු නොවීය</string>
+    <string name="settings_app_version">යෙදුම් අනුවාදය</string>
+    <string name="settings_version_format">අනුවාදය %1$s (%2$d)</string>
+
+    <!-- Feedback Dialog -->
+    <string name="feedback_title">Utility Cam භුක්ති විඳිනවාද?</string>
+    <string name="feedback_message">ඔබේ අදහස් අසන්නට අපි කැමතියි! ඔබේ ප්‍රතිපෝෂණ අපට වැඩිදියුණු කිරීමට සහ වැඩි පරිශීලකයන් වෙත ළඟා වීමට උදව් කරයි.</string>
+    <string name="feedback_rate_now">Play Store හි ශ්‍රේණිගත කරන්න</string>
+    <string name="feedback_later">සමහර විට පසුව</string>
+    <string name="feedback_no_thanks">එපා ස්තූතියි</string>
+
+    <!-- Pro Screen -->
+    <string name="pro_title">ජීවිත කාල Pro</string>
+    <string name="pro_back">ආපසු</string>
+    <string name="pro_upgrade_title">ජීවිත කාල Pro වෙත උත්ශ්‍රේණි කරන්න</string>
+    <string name="pro_upgrade_subtitle">එක් වරක් මිලදී ගැනීමකින් වාරික විශේෂාංග අගුළු අරින්න</string>
+    <string name="pro_already_purchased">ඔබ Pro පරිශීලකයෙක්!</string>
+    <string name="pro_thank_you">Utility Cam සඳහා සහාය දැක්වීම ගැන ස්තූතියි</string>
+    <string name="pro_features_title">Pro විශේෂාංග</string>
+    <string name="pro_feature_video_title">වීඩියෝ පටිගත කිරීම</string>
+    <string name="pro_feature_video_description">ස්වයං-මැකීමේ ටයිමර සමඟ වීඩියෝ පටිගත කර සුරකින්න</string>
+    <string name="pro_feature_document_scanner_title">ලේඛන ස්කෑනරය</string>
+    <string name="pro_feature_document_scanner_description">ස්වයංක්‍රීය දාර හඳුනාගැනීම සහ ඉදිරිදර්ශන නිවැරදි කිරීම සමඟ ලේඛන ස්කෑන් කරන්න</string>
+    <string name="pro_feature_biometric_lock_title">යෙදුම් අගුළ</string>
+    <string name="pro_feature_biometric_lock_description">ඇඟිලි සලකුණ, මුහුණ අගුළු අරින්න, PIN, රටාව හෝ මුරපදය සමඟ ඔබේ යෙදුම සුරක්ෂිත කරන්න</string>
+    <string name="pro_feature_custom_expiration_title">කල් ඉකුත් වීමේ කාලය අභිරුචිකරණය කරන්න</string>
+    <string name="pro_feature_custom_expiration_description">ඔබේ ඡායාරූප සහ වීඩියෝ සඳහා පැය, දින හෝ සති වලින් අභිරුචි කල් ඉකුත් වීමේ කාල සකසන්න</string>
+    <string name="pro_feature_priority_support_title">ප්‍රමුඛතා සහාය</string>
+    <string name="pro_feature_priority_support_description">ඔබේ ප්‍රශ්න සහ ගැටළු වලට වේගවත් ප්‍රතිචාර ලබා ගන්න</string>
+    <string name="pro_feature_support_dev_title">සංවර්ධනයට සහාය වන්න</string>
+    <string name="pro_feature_support_dev_description">අපට වැඩිදියුණු කිරීම සහ නව විශේෂාංග එකතු කිරීම දිගටම කරගෙන යාමට උදව් කරන්න</string>
+    <string name="pro_feature_future_title">අනාගත Pro විශේෂාංග</string>
+    <string name="pro_feature_future_description">අමතර වියදමකින් තොරව සියලුම අනාගත වාරික විශේෂාංගවලට ප්‍රවේශය ලබා ගන්න</string>
+    <string name="pro_one_time_payment">එක් වරක් ගෙවීම</string>
+    <string name="pro_price_loading">පූරණය වෙමින්…</string>
+    <string name="pro_loading_price">මිල තොරතුරු පූරණය වෙමින්…</string>
+    <string name="pro_purchase_button">ජීවිත කාල Pro මිලදී ගන්න</string>
+    <string name="pro_one_time_note">✓ එක් වරක් ගෙවීම, සදහටම ඔබේ එක\n✓ දායකත්ව හෝ පුනරාවර්තන ගාස්තු නැත</string>
+    <string name="pro_purchase_success">Pro වෙත උත්ශ්‍රේණි කිරීම ගැන ස්තූතියි!</string>
+    <string name="pro_purchase_error">මිලදී ගැනීම අසාර්ථකයි: %s</string>
+    <string name="pro_purchase_unavailable">මිලදී ගැනීම දැනට නොමැත</string>
+    <string name="settings_go_pro">Pro වෙත උත්ශ්‍රේණි කරන්න</string>
+    <string name="settings_go_pro_hint">එක් වරක් මිලදී ගැනීමකින් වාරික විශේෂාංග අගුළු අරින්න</string>
+    <string name="settings_pro_thank_you">ඔබේ සහාය ගැන ස්තූතියි!</string>
+
+    <!-- Biometric Lock -->
+    <string name="settings_biometric_lock">යෙදුම් අගුළ</string>
+    <string name="settings_biometric_lock_hint">ඇඟිලි සලකුණ, මුහුණ අගුළු අරින්න හෝ උපාංග අගුළ සමඟ ඔබේ යෙදුම සුරක්ෂිත කරන්න (Pro විශේෂාංගය)</string>
+    <string name="settings_biometric_lock_title">යෙදුම් අගුළ සක්‍රීය කරන්න</string>
+    <string name="settings_biometric_enable_title">යෙදුම් අගුළ සක්‍රීය කරන්න</string>
+    <string name="settings_biometric_enable_subtitle">සක්‍රීය කිරීමට සත්‍යාපනය කරන්න</string>
+    <string name="settings_biometric_enable_description">යෙදුම අගුළු ඇරීමට ඇඟිලි සලකුණ, මුහුණ අගුළු අරින්න, PIN, රටාව හෝ මුරපදය භාවිත කරන්න</string>
+    <string name="settings_biometric_enabled">යෙදුම් අගුළ සක්‍රීයයි</string>
+    <string name="settings_biometric_disabled">යෙදුම් අගුළ අක්‍රියයි</string>
+    <string name="settings_biometric_pro_required">ජෛවමිතික අගුළ Pro විශේෂාංගයකි. අගුළු ඇරීමට උත්ශ්‍රේණි කරන්න!</string>
+    <string name="settings_biometric_open_device_settings">උපාංග සැකසුම් විවෘත කරන්න</string>
+    <string name="settings_biometric_cannot_open_settings">උපාංග සැකසුම් විවෘත කළ නොහැක</string>
+    <string name="settings_biometric_pro_locked_title">යෙදුම් අගුළ Pro විශේෂාංගයකි</string>
+    <string name="settings_biometric_pro_locked_message">ඇඟිලි සලකුණ, මුහුණ අගුළු අරින්න, PIN, රටාව හෝ මුරපදය සමඟ ඔබේ යෙදුම සුරක්ෂිත කරන්න. මෙම වාරික විශේෂාංගය අගුළු ඇරීමට Pro වෙත උත්ශ්‍රේණි කරන්න!</string>
+    <string name="settings_biometric_pro_locked_upgrade">Pro වෙත උත්ශ්‍රේණි කරන්න</string>
+    <string name="settings_biometric_pro_locked_cancel">අවලංගු කරන්න</string>
+    <string name="biometric_unlock_title">Utility Cam අගුළු අරින්න</string>
+    <string name="biometric_unlock_subtitle">ඉදිරියට යාමට සත්‍යාපනය කරන්න</string>
+    <string name="biometric_unlock_description">යෙදුම අගුළු ඇරීමට ඇඟිලි සලකුණ, මුහුණ අගුළු අරින්න, PIN, රටාව හෝ මුරපදය භාවිත කරන්න</string>
+
+    <!-- Biometric Availability Messages -->
+    <string name="biometric_availability_available">ජෛවමිතික හෝ උපාංග අගුළු සත්‍යාපනය ලබා ගත හැකිය</string>
+    <string name="biometric_availability_no_hardware">ජෛවමිතික දෘඪාංග නොමැති අතර උපාංග අගුළක් සකසා නැත</string>
+    <string name="biometric_availability_hardware_unavailable">ජෛවමිතික දෘඪාංග දැනට නොමැත</string>
+    <string name="biometric_availability_none_enrolled">කිසිදු සත්‍යාපන ක්‍රමයක් සකසා නැත. කරුණාකර උපාංග සැකසුම්වල ඇඟිලි සලකුණ, මුහුණ අගුළු අරින්න, PIN, රටාව හෝ මුරපදය සකසන්න</string>
+    <string name="biometric_availability_security_update_required">ජෛවමිතික සත්‍යාපනය සඳහා ආරක්ෂක යාවත්කාලීනයක් අවශ්‍යයි</string>
+    <string name="biometric_availability_unsupported">මෙම උපාංගයේ ජෛවමිතික සත්‍යාපනය සහාය නොදක්වයි</string>
+    <string name="biometric_availability_unknown">නොදන්නා සත්‍යාපන තත්ත්වය</string>
+</resources>

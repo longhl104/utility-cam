@@ -55,6 +55,8 @@ class LocaleManager(private val context: Context) {
             Language("pt", "Português (Portuguese)"),
             Language("in", "Bahasa Indonesia (Indonesian)"),
             Language("ko", "한국어 (Korean)"),
+            Language("si", "සිංහල (Sinhala)"),
+            Language("ta", "தமிழ் (Tamil)"),
         )
     }
 }
