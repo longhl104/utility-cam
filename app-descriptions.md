@@ -9,7 +9,7 @@ Temporary photos & videos with auto-delete. Keep your gallery clean & organized.
 - Camera for temporary photos & videos that auto-delete. Pro customization available.
 - Snap temporary media that vanishes automatically. Save only what matters.
 - Quick photos & videos with auto-delete timer. Keep your gallery clutter-free.
-- Temporary media with smart auto-delete. 5 languages. Video recording available.
+- Temporary media with smart auto-delete. 14 languages. Video & document scanner.
 
 ---
 
@@ -45,16 +45,11 @@ Your gallery is overflowing with photos you only needed temporarily - parking lo
 
 - Take quick photos instantly
 - PRO: Record videos with auto-delete timers
+- PRO: Document scanner with ML Kit integration
 - Front and back camera support
+- Flash control and zoom functionality
 - Review before saving with retake option
 - Proper orientation handling
-
-📱 **Home Screen Widget**
-
-- View up to 5 active items at a glance
-- See countdown timers for each item
-- Quick media inventory overview
-- Check without opening the app
 
 🖼️ **Smart Gallery View**
 
@@ -65,10 +60,13 @@ Your gallery is overflowing with photos you only needed temporarily - parking lo
 - Multi-select for batch operations
 - Share multiple items at once
 
-🌍 **Multilingual Support**
+🌍 **Multilingual Support (14 Languages)**
 
-- English, Português, Bahasa Indonesia
-- हिन्दी (Hindi), Polski
+- English, Português, Bahasa Indonesia, Polski
+- हिन्दी (Hindi), বাংলা (Bengali), नेपाली (Nepali)
+- 한국어 (Korean), Tiếng Việt (Vietnamese)
+- اردو (Urdu), العربية (Arabic), Suomi (Finnish)
+- සිංහල (Sinhala), தமிழ் (Tamil)
 - Automatic language detection
 - Easy language switching in settings
 
@@ -121,6 +119,8 @@ Your gallery is overflowing with photos you only needed temporarily - parking lo
 **PRO FEATURES (One-Time Purchase)**
 
 ⭐ **Video Recording** - Capture and save videos with auto-delete timers
+⭐ **Document Scanner** - ML Kit-powered document scanning and cropping
+⭐ **Biometric App Lock** - Secure app with fingerprint or face unlock
 ⭐ **Custom Expiration Times** - Set exact duration in hours, days, or weeks
 ⭐ **Priority Support** - Get faster responses to questions
 ⭐ **Support Development** - Help us add more features
@@ -138,6 +138,7 @@ Your gallery is overflowing with photos you only needed temporarily - parking lo
 ✅ **Store Hours** - Remember business hours without permanent photo
 ✅ **WiFi Passwords** - Capture passwords at hotels or cafes temporarily
 ✅ **Meeting Notes** - Whiteboard or presentation slides that expire
+✅ **Document Scanning** - Scan receipts, forms, or papers temporarily (Pro)
 ✅ **Address Information** - Remember locations without saving permanently
 ✅ **Quick Videos** - Record brief instructions or demonstrations (Pro)
 ✅ **Temporary Reminders** - Visual notes that auto-delete when done
@@ -146,6 +147,8 @@ Your gallery is overflowing with photos you only needed temporarily - parking lo
 
 - Built with Jetpack Compose and Material 3 design
 - CameraX integration for reliable camera functionality
+- Google ML Kit document scanner integration
+- AndroidX Biometric API for secure authentication
 - WorkManager for background cleanup scheduling
 - Efficient image/video handling with thumbnails
 - Proper EXIF rotation support
@@ -157,7 +160,9 @@ Your gallery is overflowing with photos you only needed temporarily - parking lo
 **PERMISSIONS EXPLAINED**
 
 - **Camera**: Capture temporary photos and videos
+- **Microphone**: Record audio for videos (Pro feature)
 - **Storage**: Save and access media
+- **Biometric**: Secure app with fingerprint/face unlock (Pro feature)
 - **Notifications**: Alert you about expiring media (optional)
 
 **NO BLOAT, NO CONFUSION**
@@ -174,4 +179,4 @@ Download Utility Cam today and never manually delete temporary media again!
 
 ## Additional Keywords for ASO (App Store Optimization)
 
-temporary photos, temporary videos, auto delete photos, auto delete videos, self destructing photos, expiring photos, expiring videos, photo timer, video timer, temporary storage, clean gallery, photo organizer, video organizer, parking spot camera, quick reference photos, utility photos, ephemeral photos, ephemeral videos, time limited photos, auto cleanup, gallery cleaner, temporary camera, disposable photos, photo expiration, video expiration, timed photos, timed videos, smart cleanup, media auto delete, temporary media, pro camera, custom expiration, multilingual camera, privacy camera, local storage camera, video recording, photo descriptions, batch operations, material design camera, widget camera, notification reminders
+temporary photos, temporary videos, auto delete photos, auto delete videos, self destructing photos, expiring photos, expiring videos, photo timer, video timer, temporary storage, clean gallery, photo organizer, video organizer, parking spot camera, quick reference photos, utility photos, ephemeral photos, ephemeral videos, time limited photos, auto cleanup, gallery cleaner, temporary camera, disposable photos, photo expiration, video expiration, timed photos, timed videos, smart cleanup, media auto delete, temporary media, pro camera, custom expiration, multilingual camera, privacy camera, local storage camera, video recording, photo descriptions, batch operations, material design camera, notification reminders

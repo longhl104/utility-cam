@@ -61,13 +61,25 @@ class PhotoStorageManager(private val context: Context) {
         val timestamp = System.currentTimeMillis()
         val expirationTime = timestamp + ttlMilliseconds
 
+        // Check if source file exists
+        if (!imageFile.exists()) {
+            Log.e(TAG, "Source file does not exist: ${imageFile.absolutePath}")
+            throw IllegalArgumentException("Source file does not exist: ${imageFile.absolutePath}")
+        }
+
         // Detect if it's a video or image
         val isVideo = imageFile.name.endsWith(".mp4", ignoreCase = true)
         val fileExtension = if (isVideo) ".mp4" else ".jpg"
 
         // Create permanent file in sandbox
         val permanentFile = File(photosDir, "$photoId$fileExtension")
-        imageFile.copyTo(permanentFile, overwrite = true)
+
+        try {
+            imageFile.copyTo(permanentFile, overwrite = true)
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to copy file from ${imageFile.absolutePath} to ${permanentFile.absolutePath}", e)
+            throw e
+        }
 
         // Create thumbnail
         val thumbnailFile = File(photosDir, "${photoId}_thumb.jpg")
