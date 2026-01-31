@@ -115,7 +115,9 @@ fun BottomAdBanner(
 ) {
     if (!isProUser) {
         Column(
-            modifier = modifier.fillMaxWidth()
+            modifier = modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(WindowInsets.navigationBars)
         ) {
             AdMobBanner(
                 screenName = screenName,
