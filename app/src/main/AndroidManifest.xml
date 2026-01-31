@@ -59,7 +59,7 @@
 
     <!-- AdMob App ID -->
     <meta-data
-      android:name="com.google.android.gms.ads.APPLICATION_ID"
+      android:name="com.google.android.gms.ads.com.utility.cam"
       android:value="ca-app-pub-8461786124508841~9171875752" />
   </application>
 
