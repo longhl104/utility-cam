@@ -12,8 +12,8 @@ android {
         applicationId = "com.utility.cam"
         minSdk = 26
         targetSdk = 36
-        versionCode = 53
-        versionName = "1.6.5"
+        versionCode = 54
+        versionName = "1.7.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -88,13 +88,13 @@ android {
 dependencies {
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
-    implementation("androidx.activity:activity-compose:1.12.2")
+    implementation("androidx.activity:activity-compose:1.12.3")
 
     // Splash Screen
     implementation("androidx.core:core-splashscreen:1.2.0")
 
     // Compose
-    implementation(platform("androidx.compose:compose-bom:2026.01.00"))
+    implementation(platform("androidx.compose:compose-bom:2026.01.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -102,13 +102,13 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
 
     // Navigation
-    implementation("androidx.navigation:navigation-compose:2.9.6")
+    implementation("androidx.navigation:navigation-compose:2.9.7")
 
     // CameraX
-    implementation("androidx.camera:camera-camera2:1.5.2")
-    implementation("androidx.camera:camera-lifecycle:1.5.2")
-    implementation("androidx.camera:camera-view:1.5.2")
-    implementation("androidx.camera:camera-video:1.5.2")
+    implementation("androidx.camera:camera-camera2:1.5.3")
+    implementation("androidx.camera:camera-lifecycle:1.5.3")
+    implementation("androidx.camera:camera-view:1.5.3")
+    implementation("androidx.camera:camera-video:1.5.3")
 
     // Media3 ExoPlayer
     implementation("androidx.media3:media3-exoplayer:1.9.1")
@@ -119,7 +119,7 @@ dependencies {
     implementation("io.coil-kt:coil-video:2.7.0")
 
     // WorkManager for background tasks
-    implementation("androidx.work:work-runtime-ktx:2.11.0")
+    implementation("androidx.work:work-runtime-ktx:2.11.1")
 
     // Glance for widgets
     implementation("androidx.glance:glance-appwidget:1.1.1")
@@ -151,6 +151,9 @@ dependencies {
 
     // Biometric authentication (Fingerprint / FaceID)
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+    // Google AdMob
+    implementation("com.google.android.gms:play-services-ads:24.9.0")
 
     // ML Kit Document Scanner
     implementation("com.google.android.gms:play-services-mlkit-document-scanner:16.0.0")

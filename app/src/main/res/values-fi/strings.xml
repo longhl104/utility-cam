@@ -282,6 +282,8 @@
     <string name="pro_already_purchased">Olet Pro-käyttäjä!</string>
     <string name="pro_thank_you">Kiitos Utility Camin tukemisesta</string>
     <string name="pro_features_title">Pro-ominaisuudet</string>
+    <string name="pro_feature_ad_free_title">Mainokseton kokemus</string>
+    <string name="pro_feature_ad_free_description">Poista mainokset</string>
     <string name="pro_feature_video_title">Videon tallennus</string>
     <string name="pro_feature_video_description">Kaappaa ja tallenna videotallenteita automaattisilla poistoajastimilla</string>
     <string name="pro_feature_document_scanner_title">Asiakirjaskanneri</string>

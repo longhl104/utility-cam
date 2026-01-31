@@ -81,6 +81,8 @@ import com.utility.cam.data.PhotoEventBus
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.UtilityMedia
+import com.utility.cam.ui.ads.BottomAdBanner
+import com.utility.cam.ui.ads.AdUnitIds
 import com.utility.cam.ui.common.rememberProUserState
 import com.utility.cam.ui.feedback.FeedbackDialog
 import kotlinx.coroutines.delay
@@ -123,7 +125,8 @@ fun GalleryScreen(
     var showAnalyticsConsentDialog by remember { mutableStateOf(false) }
 
     // Persist sort mode preference
-    val sortModeString by preferencesManager.getGallerySortMode().collectAsState(initial = "BY_EXPIRATION")
+    val sortModeString by preferencesManager.getGallerySortMode()
+        .collectAsState(initial = "BY_EXPIRATION")
     val sortMode = remember(sortModeString) {
         try {
             GallerySortMode.valueOf(sortModeString)
@@ -215,25 +218,40 @@ fun GalleryScreen(
             if (isSelectionMode) {
                 // Selection mode top bar
                 TopAppBar(
-                    title = { Text(stringResource(R.string.gallery_selection_count, selectedPhotoIds.size)) },
+                    title = {
+                        Text(
+                            stringResource(
+                                R.string.gallery_selection_count,
+                                selectedPhotoIds.size
+                            )
+                        )
+                    },
                     navigationIcon = {
                         IconButton(onClick = {
                             isSelectionMode = false
                             selectedPhotoIds = emptySet()
                         }) {
-                            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.gallery_exit_selection))
+                            Icon(
+                                Icons.Default.Close,
+                                contentDescription = stringResource(R.string.gallery_exit_selection)
+                            )
                         }
                     },
                     actions = {
                         // Share button
                         IconButton(
                             onClick = {
-                                shareSelectedPhotos(context, photos.filter { it.id in selectedPhotoIds })
+                                shareSelectedPhotos(
+                                    context,
+                                    photos.filter { it.id in selectedPhotoIds })
                                 // Keep selection active after sharing
                             },
                             enabled = selectedPhotoIds.isNotEmpty()
                         ) {
-                            Icon(Icons.Default.Share, contentDescription = stringResource(R.string.gallery_share_selected))
+                            Icon(
+                                Icons.Default.Share,
+                                contentDescription = stringResource(R.string.gallery_share_selected)
+                            )
                         }
 
                         // Save permanently button
@@ -243,7 +261,10 @@ fun GalleryScreen(
                             },
                             enabled = selectedPhotoIds.isNotEmpty()
                         ) {
-                            Icon(Icons.Outlined.CheckCircle, contentDescription = stringResource(R.string.gallery_save_selected))
+                            Icon(
+                                Icons.Outlined.CheckCircle,
+                                contentDescription = stringResource(R.string.gallery_save_selected)
+                            )
                         }
 
                         // Delete button
@@ -253,7 +274,10 @@ fun GalleryScreen(
                             },
                             enabled = selectedPhotoIds.isNotEmpty()
                         ) {
-                            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.gallery_delete_selected))
+                            Icon(
+                                Icons.Default.Delete,
+                                contentDescription = stringResource(R.string.gallery_delete_selected)
+                            )
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -276,7 +300,10 @@ fun GalleryScreen(
                                 ) {
                                     Text(
                                         "PRO",
-                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                        modifier = Modifier.padding(
+                                            horizontal = 6.dp,
+                                            vertical = 2.dp
+                                        ),
                                         style = MaterialTheme.typography.labelSmall,
                                         color = MaterialTheme.colorScheme.onPrimaryContainer
                                     )
@@ -286,15 +313,24 @@ fun GalleryScreen(
                     },
                     navigationIcon = {
                         IconButton(onClick = onOpenDrawer) {
-                            Icon(Icons.Default.Menu, contentDescription = stringResource(R.string.gallery_title))
+                            Icon(
+                                Icons.Default.Menu,
+                                contentDescription = stringResource(R.string.gallery_title)
+                            )
                         }
                     },
                     actions = {
                         IconButton(onClick = onNavigateToBin) {
-                            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.gallery_bin))
+                            Icon(
+                                Icons.Default.Delete,
+                                contentDescription = stringResource(R.string.gallery_bin)
+                            )
                         }
                         IconButton(onClick = onNavigateToSettings) {
-                            Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.gallery_settings))
+                            Icon(
+                                Icons.Default.Settings,
+                                contentDescription = stringResource(R.string.gallery_settings)
+                            )
                         }
                     }
                 )
@@ -306,9 +342,19 @@ fun GalleryScreen(
                     onClick = onNavigateToCamera,
                     containerColor = MaterialTheme.colorScheme.primary
                 ) {
-                    Icon(Icons.Default.CameraAlt, contentDescription = stringResource(R.string.gallery_take_photo))
+                    Icon(
+                        Icons.Default.CameraAlt,
+                        contentDescription = stringResource(R.string.gallery_take_photo)
+                    )
                 }
             }
+        },
+        bottomBar = {
+            BottomAdBanner(
+                isProUser = actualIsProUser,
+                screenName = "Gallery",
+                adUnitId = AdUnitIds.BANNER_GALLERY
+            )
         }
     ) { padding ->
         PullToRefreshBox(
@@ -390,7 +436,11 @@ fun GalleryScreen(
                     ) {
                         groupedMedia.forEach { (sectionTitle, sectionPhotos) ->
                             // Section header
-                            item(key = "header_$sectionTitle", span = { androidx.compose.foundation.lazy.grid.GridItemSpan(maxLineSpan) }) {
+                            item(
+                                key = "header_$sectionTitle",
+                                span = {
+                                    androidx.compose.foundation.lazy.grid.GridItemSpan(maxLineSpan)
+                                }) {
                                 Column {
                                     Spacer(modifier = Modifier.height(8.dp))
                                     Text(
@@ -519,7 +569,14 @@ fun GalleryScreen(
     if (showDeleteConfirmDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteConfirmDialog = false },
-            title = { Text(stringResource(R.string.gallery_delete_confirm_title, selectedPhotoIds.size)) },
+            title = {
+                Text(
+                    stringResource(
+                        R.string.gallery_delete_confirm_title,
+                        selectedPhotoIds.size
+                    )
+                )
+            },
             text = { Text(stringResource(R.string.gallery_delete_confirm_message)) },
             confirmButton = {
                 TextButton(
@@ -551,7 +608,14 @@ fun GalleryScreen(
     if (showSaveConfirmDialog) {
         AlertDialog(
             onDismissRequest = { showSaveConfirmDialog = false },
-            title = { Text(stringResource(R.string.gallery_save_confirm_title, selectedPhotoIds.size)) },
+            title = {
+                Text(
+                    stringResource(
+                        R.string.gallery_save_confirm_title,
+                        selectedPhotoIds.size
+                    )
+                )
+            },
             text = { Text(stringResource(R.string.gallery_save_confirm_message)) },
             confirmButton = {
                 TextButton(
@@ -569,7 +633,8 @@ fun GalleryScreen(
                                 feedbackManager.incrementSavedPhotoCount(savedCount)
 
                                 // Check if we should trigger in-app review
-                                val shouldTriggerReview = feedbackManager.shouldTriggerReviewAfterSave()
+                                val shouldTriggerReview =
+                                    feedbackManager.shouldTriggerReviewAfterSave()
                                 if (shouldTriggerReview) {
                                     // Small delay to let the UI settle
                                     delay(1000)
@@ -910,7 +975,8 @@ private fun groupByCapture(photos: List<UtilityMedia>): List<Pair<String, List<U
             ZoneId.systemDefault()
         )
 
-        val daysDiff = java.time.temporal.ChronoUnit.DAYS.between(captureDate.toLocalDate(), now.toLocalDate())
+        val daysDiff =
+            java.time.temporal.ChronoUnit.DAYS.between(captureDate.toLocalDate(), now.toLocalDate())
 
         when (daysDiff) {
             0L -> today.add(photo)

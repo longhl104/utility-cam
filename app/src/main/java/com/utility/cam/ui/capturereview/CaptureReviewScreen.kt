@@ -47,6 +47,8 @@ import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.TTLDuration
+import com.utility.cam.ui.ads.BottomAdBanner
+import com.utility.cam.ui.ads.AdUnitIds
 import com.utility.cam.ui.common.CustomTTLDialog
 import com.utility.cam.ui.common.ProLockedDialog
 import com.utility.cam.ui.common.VideoPlayer
@@ -98,6 +100,13 @@ fun CaptureReviewScreen(
                         )
                     }
                 }
+            )
+        },
+        bottomBar = {
+            BottomAdBanner(
+                isProUser = actualIsProUser,
+                screenName = "CaptureReview",
+                adUnitId = AdUnitIds.BANNER_CAPTURE_REVIEW
             )
         }
     ) { padding ->

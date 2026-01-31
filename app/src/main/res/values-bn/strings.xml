@@ -299,6 +299,8 @@
     <string name="pro_already_purchased">আপনি Pro ব্যবহারকারী!</string>
     <string name="pro_thank_you">Utility Cam কে সমর্থন করার জন্য ধন্যবাদ</string>
     <string name="pro_features_title">Pro ফিচার</string>
+    <string name="pro_feature_ad_free_title">বিজ্ঞাপন-মুক্ত অভিজ্ঞতা</string>
+    <string name="pro_feature_ad_free_description">বিজ্ঞাপন সরান</string>
     <string name="pro_feature_video_title">ভিডিও রেকর্ডিং</string>
     <string name="pro_feature_video_description">অটো-ডিলিট টাইমার সহ ভিডিও রেকর্ডিং ক্যাপচার এবং সংরক্ষণ করুন</string>
     <string name="pro_feature_document_scanner_title">ডকুমেন্ট স্ক্যানার</string>

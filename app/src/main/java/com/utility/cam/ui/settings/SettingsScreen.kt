@@ -78,6 +78,8 @@ import com.utility.cam.data.LocaleManager
 import com.utility.cam.data.NotificationHelper
 import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.TTLDuration
+import com.utility.cam.ui.ads.BottomAdBanner
+import com.utility.cam.ui.ads.AdUnitIds
 import com.utility.cam.ui.common.ProLockedDialog
 import com.utility.cam.ui.common.rememberProUserStateWithManagers
 import com.utility.cam.ui.permissions.isNotificationPermissionGranted
@@ -177,6 +179,13 @@ fun SettingsScreen(
                         )
                     }
                 }
+            )
+        },
+        bottomBar = {
+            BottomAdBanner(
+                isProUser = actualIsProUser,
+                screenName = "Settings",
+                adUnitId = AdUnitIds.BANNER_SETTINGS
             )
         }
     ) { padding ->

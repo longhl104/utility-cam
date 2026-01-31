@@ -80,6 +80,8 @@ import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
+import com.utility.cam.ui.ads.AdUnitIds
+import com.utility.cam.ui.ads.BottomAdBanner
 import com.utility.cam.ui.common.ProLockedDialog
 import com.utility.cam.ui.common.rememberProUserState
 import kotlinx.coroutines.delay
@@ -638,6 +640,19 @@ fun CameraPreviewScreen(
                     )
                 }
             }
+        }
+
+        // Ad banner at bottom
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+        ) {
+            BottomAdBanner(
+                isProUser = isProUser,
+                screenName = "Camera",
+                adUnitId = AdUnitIds.BANNER_CAMERA
+            )
         }
     }
 

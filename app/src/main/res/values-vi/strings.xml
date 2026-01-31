@@ -298,6 +298,8 @@
     <string name="pro_already_purchased">Bạn là người dùng Pro!</string>
     <string name="pro_thank_you">Cảm ơn bạn đã hỗ trợ Utility Cam</string>
     <string name="pro_features_title">Tính năng Pro</string>
+    <string name="pro_feature_ad_free_title">Trải nghiệm không quảng cáo</string>
+    <string name="pro_feature_ad_free_description">Xóa quảng cáo</string>
     <string name="pro_feature_video_title">Quay video</string>
     <string name="pro_feature_video_description">Quay và lưu video với bộ hẹn giờ tự động xóa</string>
     <string name="pro_feature_document_scanner_title">Máy Quét Tài Liệu</string>

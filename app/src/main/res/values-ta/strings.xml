@@ -268,6 +268,8 @@
     <string name="pro_already_purchased">நீங்கள் ஒரு Pro பயனர்!</string>
     <string name="pro_thank_you">Utility Cam ஐ ஆதரித்ததற்கு நன்றி</string>
     <string name="pro_features_title">Pro அம்சங்கள்</string>
+    <string name="pro_feature_ad_free_title">விளம்பரம் இல்லாத அனுபவம்</string>
+    <string name="pro_feature_ad_free_description">விளம்பரங்களை அகற்று</string>
     <string name="pro_feature_video_title">வீடியோ பதிவு</string>
     <string name="pro_feature_video_description">தானியங்கி நீக்குதல் டைமர்களுடன் வீடியோ பதிவுகளைப் பிடித்து சேமிக்கவும்</string>
     <string name="pro_feature_document_scanner_title">ஆவண ஸ்கேனர்</string>

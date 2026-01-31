@@ -281,6 +281,8 @@
     <string name="pro_already_purchased">You\'re a Pro User!</string>
     <string name="pro_thank_you">Thank you for supporting Utility Cam</string>
     <string name="pro_features_title">Pro Features</string>
+    <string name="pro_feature_ad_free_title">Ad-Free Experience</string>
+    <string name="pro_feature_ad_free_description">Remove ads</string>
     <string name="pro_feature_video_title">Video Recording</string>
     <string name="pro_feature_video_description">Capture and save video recordings with auto-delete timers</string>
     <string name="pro_feature_document_scanner_title">Document Scanner</string>

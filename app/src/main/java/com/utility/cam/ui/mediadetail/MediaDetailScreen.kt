@@ -29,7 +29,10 @@ import com.utility.cam.data.FeedbackManager
 import com.utility.cam.data.InAppReviewManager
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityMedia
+import com.utility.cam.ui.ads.BottomAdBanner
+import com.utility.cam.ui.ads.AdUnitIds
 import com.utility.cam.ui.common.VideoPlayer
+import com.utility.cam.ui.common.rememberProUserState
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
@@ -48,6 +51,7 @@ fun MediaDetailScreen(
     val feedbackManager = remember { FeedbackManager(context) }
     val inAppReviewManager = remember { InAppReviewManager(context) }
     val coroutineScope = rememberCoroutineScope()
+    val actualIsProUser = rememberProUserState()
 
     var media by remember { mutableStateOf<UtilityMedia?>(null) }
     var showDeleteDialog by remember { mutableStateOf(false) }
@@ -137,7 +141,14 @@ fun MediaDetailScreen(
                     }
                 )
             },
-            snackbarHost = { SnackbarHost(snackbarHostState) }
+            snackbarHost = { SnackbarHost(snackbarHostState) },
+            bottomBar = {
+                BottomAdBanner(
+                    isProUser = actualIsProUser,
+                    screenName = "MediaDetail",
+                    adUnitId = AdUnitIds.BANNER_MEDIA_DETAIL
+                )
+            }
         ) { padding ->
             Column(
                 modifier = Modifier

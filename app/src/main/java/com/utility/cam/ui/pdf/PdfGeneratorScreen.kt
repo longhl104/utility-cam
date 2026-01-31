@@ -30,6 +30,9 @@ import com.utility.cam.R
 import com.utility.cam.analytics.AnalyticsHelper
 import com.utility.cam.data.PhotoStorageManager
 import com.utility.cam.data.UtilityMedia
+import com.utility.cam.ui.ads.BottomAdBanner
+import com.utility.cam.ui.ads.AdUnitIds
+import com.utility.cam.ui.common.rememberProUserState
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +49,7 @@ fun PdfGeneratorScreen(
     val context = LocalContext.current
     val storageManager = remember { PhotoStorageManager(context) }
     val scope = rememberCoroutineScope()
+    val actualIsProUser = rememberProUserState()
 
     var availableMedia by remember { mutableStateOf<List<UtilityMedia>>(emptyList()) }
     var selectedMediaIds by remember { mutableStateOf<List<String>>(emptyList()) }
@@ -126,6 +130,13 @@ fun PdfGeneratorScreen(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
+            )
+        },
+        bottomBar = {
+            BottomAdBanner(
+                isProUser = actualIsProUser,
+                screenName = "PdfGenerator",
+                adUnitId = AdUnitIds.BANNER_PDF_GENERATOR
             )
         }
     ) { paddingValues ->

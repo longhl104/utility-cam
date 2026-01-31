@@ -166,6 +166,14 @@ fun ProScreen(
 
             // Feature items
             ProFeatureItem(
+                icon = Icons.Default.Block,
+                title = stringResource(R.string.pro_feature_ad_free_title),
+                description = stringResource(R.string.pro_feature_ad_free_description)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ProFeatureItem(
                 icon = Icons.Default.Videocam,
                 title = stringResource(R.string.pro_feature_video_title),
                 description = stringResource(R.string.pro_feature_video_description)

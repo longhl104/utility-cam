@@ -282,6 +282,8 @@
     <string name="pro_already_purchased">آپ Pro صارف ہیں!</string>
     <string name="pro_thank_you">Utility Cam کی حمایت کا شکریہ</string>
     <string name="pro_features_title">Pro فیچرز</string>
+    <string name="pro_feature_ad_free_title">اشتہارات سے پاک تجربہ</string>
+    <string name="pro_feature_ad_free_description">اشتہارات ہٹائیں</string>
     <string name="pro_feature_video_title">ویڈیو ریکارڈنگ</string>
     <string name="pro_feature_video_description">خودکار حذف ٹائمرز کے ساتھ ویڈیو ریکارڈنگ کیپچر اور محفوظ کریں</string>
     <string name="pro_feature_document_scanner_title">دستاویز اسکینر</string>

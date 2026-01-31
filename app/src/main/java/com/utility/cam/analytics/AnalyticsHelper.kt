@@ -387,4 +387,30 @@ object AnalyticsHelper {
         }
         analytics.logEvent("debug_pro_override_toggled", bundle)
     }
+
+    // AdMob events
+    fun logAdLoaded(screenName: String) {
+        if (!isEnabled) return
+        val bundle = Bundle().apply {
+            putString("screen_name", screenName)
+        }
+        analytics.logEvent("ad_loaded", bundle)
+    }
+
+    fun logAdLoadFailed(screenName: String, errorMessage: String) {
+        if (!isEnabled) return
+        val bundle = Bundle().apply {
+            putString("screen_name", screenName)
+            putString("error_message", errorMessage)
+        }
+        analytics.logEvent("ad_load_failed", bundle)
+    }
+
+    fun logAdClicked(screenName: String) {
+        if (!isEnabled) return
+        val bundle = Bundle().apply {
+            putString("screen_name", screenName)
+        }
+        analytics.logEvent("ad_clicked", bundle)
+    }
 }

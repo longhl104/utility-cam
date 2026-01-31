@@ -281,6 +281,8 @@
     <string name="pro_already_purchased">ඔබ Pro පරිශීලකයෙක්!</string>
     <string name="pro_thank_you">Utility Cam සඳහා සහාය දැක්වීම ගැන ස්තූතියි</string>
     <string name="pro_features_title">Pro විශේෂාංග</string>
+    <string name="pro_feature_ad_free_title">දැන්වීම් රහිත අත්දැකීම</string>
+    <string name="pro_feature_ad_free_description">දැන්වීම් ඉවත් කරන්න</string>
     <string name="pro_feature_video_title">වීඩියෝ පටිගත කිරීම</string>
     <string name="pro_feature_video_description">ස්වයං-මැකීමේ ටයිමර සමඟ වීඩියෝ පටිගත කර සුරකින්න</string>
     <string name="pro_feature_document_scanner_title">ලේඛන ස්කෑනරය</string>
