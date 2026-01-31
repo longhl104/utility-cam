@@ -12,8 +12,8 @@ android {
         applicationId = "com.utility.cam"
         minSdk = 26
         targetSdk = 36
-        versionCode = 54
-        versionName = "1.7.0"
+        versionCode = 55
+        versionName = "1.7.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
