@@ -1,5 +1,3 @@
-You don't have to create MD file for each prompt.
-
 ## Internationalization
 
 Support multiple languages. We currently have:
@@ -23,3 +21,7 @@ When adding new strings, update all language files to maintain consistency.
 ## Analytics
 
 Use `AnalyticsHelper` for tracking user interactions and app events.
+
+## Others
+
+You don't have to create a quick summary document after each prompt.

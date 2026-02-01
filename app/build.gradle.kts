@@ -31,8 +31,8 @@ android {
         applicationId = "com.utility.cam"
         minSdk = 26
         targetSdk = 36
-        versionCode = 58
-        versionName = "1.7.4"
+        versionCode = 59
+        versionName = "1.7.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -107,6 +107,7 @@ android {
 dependencies {
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-process:2.10.0")
     implementation("androidx.activity:activity-compose:1.12.3")
 
     // Splash Screen
