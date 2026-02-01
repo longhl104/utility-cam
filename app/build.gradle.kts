@@ -4,6 +4,25 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+// Function to load .env file
+fun loadEnvFile(): Map<String, String> {
+    val envFile = rootProject.file(".env")
+    val envMap = mutableMapOf<String, String>()
+    if (envFile.exists()) {
+        envFile.readLines().forEach { line ->
+            if (line.isNotBlank() && !line.startsWith("#")) {
+                val parts = line.split("=", limit = 2)
+                if (parts.size == 2) {
+                    envMap[parts[0].trim()] = parts[1].trim()
+                }
+            }
+        }
+    }
+    return envMap
+}
+
+val envVars = loadEnvFile()
+
 android {
     namespace = "com.utility.cam"
     compileSdk = 36
@@ -12,8 +31,8 @@ android {
         applicationId = "com.utility.cam"
         minSdk = 26
         targetSdk = 36
-        versionCode = 57
-        versionName = "1.7.3"
+        versionCode = 58
+        versionName = "1.7.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -24,9 +43,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("../utility-cam-release.keystore")
-            storePassword = project.findProperty("KEYSTORE_PASSWORD") as String? ?: ""
+            storePassword = envVars["KEYSTORE_PASSWORD"] ?: System.getenv("KEYSTORE_PASSWORD") ?: ""
             keyAlias = "utility-cam"
-            keyPassword = project.findProperty("KEY_PASSWORD") as String? ?: ""
+            keyPassword = envVars["KEY_PASSWORD"] ?: System.getenv("KEY_PASSWORD") ?: ""
         }
     }
 

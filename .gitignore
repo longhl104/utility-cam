@@ -61,5 +61,5 @@ captures/
 Thumbs.db
 
 *.hprof
-gradle.properties
+.env
 .kotlin/sessions/*.salive
