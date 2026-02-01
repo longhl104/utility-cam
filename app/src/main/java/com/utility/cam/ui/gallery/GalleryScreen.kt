@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
@@ -84,6 +83,8 @@ import com.utility.cam.data.PreferencesManager
 import com.utility.cam.data.UtilityMedia
 import com.utility.cam.ui.ads.BottomAdBanner
 import com.utility.cam.ui.ads.AdUnitIds
+import com.utility.cam.ui.ads.NativeAdvancedAd
+import com.utility.cam.ui.ads.NativeAdUnitIds
 import com.utility.cam.ui.common.rememberProUserState
 import com.utility.cam.ui.feedback.FeedbackDialog
 import kotlinx.coroutines.delay
@@ -501,34 +502,51 @@ fun GalleryScreen(
                                 }
                             }
 
-                            // Section items
-                            items(sectionPhotos, key = { it.id }) { photo ->
-                                PhotoGridItem(
-                                    photo = photo,
-                                    isSelected = selectedPhotoIds.contains(photo.id),
-                                    isSelectionMode = isSelectionMode,
-                                    onClick = {
-                                        if (isSelectionMode) {
-                                            // Toggle selection
-                                            selectedPhotoIds = if (photo.id in selectedPhotoIds) {
-                                                selectedPhotoIds - photo.id
-                                            } else {
-                                                selectedPhotoIds + photo.id
-                                            }
-                                            // Exit selection mode if no photos selected
-                                            if (selectedPhotoIds.isEmpty()) {
-                                                isSelectionMode = false
-                                            }
-                                        } else {
-                                            onNavigateToMediaDetail(photo.id)
-                                        }
-                                    },
-                                    onLongClick = {
-                                        // Enter selection mode and select this photo
-                                        isSelectionMode = true
-                                        selectedPhotoIds = selectedPhotoIds + photo.id
+                            // Section items with native ads interspersed
+                            sectionPhotos.forEachIndexed { index, photo ->
+                                // Insert native ad every 6 items for non-Pro users
+                                if (!actualIsProUser && index > 0 && index % 6 == 0) {
+                                    item(
+                                        key = "native_ad_${sectionTitle}_$index",
+                                        span = { androidx.compose.foundation.lazy.grid.GridItemSpan(1) }
+                                    ) {
+                                        NativeAdvancedAd(
+                                            adUnitId = NativeAdUnitIds.GALLERY_NATIVE,
+                                            screenName = "Gallery_Native",
+                                            isProUser = actualIsProUser
+                                        )
                                     }
-                                )
+                                }
+
+                                // Regular photo item
+                                item(key = photo.id) {
+                                    PhotoGridItem(
+                                        photo = photo,
+                                        isSelected = selectedPhotoIds.contains(photo.id),
+                                        isSelectionMode = isSelectionMode,
+                                        onClick = {
+                                            if (isSelectionMode) {
+                                                // Toggle selection
+                                                selectedPhotoIds = if (photo.id in selectedPhotoIds) {
+                                                    selectedPhotoIds - photo.id
+                                                } else {
+                                                    selectedPhotoIds + photo.id
+                                                }
+                                                // Exit selection mode if no photos selected
+                                                if (selectedPhotoIds.isEmpty()) {
+                                                    isSelectionMode = false
+                                                }
+                                            } else {
+                                                onNavigateToMediaDetail(photo.id)
+                                            }
+                                        },
+                                        onLongClick = {
+                                            // Enter selection mode and select this photo
+                                            isSelectionMode = true
+                                            selectedPhotoIds = selectedPhotoIds + photo.id
+                                        }
+                                    )
+                                }
                             }
                         }
                     }

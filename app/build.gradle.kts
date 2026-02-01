@@ -120,6 +120,12 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
 
+    // CardView (for native ad layout)
+    implementation("androidx.cardview:cardview:1.0.0")
+
+    // Material Components (for native ad MaterialButton)
+    implementation("com.google.android.material:material:1.13.0")
+
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.9.7")
 
