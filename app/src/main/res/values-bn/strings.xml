@@ -46,6 +46,8 @@
     <string name="gallery_sort_by_expiration">মেয়াদ অনুযায়ী</string>
     <string name="gallery_sort_by_capture">তারিখ অনুযায়ী</string>
     <string name="gallery_bin">বিন</string>
+    <string name="gallery_pro_upgrade_prompt">Utility Cam উপভোগ করছেন? বিজ্ঞাপন-মুক্ত অভিজ্ঞতার জন্য Pro-তে আপগ্রেড করুন!</string>
+    <string name="gallery_pro_upgrade_button">Pro-তে আপগ্রেড করুন</string>
 
     <!-- Bin Screen -->
     <string name="bin_title">বিন</string>

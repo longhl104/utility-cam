@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -107,6 +108,7 @@ fun GalleryScreen(
     onNavigateToSettings: () -> Unit,
     onNavigateToMediaDetail: (String) -> Unit,
     onNavigateToBin: () -> Unit,
+    onNavigateToPro: () -> Unit = {},
     onOpenDrawer: () -> Unit = {}
 ) {
     val context = LocalContext.current
@@ -416,6 +418,52 @@ fun GalleryScreen(
                                 shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2)
                             ) {
                                 Text(stringResource(R.string.gallery_sort_by_capture))
+                            }
+                        }
+
+                        // Pro upgrade prompt (only for non-Pro users)
+                        if (!actualIsProUser) {
+                            Surface(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                                color = MaterialTheme.colorScheme.primaryContainer,
+                                shape = RoundedCornerShape(12.dp),
+                                tonalElevation = 2.dp
+                            ) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Column(
+                                        modifier = Modifier.weight(1f)
+                                    ) {
+                                        Text(
+                                            text = stringResource(R.string.gallery_pro_upgrade_prompt),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                                        )
+                                    }
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    TextButton(
+                                        onClick = {
+                                            AnalyticsHelper.logProFeatureAttempted("gallery_upgrade_prompt")
+                                            onNavigateToPro()
+                                        },
+                                        colors = androidx.compose.material3.ButtonDefaults.textButtonColors(
+                                            contentColor = MaterialTheme.colorScheme.primary
+                                        )
+                                    ) {
+                                        Text(
+                                            text = stringResource(R.string.gallery_pro_upgrade_button),
+                                            style = MaterialTheme.typography.labelLarge,
+                                            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                                        )
+                                    }
+                                }
                             }
                         }
                     }

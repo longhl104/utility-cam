@@ -45,6 +45,8 @@
     <string name="gallery_sort_by_expiration">Berdasarkan Kedaluwarsa</string>
     <string name="gallery_sort_by_capture">Berdasarkan Tanggal</string>
     <string name="gallery_bin">Tempat Sampah</string>
+    <string name="gallery_pro_upgrade_prompt">Menikmati Utility Cam? Tingkatkan ke Pro untuk pengalaman tanpa iklan!</string>
+    <string name="gallery_pro_upgrade_button">Tingkatkan ke Pro</string>
 
     <!-- Bin Screen -->
     <string name="bin_title">Tempat Sampah</string>

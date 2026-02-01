@@ -393,6 +393,7 @@ object AnalyticsHelper {
         if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("screen_name", screenName)
+            putString("ad_type", if (screenName == "Interstitial") "interstitial" else "banner")
         }
         analytics.logEvent("ad_loaded", bundle)
     }
@@ -402,6 +403,7 @@ object AnalyticsHelper {
         val bundle = Bundle().apply {
             putString("screen_name", screenName)
             putString("error_message", errorMessage)
+            putString("ad_type", if (screenName == "Interstitial") "interstitial" else "banner")
         }
         analytics.logEvent("ad_load_failed", bundle)
     }
@@ -410,7 +412,16 @@ object AnalyticsHelper {
         if (!isEnabled) return
         val bundle = Bundle().apply {
             putString("screen_name", screenName)
+            putString("ad_type", if (screenName == "Interstitial") "interstitial" else "banner")
         }
         analytics.logEvent("ad_clicked", bundle)
+    }
+
+    fun logInterstitialAdShown(location: String) {
+        if (!isEnabled) return
+        val bundle = Bundle().apply {
+            putString("location", location)
+        }
+        analytics.logEvent("interstitial_ad_shown", bundle)
     }
 }

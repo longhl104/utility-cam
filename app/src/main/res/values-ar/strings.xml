@@ -50,7 +50,9 @@
     <string name="gallery_save_button">حفظ</string>
     <string name="gallery_sort_by_expiration">حسب انتهاء الصلاحية</string>
     <string name="gallery_sort_by_capture">حسب التاريخ</string>
-    <string name="gallery_bin">سلة المهملات</string>
+    <string name="gallery_bin">سلة المحذوفات</string>
+    <string name="gallery_pro_upgrade_prompt">تستمتع بـ Utility Cam؟ قم بالترقية إلى Pro للحصول على تجربة خالية من الإعلانات!</string>
+    <string name="gallery_pro_upgrade_button">الترقية إلى Pro</string>
 
     <!-- Bin Screen -->
     <string name="bin_title">سلة المهملات</string>

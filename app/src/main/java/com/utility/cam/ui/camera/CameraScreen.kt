@@ -640,19 +640,19 @@ fun CameraPreviewScreen(
                     )
                 }
             }
-        }
 
-        // Ad banner at bottom
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-        ) {
-            BottomAdBanner(
-                isProUser = isProUser,
-                screenName = "Camera",
-                adUnitId = AdUnitIds.BANNER_CAMERA
-            )
+            // Ad banner at bottom (inside the controls column)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                BottomAdBanner(
+                    isProUser = isProUser,
+                    screenName = "Camera",
+                    adUnitId = AdUnitIds.BANNER_CAMERA
+                )
+            }
         }
     }
 

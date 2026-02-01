@@ -48,6 +48,8 @@
     <string name="gallery_sort_by_expiration">Według wygaśnięcia</string>
     <string name="gallery_sort_by_capture">Według daty</string>
     <string name="gallery_bin">Kosz</string>
+    <string name="gallery_pro_upgrade_prompt">Podoba Ci się Utility Cam? Przejdź na Pro, aby usunąć reklamy!</string>
+    <string name="gallery_pro_upgrade_button">Przejdź na Pro</string>
 
     <!-- Bin Screen -->
     <string name="bin_title">Kosz</string>

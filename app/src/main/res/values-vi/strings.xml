@@ -45,6 +45,8 @@
     <string name="gallery_sort_by_expiration">Theo hết hạn</string>
     <string name="gallery_sort_by_capture">Theo ngày</string>
     <string name="gallery_bin">Thùng rác</string>
+    <string name="gallery_pro_upgrade_prompt">Thích Utility Cam? Nâng cấp lên Pro để trải nghiệm không quảng cáo!</string>
+    <string name="gallery_pro_upgrade_button">Nâng cấp lên Pro</string>
 
     <!-- Bin Screen -->
     <string name="bin_title">Thùng rác</string>

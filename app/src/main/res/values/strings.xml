@@ -46,6 +46,8 @@
     <string name="gallery_sort_by_expiration">By Expiration</string>
     <string name="gallery_sort_by_capture">By Date</string>
     <string name="gallery_bin">Bin</string>
+    <string name="gallery_pro_upgrade_prompt">Enjoying Utility Cam? Upgrade to Pro for an ad-free experience!</string>
+    <string name="gallery_pro_upgrade_button">Upgrade to Pro</string>
 
     <!-- Bin Screen -->
     <string name="bin_title">Bin</string>

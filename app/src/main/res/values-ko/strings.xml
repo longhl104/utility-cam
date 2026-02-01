@@ -45,6 +45,8 @@
     <string name="gallery_sort_by_expiration">만료 기준</string>
     <string name="gallery_sort_by_capture">날짜 기준</string>
     <string name="gallery_bin">휴지통</string>
+    <string name="gallery_pro_upgrade_prompt">Utility Cam을 즐기고 계신가요? Pro로 업그레이드하여 광고 없는 환경을 경험하세요!</string>
+    <string name="gallery_pro_upgrade_button">Pro로 업그레이드</string>
 
     <!-- Bin Screen -->
     <string name="bin_title">휴지통</string>

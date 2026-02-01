@@ -45,7 +45,9 @@
     <string name="gallery_save_button">සුරකින්න</string>
     <string name="gallery_sort_by_expiration">කල් ඉකුත් වීම අනුව</string>
     <string name="gallery_sort_by_capture">දිනය අනුව</string>
-    <string name="gallery_bin">කුණු බඳුන</string>
+    <string name="gallery_bin">බින්</string>
+    <string name="gallery_pro_upgrade_prompt">Utility Cam භුක්ති විඳිනවාද? දැන්වීම් රහිත අත්දැකීමක් සඳහා Pro වෙත උත්ශ්‍රේණි කරන්න!</string>
+    <string name="gallery_pro_upgrade_button">Pro වෙත උත්ශ්‍රේණි කරන්න</string>
 
     <!-- Bin Screen -->
     <string name="bin_title">කුණු බඳුන</string>

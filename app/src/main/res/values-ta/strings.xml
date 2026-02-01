@@ -41,7 +41,9 @@
     <string name="gallery_save_button">சேமி</string>
     <string name="gallery_sort_by_expiration">காலாவதி மூலம்</string>
     <string name="gallery_sort_by_capture">தேதி மூலம்</string>
-    <string name="gallery_bin">குப்பை</string>
+    <string name="gallery_bin">பின்</string>
+    <string name="gallery_pro_upgrade_prompt">Utility Cam ஐ ரசிக்கிறீர்களா? விளம்பரம் இல்லாத அனுபவத்திற்கு Pro க்கு மேம்படுத்தவும்!</string>
+    <string name="gallery_pro_upgrade_button">Pro க்கு மேம்படுத்து</string>
 
     <string name="bin_title">குப்பை</string>
     <string name="bin_back">பின்னால்</string>

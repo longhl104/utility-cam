@@ -47,6 +47,8 @@
     <string name="gallery_sort_by_expiration">Vanhentumisen mukaan</string>
     <string name="gallery_sort_by_capture">Päivämäärän mukaan</string>
     <string name="gallery_bin">Roskakori</string>
+    <string name="gallery_pro_upgrade_prompt">Pidätkö Utility Camista? Päivitä Pro-versioon mainoksettoman kokemuksen saamiseksi!</string>
+    <string name="gallery_pro_upgrade_button">Päivitä Pro-versioon</string>
 
     <!-- Bin Screen -->
     <string name="bin_title">Roskakori</string>
