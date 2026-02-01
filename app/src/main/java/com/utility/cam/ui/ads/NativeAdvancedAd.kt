@@ -93,6 +93,13 @@ fun NativeAdvancedAd(
             .withNativeAdOptions(
                 NativeAdOptions.Builder()
                     .setAdChoicesPlacement(NativeAdOptions.ADCHOICES_TOP_RIGHT)
+                    .setRequestMultipleImages(false)
+                    .setVideoOptions(
+                        com.google.android.gms.ads.VideoOptions.Builder()
+                            .setStartMuted(true)
+                            .build()
+                    )
+                    .setMediaAspectRatio(NativeAdOptions.NATIVE_MEDIA_ASPECT_RATIO_SQUARE)
                     .build()
             )
             .build()

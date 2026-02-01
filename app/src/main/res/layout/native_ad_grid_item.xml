@@ -22,8 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_above="@+id/ad_content_container"
-                android:layout_alignParentTop="true"
-                android:scaleType="centerCrop" />
+                android:layout_alignParentTop="true" />
 
             <!-- Content Container at bottom -->
             <LinearLayout
